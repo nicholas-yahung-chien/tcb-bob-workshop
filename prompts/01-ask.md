@@ -1,4 +1,4 @@
-請先閱讀 AGENTS.md、SOURCE-MAP.md、bank-source/reading/CKP02.TXT；再用samples/cobol/IDSHIFT.cbl與IDREC.cpy對照。
+請先閱讀 AGENTS.md、SOURCE-MAP.md、bank-source/reading/CKP02.TXT；再用samples/cobol/IDSHIFT.cbl與samples/cobol/IDREC.cpy對照。
 使用 Ask 模式，只解釋不改檔。用繁體中文回答：
 1. CKP02是否有READ/REWRITE/IMS呼叫？REWRITE在IF內還是外？與IDSHIFT子程式有何不同？
 2. 計算400 bytes：REDEFINES是否占用額外空間？第11位及14–16位在哪裡？

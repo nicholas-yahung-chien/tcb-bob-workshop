@@ -1,72 +1,9 @@
-<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="先完成自己的實作，再用參考答案與人工規準核對。"><title>對照成果，完成最後一哩 · 合庫 IBM Bob Workshop</title><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/app.js" defer></script></head><body><a class="skip" href="#main">跳至主要內容</a><div class="utility">IBM Bob · 合作金庫 Workshop · 2026.09</div><header><a class="brand" href="../../index.html">IBM <span>Bob</span></a><nav aria-label="主要導覽"><a href="../../workshops/tcb/index.html">課程首頁</a><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop">GitHub ↗</a></nav></header><div class="layout with-side"><aside><p class="side-label">本期教材</p><nav aria-label="課程導覽"><a  href="00-setup.html">00　課前準備</a><a  href="01-planning.html">01　需求規劃</a><a  href="02-documentation.html">02　COBOL 文件化</a><a  href="03-testing.html">03　測試與修正</a><a  href="04-logs.html">04　IMS log 分析</a><a  href="05-sast.html">05　SAST 修補</a><a aria-current=page href="06-reference.html">06　成果與備援</a><a  href="07-instructor.html">07　講師手冊</a><a  href="08-source-map.html">08　程式素材地圖</a></nav><p class="progress" aria-live="polite"></p></aside><main id="main"><section class="hero"><p class="eyebrow">16:12–16:15 · 成果確認</p><h1>對照成果，完成最後一哩</h1><p class="lead">先完成自己的實作，再用參考答案與人工規準核對。</p></section><article><h2 id="rubric">成果驗收規準</h2><p>採「可觀測成果一致」，不要求AI每次用相同文字。文件結構通過後，講師再用四項規準判斷是否可用。</p><ol><li>正確：400 bytes、11位群組、EOF與REWRITE範圍不誤判。</li><li>可追溯：每項來源事實有檔案與行號；引用真的支持結論。</li><li>可執行：清單有角色、依賴、測試與回復；不捏造已執行紀錄。</li><li>有界線：已知、提案、缺件分開，Python／主機／Premium／SAST驗證分開。</li></ol>
-<h2 id="reference">參考答案</h2><p>先自行完成再展開。repo的reference/可離線閱讀；網站連結導向GitHub。</p><details><summary>開啟參考檔案清單</summary><ul><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/architecture.md">architecture.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/change-ticket.md">change-ticket.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/checklist.md">checklist.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/customer-analysis.md">customer-analysis.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/customer_lookup.py">customer_lookup.py</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/facts.json">facts.json</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/impact-analysis.md">impact-analysis.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/log-analysis.md">log-analysis.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/log-facts.json">log-facts.json</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/normalizer.py">normalizer.py</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/program.md">program.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/sast-remediation.md">sast-remediation.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/test-report.md">test-report.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/reference/test_authored.py">test_authored.py</a></li></ul></details>
-<h2 id="fallback">服務故障或時間不足</h2><p>在全新clone執行下列備援指令；遇到既有output會停止，以免覆蓋學員工作。備援答案是講師提供，不可標成新一次Bob成功生成。</p><pre><code>python scripts/restore-reference.py all
-python scripts/verify.py all</code></pre>
-<h2 id="verification">實測紀錄</h2><pre><code># IBM Bob Workshop 實測驗證報告
-
-日期：2026/09/10。環境：Windows、Python 3.13.5、IBM Bob Shell 2.0.2。確實使用BOB_API_KEY呼叫Bob服務；沒有以參考答案冒充新生成結果。
-
-## 結論與界線
-
-核心路徑經兩個新工作區重跑、獨立驗收與人工審查後修正。最終結果以以下表格和evidence.json為準。模型首次輸出並非每次通過，不能保證所有學員一次生成相同文字或未來服務延遲相同；教材以固定契約、測試、修正Prompt及講師備援維持可觀測成果一致。
-
-## 完整演練
-
-| 輪次 | 原輪5項機械驗收首次通過 | 七步累計時間 | CLI/事件狀態 | 發布判定 |
-|---|---|---|---|---|
-| run-01 | 4/5 | 20.8分 | 05-unit: invalid-json | 初期探索紀錄，不作為最終通過輪次 |
-| run-02 | 3/5 | 20.0分 | 05-unit: invalid-json | 初期探索紀錄，不作為最終通過輪次 |
-| run-03 | 3/5 | 20.9分 | 無執行異常 | 初期探索紀錄，不作為最終通過輪次 |
-| final-01 | 5/5 | 29.8分 | 無執行異常 | 通過；含人工審查修正 |
-| final-02 | 3/5 | 23.8分 | 無執行異常 | 通過；含人工審查修正 |
-
-Ask與Plan無檔案驗收項，另以來源審查；計數中的5項為plan/docs/unit/logs/sast。初期工具30回合上限後改為45。run-01/run-02的invalid-json含max-turns错误事件與result，不能因exit code 0而當成正常完成。發布版驗收新增文件控制字元與報告存在檢查，已重新檢查最終兩輪；原輪數據保持原樣。
-
-| 輪次 | 步驟 | 實測時間 | 原輪驗收 |
-|---|---|---|---|
-| final-01 | 01-ask | 56.7秒 | 不適用（Ask/Plan人工審查） |
-| final-01 | 02-plan | 256.8秒 | 不適用（Ask/Plan人工審查） |
-| final-01 | 03-plan-deliver | 249.5秒 | 通過 |
-| final-01 | 04-document | 267.9秒 | 通過 |
-| final-01 | 05-unit | 250.5秒 | 通過 |
-| final-01 | 07-logs | 600.0秒 | 通過 |
-| final-01 | 08-sast | 108.3秒 | 通過 |
-| final-02 | 01-ask | 63.7秒 | 不適用（Ask/Plan人工審查） |
-| final-02 | 02-plan | 125.9秒 | 不適用（Ask/Plan人工審查） |
-| final-02 | 03-plan-deliver | 510.6秒 | 失敗，需修正 |
-| final-02 | 04-document | 141.9秒 | 通過 |
-| final-02 | 05-unit | 234.6秒 | 通過 |
-| final-02 | 07-logs | 112.7秒 | 失敗，需修正 |
-| final-02 | 08-sast | 239.9秒 | 通過 |
-
-## 修正後驗收
-
-- final-01：修正 logs, manual-review；耗時 307.4 秒；發布版全部驗收 通過；受保護檔案未修改。修正呼叫的error事件數：0。最後另開Bob對話只執行全部驗收：success，17.2秒，error事件0個。
-- final-02：修正 plan, logs, manual-review；耗時 286.9 秒；發布版全部驗收 通過；受保護檔案未修改。修正呼叫的error事件數：2。最後另開Bob對話只執行全部驗收：success，14.2秒，error事件0個。
-
-修正採prompts/09-repair.md加實際驗收輸出與人工審查意見。final-02修正時達45回合上限，出現2個error事件，即使最後result寫success也不算乾淨的成功呼叫；其產物通過獨立驗收後，再開新對話讓Bob只執行驗收確認。這項異常如實保留，不能以測試通過抹去。
-
-機器檢查與人工審查分開：主機編碼、資料集組織、外部備份／鎖定、IDSHIFT記憶體修改及CR-01實作範圍均人工核對；參考答案經講師內容審訂。摘要保留Prompt SHA-256；詳細本機記錄未公開，避免把大量中間輸出當教材。
-
-每個最終工作區驗收包含11個獨立Python行為測試、至少3個Bob補充測試、6個SQLite/參數綁定測試，以及plan/docs/log的固定事實與來源引文。45份原始碼與45份閱讀版SHA-256全部核對。
-
-## CIS14進階題
-
-另外實跑06-customer-analysis三個版本，發現過度推論未讀程式用途、縮排/句點混淆與日期算式錯誤；第三版再依人工審查讓Bob修正。確認欄位、狀態分層、缺件與日期運算後，提供reference/customer-analysis.md的精簡審訂答案。GNP/ GU細部分支仍須逐行核對；不把長篇AI回答當成已完整理解主機。
-
-## 網站與下載驗證
-
-11頁靜態網站經HTML本地連結、fragment、標題與Prompt複製目標檢查。Edge實際檢查桌面／390px行動版、課程導覽、核對進度重新整理後保留、複製成功提示及無頁面橫向溢出。剪貼簿內容本身未以瀏覽器工具成功讀回，因此僅記錄複製介面回饋通過。
-
-Windows PowerShell的run-bob.ps1實測UTF-8 stdin，Bob原樣回覆「合庫工作坊 SHELL_OK」，0工具呼叫、成功。原始碼及公開檔案未包含本次API key；原始工作單截圖未公開。
-
-## 尚未實測
-
-- Bob Premium Package for Z的IDE專用模式、Explain／Impact Analysis、Z Understand與授權：需Jackson課前以實際環境驗收。
-- COBOL編譯、Enterprise COBOL、JCL提交、IMS runtime與真實transaction log：本機無該環境；合成Python模型不替代主機驗證。
-- Fortify／Checkmarx正式掃描／複掃：未提供報告與引擎，使用明確標示的合成SQL injection finding。
-- 現場學員數量、網路、額度與模型版本：兩場前仍應依講師手冊重新演練。
-
-方法與失敗案例整理見docs/rehearsal-method.md；機器可讀證據見verification/evidence.json。最終Pages發布與新clone檢查另記於verification/release-check.md。
-</code></pre>
-<h2 id="action">帶走一項行動計畫</h2><p>16:12–16:15填寫：下週要用Bob處理哪支程式？已有哪些來源？需要誰補哪份文件？第一個可驗收產出是什麼？把答案存到output/action-plan.md，16:15交回Haowen的Key Takeaway與Q&amp;A。</p></article><nav class="next" aria-label="前後單元"><a href="05-sast.html">← SAST 修補</a><a href="07-instructor.html">講師手冊 →</a></nav></main></div><footer><p>TCB × IBM Bob Workshop</p><p>課程內容由 Nicholas Chien 規劃，使用 Codex 與 IBM Bob Shell 協作製作及驗證。</p><p>參考 <a href="https://hw.is-a.dev/ibm-bobathon/">IBM Bob Workshop Hub</a> 的教學網站風格。</p></footer></body></html>
+<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="先完成自己的實作，再用參考答案與檢查規準核對。"><title>檢查成果，帶走實作方法 · 合庫 IBM Bob Workshop</title><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/app.js" defer></script></head><body><a class="skip" href="#main">跳至主要內容</a><div class="utility">IBM Bob · 合作金庫 Workshop · 2026.09</div><header><a class="brand" href="../../index.html">IBM <span>Bob</span></a><nav aria-label="主要導覽"><a href="../../workshops/tcb/index.html">課程首頁</a><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop">GitHub ↗</a></nav></header><div class="layout with-side"><aside><p class="side-label">本期教材</p><nav aria-label="課程導覽"><a  href="00-setup.html">00　課前準備</a><a  href="01-planning.html">01　需求規劃</a><a  href="02-documentation.html">02　COBOL 文件化</a><a  href="03-testing.html">03　測試與修正</a><a  href="04-logs.html">04　IMS log 分析</a><a  href="05-sast.html">05　SAST 修補</a><a aria-current=page href="06-reference.html">06　成果與解答</a><a  href="07-help.html">07　常見問題</a><a  href="08-source-map.html">08　程式素材地圖</a></nav><p class="progress" aria-live="polite"></p></aside><main id="main"><section class="hero"><p class="eyebrow">16:12–16:15 · 成果確認</p><h1>檢查成果，帶走實作方法</h1><p class="lead">先完成自己的實作，再用參考答案與檢查規準核對。</p></section><article><h2 id="results">完成成果</h2><table><tr><th>練習</th><th>output中的成果</th><th>檢查重點</th></tr><tr><td>需求規劃</td><td>architecture.md、checklist.md</td><td>七領域、來源、依賴、風險與回復</td></tr><tr><td>程式文件化</td><td>program.md、impact-analysis.md、facts.json</td><td>欄位、流程、COPY/JCL、引文</td></tr><tr><td>COBOL測試</td><td>cobol-test-plan.md、TESTSHIFT-EXT.cbl</td><td>預期記錄、判定方式與執行前提</td></tr><tr><td>行為模型測試</td><td>normalizer.py、test_authored.py、test-report.md</td><td>行為契約與實際結果</td></tr><tr><td>事件分析</td><td>log-analysis.md、log-facts.json</td><td>時間線、未知、證據</td></tr><tr><td>弱點修補</td><td>customer_lookup.py、sast-remediation.md</td><td>參數綁定與回歸測試</td></tr></table>
+<h2 id="reference">參考解答</h2><p>先完成自己的實作，再展開解答。比較來源事實與程式行為，不需要逐字相同。</p><details><summary>查看參考檔案</summary><ul><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/architecture.md">architecture.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/change-ticket.md">change-ticket.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/checklist.md">checklist.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/customer-analysis.md">customer-analysis.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/customer_lookup.py">customer_lookup.py</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/facts.json">facts.json</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/impact-analysis.md">impact-analysis.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/log-analysis.md">log-analysis.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/log-facts.json">log-facts.json</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/normalizer.py">normalizer.py</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/program.md">program.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/sast-remediation.md">sast-remediation.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/test-report.md">test-report.md</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/test_authored.py">test_authored.py</a></li></ul></details>
+<h2 id="compare">比較自己的成果</h2><p>在VSCode先右鍵自己的檔案選<strong>Select for Compare</strong>，再對reference中的對應檔案選<strong>Compare with Selected</strong>。將差異中需要釐清的段落透過@或選取文字加入Bob對話。</p>
+<h2 id="action">下一步行動計畫</h2><p class="mode-guide">在Bob模式選單選取 <strong>Agent</strong>，用 @ 加入下方Prompt列出的檔案，再貼上內容送出。</p><div class="prompt"><div class="prompt-head"><span>把方法帶回日常工作 · Agent</span><button type="button" data-copy="action-plan">複製 Prompt</button></div><pre id="action-plan">請根據本次output中的成果，協助我建立output/action-plan.md。
+用一頁整理：已完成的實作與證據、仍需確認的問題、下一個適合處理的程式或小需求、需要加入的來源檔案，以及第一個可驗收的成果。
+沒有由我提供的程式名稱或業務需求，保留為待填，不自行編造。只寫output/action-plan.md。
+</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
+<label class="check"><input type="checkbox" data-check="至少完成一項實作及檢查"><span>至少完成一項實作及檢查</span></label><label class="check"><input type="checkbox" data-check="能指出已知、提案與待確認項目"><span>能指出已知、提案與待確認項目</span></label><label class="check"><input type="checkbox" data-check="已寫下下一個可驗收的小任務"><span>已寫下下一個可驗收的小任務</span></label>
+</article><nav class="next" aria-label="前後單元"><a href="05-sast.html">← SAST 修補</a><a href="07-help.html">常見問題 →</a></nav></main></div><footer><p>合作金庫 IBM Bob Workshop</p><p>2026.09.21 / 09.24</p></footer></body></html>

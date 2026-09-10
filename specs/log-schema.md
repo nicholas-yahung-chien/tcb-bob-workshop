@@ -1,6 +1,6 @@
 # 合成事件摘要格式
 
-這是教學者定義的已轉譯CSV摘要，不是IBM原始IMS log格式或真實事件。
+這是本題使用的合成CSV事件摘要，不是IBM原始IMS log格式或真實事件。
 event_id 是證據定位鍵；correlation_id 是本教材的關聯鍵。elapsed_ms 是單一事件時間，不能當端到端時間。
 狀態字典（僅供本題）：OK=此操作成功；GE=segment未找到；II=重複segment；NORMAL=流程正常結束；FAILED=流程失敗結束。
 GE 本身不證明整個交易失敗，須看後續事件。ROLB OK 表示摘要記錄的回復操作成功，不能證明所有外部副作用均已補償。

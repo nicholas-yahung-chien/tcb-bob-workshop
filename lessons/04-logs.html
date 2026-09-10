@@ -1,0 +1,7 @@
+<h2 id="goal">任務目標</h2><p>根據IMS事件摘要重建交易時間線，區分正常完成、失敗與結束狀態未知。先用5分鐘完成三條時間線的判讀，再延伸整理完整報告。</p>
+<p>本題CSV是合成的轉譯事件摘要。請先閱讀log-schema.md中的欄位與狀態定義。</p>
+<h2 id="task">Step 1 · 在Bob加入事件與定義</h2>{{07-logs|事件時間線與證據|Agent}}
+<h2 id="verify">Step 2 · 對照分析結果</h2>{{verify-logs|檢查三條時間線|Agent}}
+<table><tr><th>ID</th><th>已知</th><th>待確認</th></tr><tr><td>DEMO-A</td><td>E01–E03，GE後正常結束</td><td>GE不能單獨判為交易失敗</td></tr><tr><td>DEMO-B</td><td>E04–E07，II、ROLB OK、失敗結束</td><td>外部副作用是否已回復</td></tr><tr><td>DEMO-C</td><td>E08耗時2500ms，缺END</td><td>結束狀態及慢事件根因</td></tr></table>
+<h2 id="extend">延伸到真實事件</h2><p>先確認轉譯方式、時區、截取窗口、關聯鍵與狀態碼版本，再沿用本題的證據表。單一慢事件不足以證明死鎖；ROLB OK也不等於所有外部操作已補償。</p>
+{{check:觀察均附event_id}}{{check:未知結果與根因假設分開}}

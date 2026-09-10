@@ -1,4 +1,4 @@
-"""Explicit fallback: copy selected instructor answers into a new output directory."""
+"""Explicit fallback: copy selected reference examples into a new output directory."""
 import argparse
 from pathlib import Path
 import shutil
@@ -15,4 +15,4 @@ dest=root/"output"
 if any((dest/f).exists() for f in files): raise SystemExit("Output exists. Use a fresh clone to preserve your work.")
 dest.mkdir(exist_ok=True)
 for name in files: shutil.copyfile(root/"reference"/name,dest/name)
-print("Instructor fallback restored; these are reference answers, not new Bob-generated results.")
+print("Reference examples copied to output; compare them with your own results.")

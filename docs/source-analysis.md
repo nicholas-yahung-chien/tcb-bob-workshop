@@ -1,6 +1,6 @@
-# 合庫原始素材分析與課程選材
+# 合庫原始素材分析
 
-本分析依bank-source/reading/的來源。行號為檔案實際行號，HLASM右側編號不是此處的行號。機械清單見[source-index.md](source-index.md)與JSON；其用途是找線索，不能取代語法／業務審查。
+本分析依bank-source/reading/的來源。行號為檔案實際行號，HLASM右側編號不是此處的行號。符號索引見[source-index.md](source-index.md)與JSON；其用途是找線索，不能取代語法／業務審查。
 
 ## CKP02：核心實作的理由
 
@@ -22,7 +22,7 @@ FD宣告輸入300、分行表80、主輸出917、附記事項輸出1109字元。
 
 3309以年/月/日範圍處理日期，非完整曆法驗證；以CURRENT-DATE減10000做一年前的比較也不等於365天差值。電話A1/A2位置搜尋應以無數字、跨筆狀態及合法bounds再驗證，不能未測就宣稱修復。
 
-5000印出計數、關檔、呼叫FUNCTION-SYNC，依PGM-END區分正常與RETURN-CODE=99。完整執行仍依賴IMS、PSB/PCB參數順序、正式JCL及測资。本工作坊以文件與impact為主，避免要求全體在一般筆電完整跑此程式。
+5000印出計數、關檔、呼叫FUNCTION-SYNC，依PGM-END區分正常與RETURN-CODE=99。完整執行仍依賴IMS、PSB/PCB參數順序、正式JCL及測资。本單元以文件與impact分析為主；完整執行需上述相依環境。
 
 ## Copybooks：閱讀順序
 
@@ -40,7 +40,7 @@ STANPRM的OLDSTAN/NEWSTAN各7、RETCODE1字元。先處理FFFFFFF→0000001，�
 
 正常返回時OLDSTAN已改寫，MVC複製至NEWSTAN，RETCODE='Y'且RC=0。不存在明確非法字元錯誤返回分支；只有被TR處理的位置會查表，其他非法字元可能原樣保留。不要把常數的含義當作主機執行已驗證，也不要推論呼叫端已做好並行序號控制。
 
-## SYSOCP31：適合講師導讀的完整度邊界
+## SYSOCP31：訊息流程與相依邊界
 
 入口初始化返回與輸出工作欄位，依交易條件處理OCPMSG/OCPRTN、錯誤回復及SENDERR。OCPMSG最多檢視兩個訊息槽，PUTMSG決定輸出目的、複製512位元組OUTAREA、可寫交易log、依路由進行code conversion再送出；完成後清理可重用的訊息區。
 
@@ -50,7 +50,7 @@ OCPRTN最多處理四個format描述槽。FMTOUT→DYLOAD以SYSDLD00載入名稱
 
 ISRTLOG組TXLSEG並透過ASMTDLI ISRT；ENQBMP送出另一類訊息。OCPEHP執行ROLB，成功後REPODB，依情況REPOAT/REGSTAN及REPOLC重新定位；失敗填返回碼並診斷。REGSTAN可用既有端末序號或呼叫STANGEN，**沒有直接證據連到STANCVT**。SENDERR組對應錯誤訊息再ISRTMSG。
 
-缺少IBBAR、IBDSECT、ASMMSP、FGSGEN1等COPY與外部程式，另有SAVEAREA與可改寫靜態欄位，因此重入、併發、資料長度、交易一致性必須由實際link-edit／runtime設定與測試确认，不能在教材保證安全。
+缺少IBBAR、IBDSECT、ASMMSP、FGSGEN1等COPY與外部程式，另有SAVEAREA與可改寫靜態欄位，因此重入、併發、資料長度、交易一致性必須由實際link-edit／runtime設定與測試确认，不能僅凭靜態分析判定安全。
 
 ## 課程結論
 

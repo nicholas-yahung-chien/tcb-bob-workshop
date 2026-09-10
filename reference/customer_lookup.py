@@ -1,4 +1,4 @@
-"""Instructor reference for the synthetic SQLite exercise."""
+"""Reference implementation for the synthetic SQLite exercise."""
 
 
 def lookup(connection, customer_id):

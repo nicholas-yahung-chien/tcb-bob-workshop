@@ -1,0 +1,7 @@
+<h2 id="pp4z">找不到pp4z模式或Workflow</h2><p>確認已登入Bob且Premium Package for Z啟用。重新開啟Bob面板後，檢查模式選單與上方Start Workflow入口。Z Understand登入是跨應用程式分析的額外連線；它與本機檔案閱讀不是同一件事。</p>
+<h2 id="context">Bob沒有讀到檔案</h2><p>確認VSCode開啟的是教材根目錄。輸入@後從清單選檔，不只手打檔名；確認附件出現在輸入框。若選取的是片段而非全檔，補上檔案附件。原始.TXT使用UTF-8閱讀版；pp4z流程使用output/z-lab中的.cbl/.cpy副本。</p>
+<h2 id="permissions">需要核准操作</h2><p>檢查Bob提出的檔案範圍與命令，確認只處理本次output及指定驗收，再透過Permissions提示核准。若要求變更bank-source或tests，先取消並要求重新遵守工作區規則。</p>
+<h2 id="plan">Plan沒有建立指定檔案</h2><p>先閱讀計畫內容，確認後在同一Task切換Agent，貼上「依計畫產出文件」Prompt。若開了新Task，用@加入需求與已有計畫再繼續。</p>
+<h2 id="tests">Python或驗收失敗</h2><p>確認Python 3.10以上可用。在Windows只有py指令時，請Bob以py -3執行同一驗收。把完整錯誤訊息留在對話，使用修正Prompt；不要自行放寬驗收或只忽略錯誤。</p>
+<h2 id="waiting">回應中斷或等待過久</h2><p>先確認已產生的output檔案，將任務縮小為一個檔案或一項失敗。在新Task以@加入需要的檔案後繼續；也可先閱讀reference完成來源核對，再回到自己的成果。</p>
+<h2 id="scope">本機測試與主機測試的差別</h2><p>Python／SQLite測試驗證本機模型及修補行為。COBOL編譯、IMS執行與JCL提交需要相應主機資源；pp4z的分析結果也應依來源與測試核對。尚未執行的項目保留為待確認。</p>

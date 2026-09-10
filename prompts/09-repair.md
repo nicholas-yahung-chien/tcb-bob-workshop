@@ -4,5 +4,5 @@
 若遇到缺件或服務逾時，保留目前輸出，依reference/的備援答案進行人工比對；不要宣稱重跑成功。
 
 格式核對：marker_field只放欄位名稱R-NAME，說明寫在JSON外；id_bytes指R-ID-1的10位，不是R-ID群組11位。JSON只保留契約指定的鍵，不加註解欄位。引文直接取原始行的文字片段。
-用原文檔案編輯工具修復Markdown反引號與控制字元，不使用PowerShell雙引號字串拼接Markdown。人工核對主機code page、資料集組織、外部備份與鎖定都屬未提供；不把未知改寫成確定不存在。IDSHIFT會改記憶體，無I/O不等於已具dry-run。
+使用檔案編輯工具保留Markdown原文與反引號。人工核對主機code page、資料集組織、外部備份與鎖定都屬未提供；不把未知改寫成確定不存在。IDSHIFT會改記憶體，無I/O不等於已具dry-run。
 若需要查看驗收實作，只讀scripts/verify.py；不得更改驗收標準。最後再次執行對應命令並回報實際結果。

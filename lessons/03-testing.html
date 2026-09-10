@@ -1,0 +1,10 @@
+<h2 id="goal">任務目標</h2><p>將轉換規則做成可執行的行為模型，並以測試確認正常、邊界與重跑結果。本單元約15分鐘；程式與報告都存入output。</p>
+<h2 id="cobol">Step 1 · Z Code：撰寫COBOL測試</h2><p>開啟IDSHIFT、IDREC與TESTSHIFT，以@加入對話。先分析測試driver已覆蓋哪些行為，再產生<code>cobol-test-plan.md</code>與<code>TESTSHIFT-EXT.cbl</code>。</p>{{z-tests|COBOL測試矩陣與程式|Z Code}}
+<p>COBOL driver的編譯與執行需要對應編譯器與環境。本次可執行驗收使用Python bytes行為模型；兩者應使用相同的欄位規則。</p>
+<h2 id="implement">Step 2 · Agent：實作模型與測試</h2>{{05-unit|完成模型及單元測試|Agent}}
+<table><tr><th>案例</th><th>預期結果</th></tr><tr><td>前十位0012345678，無EOF</td><td>12345678加兩空白；尾390 bytes不變</td></tr><tr><td>14–16位為EOF</td><td>內容不變，仍處理下一筆</td></tr><tr><td>dry-run</td><td>回原始資料副本；written=0</td></tr><tr><td>write模型</td><td>回轉換副本；written=changed</td></tr><tr><td>非法長度／型別</td><td>ValueError，先驗證整批</td></tr></table>
+<h2 id="verify">Step 3 · 檢查執行結果</h2>{{verify-unit|確認測試結果|Agent}}
+<p>展開Bob的執行命令結果，應看到11個契約測試及至少3個新增測試通過。開啟test-report.md核對實際結果。</p>
+<h2 id="repair">Step 4 · 修正失敗項目</h2><p>將失敗的完整訊息加入對話，再貼下方Prompt。若是單一項目失敗，只要求修正該項。</p>{{09-repair|依失敗證據修正|Agent}}
+<details><summary>重跑為什麼要測？</summary><p>0000123456第一次成為00123456加兩空白，第二次成為123456加四空白。規則不保證冪等，必須保留原始資料與重跑策略。</p></details>
+{{check:11個契約測試及至少3個新增測試通過}}{{check:原始碼與驗收測試未被修改}}{{check:報告區分模型執行與COBOL測試設計}}

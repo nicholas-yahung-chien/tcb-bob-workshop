@@ -1,0 +1,5 @@
+<h2 id="files">來源與閱讀副本</h2><p>bank-source/raw保留45份原始檔；bank-source/reading為UTF-8閱讀版，manifest.json記錄雜湊、編碼與行數。output/z-lab提供pp4z可選取的語言副檔名，與閱讀版內容及行號一致。</p>
+<table><tr><th>程式</th><th>內容</th><th>適合練習</th></tr><tr><td>CKP02</td><td>400位記錄與逐筆REWRITE</td><td>需求規劃、欄位及流程文件</td></tr><tr><td>CIS14及41份Copybooks</td><td>IMS、PCB、SSA、資料加工</td><td>控制流程及相依分析</td></tr><tr><td>STANCVT</td><td>HLASM十六進位序號遞增</td><td>邊界與輸入副作用</td></tr><tr><td>SYSOCP31</td><td>HLASM訊息流程與外部呼叫</td><td>缺件與呼叫關係辨識</td></tr><tr><td>IDSHIFT／IDREC／TESTSHIFT</td><td>合成COBOL子程式、Copybook、測試driver</td><td>記憶體轉換與測試</td></tr></table>
+<p>SYSOCP31少數無法解碼的位元組保留為明確跳脫文字，不能據此猜測字義。CIS14的XIDCHK、BRHIDCNV實作與正式JCL未提供。SYSOCP31呼叫STANGEN不等於證明它連接STANCVT。</p>
+<h2 id="map">來源索引</h2><ul><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/docs/source-analysis.md">程式分析</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/docs/source-index.md">COPY、CALL與資料群組索引</a></li></ul>
+<h2 id="extend">延伸練習 · HLASM</h2><p>用Z Code開啟output/z-lab/STANCVT.asm，從Explain code開始，再追問FFFFFFF如何回到0000001、OLDSTAN是否改寫，以及非法字元在哪些路徑被查表。每項結論附來源行號。</p>
