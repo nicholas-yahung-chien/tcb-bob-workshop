@@ -1,0 +1,34 @@
+<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="從合庫 CKP02 出發，交付 architecture.md 與 checklist.md。"><title>把一項需求，變成可執行的計畫 · 合庫 IBM Bob Workshop</title><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/app.js" defer></script></head><body><a class="skip" href="#main">跳至主要內容</a><div class="utility">IBM Bob · 合作金庫 Workshop · 2026.09</div><header><a class="brand" href="../../index.html">IBM <span>Bob</span></a><nav aria-label="主要導覽"><a href="../../workshops/tcb/index.html">課程首頁</a><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop">GitHub ↗</a></nav></header><div class="layout with-side"><aside><p class="side-label">本期教材</p><nav aria-label="課程導覽"><a  href="00-setup.html">00　課前準備</a><a aria-current=page href="01-planning.html">01　需求規劃</a><a  href="02-documentation.html">02　COBOL 文件化</a><a  href="03-testing.html">03　測試與修正</a><a  href="04-logs.html">04　IMS log 分析</a><a  href="05-sast.html">05　SAST 修補</a><a  href="06-reference.html">06　成果與備援</a><a  href="07-instructor.html">07　講師手冊</a><a  href="08-source-map.html">08　程式素材地圖</a></nav><p class="progress" aria-live="polite"></p></aside><main id="main"><section class="hero"><p class="eyebrow">14:30–15:00 · Nicholas Chien</p><h1>把一項需求，變成可執行的計畫</h1><p class="lead">從合庫 CKP02 出發，交付 architecture.md 與 checklist.md。</p></section><article><h2 id="outcome">30分鐘，兩份可審查成果</h2><p>假設業務提出：「批次更新前，先告訴我會改幾筆；確認後才能套用。」這是教學假設，非合庫已核定需求。先讀CKP02實際行為，再規劃dry-run與統計，避免一開始就要求Bob修改整個主機系統。</p>
+<table><thead><tr><th>時間</th><th>操作</th><th>完成證據</th></tr></thead><tbody><tr><td>14:30–14:33</td><td>開啟需求與原始碼</td><td>確認CR-01邊界</td></tr><tr><td>14:33–14:38</td><td>Ask：了解現況</td><td>REWRITE範圍及欄位對照</td></tr><tr><td>14:38–14:45</td><td>Plan：規劃七個領域</td><td>區分已知／提案／缺件</td></tr><tr><td>14:45–14:55</td><td>Agent：輸出兩份文件</td><td>architecture.md / checklist.md</td></tr><tr><td>14:55–15:00</td><td>驗收與討論</td><td>結構通過、人工核對</td></tr></tbody></table>
+<h2 id="ask">Step 1 · 先理解現況</h2><p>不要把「將某些欄位改寫」等同於「只有這些筆數發生I/O」。CKP02的句點決定IF範圍，這會直接影響dry-run設計。</p><div class="prompt"><div class="prompt-head"><span>現況與欄位 · Ask</span><button type="button" data-copy="01-ask">複製 Prompt</button></div><pre id="01-ask">請先閱讀 AGENTS.md、SOURCE-MAP.md、bank-source/reading/CKP02.TXT；再用samples/cobol/IDSHIFT.cbl與IDREC.cpy對照。
+使用 Ask 模式，只解釋不改檔。用繁體中文回答：
+1. CKP02是否有READ/REWRITE/IMS呼叫？REWRITE在IF內還是外？與IDSHIFT子程式有何不同？
+2. 計算400 bytes：REDEFINES是否占用額外空間？第11位及14–16位在哪裡？
+3. 條件成立時，舊第3–10位移去哪裡？兩個空白在新記錄哪裡？
+4. 資料中的EOF是跳過轉換還是結束批次？未提供的呼叫端能否推斷？
+每個結論附檔案及實際行號；不從程式名稱、註解或修訂碼杜撰歷史。
+最後列出兩個適合向業務確認的問題，並指出這是靜態解讀、不是合庫程式執行結果。CKP02的R-ID群組為11 bytes，R-ID-1為10，請自己核對來源，不把漏算當成程式異常。
+</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
+<details><summary>預期回應與常見偏差</summary><p>CKP02每筆讀入記錄都REWRITE；資料內EOF只阻止欄位轉換。R-ID群組11 bytes；補白在第9–10位。IDSHIFT是合成純子程式，沒有I/O。若Bob聲稱R-ID只有10或EOF停止讀檔，要求重新引用來源。</p></details>
+<h2 id="plan">Step 2 · Plan整理提案</h2><p>七項不是七套一定存在的系統，而是七個需要檢視的領域。Java、API、Database實作未提供時，應標未知並列負責確認的角色。</p><div class="prompt"><div class="prompt-head"><span>完整Implementation Plan · Plan</span><button type="button" data-copy="02-plan">複製 Prompt</button></div><pre id="02-plan">請閱讀 AGENTS.md、SOURCE-MAP.md、specs/change-request.md、specs/customer-context.md、bank-source/reading/CKP02.TXT、samples/cobol/IDSHIFT.cbl與IDREC.cpy。
+使用 Plan 模式規劃 CR-01，不修改程式、不執行任何主機或外部系統操作。
+本次教學範圍已限定為純Python行為模型與文件。未決的正式平台問題列入待確認，不需要等待其答案才完成教學計畫。
+請規劃 output/architecture.md 與 output/checklist.md 的完整內容：
+- As-is來源事實、To-be提案、資料流、介面、缺件；引用實際檔案與行號。
+- 分別分析 COBOL、Java、Database、Transaction、API、Batch、Test 七項。未提供的Java/API/Database實作明示未知，勿宣稱存在。
+- 分析→設計→實作→測試→部署→回復清單，含負責角色、依賴與驗收。
+- dry-run/write語意、eligible與changed區別、400 bytes與編碼、無I/O、批次原子驗證、重跑非冪等風險、並行控制、備份與回復。
+若本版Plan只能存到指定規劃目錄，請遵循工具限制，保留計畫於該目錄或對話，下一步交由Agent輸出兩份正式檔案。現在不要實作normalizer。
+</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
+<h2 id="deliver">Step 3 · Agent落成文件</h2><div class="prompt"><div class="prompt-head"><span>輸出architecture與checklist · Agent</span><button type="button" data-copy="03-plan-deliver">複製 Prompt</button></div><pre id="03-plan-deliver">請閱讀 AGENTS.md、SOURCE-MAP.md、specs/change-request.md、specs/customer-context.md、bank-source/reading/CKP02.TXT、samples/cobol/IDSHIFT.cbl、IDREC.cpy，及前一步可用的CR-01規劃。
+切換 Agent 模式，只建立 output/architecture.md 與 output/checklist.md；若本對話沒有前一步內容，依相同需求重建計畫。
+architecture必須有As-is、To-be、資料流、風險、缺件，以及COBOL、Java、Database、Transaction、API、Batch、Test七個領域的分析；明確區分來源事實與提案。
+checklist用Markdown核取清單，涵蓋分析、設計、實作、測試、部署、回復，每項列角色、依賴和驗收。加入dry-run、計數語意、非冪等重跑、備份、並行、編碼。未實際執行的項目保持未勾選。
+每個來源結論引用讀過的檔案行號。未提供的Java/API/Database/JCL/主機runtime明示未知。禁止將Python驗證稱為主機驗證。
+只寫上述兩個檔案，不執行程式，不實作需求。完成後摘要兩份產出與待確認事項。
+
+請控制每份文件在1500中文字左右，避免長篇重複。交付前做一致性檢查：R-ID是11 bytes的群組，R-ID-1才是10；第14–16位在R-NAME（12–51）內，不是R-PID；COBOL常數不能推論主機使用ASCII；來源只證明沒有內建回復，不能宣稱有備份也無法回復；0000123456第一次變成00123456加兩空白，第二次變成123456加四空白，因此不能寫「轉換一次後必不再以00開頭」。
+在architecture.md末尾加入一個JSON fenced block作為來源核對，鍵為id_group_bytes、id_field_bytes、marker_field、rewrite_scope、mainframe_encoding_confirmed、repeat_input、repeat_once、repeat_twice；repeat值用完整十字元字串保留尾端空白。rewrite_scope以all-read-records或eligible-only二選一。以上數值請核對來源與推導，正文不得與JSON矛盾。
+</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
+<h2 id="verify">Step 4 · 驗收</h2><pre><code>python scripts/verify.py plan</code></pre><p>此命令檢查文件、七領域關鍵詞，以及 source-check 的欄位長度、EOF欄位、REWRITE範圍與重跑結果。還必須人工核對來源引用、缺件與部署回復可行性。</p><label class="check"><input type="checkbox" data-check="architecture清楚區分As-is／To-be／缺件"><span>architecture清楚區分As-is／To-be／缺件</span></label><label class="check"><input type="checkbox" data-check="七項領域都有分析，不補造Java或API"><span>七項領域都有分析，不補造Java或API</span></label><label class="check"><input type="checkbox" data-check="checklist含角色、驗收、依賴與回復"><span>checklist含角色、驗收、依賴與回復</span></label><label class="check"><input type="checkbox" data-check="未執行的部署與主機測試保持未完成"><span>未執行的部署與主機測試保持未完成</span></label>
+<p class="note">提示技巧：固定輸出路徑、限定來源、要求證據、指定未知的表達方式，比「請給我完整計畫」更容易驗收。做完即可休息，15:15回來接續文件化。</p></article><nav class="next" aria-label="前後單元"><a href="00-setup.html">← 課前準備</a><a href="02-documentation.html">COBOL 文件化 →</a></nav></main></div><footer><p>TCB × IBM Bob Workshop</p><p>課程內容由 Nicholas Chien 規劃，使用 Codex 與 IBM Bob Shell 協作製作及驗證。</p><p>參考 <a href="https://hw.is-a.dev/ibm-bobathon/">IBM Bob Workshop Hub</a> 的教學網站風格。</p></footer></body></html>

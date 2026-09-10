@@ -1,0 +1,19 @@
+      * SYNTHETIC PURE SUBPROGRAM; NOT CKP02 OR AN IMS PROGRAM.
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. IDSHIFT.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       COPY 'IDREC.cpy'.
+       01 WS-NEW-ID.
+          05 WS-NEW-KEY                PIC X(8).
+          05 FILLER                    PIC X(2) VALUE SPACES.
+       LINKAGE SECTION.
+       01 LK-RECORD                    PIC X(400).
+       PROCEDURE DIVISION USING LK-RECORD.
+           MOVE LK-RECORD TO WS-RECORD
+           IF WS-PREFIX = '00' AND WS-RECORD(14:3) NOT = 'EOF'
+               MOVE WS-KEY TO WS-NEW-KEY
+               MOVE WS-NEW-ID TO WS-ID
+           END-IF
+           MOVE WS-RECORD TO LK-RECORD
+           GOBACK.

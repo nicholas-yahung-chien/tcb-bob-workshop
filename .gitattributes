@@ -1,0 +1,3 @@
+# Preserve the exact bytes used by the source and rehearsal SHA-256 manifests.
+# Python, browsers and GitHub Actions accept the retained line endings.
+* -text

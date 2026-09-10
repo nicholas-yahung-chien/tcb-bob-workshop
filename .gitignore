@@ -1,0 +1,11 @@
+customer-source/
+output/
+__pycache__/
+*.pyc
+.venv/
+.bob/
+.env*
+!/.env.example
+.DS_Store
+verification/raw/
+verification/runs/
