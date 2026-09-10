@@ -8,6 +8,9 @@
   "has_file_io": true,
   "redefines_extra_bytes": 0,
   "synthetic": false,
+  "repeat_input": "0000123456",
+  "repeat_once": "00123456  ",
+  "repeat_twice": "123456    ",
   "evidence": [
     {"file":"bank-source/reading/CKP02.TXT","line":25,"quote":"RECORD CONTAINS 400 CHARACTERS."},
     {"file":"bank-source/reading/CKP02.TXT","line":83,"quote":"IN-REF-REC (14:3) NOT = \"EOF\""},

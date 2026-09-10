@@ -6,7 +6,7 @@
 <h2 id="document">Step 3 · pp4z：Generate documentation</h2><p>保持Z Code，從<strong>Start Workflow → Generate documentation → Start</strong>啟動文件化流程，選取<code>output/z-lab/CKP02.cbl</code>。如流程要求輸出位置，使用<code>output/z-lab/</code>。完成後閱讀產生的程式概要、資料使用與錯誤處理章節。</p>
 <p>切換<strong>Agent</strong>，將已產生的說明檔透過@加入同一Task，再用下方Prompt整理成指定的三份成果。</p>{{04-document|整理程式與影響文件|Agent}}
 <h2 id="verify">Step 4 · 檢查文件</h2>{{verify-docs|核對欄位與來源引文|Agent}}
-<p>檢查通過後仍需閱讀引用的來源行：原文存在不等於它能支持整段結論。比較規劃階段的影響分析，確認新增的發現有納入文件。</p>
+<p>檢查通過後仍需閱讀引用的來源行：原文存在不等於它能支持整段結論。核對重跑反例：0000123456第一次成為00123456加兩空白，第二次成為123456加四空白；第一次仍以00開頭。兩份文件與facts.json應說明相同行為，再與規劃階段的影響分析比較。</p>
 {{check:完成Explain與文件化流程}}{{check:能說明CKP02與IDSHIFT的I/O差異}}{{check:文件及三筆來源引文檢查通過}}
 <h2 id="extension">延伸練習 · CIS14</h2><p>開啟<code>output/z-lab/CIS14/CIS14.cbl</code>，加入同目錄的PCB、SSA與segment copybooks，以Z Architecture分析較完整的IMS相依。</p>{{06-customer-analysis|CIS14資料與控制流程|Z Architecture}}
 <details><summary>參考解答</summary><p>輸入300、分行表80、輸出917/1109。PROCESS-OK與PGM-OK作用不同；XIDCHK與BRHIDCNV實作未提供。YYYYMMDD減10000不等於完整曆法運算。</p><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/customer-analysis.md">查看完整解答</a></details>
