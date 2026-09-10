@@ -15,6 +15,7 @@
 {{04-document|完成程式文件|Agent}}
 <h2 id="verify">4. 回到程式，確認說明</h2>
 {{verify-docs|檢查文件中的例子|Agent}}
+<details><summary>對照文件時，可以先看哪些地方？</summary><ul><li>資料內的 EOF 會略過這一筆的轉換，接著仍會讀下一筆；READ 的 AT END 才會設定迴圈使用的 EOF 旗標。</li><li>記錄第 14–16 位，對應 R-NAME 的第 3–5 位。閱讀欄位位置時，先看看是從哪裡起算。</li><li>程式宣告 VALUE SPACE；實際空白編碼與資料集屬性，需要搭配主機環境確認。</li><li>範例 JCL 執行 TESTSHIFT。CKP02 的正式 JCL 尚未提供。</li></ul><p>檢查程式會核對格式與數值；閱讀這些段落，可以再確認正文有沒有把不同概念混在一起。</p></details>
 <details><summary>重跑的例子，應該怎麼看？</summary><p>使用需求文件中的 0000123456，並讓第 14–16 位不是 EOF。第一次轉換得到 00123456 加兩個空白，第二次得到 123456 加四個空白。第一次後仍以 00 開頭，所以不能只用一個例子就認定重跑結果都相同。</p></details>
 <p>output 裡會有 program.md、impact-analysis.md 和 facts.json。前兩份方便閱讀，facts.json 則用來檢查欄位及例子是否一致。</p>
 {{check:我試過 Explain code 與文件化}}{{check:我能說明 Copybook 和 JCL 的用途}}{{check:我已對照原始碼檢查文件}}
