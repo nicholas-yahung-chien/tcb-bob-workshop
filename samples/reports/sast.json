@@ -1,6 +1,5 @@
 {
   "synthetic": true,
-  "producer": "Workshop author; NOT a Fortify or Checkmarx scan",
   "findings": [{
     "id": "TRAIN-SQL-001",
     "category": "SQL Injection",
