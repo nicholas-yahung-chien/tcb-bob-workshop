@@ -14,4 +14,5 @@ In Ask mode, explain without writing. In Plan mode, plan only. Use Agent to save
 Use bytes for the 400-byte synthetic record. Python is a behavior model, not an IMS or COBOL runtime.
 When blocked, name the missing prerequisite and use the documented fallback. Do not invent test results.
 
-Learners use the IBM Bob chat panel in VSCode with Premium Package for Z (pp4z). Use the selected mode and attached file context. Ask for approval through the IDE permission dialog when required. Do not require a separate command-line AI client. For pp4z workflows, use output/z-lab/ copies created by scripts/prepare_z.py; keep bank-source/ unchanged.
+Learners use the IBM Bob chat panel in VSCode with Premium Package for Z (pp4z). Use the selected mode and attached file context. Ask for approval through the IDE permission dialog when required. For pp4z workflows, use the language-extension copies in output/z-lab/; keep bank-source/ unchanged.
+Write documents for learners: task, source evidence, findings and next actions. Report only observed test commands, timestamps and results.
