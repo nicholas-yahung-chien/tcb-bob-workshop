@@ -1,48 +1,28 @@
-<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="從合庫 CKP02 出發，交付 architecture.md 與 checklist.md。"><title>把一項需求，變成可執行的計畫 · 合庫 IBM Bob Workshop</title><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/app.js" defer></script></head><body><a class="skip" href="#main">跳至主要內容</a><div class="utility">IBM Bob · 合作金庫 Workshop · 2026.09</div><header><a class="brand" href="../../index.html">IBM <span>Bob</span></a><nav aria-label="主要導覽"><a href="../../workshops/tcb/index.html">課程首頁</a><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop">GitHub ↗</a></nav></header><div class="layout with-side"><aside><p class="side-label">本期教材</p><nav aria-label="課程導覽"><a  href="00-setup.html">00　課前準備</a><a aria-current=page href="01-planning.html">01　需求規劃</a><a  href="02-documentation.html">02　COBOL 文件化</a><a  href="03-testing.html">03　測試與修正</a><a  href="04-logs.html">04　IMS log 分析</a><a  href="05-sast.html">05　SAST 修補</a><a  href="06-reference.html">06　成果與解答</a><a  href="07-help.html">07　常見問題</a><a  href="08-source-map.html">08　程式素材地圖</a></nav><p class="progress" aria-live="polite"></p></aside><main id="main"><section class="hero"><p class="eyebrow">14:30–15:00 · 需求規劃</p><h1>把一項需求，變成可執行的計畫</h1><p class="lead">從合庫 CKP02 出發，交付 architecture.md 與 checklist.md。</p></section><article><h2 id="goal">任務目標</h2><p>新增一項批次需求：「更新前先預覽本批會改幾筆，確認後再套用。」請以CKP02的現有行為為依據，完成<code>output/architecture.md</code>與<code>output/checklist.md</code>。CR-01是本次練習需求。</p>
-<table><tr><th>時間</th><th>操作</th></tr><tr><td>5分鐘</td><td>理解現有程式與需求</td></tr><tr><td>10分鐘</td><td>分析影響並規劃七個領域</td></tr><tr><td>10分鐘</td><td>產出兩份文件</td></tr><tr><td>5分鐘</td><td>檢查成果與補充問題</td></tr></table>
-<h2 id="ask">Step 1 · Ask：理解現況</h2><p class="mode-guide">在Bob模式選單選取 <strong>Ask</strong>，用 @ 加入下方Prompt列出的檔案，再貼上內容送出。</p><div class="prompt"><div class="prompt-head"><span>解讀CKP02 · Ask</span><button type="button" data-copy="01-ask">複製 Prompt</button></div><pre id="01-ask">請先閱讀 AGENTS.md、SOURCE-MAP.md、bank-source/reading/CKP02.TXT；再用samples/cobol/IDSHIFT.cbl與samples/cobol/IDREC.cpy對照。
-使用 Ask 模式，只解釋不改檔。用繁體中文回答：
-1. CKP02是否有READ/REWRITE/IMS呼叫？REWRITE在IF內還是外？與IDSHIFT子程式有何不同？
-2. 計算400 bytes：REDEFINES是否占用額外空間？第11位及14–16位在哪裡？
-3. 條件成立時，舊第3–10位移去哪裡？兩個空白在新記錄哪裡？
-4. 資料中的EOF是跳過轉換還是結束批次？未提供的呼叫端能否推斷？
-每個結論附檔案及實際行號；不從程式名稱、註解或修訂碼杜撰歷史。
-最後列出兩個適合向業務確認的問題，並指出這是靜態解讀、不是合庫程式執行結果。CKP02的R-ID群組為11 bytes，R-ID-1為10，請自己核對來源，不把漏算當成程式異常。
-</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
-<details><summary>預期回應</summary><p>每筆讀入記錄均REWRITE；資料內EOF只略過轉換。R-ID群組11位，R-ID-1為10位，空白補在9–10位。IDSHIFT只修改記憶體，沒有檔案I/O。</p></details>
-<h2 id="impact">Step 2 · pp4z：檢視變更影響</h2><p>切換<strong>Z Architecture</strong>，以@加入<code>output/z-lab/CKP02.cbl</code>與需求。輸入<code>/</code>，從清單選取<code>/impact-analysis</code>，在同一輸入框接上下列需求後一起送出。依流程回答來源範圍問題。</p><p class="mode-guide">在Bob模式選單選取 <strong>Z Architecture</strong>，用 @ 加入下方Prompt列出的檔案，再貼上內容送出。</p><div class="prompt"><div class="prompt-head"><span>需求的影響範圍 · Z Architecture</span><button type="button" data-copy="z-impact">複製 Prompt</button></div><pre id="z-impact">請閱讀specs/change-request.md、specs/customer-context.md與output/z-lab/CKP02.cbl，以CR-01的dry-run與批次統計需求進行影響分析。
-先明示分析範圍是本機工作區，還是已連線且包含這支程式的Z Understand專案；不使用無關專案推論。
-列出直接變更候選、檔案與資料欄位影響、可能的下游影響、需要補充的JCL／資料集／交易／API／Database資訊。
-本次只實作Python行為模型與文件；修改主機程式屬後續評估。沒有來源的Java/API/Database相依標為待確認。
-每項已確認結論附檔案與行號或實際分析結果；工具不可用或沒有專案時明示限制，不宣稱已完成跨系統分析。只分析，不修改程式。
-</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>若流程要求Z Understand專案，選取與本次程式相符的已連線專案；未連線時，將跨系統影響標為待確認，繼續以本機來源完成計畫。不要把工作區分析當成全行系統的完整呼叫圖。</p>
-<h2 id="plan">Step 3 · Plan：形成完整計畫</h2><p>保留同一個Task的分析上下文，切換<strong>Plan</strong>。先檢閱計畫，確認範圍與缺件，再進入下一步。</p><p class="mode-guide">在Bob模式選單選取 <strong>Plan</strong>，用 @ 加入下方Prompt列出的檔案，再貼上內容送出。</p><div class="prompt"><div class="prompt-head"><span>規劃Implementation Plan · Plan</span><button type="button" data-copy="02-plan">複製 Prompt</button></div><pre id="02-plan">請閱讀 AGENTS.md、SOURCE-MAP.md、specs/change-request.md、specs/customer-context.md、bank-source/reading/CKP02.TXT、samples/cobol/IDSHIFT.cbl與samples/cobol/IDREC.cpy。
-使用 Plan 模式規劃 CR-01，不修改程式、不執行任何主機或外部系統操作。
-本次教學範圍已限定為純Python行為模型與文件。未決的正式平台問題列入待確認，不需要等待其答案才完成教學計畫。
-請規劃 output/architecture.md 與 output/checklist.md 的完整內容：
-- As-is來源事實、To-be提案、資料流、介面、缺件；引用實際檔案與行號。
-- 分別分析 COBOL、Java、Database、Transaction、API、Batch、Test 七項。未提供的Java/API/Database實作明示未知，勿宣稱存在。
-- 分析→設計→實作→測試→部署→回復清單，含負責角色、依賴與驗收。
-- dry-run/write語意、eligible與changed區別、400 bytes與編碼、無I/O、批次原子驗證、重跑非冪等風險、並行控制、備份與回復。
-若本版Plan只能存到指定規劃目錄，請遵循工具限制，保留計畫於該目錄或對話，下一步交由Agent輸出兩份正式檔案。現在不要實作normalizer。
-</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
-<details><summary>預期回應</summary><p>涵蓋COBOL、Java、Database、Transaction、API、Batch、Test；每一領域區分已知、提案與待確認。Java/API/Database未提供時，不應補造既有實作。</p></details>
-<h2 id="deliver">Step 4 · Agent：建立文件</h2><p class="mode-guide">在Bob模式選單選取 <strong>Agent</strong>，用 @ 加入下方Prompt列出的檔案，再貼上內容送出。</p><div class="prompt"><div class="prompt-head"><span>依計畫產出文件 · Agent</span><button type="button" data-copy="03-plan-deliver">複製 Prompt</button></div><pre id="03-plan-deliver">請閱讀 AGENTS.md、SOURCE-MAP.md、specs/change-request.md、specs/customer-context.md、bank-source/reading/CKP02.TXT、samples/cobol/IDSHIFT.cbl、samples/cobol/IDREC.cpy，及前一步可用的CR-01規劃。
-切換 Agent 模式，只建立 output/architecture.md 與 output/checklist.md；若本對話沒有前一步內容，依相同需求重建計畫。
-architecture必須有As-is、To-be、資料流、風險、缺件，以及COBOL、Java、Database、Transaction、API、Batch、Test七個領域的分析；明確區分來源事實與提案。
-checklist用Markdown核取清單，涵蓋分析、設計、實作、測試、部署、回復，每項列角色、依賴和驗收。加入dry-run、計數語意、非冪等重跑、備份、並行、編碼。未實際執行的項目保持未勾選。
-每個來源結論引用讀過的檔案行號。未提供的Java/API/Database/JCL/主機runtime明示未知。禁止將Python驗證稱為主機驗證。
-只寫上述兩個檔案，不執行業務程式，不實作需求。完成後摘要兩份產出與待確認事項。
-
-請控制每份文件在1500中文字左右，避免長篇重複。交付前做一致性檢查：R-ID是11 bytes的群組，R-ID-1才是10；第14–16位在R-NAME（12–51）內，不是R-PID；COBOL常數不能推論主機使用ASCII；來源只證明沒有內建回復，不能宣稱有備份也無法回復；0000123456第一次變成00123456加兩空白，第二次變成123456加四空白，因此不能寫「轉換一次後必不再以00開頭」。
-在architecture.md末尾加入一個JSON fenced block作為來源核對，鍵為id_group_bytes、id_field_bytes、marker_field、rewrite_scope、mainframe_encoding_confirmed、repeat_input、repeat_once、repeat_twice；repeat值用完整十字元字串保留尾端空白。rewrite_scope以all-read-records或eligible-only二選一。以上數值請核對來源與推導，正文不得與JSON矛盾。
-
-marker_field只放欄位名稱R-NAME；正文說明放JSON之外。請使用原文檔案編輯工具保存Markdown。建立後執行python scripts/verify.py plan，只修正output中的失敗。
-</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
-<h2 id="verify">Step 5 · 檢查成果</h2><p class="mode-guide">在Bob模式選單選取 <strong>Agent</strong>，用 @ 加入下方Prompt列出的檔案，再貼上內容送出。</p><div class="prompt"><div class="prompt-head"><span>檢查兩份計畫文件 · Agent</span><button type="button" data-copy="verify-plan">複製 Prompt</button></div><pre id="verify-plan">請在目前教材工作區執行python scripts/verify.py plan。Windows若只有py指令，改用py -3。
-展開實際執行結果，回報exit code、通過與失敗項目；不要修改來源或驗收程式。若檢查失敗，先說明原因與最小修正建議，等我確認後再改output。
-</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>在檔案總管開啟兩份Markdown並使用預覽，核對來源引用、重跑風險、備份與回復，以及各項工作的角色、依賴和驗收條件。</p>
-<label class="check"><input type="checkbox" data-check="architecture包含七個領域及來源事實"><span>architecture包含七個領域及來源事實</span></label><label class="check"><input type="checkbox" data-check="checklist包含分析到回復的執行順序"><span>checklist包含分析到回復的執行順序</span></label><label class="check"><input type="checkbox" data-check="未知項目已明示且檢查通過"><span>未知項目已明示且檢查通過</span></label>
+<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="從一個批次需求開始，練習看程式、問問題，再整理計畫。"><title>我想先知道，這次會改到多少筆？ · 合庫 IBM Bob Workshop</title><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/app.js" defer></script></head><body><a class="skip" href="#main">跳至主要內容</a><div class="utility">IBM Bob · 合作金庫 Workshop · 2026.09</div><header><a class="brand" href="../../index.html">IBM <span>Bob</span></a><nav aria-label="主要導覽"><a href="../../workshops/tcb/index.html">課程首頁</a><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop">GitHub ↗</a></nav></header><div class="layout with-side"><aside><p class="side-label">練習單元</p><nav aria-label="課程導覽"><a  href="00-setup.html">00　課前準備</a><a aria-current=page href="01-planning.html">01　需求規劃</a><a  href="02-documentation.html">02　COBOL 文件化</a><a  href="03-testing.html">03　測試與修正</a><a  href="04-logs.html">04　IMS 事件分析</a><a  href="05-sast.html">05　查詢弱點修補</a><a  href="06-reference.html">06　成果與解答</a><a  href="07-help.html">07　常見問題</a><a  href="08-source-map.html">08　認識練習程式</a></nav><p class="progress" aria-live="polite"></p></aside><main id="main"><section class="hero"><p class="eyebrow">需求規劃</p><h1>我想先知道，這次會改到多少筆？</h1><p class="lead">從一個批次需求開始，練習看程式、問問題，再整理計畫。</p></section><article><h2 id="story">執行批次前，你想先知道什麼？</h2>
+<p>假設你準備執行一支資料轉換程式，想先知道這次會改到多少筆，確認後再套用變更。我們就從這個需求開始，請 Bob 幫忙看現有程式、找出影響範圍，最後整理成計畫。</p>
+<h2 id="ask">1. 先認識這支程式</h2>
+<p>剛接手程式時，不必先知道每個欄位和段落的意思。先把 CKP02 加入對話，問一個接手工作時會問的問題。</p>
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>bank-source/reading/CKP02.TXT</code></p><div class="prompt"><div class="prompt-head"><span>認識 CKP02</span><button type="button" data-copy="01-ask">複製 Prompt</button></div><pre id="01-ask">我剛接手 CKP02，還不熟悉這支程式。請幫我說明它處理什麼資料、什麼情況會修改資料，以及整個批次是怎麼跑的。也請指出對應的程式段落，方便我一起看。
+</pre><div class="expected"><strong>預期回應</strong><p>程式的用途、讀寫流程，以及可以一起閱讀的段落。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>看完說明，如果還不容易想像資料怎麼變，可以接著請 Bob 舉例。</p>
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>bank-source/reading/CKP02.TXT</code></p><div class="prompt"><div class="prompt-head"><span>看一筆資料怎麼變</span><button type="button" data-copy="01-layout">複製 Prompt</button></div><pre id="01-layout">可以用一筆資料帶我走過轉換過程嗎？請把欄位位置、修改前後的內容，以及沒有被修改的部分整理成表格。
+</pre><div class="expected"><strong>預期回應</strong><p>一筆資料的欄位表，搭配修改前後的例子。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<h2 id="impact">2. 看看需求會影響哪些地方</h2>
+<p>需求寫在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/change-request.md">change-request.md</a>。切換到 <strong>Z Architecture</strong>，從輸入框的 <code>/</code> 清單選取 <code>/impact-analysis</code>，再接上下方問題送出。</p>
+<p class="mode-guide"><strong>Z Architecture 模式</strong></p><p class="file-context">加入檔案：<code>output/z-lab/CKP02.cbl</code>、<code>specs/change-request.md</code></p><div class="prompt"><div class="prompt-head"><span>找出變更影響</span><button type="button" data-copy="z-impact">複製 Prompt</button></div><pre id="z-impact">如果要加入 specs/change-request.md 的預覽功能，哪些程式、資料和批次作業可能受到影響？請幫我區分已經查到的關係，以及還需要補資料才能確認的部分。
+</pre><div class="expected"><strong>預期回應</strong><p>已確認的影響，以及需要補資料才能確認的關係。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>如果流程要求連線 Z Understand，請選擇包含這支程式的專案。手邊只有本機檔案時，先分析看得到的內容，跨系統的關係留待補齊資料後確認。</p>
+<h2 id="plan">3. 把需求整理成計畫</h2>
+<p>現在知道程式大致怎麼運作，就可以討論怎麼改。<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a> 約定文件的章節和檢查方式；提問時引用它，Bob 就有格式可以依循。</p>
+<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>specs/change-request.md</code>、<code>DOC-SPEC.md</code></p><div class="prompt"><div class="prompt-head"><span>規劃預覽功能</span><button type="button" data-copy="02-plan">複製 Prompt</button></div><pre id="02-plan">我想在批次執行前，先知道會改到多少筆資料。請閱讀 specs/change-request.md，分析這項需求會影響哪些程式與作業，再依 DOC-SPEC.md 規劃架構文件和實作清單。先討論計畫，不修改程式。
+</pre><div class="expected"><strong>預期回應</strong><p>需要分析的範圍、文件內容，以及還需要確認的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>閱讀計畫時，想想兩件事：哪些建議有程式可以對照？哪些還需要業務或系統資料？有疑問的地方，直接在同一個對話追問。</p>
+<h2 id="deliver">4. 請 Bob 寫成文件</h2>
+<p>計畫確認後，在同一個對話切換到 <strong>Agent</strong>。前面已經說清楚的內容，這裡不用再重述一遍。</p>
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/change-request.md</code>、<code>DOC-SPEC.md</code></p><div class="prompt"><div class="prompt-head"><span>依計畫完成文件</span><button type="button" data-copy="03-plan-deliver">複製 Prompt</button></div><pre id="03-plan-deliver">請依剛才的計畫和 specs/change-request.md，完成架構文件與實作清單，存到 output。文件格式與檢查方式請依 DOC-SPEC.md。
+</pre><div class="expected"><strong>預期回應</strong><p>output 裡的架構文件和實作清單，附上檢查結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/architecture.md</code>、<code>output/checklist.md</code></p><div class="prompt"><div class="prompt-head"><span>一起檢查計畫</span><button type="button" data-copy="verify-plan">複製 Prompt</button></div><pre id="verify-plan">請重新打開文件引用的原始碼，依 DOC-SPEC.md 核對架構文件與實作清單。修正和程式不一致的說明，再執行檢查；還需要補資料的地方，請另外列出。
+</pre><div class="expected"><strong>預期回應</strong><p>文件檢查結果，以及仍需要補齊的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<details><summary>完成後可以看什麼？</summary><p>開啟 output/architecture.md 和 output/checklist.md。前者說明現況、提案及影響，後者列出要做的工作、前置條件與完成標準。七個分析面向與詳細格式都在 DOC-SPEC.md。</p></details>
+<label class="check"><input type="checkbox" data-check="我能說明 CKP02 在處理什麼"><span>我能說明 CKP02 在處理什麼</span></label><label class="check"><input type="checkbox" data-check="我已看過架構文件與實作清單"><span>我已看過架構文件與實作清單</span></label><label class="check"><input type="checkbox" data-check="需要補充的資訊已列出"><span>需要補充的資訊已列出</span></label>
 </article><nav class="next" aria-label="前後單元"><a href="00-setup.html">← 課前準備</a><a href="02-documentation.html">COBOL 文件化 →</a></nav></main></div><footer><p>合作金庫 IBM Bob Workshop</p><p>2026.09.21 / 09.24</p></footer></body></html>

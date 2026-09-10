@@ -1,36 +1,36 @@
 # 合作金庫 IBM Bob Workshop
 
-在VSCode的IBM Bob對話面板搭配Premium Package for Z（pp4z），完成需求規劃、COBOL文件化、測試、事件分析與弱點修補。
+接手不熟悉的程式時，可以先問什麼？這裡從批次需求開始，練習和 Bob 一起閱讀程式、整理文件，再用測試確認結果。
 
-**[進入課程網站](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/)** · **[下載教材](https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest)**
+**[開始練習](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/)** · **[下載教材](https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest)**
 
-## 開始使用
+## 開啟工作區
 
-1. 在VSCode執行Git: Clone，輸入本repo網址並開啟資料夾。
-2. 從分支選單切換至workshop/tcb-2026；也可下載ZIP後開啟資料夾。
-3. 開啟IBM BOB面板，確認登入及pp4z啟用。
-4. 依[課前準備](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/00-setup.html)選擇模式、加入@檔案並送出Prompt。
+在 VSCode 用 Git: Clone 下載這個 repo，開啟後切換到 `workshop/tcb-2026` 分支。也可以下載 ZIP，解壓後用 File → Open Folder 開啟。
 
-需要Git與Python 3.10以上；Python實作只使用標準庫。執行命令由Bob在目前工作區提出，請檢查Permissions提示後核准。
+準備好 Git、Python 3.10 以上版本，以及已登入並啟用 pp4z 的 IBM Bob，接著從[課前準備](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/00-setup.html)開始。
 
-## 課程與成果
+## 怎麼使用這些練習
 
-| 時段 | 任務 | 成果 |
-|---|---|---|
-| 14:30–15:00 | 業務新需求規劃 | architecture.md、checklist.md |
-| 15:15–16:15 | pp4z程式解讀與文件化、測試、IMS事件、SAST修補 | 文件、程式、測試與分析報告 |
+每個單元先介紹一個情境，再提供可以直接問 Bob 的問題。將頁面列出的檔案用 @ 加入對話，選擇對應模式，就可以開始。看完回覆，再依自己的疑問追問。
 
-2026/09/21與09/24兩場內容相同。
+需求和文件格式放在獨立檔案裡，提問時引用即可：
 
-## 素材目錄
+- `specs/change-request.md`：這次要解決什麼問題，以及範例介面。
+- `DOC-SPEC.md`：文件內容、檔名和檢查方式。
+- `specs/testing.md`：COBOL 與 Python 測試。
+- `specs/log-schema.md`、`specs/sast-task.md`：事件分析和查詢修正。
 
-- bank-source/raw：45份合庫原始檔，保留原始位元組。
-- bank-source/reading：UTF-8閱讀版；manifest記錄編碼、行數與雜湊。
-- samples：COBOL／Copybook／JCL及Python、事件、finding練習。
-- specs：需求與資料契約。
-- prompts：可貼入Bob對話的任務提示。
-- tests：行為及修補驗收。
-- reference：完成實作後可比較的參考解答。
-- output：自己的產出；不納入版本控制。
+## 找到需要的檔案
 
-pp4z使用output/z-lab中的語言副檔名閱讀副本；原始碼保持不變。Python模型與合成事件的檢查不代替COBOL編譯、IMS執行或正式SAST複掃。原始碼權利歸原權利人，本repo不另行授予原始程式授權。
+| 資料夾 | 內容 |
+|---|---|
+| bank-source | 45 份合庫原始檔及 UTF-8 閱讀版 |
+| samples | 轉換程式、測試、JCL、事件及查詢練習 |
+| prompts | 各單元的提問範例 |
+| reference | 可以比較的參考解答 |
+| output | 自己完成的文件與程式 |
+
+Python 與 SQLite 可以在本機執行。COBOL、IMS 和 JCL 則需要對應環境，測試結果分開記錄。
+
+原始碼權利歸原權利人，本 repo 不另行授予原始程式授權。

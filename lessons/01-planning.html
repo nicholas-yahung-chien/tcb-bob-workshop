@@ -1,12 +1,21 @@
-<h2 id="goal">任務目標</h2><p>新增一項批次需求：「更新前先預覽本批會改幾筆，確認後再套用。」請以CKP02的現有行為為依據，完成<code>output/architecture.md</code>與<code>output/checklist.md</code>。CR-01是本次練習需求。</p>
-<table><tr><th>時間</th><th>操作</th></tr><tr><td>5分鐘</td><td>理解現有程式與需求</td></tr><tr><td>10分鐘</td><td>分析影響並規劃七個領域</td></tr><tr><td>10分鐘</td><td>產出兩份文件</td></tr><tr><td>5分鐘</td><td>檢查成果與補充問題</td></tr></table>
-<h2 id="ask">Step 1 · Ask：理解現況</h2>{{01-ask|解讀CKP02|Ask}}
-<details><summary>預期回應</summary><p>每筆讀入記錄均REWRITE；資料內EOF只略過轉換。R-ID群組11位，R-ID-1為10位，空白補在9–10位。IDSHIFT只修改記憶體，沒有檔案I/O。</p></details>
-<h2 id="impact">Step 2 · pp4z：檢視變更影響</h2><p>切換<strong>Z Architecture</strong>，以@加入<code>output/z-lab/CKP02.cbl</code>與需求。輸入<code>/</code>，從清單選取<code>/impact-analysis</code>，在同一輸入框接上下列需求後一起送出。依流程回答來源範圍問題。</p>{{z-impact|需求的影響範圍|Z Architecture}}
-<p>若流程要求Z Understand專案，選取與本次程式相符的已連線專案；未連線時，將跨系統影響標為待確認，繼續以本機來源完成計畫。不要把工作區分析當成全行系統的完整呼叫圖。</p>
-<h2 id="plan">Step 3 · Plan：形成完整計畫</h2><p>保留同一個Task的分析上下文，切換<strong>Plan</strong>。先檢閱計畫，確認範圍與缺件，再進入下一步。</p>{{02-plan|規劃Implementation Plan|Plan}}
-<details><summary>預期回應</summary><p>涵蓋COBOL、Java、Database、Transaction、API、Batch、Test；每一領域區分已知、提案與待確認。Java/API/Database未提供時，不應補造既有實作。</p></details>
-<h2 id="deliver">Step 4 · Agent：建立文件</h2>{{03-plan-deliver|依計畫產出文件|Agent}}
-<h2 id="verify">Step 5 · 檢查成果</h2>{{verify-plan|檢查兩份計畫文件|Agent}}
-<p>在檔案總管開啟兩份Markdown並使用預覽，核對來源引用、重跑風險、備份與回復，以及各項工作的角色、依賴和驗收條件。</p>
-{{check:architecture包含七個領域及來源事實}}{{check:checklist包含分析到回復的執行順序}}{{check:未知項目已明示且檢查通過}}
+<h2 id="story">執行批次前，你想先知道什麼？</h2>
+<p>假設你準備執行一支資料轉換程式，想先知道這次會改到多少筆，確認後再套用變更。我們就從這個需求開始，請 Bob 幫忙看現有程式、找出影響範圍，最後整理成計畫。</p>
+<h2 id="ask">1. 先認識這支程式</h2>
+<p>剛接手程式時，不必先知道每個欄位和段落的意思。先把 CKP02 加入對話，問一個接手工作時會問的問題。</p>
+{{01-ask|認識 CKP02|Ask}}
+<p>看完說明，如果還不容易想像資料怎麼變，可以接著請 Bob 舉例。</p>
+{{01-layout|看一筆資料怎麼變|Ask}}
+<h2 id="impact">2. 看看需求會影響哪些地方</h2>
+<p>需求寫在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/change-request.md">change-request.md</a>。切換到 <strong>Z Architecture</strong>，從輸入框的 <code>/</code> 清單選取 <code>/impact-analysis</code>，再接上下方問題送出。</p>
+{{z-impact|找出變更影響|Z Architecture}}
+<p>如果流程要求連線 Z Understand，請選擇包含這支程式的專案。手邊只有本機檔案時，先分析看得到的內容，跨系統的關係留待補齊資料後確認。</p>
+<h2 id="plan">3. 把需求整理成計畫</h2>
+<p>現在知道程式大致怎麼運作，就可以討論怎麼改。<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a> 約定文件的章節和檢查方式；提問時引用它，Bob 就有格式可以依循。</p>
+{{02-plan|規劃預覽功能|Plan}}
+<p>閱讀計畫時，想想兩件事：哪些建議有程式可以對照？哪些還需要業務或系統資料？有疑問的地方，直接在同一個對話追問。</p>
+<h2 id="deliver">4. 請 Bob 寫成文件</h2>
+<p>計畫確認後，在同一個對話切換到 <strong>Agent</strong>。前面已經說清楚的內容，這裡不用再重述一遍。</p>
+{{03-plan-deliver|依計畫完成文件|Agent}}
+{{verify-plan|一起檢查計畫|Agent}}
+<details><summary>完成後可以看什麼？</summary><p>開啟 output/architecture.md 和 output/checklist.md。前者說明現況、提案及影響，後者列出要做的工作、前置條件與完成標準。七個分析面向與詳細格式都在 DOC-SPEC.md。</p></details>
+{{check:我能說明 CKP02 在處理什麼}}{{check:我已看過架構文件與實作清單}}{{check:需要補充的資訊已列出}}

@@ -1,56 +1,33 @@
-<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="以 CKP02 為必做題，CIS14 為相依分析加深題。"><title>從讀懂程式，到留下可查證的文件 · 合庫 IBM Bob Workshop</title><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/app.js" defer></script></head><body><a class="skip" href="#main">跳至主要內容</a><div class="utility">IBM Bob · 合作金庫 Workshop · 2026.09</div><header><a class="brand" href="../../index.html">IBM <span>Bob</span></a><nav aria-label="主要導覽"><a href="../../workshops/tcb/index.html">課程首頁</a><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop">GitHub ↗</a></nav></header><div class="layout with-side"><aside><p class="side-label">本期教材</p><nav aria-label="課程導覽"><a  href="00-setup.html">00　課前準備</a><a  href="01-planning.html">01　需求規劃</a><a aria-current=page href="02-documentation.html">02　COBOL 文件化</a><a  href="03-testing.html">03　測試與修正</a><a  href="04-logs.html">04　IMS log 分析</a><a  href="05-sast.html">05　SAST 修補</a><a  href="06-reference.html">06　成果與解答</a><a  href="07-help.html">07　常見問題</a><a  href="08-source-map.html">08　程式素材地圖</a></nav><p class="progress" aria-live="polite"></p></aside><main id="main"><section class="hero"><p class="eyebrow">15:15–15:47 · pp4z 文件化</p><h1>從讀懂程式，到留下可查證的文件</h1><p class="lead">以 CKP02 為必做題，CIS14 為相依分析加深題。</p></section><article><h2 id="goal">任務目標</h2><p>使用pp4z解讀COBOL、Copybook與JCL，將程式知識整理成<code>program.md</code>、<code>impact-analysis.md</code>與<code>facts.json</code>。本單元約32分鐘。</p>
-<h2 id="explain">Step 1 · Z Code：Explain code</h2><ol><li>開啟<code>output/z-lab/CKP02.cbl</code>。</li><li>在Bob切換<strong>Z Code</strong>，點上方<strong>Start Workflow</strong>播放圖示，選<strong>Explain code</strong>並按Start。</li><li>依流程選取目前檔案與Developer視角，閱讀整支程式的說明。</li></ol>
-<p>也可在Z Code的對話輸入框選取<code>/explain</code>。這是整個檔案的解釋流程；針對段落的追問，使用下方一般文字Prompt。</p><p class="mode-guide">在Bob模式選單選取 <strong>Z Code</strong>，用 @ 加入下方Prompt列出的檔案，再貼上內容送出。</p><div class="prompt"><div class="prompt-head"><span>核對程式解釋 · Z Code</span><button type="button" data-copy="z-explain">複製 Prompt</button></div><pre id="z-explain">請根據目前的Explain結果，重新核對output/z-lab/CKP02.cbl與bank-source/reading/CKP02.TXT。
-1. 以實際行號說明IF句點、REWRITE與下一筆READ的範圍。
-2. 列出R-ID群組、R-ID-1、R-ID-2、R-NAME的起訖位置；REDEFINES不重複計算。
-3. 以0012345678及0000123456示範轉換與再次執行，標出兩個空白的位置。
-4. 資料內EOF與READ AT END的差別是什麼？
-5. 哪些主機code page、資料集組織、備份或外部呼叫資訊尚未提供？
-只解釋，不改程式。不要從程式名稱、修訂碼或硬體名稱推斷未證實的歷史與環境。
-</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
-<details><summary>檢查重點</summary><p>IF的句點在84行結束；86行REWRITE不受該IF限制。R-ID群組為11位，R-NAME位於12–51，因此14–16位的EOF檢查在R-NAME內。主機code page與外部備份設定仍待確認。</p></details>
-<h2 id="copybook">Step 2 · 加入Copybook與JCL上下文</h2><p>用@加入<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>與<code>samples/jcl/IDSHIFT.jcl</code>，比較內嵌欄位與COPY。IDSHIFT的JCL是TESTSHIFT測試骨架，沒有CKP02正式DD配置。</p><p class="mode-guide">在Bob模式選單選取 <strong>Z Code</strong>，用 @ 加入下方Prompt列出的檔案，再貼上內容送出。</p><div class="prompt"><div class="prompt-head"><span>比較COBOL、Copybook與JCL · Z Code</span><button type="button" data-copy="z-context">複製 Prompt</button></div><pre id="z-context">請閱讀samples/cobol/IDSHIFT.cbl、samples/cobol/IDREC.cpy、samples/cobol/TESTSHIFT.cbl、samples/jcl/IDSHIFT.jcl及bank-source/reading/CKP02.TXT。
-比較CKP02的內嵌資料宣告與IDSHIFT的COPY，計算10+1+389與REDEFINES。
-說明IDSHIFT會修改傳入記憶體，但沒有檔案I/O；這不等於已實作dry-run。
-說明JCL的EXEC對象、尚未填入的欄位、缺少的主機資訊，以及為何不能當作CKP02正式批次作業。
-每項結論附檔案及行號，只作靜態解釋，不提交JCL。
-</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
-<h2 id="document">Step 3 · pp4z：Generate documentation</h2><p>保持Z Code，從<strong>Start Workflow → Generate documentation → Start</strong>啟動文件化流程，選取<code>output/z-lab/CKP02.cbl</code>。如流程要求輸出位置，使用<code>output/z-lab/</code>。完成後閱讀產生的程式概要、資料使用與錯誤處理章節。</p>
-<p>切換<strong>Agent</strong>，將已產生的說明檔透過@加入同一Task，再用下方Prompt整理成指定的三份成果。</p><p class="mode-guide">在Bob模式選單選取 <strong>Agent</strong>，用 @ 加入下方Prompt列出的檔案，再貼上內容送出。</p><div class="prompt"><div class="prompt-head"><span>整理程式與影響文件 · Agent</span><button type="button" data-copy="04-document">複製 Prompt</button></div><pre id="04-document">請閱讀 AGENTS.md、SOURCE-MAP.md、specs/change-request.md、bank-source/reading/CKP02.TXT，以及samples/cobol/IDSHIFT.cbl、samples/cobol/IDREC.cpy、samples/cobol/TESTSHIFT.cbl、samples/jcl/IDSHIFT.jcl。
-請整合本次pp4z Explain與Generate documentation的結果，以原始程式為準，只建立 output/program.md、output/impact-analysis.md、output/facts.json。
-program.md以CKP02為主，包含用途、入口、欄位表（起訖位置/長度）、流程、轉換前後例子、錯誤與限制、測試矩陣。說明其欄位內嵌而非COPY引入；另外對照IDSHIFT的copybook。每個來源結論附實際檔案及行號。
-impact-analysis.md依CR-01列直接影響、可能影響、缺件與需確認角色；明示CKP02每筆REWRITE、IDSHIFT子程式無I/O、JCL只是不可直接提交的骨架。Java/API/Database的實際相依未提供；別自行新增。
-facts.json必須是純JSON，鍵為 record_bytes、id_bytes、suffix_position、marker_start、marker_length、padding_positions、has_file_io、redefines_extra_bytes、synthetic、repeat_input、repeat_once、repeat_twice、evidence。
-前九項依原始CKP02填入數值、布林或位置陣列；synthetic應表示CKP02是否為合成來源。evidence是至少三筆物件的陣列，每筆有file、line（1-based整數）、quote（該行的原始文字片段），必須真實存在於bank-source/reading/CKP02.TXT。
-提醒：REDEFINES不重複計算；payload389 bytes包含第14–16位。只寫output/，勿改測試或來源。
-每份Markdown以1500中文字為目標。交付前確認：CKP02的R-ID=11，R-ID-1=10；R-NAME在12–51，因此EOF檢查在R-NAME內。不要宣稱原始主機code page為ASCII；Python才使用ASCII模型。重跑可能再次轉換，不保證冪等。
-quote請只取不含前導縮排的精確原文子字串，不自行補空格。寫完執行python scripts/verify.py docs；不通過則僅修正output/後再驗證，直到通過或清楚回報阻礙。不能以VSAM或其他未提供的檔案組織當確定事實。
-
-請在兩份Markdown及facts.json逐步核對同一個重跑反例：假設第14–16位不是EOF，repeat_input為0000123456，第一次為00123456加兩空白，第二次為123456加四空白。JSON的三個repeat值均保留完整十字元。第一次的結果仍以00開頭，不能概括為「轉換後不再符合條件」；僅用0012345678這個一次後穩定的例子不足以說明所有輸入。正文、例子、測試矩陣與JSON必須一致。
-請將主機code page標為未知；ASCII或EBCDIC都尚未確認。id_bytes指R-ID-1的10位，R-ID群組為11位。請明示IDSHIFT會修改傳入記憶體，無I/O不等於dry-run。回復方面只說明CKP02未內建回復流程；外部備份未提供，不推斷有備份仍無法還原。
-</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
-<h2 id="verify">Step 4 · 檢查文件</h2><p class="mode-guide">在Bob模式選單選取 <strong>Agent</strong>，用 @ 加入下方Prompt列出的檔案，再貼上內容送出。</p><div class="prompt"><div class="prompt-head"><span>核對欄位與來源引文 · Agent</span><button type="button" data-copy="verify-docs">複製 Prompt</button></div><pre id="verify-docs">請在目前教材工作區執行python scripts/verify.py docs。Windows若只有py指令，改用py -3。
-再對照program.md、impact-analysis.md及facts.json，核對0000123456→00123456加兩空白→123456加四空白的反例。第一次仍以00開頭，第二次可能再次轉換；若正文與此推導矛盾，列為尚未通過內容核對，不以JSON通過代替正文審查。
-展開實際執行結果，回報exit code、通過與失敗項目；不要修改來源或驗收程式。若檢查失敗，先說明原因與最小修正建議，等我確認後再改output。
-</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>檢查通過後仍需閱讀引用的來源行：原文存在不等於它能支持整段結論。核對重跑反例：0000123456第一次成為00123456加兩空白，第二次成為123456加四空白；第一次仍以00開頭。兩份文件與facts.json應說明相同行為，再與規劃階段的影響分析比較。</p>
-<label class="check"><input type="checkbox" data-check="完成Explain與文件化流程"><span>完成Explain與文件化流程</span></label><label class="check"><input type="checkbox" data-check="能說明CKP02與IDSHIFT的I/O差異"><span>能說明CKP02與IDSHIFT的I/O差異</span></label><label class="check"><input type="checkbox" data-check="文件及三筆來源引文檢查通過"><span>文件及三筆來源引文檢查通過</span></label>
-<h2 id="extension">延伸練習 · CIS14</h2><p>開啟<code>output/z-lab/CIS14/CIS14.cbl</code>，加入同目錄的PCB、SSA與segment copybooks，以Z Architecture分析較完整的IMS相依。</p><p class="mode-guide">在Bob模式選單選取 <strong>Z Architecture</strong>，用 @ 加入下方Prompt列出的檔案，再貼上內容送出。</p><div class="prompt"><div class="prompt-head"><span>CIS14資料與控制流程 · Z Architecture</span><button type="button" data-copy="06-customer-analysis">複製 Prompt</button></div><pre id="06-customer-analysis">這是合庫原始素材的加深題。先閱讀SOURCE-MAP.md與bank-source/manifest.json。
-只閱讀bank-source/reading/CKP02.TXT、bank-source/reading/CIS14/CIS14.TXT及直接需要的copybooks。不要掃描其他客戶資料。
-請分析：
-1. CKP02的REWRITE是否受IF限制？資料內EOF與AT END有何不同？R-ID群組合計幾bytes、補白在哪？引用行號，勿從修訂標記推論日期。
-2. CIS14的3000-PROCESS-RTN如何分別使用PROCESS-OK與PGM-OK？列GU/GNP相依、輸入輸出長度、XIDCHK/BRHIDCNV缺件。
-3. 日期範圍檢查是否等於完整曆法檢查？CURRENT-DATE對重現性有何影響？
-4. 若將識別欄位規則變更，哪些呼叫關係已證實、哪些還未知？不能把CKP02、CIS14、SYSOCP31、STANCVT接成未證實的呼叫鏈。
-每項分來源事實、推論、缺件。這是靜態分析，沒有主機執行證據。不要把samples/的答案套到原始程式。
-交付前核對：CKP02的實際資料集組織未提供，圖與正文都不稱它為已確認的VSAM或循序資料集；CIS14的日期運算是YYYYMMDD數值減10000，不是完整曆法的一年或365天。若說外部子程式或copybook缺少，先確認manifest及內嵌宣告，不把LINKAGE參數名直接當COPY檔名。
-用800中文字左右的四段摘要回答，不畫圖。不描述本題未讀取的SYSOCP31或STANCVT用途，不從名稱猜測業務。CALL字面值不能證明編譯時採動態或靜態繫結。只確認這兩支已讀程式的直接CALL，其他跨程式或排程關係保留未知；不要把未掃描的全系統關係宣判不存在。
-</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
-<details><summary>參考解答</summary><p>輸入300、分行表80、輸出917/1109。PROCESS-OK與PGM-OK作用不同；XIDCHK與BRHIDCNV實作未提供。YYYYMMDD減10000不等於完整曆法運算。</p><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/customer-analysis.md">查看完整解答</a></details>
-
-<h2 id="modernization">選做 · COBOL現代化規劃</h2><p>完成主線後，使用Z Architecture比較保留批次、抽出邏輯與API包裝的選項。先核對相同行為如何驗證，再評估架構變更。</p><p class="mode-guide">在Bob模式選單選取 <strong>Z Architecture</strong>，用 @ 加入下方Prompt列出的檔案，再貼上內容送出。</p><div class="prompt"><div class="prompt-head"><span>比較現代化選項 · Z Architecture</span><button type="button" data-copy="z-modernization">複製 Prompt</button></div><pre id="z-modernization">請讀AGENTS.md、bank-source/reading/CKP02.TXT、samples/cobol/IDSHIFT.cbl、samples/cobol/IDREC.cpy與specs/change-request.md。
-以Z Architecture分析CKP02的現代化選項，先保留既有業務語意，分別比較：保留COBOL批次並增加驗證／回復措施、抽出轉換邏輯、以API包裝新增功能。
-每個選項列出適用情境、需補充的JCL／資料集／編碼／呼叫端資訊、測試策略、回復方法與風險。區分目前有程式證據的功能和提案，不宣稱已存在Java服務、API或資料庫實作。
-只提出計畫，不改原始碼、不建立服務、不連線主機。說明如何以相同測資比較轉換結果、重跑行為及檔案I/O，將尚無執行證據的項目標為待驗證。
-</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
+<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="用 pp4z 解讀程式，再整理成方便查閱的文件。"><title>把程式讀懂，也讓下一個人看得懂 · 合庫 IBM Bob Workshop</title><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/app.js" defer></script></head><body><a class="skip" href="#main">跳至主要內容</a><div class="utility">IBM Bob · 合作金庫 Workshop · 2026.09</div><header><a class="brand" href="../../index.html">IBM <span>Bob</span></a><nav aria-label="主要導覽"><a href="../../workshops/tcb/index.html">課程首頁</a><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop">GitHub ↗</a></nav></header><div class="layout with-side"><aside><p class="side-label">練習單元</p><nav aria-label="課程導覽"><a  href="00-setup.html">00　課前準備</a><a  href="01-planning.html">01　需求規劃</a><a aria-current=page href="02-documentation.html">02　COBOL 文件化</a><a  href="03-testing.html">03　測試與修正</a><a  href="04-logs.html">04　IMS 事件分析</a><a  href="05-sast.html">05　查詢弱點修補</a><a  href="06-reference.html">06　成果與解答</a><a  href="07-help.html">07　常見問題</a><a  href="08-source-map.html">08　認識練習程式</a></nav><p class="progress" aria-live="polite"></p></aside><main id="main"><section class="hero"><p class="eyebrow">COBOL 文件化</p><h1>把程式讀懂，也讓下一個人看得懂</h1><p class="lead">用 pp4z 解讀程式，再整理成方便查閱的文件。</p></section><article><h2 id="story">下次接手的人，會想問哪些問題？</h2>
+<p>知道程式「大概在做什麼」之後，還需要留下欄位、流程和注意事項。這個練習會用 pp4z 解讀 CKP02，再把說明整理成方便查閱的文件。</p>
+<h2 id="explain">1. 用 Explain code 閱讀程式</h2>
+<ol><li>開啟 <code>output/z-lab/CKP02.cbl</code>，選擇 <strong>Z Code</strong>。</li><li>點 <strong>Start Workflow → Explain code → Start</strong>。</li><li>依流程選取這個檔案及 Developer 視角，閱讀程式說明。</li></ol>
+<p>回覆談到轉換條件後，可以追問實際執行時會遇到的情況，例如同一份資料再跑一次。</p>
+<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>output/z-lab/CKP02.cbl</code>、<code>specs/change-request.md</code></p><div class="prompt"><div class="prompt-head"><span>追問執行時的行為</span><button type="button" data-copy="z-explain">複製 Prompt</button></div><pre id="z-explain">如果一筆資料沒有符合轉換條件，後面還會做什麼？如果同一份資料再跑一次，結果會一樣嗎？請用 specs/change-request.md 裡的測試資料說明，並帶我看對應的程式。
+</pre><div class="expected"><strong>預期回應</strong><p>不符合條件和重跑時的處理過程，附上對應程式位置。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<h2 id="copybook">2. 加入 Copybook 和 JCL</h2>
+<p>接著看看另一個小範例 IDSHIFT。它把資料定義放在 Copybook，另外附有測試程式和 JCL。把相關檔案一起交給 Bob，就能比較兩種寫法。</p>
+<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>bank-source/reading/CKP02.TXT</code>、<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>、<code>samples/cobol/TESTSHIFT.cbl</code>、<code>samples/jcl/IDSHIFT.jcl</code></p><div class="prompt"><div class="prompt-head"><span>把相關檔案一起看</span><button type="button" data-copy="z-context">複製 Prompt</button></div><pre id="z-context">請幫我比較 CKP02 和 IDSHIFT 的資料定義。IDREC.cpy 在這裡負責什麼？這份 JCL 會執行哪支程式，還需要哪些資訊才能執行？
+</pre><div class="expected"><strong>預期回應</strong><p>資料定義、呼叫方式及 JCL 執行對象的比較。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<h2 id="document">3. 整理成接手文件</h2>
+<p>保持 <strong>Z Code</strong>，從 <strong>Start Workflow → Generate documentation → Start</strong> 選取 CKP02.cbl。若需要指定儲存位置，放在 <code>output/z-lab/</code>。</p>
+<p>把產生的說明檔加入同一個對話，切換到 <strong>Plan</strong>，想想還有哪些內容需要補齊。</p>
+<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code></p><div class="prompt"><div class="prompt-head"><span>規劃文件內容</span><button type="button" data-copy="document-plan">複製 Prompt</button></div><pre id="document-plan">我希望下次接手的人不用重新讀完整支程式。請根據剛才的解讀，依 DOC-SPEC.md 規劃 CKP02 的程式說明與影響分析，列出需要補充的內容。
+</pre><div class="expected"><strong>預期回應</strong><p>程式說明與影響分析的章節，以及需要補充的內容。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>確認內容後切換到 <strong>Agent</strong>。文件的章節、檔名與檢查方式都寫在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a>，沿用同一份規格即可。</p>
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>bank-source/reading/CKP02.TXT</code></p><div class="prompt"><div class="prompt-head"><span>完成程式文件</span><button type="button" data-copy="04-document">複製 Prompt</button></div><pre id="04-document">請依 DOC-SPEC.md，把 CKP02 的程式說明與影響分析整理成文件，存到 output。把剛才的解讀也一起納入，完成後幫我檢查文件與原始碼是否一致。
+</pre><div class="expected"><strong>預期回應</strong><p>program.md、impact-analysis.md、facts.json，以及文件檢查結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<h2 id="verify">4. 回到程式，確認說明</h2>
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/program.md</code>、<code>output/impact-analysis.md</code>、<code>output/facts.json</code></p><div class="prompt"><div class="prompt-head"><span>檢查文件中的例子</span><button type="button" data-copy="verify-docs">複製 Prompt</button></div><pre id="verify-docs">請重新打開文件引用的原始碼，依 DOC-SPEC.md 核對程式文件。從頭到尾看看欄位、流程和例子，修正不一致的說明，再執行檢查並告訴我改了哪些地方。
+</pre><div class="expected"><strong>預期回應</strong><p>格式檢查結果，以及需要回到原始碼確認的說明。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<details><summary>重跑的例子，應該怎麼看？</summary><p>使用需求文件中的 0000123456，並讓第 14–16 位不是 EOF。第一次轉換得到 00123456 加兩個空白，第二次得到 123456 加四個空白。第一次後仍以 00 開頭，所以不能只用一個例子就認定重跑結果都相同。</p></details>
+<p>output 裡會有 program.md、impact-analysis.md 和 facts.json。前兩份方便閱讀，facts.json 則用來檢查欄位及例子是否一致。</p>
+<label class="check"><input type="checkbox" data-check="我試過 Explain code 與文件化"><span>我試過 Explain code 與文件化</span></label><label class="check"><input type="checkbox" data-check="我能說明 Copybook 和 JCL 的用途"><span>我能說明 Copybook 和 JCL 的用途</span></label><label class="check"><input type="checkbox" data-check="我已對照原始碼檢查文件"><span>我已對照原始碼檢查文件</span></label>
+<h2 id="extension">再試試看：CIS14</h2>
+<p>想進一步了解 IMS 程式，可以開啟 <code>output/z-lab/CIS14/CIS14.cbl</code>，加入同目錄的 Copybook，再從資料流開始問。</p>
+<p class="mode-guide"><strong>Z Architecture 模式</strong></p><p class="file-context">加入檔案：<code>output/z-lab/CIS14/CIS14.cbl</code>、<code>output/z-lab/CIS14/</code></p><div class="prompt"><div class="prompt-head"><span>閱讀 CIS14</span><button type="button" data-copy="06-customer-analysis">複製 Prompt</button></div><pre id="06-customer-analysis">這支 CIS14 比剛才的程式大得多。請先幫我整理它讀取、加工和輸出資料的流程，再說明它會用到哪些 Copybook 和 IMS 呼叫。遇到查不到資料或日期異常時，它會怎麼處理？
+</pre><div class="expected"><strong>預期回應</strong><p>主要資料流、Copybook 與 IMS 呼叫，以及需要補充的程式。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<h2 id="modernization">再想一步：讓其他系統也能使用</h2>
+<p class="mode-guide"><strong>Z Architecture 模式</strong></p><p class="file-context">加入檔案：<code>bank-source/reading/CKP02.TXT</code>、<code>specs/change-request.md</code></p><div class="prompt"><div class="prompt-head"><span>討論現代化選項</span><button type="button" data-copy="z-modernization">複製 Prompt</button></div><pre id="z-modernization">如果之後想把這段批次功能提供給其他系統使用，可以有哪些做法？請比較保留批次、抽出轉換邏輯和提供 API 這幾種選擇，並說明各自需要先確認的事情。
+</pre><div class="expected"><strong>預期回應</strong><p>不同做法的適用情況，以及開始之前需要確認的事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 </article><nav class="next" aria-label="前後單元"><a href="01-planning.html">← 需求規劃</a><a href="03-testing.html">測試與修正 →</a></nav></main></div><footer><p>合作金庫 IBM Bob Workshop</p><p>2026.09.21 / 09.24</p></footer></body></html>
