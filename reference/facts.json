@@ -1,0 +1,16 @@
+{
+  "record_bytes": 400,
+  "id_bytes": 10,
+  "suffix_position": 11,
+  "marker_start": 14,
+  "marker_length": 3,
+  "padding_positions": [9, 10],
+  "has_file_io": true,
+  "redefines_extra_bytes": 0,
+  "synthetic": false,
+  "evidence": [
+    {"file":"bank-source/reading/CKP02.TXT","line":25,"quote":"RECORD CONTAINS 400 CHARACTERS."},
+    {"file":"bank-source/reading/CKP02.TXT","line":83,"quote":"IN-REF-REC (14:3) NOT = \"EOF\""},
+    {"file":"bank-source/reading/CKP02.TXT","line":86,"quote":"REWRITE IN-REF-REC."}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "producer": "Workshop author; NOT a Fortify or Checkmarx scan",
+  "findings": [{
+    "id": "TRAIN-SQL-001",
+    "category": "SQL Injection",
+    "cwe": "CWE-89",
+    "severity": "High",
+    "file": "samples/python/customer_lookup.py",
+    "function": "lookup",
+    "source": "customer_id parameter",
+    "sink": "connection.execute(sql)",
+    "claim": "Untrusted text is concatenated into a SQL query. Confirm from code before fixing.",
+    "acceptance": "Parameter binding; exact matches preserved; quote input safe; injection cannot return other rows."
+  }]
+}

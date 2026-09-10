@@ -1,0 +1,503 @@
+{
+  "date": "2026-09-10",
+  "bob_shell": "2.0.2",
+  "python": "3.13.5",
+  "platform": "Windows",
+  "rounds": [
+    {
+      "name": "run-01",
+      "initial_stages": [
+        {
+          "step": "01-ask",
+          "mode": "ask",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 63.0,
+          "check_passed": null,
+          "protected_files_unchanged": true,
+          "tool_calls": 5,
+          "prompt_sha256": "7e791e0637c1322f329823586fee09b68e2e3dbdabb6f982116f7fd0c44dcb02"
+        },
+        {
+          "step": "02-plan",
+          "mode": "plan",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 159.9,
+          "check_passed": null,
+          "protected_files_unchanged": true,
+          "tool_calls": 13,
+          "prompt_sha256": "ce2f653335971d207a5419cca3cae012d8f12a7aa5491f91e702ce7c93c6ef8d"
+        },
+        {
+          "step": "03-plan-deliver",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 330.5,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 21,
+          "prompt_sha256": "25b1fc297ca7b1206e00ad3449afb1a9488a065c9fde218c3f0fdce9b1dcd554"
+        },
+        {
+          "step": "04-document",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 275.9,
+          "check_passed": false,
+          "protected_files_unchanged": true,
+          "tool_calls": 25,
+          "prompt_sha256": "a4ae4bddeb68ba3658d7e7231bb233c0b45a17bcfdeef9dce997fb477b886832"
+        },
+        {
+          "step": "05-unit",
+          "mode": "agent",
+          "status": "invalid-json",
+          "exit_code": 0,
+          "elapsed_seconds": 223.0,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": null,
+          "prompt_sha256": "9be77d519954acaa3235e0416f24753a226a4c2b594cecdc0bdfa33c89207629"
+        },
+        {
+          "step": "07-logs",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 113.9,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 22,
+          "prompt_sha256": "b06ffb62b49b03236851a8111c79cc71b2abf99cb8df14bb48d8e98a60a5fc15"
+        },
+        {
+          "step": "08-sast",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 79.0,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 15,
+          "prompt_sha256": "9680797316250cadb7297a7499101d7873caa1b98b23bbee07df95f22164c194"
+        }
+      ],
+      "agentrules_sha256": "a9c4871c5a301abae533c3de6e6d659272da1bab61f040c8888263a1701d1cfd"
+    },
+    {
+      "name": "run-02",
+      "initial_stages": [
+        {
+          "step": "01-ask",
+          "mode": "ask",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 68.3,
+          "check_passed": null,
+          "protected_files_unchanged": true,
+          "tool_calls": 5,
+          "prompt_sha256": "7e791e0637c1322f329823586fee09b68e2e3dbdabb6f982116f7fd0c44dcb02"
+        },
+        {
+          "step": "02-plan",
+          "mode": "plan",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 121.3,
+          "check_passed": null,
+          "protected_files_unchanged": true,
+          "tool_calls": 12,
+          "prompt_sha256": "ce2f653335971d207a5419cca3cae012d8f12a7aa5491f91e702ce7c93c6ef8d"
+        },
+        {
+          "step": "03-plan-deliver",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 271.1,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 25,
+          "prompt_sha256": "ef62147f369a21d317824b67e9927da4d8380dce054cc80e6fa3148d10137002"
+        },
+        {
+          "step": "04-document",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 336.2,
+          "check_passed": false,
+          "protected_files_unchanged": true,
+          "tool_calls": 23,
+          "prompt_sha256": "a29601cac13b3fb81f16799f6d1ad204f61415f34ac02570f47de3930967bb01"
+        },
+        {
+          "step": "05-unit",
+          "mode": "agent",
+          "status": "invalid-json",
+          "exit_code": 0,
+          "elapsed_seconds": 199.6,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": null,
+          "prompt_sha256": "9be77d519954acaa3235e0416f24753a226a4c2b594cecdc0bdfa33c89207629"
+        },
+        {
+          "step": "07-logs",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 109.7,
+          "check_passed": false,
+          "protected_files_unchanged": true,
+          "tool_calls": 12,
+          "prompt_sha256": "b06ffb62b49b03236851a8111c79cc71b2abf99cb8df14bb48d8e98a60a5fc15"
+        },
+        {
+          "step": "08-sast",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 92.6,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 17,
+          "prompt_sha256": "9680797316250cadb7297a7499101d7873caa1b98b23bbee07df95f22164c194"
+        }
+      ],
+      "agentrules_sha256": "b4895d801336b2cc29c0e7f7e050c1903de0876a705c072e7de9d87f3c272429"
+    },
+    {
+      "name": "run-03",
+      "initial_stages": [
+        {
+          "step": "01-ask",
+          "mode": "ask",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 60.5,
+          "check_passed": null,
+          "protected_files_unchanged": true,
+          "tool_calls": 5,
+          "prompt_sha256": "7e791e0637c1322f329823586fee09b68e2e3dbdabb6f982116f7fd0c44dcb02"
+        },
+        {
+          "step": "02-plan",
+          "mode": "plan",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 117.5,
+          "check_passed": null,
+          "protected_files_unchanged": true,
+          "tool_calls": 9,
+          "prompt_sha256": "ce2f653335971d207a5419cca3cae012d8f12a7aa5491f91e702ce7c93c6ef8d"
+        },
+        {
+          "step": "03-plan-deliver",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 265.4,
+          "check_passed": false,
+          "protected_files_unchanged": true,
+          "tool_calls": 22,
+          "prompt_sha256": "ef62147f369a21d317824b67e9927da4d8380dce054cc80e6fa3148d10137002"
+        },
+        {
+          "step": "04-document",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 277.2,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 25,
+          "prompt_sha256": "89e2b822dfbddd3b41856826672b37c60e59a8bda194defe592c8acca13028f8"
+        },
+        {
+          "step": "05-unit",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 148.4,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 22,
+          "prompt_sha256": "9be77d519954acaa3235e0416f24753a226a4c2b594cecdc0bdfa33c89207629"
+        },
+        {
+          "step": "07-logs",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 299.4,
+          "check_passed": false,
+          "protected_files_unchanged": true,
+          "tool_calls": 30,
+          "prompt_sha256": "b06ffb62b49b03236851a8111c79cc71b2abf99cb8df14bb48d8e98a60a5fc15"
+        },
+        {
+          "step": "08-sast",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 83.7,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 18,
+          "prompt_sha256": "9680797316250cadb7297a7499101d7873caa1b98b23bbee07df95f22164c194"
+        }
+      ],
+      "agentrules_sha256": "b4895d801336b2cc29c0e7f7e050c1903de0876a705c072e7de9d87f3c272429"
+    },
+    {
+      "name": "final-01",
+      "initial_stages": [
+        {
+          "step": "01-ask",
+          "mode": "ask",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 56.7,
+          "check_passed": null,
+          "protected_files_unchanged": true,
+          "tool_calls": 5,
+          "prompt_sha256": "7e791e0637c1322f329823586fee09b68e2e3dbdabb6f982116f7fd0c44dcb02"
+        },
+        {
+          "step": "02-plan",
+          "mode": "plan",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 256.8,
+          "check_passed": null,
+          "protected_files_unchanged": true,
+          "tool_calls": 12,
+          "prompt_sha256": "ce2f653335971d207a5419cca3cae012d8f12a7aa5491f91e702ce7c93c6ef8d"
+        },
+        {
+          "step": "03-plan-deliver",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 249.5,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 20,
+          "prompt_sha256": "ef62147f369a21d317824b67e9927da4d8380dce054cc80e6fa3148d10137002"
+        },
+        {
+          "step": "04-document",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 267.9,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 24,
+          "prompt_sha256": "89e2b822dfbddd3b41856826672b37c60e59a8bda194defe592c8acca13028f8"
+        },
+        {
+          "step": "05-unit",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 250.5,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 30,
+          "prompt_sha256": "1cdfc6202fad2ee937272b9f7ba6c698f94883f156fbdd8df8ab07cda20c78b7"
+        },
+        {
+          "step": "07-logs",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 600.0,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 37,
+          "prompt_sha256": "b06ffb62b49b03236851a8111c79cc71b2abf99cb8df14bb48d8e98a60a5fc15"
+        },
+        {
+          "step": "08-sast",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 108.3,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 20,
+          "prompt_sha256": "9680797316250cadb7297a7499101d7873caa1b98b23bbee07df95f22164c194"
+        }
+      ],
+      "agentrules_sha256": "3bdc35714c0f64d0696c167a7706914d397a67f13520ed8c37df11f98d78803d",
+      "repair": {
+        "needed": true,
+        "targets": [
+          "logs",
+          "manual-review"
+        ],
+        "status": "success",
+        "error_events": 0,
+        "exit_code": 0,
+        "elapsed_seconds": 307.4,
+        "published_verifier_all_pass": true,
+        "protected_files_unchanged": true
+      },
+      "manual_review": "人工審查：architecture.md 風險表「來源未見備份或 ROLLBACK；中途失敗無還原點」超出來源可證明的範圍。請改為「來源未提供備份／還原程序，需確認可用還原點與重跑方式」，也核對 checklist、program、impact-analysis 不把未提供的外部備份或鎖定機制當成確定不存在。保留明確可證明的 CKP02 本身無內建復原程序事實。其他已通過項目不必重寫。\nprogram.md與impact-analysis.md把「原始主機為EBCDIC」當確定事實，與來源核對規則不符：主機code page與編譯／執行設定未提供，請一律列待確認；只有Python模型已定義ASCII。impact-analysis的「CKP02不是VSAM」「CKP02非VSAM」也不能成立，請改成檔案組織未知。\nimpact-analysis直接影響段需區分本次CR-01只實作Python模型與文件，修改CKP02是未來另行評估的提案，不是本次必做變更。IDSHIFT無檔案I/O但會修改傳入的記憶體，不能說它天然等於dry-run；Python dry-run以保留呼叫端資料副本的契約實現。program.md的重跑案例應展示完整兩次推導0000123456→00123456加兩空白→123456加四空白。\n",
+      "final_bob_verification": {
+        "status": "success",
+        "error_events": 0,
+        "exit_code": 0,
+        "elapsed_seconds": 17.2,
+        "tool_calls": 1
+      }
+    },
+    {
+      "name": "final-02",
+      "initial_stages": [
+        {
+          "step": "01-ask",
+          "mode": "ask",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 63.7,
+          "check_passed": null,
+          "protected_files_unchanged": true,
+          "tool_calls": 5,
+          "prompt_sha256": "7e791e0637c1322f329823586fee09b68e2e3dbdabb6f982116f7fd0c44dcb02"
+        },
+        {
+          "step": "02-plan",
+          "mode": "plan",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 125.9,
+          "check_passed": null,
+          "protected_files_unchanged": true,
+          "tool_calls": 12,
+          "prompt_sha256": "ce2f653335971d207a5419cca3cae012d8f12a7aa5491f91e702ce7c93c6ef8d"
+        },
+        {
+          "step": "03-plan-deliver",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 510.6,
+          "check_passed": false,
+          "protected_files_unchanged": true,
+          "tool_calls": 38,
+          "prompt_sha256": "ef62147f369a21d317824b67e9927da4d8380dce054cc80e6fa3148d10137002"
+        },
+        {
+          "step": "04-document",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 141.9,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 18,
+          "prompt_sha256": "89e2b822dfbddd3b41856826672b37c60e59a8bda194defe592c8acca13028f8"
+        },
+        {
+          "step": "05-unit",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 234.6,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 32,
+          "prompt_sha256": "1cdfc6202fad2ee937272b9f7ba6c698f94883f156fbdd8df8ab07cda20c78b7"
+        },
+        {
+          "step": "07-logs",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 112.7,
+          "check_passed": false,
+          "protected_files_unchanged": true,
+          "tool_calls": 13,
+          "prompt_sha256": "b06ffb62b49b03236851a8111c79cc71b2abf99cb8df14bb48d8e98a60a5fc15"
+        },
+        {
+          "step": "08-sast",
+          "mode": "agent",
+          "status": "success",
+          "exit_code": 0,
+          "elapsed_seconds": 239.9,
+          "check_passed": true,
+          "protected_files_unchanged": true,
+          "tool_calls": 30,
+          "prompt_sha256": "9680797316250cadb7297a7499101d7873caa1b98b23bbee07df95f22164c194"
+        }
+      ],
+      "agentrules_sha256": "3bdc35714c0f64d0696c167a7706914d397a67f13520ed8c37df11f98d78803d",
+      "repair": {
+        "needed": true,
+        "targets": [
+          "plan",
+          "logs",
+          "manual-review"
+        ],
+        "status": "success",
+        "error_events": 2,
+        "exit_code": 0,
+        "elapsed_seconds": 286.9,
+        "published_verifier_all_pass": true,
+        "protected_files_unchanged": true
+      },
+      "manual_review": "人工審查：architecture.md風險／缺件表把「無並行鎖定機制」「無鎖定或序列化機制」當事實，應改成「來源未提供並行鎖定與序列化設定，需平台確認」；「無回復機制」應表達來源未提供外部備份與還原程序，不能確認可用還原點。marker_field的額外括號說明移到正文，JSON僅留R-NAME。主機編碼仍未知，不要改成EBCDIC已確認。\nprogram.md與impact-analysis.md的完整欄位表、IF/REWRITE、來源/提案/缺件與主機未驗證界線已人工檢查，請保留，僅增加0000123456→00123456加兩空白→123456加四空白的完整重跑推導，方便學员核對。只修改output，不動來源與驗收。\nsast-remediation.md第二階SQL injection的「參數綁定仍無法防護」容易誤導：本函式參數綁定有效；若其他下游將已儲存值重新串接進SQL，那是未修補的另一個sink，每個sink仍應參數綁定。正式複掃需使用真實報告的規則與finding ID，TRAIN-SQL-001僅是本題合成編號，不應宣稱正式掃描器存在這個規則。保留6項測試實際結果及正式掃描未執行。\n",
+      "final_bob_verification": {
+        "status": "success",
+        "error_events": 0,
+        "exit_code": 0,
+        "elapsed_seconds": 14.2,
+        "tool_calls": 1
+      }
+    }
+  ],
+  "published_verifier_sha256": "f97885415b12ec2d7b15dee44b04630d2aeb196691f608a1f0a63e289a7796e8",
+  "published_repair_prompt_sha256": "bec652f32877d9cb9993754f6ac00b920808c65cbaa50dab03496b669eeb5b6e",
+  "source_manifest_sha256": "526967d814e8011ecfb77ab4deb08897d7c59203623133725d09b3fc48b792ee",
+  "extension": {
+    "extension-01": {
+      "step": "06-customer-analysis",
+      "mode": "ask",
+      "status": "success",
+      "exit_code": 0,
+      "elapsed_seconds": 99.3,
+      "check_passed": null,
+      "protected_files_unchanged": true
+    },
+    "extension-02": {
+      "step": "06-customer-analysis",
+      "mode": "ask",
+      "status": "success",
+      "exit_code": 0,
+      "elapsed_seconds": 82.8,
+      "check_passed": null,
+      "protected_files_unchanged": true
+    },
+    "extension-03": {
+      "step": "06-customer-analysis",
+      "mode": "ask",
+      "status": "success",
+      "exit_code": 0,
+      "elapsed_seconds": 69.6,
+      "check_passed": null,
+      "protected_files_unchanged": true,
+      "repair": {
+        "status": "success",
+        "exit_code": 0,
+        "elapsed_seconds": 69.3
+      }
+    }
+  }
+}

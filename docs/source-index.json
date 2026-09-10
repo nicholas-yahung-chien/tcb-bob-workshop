@@ -1,0 +1,1374 @@
+[
+  {
+    "file": "CIS14/CICIASEG.TXT",
+    "lines": 16,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "CIASEG",
+        "line": 2
+      }
+    ]
+  },
+  {
+    "file": "CIS14/CICIRSEG.TXT",
+    "lines": 160,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "CIRSEG",
+        "line": 2
+      }
+    ]
+  },
+  {
+    "file": "CIS14/CICIXSEG.TXT",
+    "lines": 1657,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "CIXSEG",
+        "line": 2
+      }
+    ]
+  },
+  {
+    "file": "CIS14/CIS14.TXT",
+    "lines": 1341,
+    "language": "COBOL/copybook",
+    "copy": [
+      {
+        "name": "DLIFUNCT",
+        "line": 52
+      },
+      {
+        "name": "SSACIDB",
+        "line": 53
+      },
+      {
+        "name": "IMSDBCOD",
+        "line": 54
+      },
+      {
+        "name": "SUBCODES",
+        "line": 55
+      },
+      {
+        "name": "TSYNCTSR",
+        "line": 56
+      },
+      {
+        "name": "CICIRSEG",
+        "line": 57
+      },
+      {
+        "name": "CICIASEG",
+        "line": 58
+      },
+      {
+        "name": "CICIXSEG",
+        "line": 59
+      },
+      {
+        "name": "VAVADSEG",
+        "line": 60
+      },
+      {
+        "name": "TAXCOMB",
+        "line": 61
+      },
+      {
+        "name": "PCBTPDB",
+        "line": 286
+      },
+      {
+        "name": "PCBBCDB",
+        "line": 287
+      },
+      {
+        "name": "PCBTCDB",
+        "line": 288
+      },
+      {
+        "name": "PCBBSDB",
+        "line": 289
+      },
+      {
+        "name": "PCBTSDB",
+        "line": 290
+      },
+      {
+        "name": "PCBTDDB",
+        "line": 291
+      },
+      {
+        "name": "PCBMSDB",
+        "line": 292
+      },
+      {
+        "name": "PCBIRDB",
+        "line": 293
+      },
+      {
+        "name": "PCBCIDB",
+        "line": 294
+      },
+      {
+        "name": "PCBABDB",
+        "line": 295
+      },
+      {
+        "name": "PCBPBDB",
+        "line": 296
+      },
+      {
+        "name": "PCBFDDB",
+        "line": 297
+      },
+      {
+        "name": "PCBCKDB",
+        "line": 298
+      },
+      {
+        "name": "PCBCNDB",
+        "line": 299
+      },
+      {
+        "name": "PCBBMDB",
+        "line": 300
+      },
+      {
+        "name": "PCBLADB",
+        "line": 301
+      },
+      {
+        "name": "PCBIBDB",
+        "line": 302
+      },
+      {
+        "name": "PCBCHDB",
+        "line": 304
+      },
+      {
+        "name": "PCBLCDB",
+        "line": 305
+      },
+      {
+        "name": "PCBATDB",
+        "line": 306
+      },
+      {
+        "name": "PCBBTDB",
+        "line": 307
+      },
+      {
+        "name": "PCBRTDB",
+        "line": 308
+      },
+      {
+        "name": "PCBFTDB",
+        "line": 309
+      },
+      {
+        "name": "PCBMBDB",
+        "line": 310
+      },
+      {
+        "name": "PCBFRDB",
+        "line": 311
+      },
+      {
+        "name": "PCBVDDB",
+        "line": 312
+      },
+      {
+        "name": "PCBTRDB",
+        "line": 313
+      },
+      {
+        "name": "PCBCLDB",
+        "line": 314
+      },
+      {
+        "name": "PCBGADB",
+        "line": 315
+      },
+      {
+        "name": "PCBIPDB",
+        "line": 316
+      },
+      {
+        "name": "PCBVADB",
+        "line": 317
+      }
+    ],
+    "missing_copy": [],
+    "literal_calls": [
+      {
+        "name": "CBLTDLI",
+        "line": 441
+      },
+      {
+        "name": "CBLTDLI",
+        "line": 468
+      },
+      {
+        "name": "XIDCHK",
+        "line": 966
+      },
+      {
+        "name": "XIDCHK",
+        "line": 982
+      },
+      {
+        "name": "XIDCHK",
+        "line": 997
+      },
+      {
+        "name": "CBLTDLI",
+        "line": 1257
+      },
+      {
+        "name": "BRHIDCNV",
+        "line": 1292
+      },
+      {
+        "name": "CBLTDLI",
+        "line": 1330
+      }
+    ],
+    "groups_or_labels": [
+      {
+        "name": "IN-REC",
+        "line": 30
+      },
+      {
+        "name": "BK-REC",
+        "line": 36
+      },
+      {
+        "name": "OUT-REC",
+        "line": 42
+      },
+      {
+        "name": "OUT2-REC",
+        "line": 48
+      },
+      {
+        "name": "BK-DATA",
+        "line": 63
+      },
+      {
+        "name": "OUT-DETAIL",
+        "line": 68
+      },
+      {
+        "name": "OUT2-DETAIL",
+        "line": 141
+      },
+      {
+        "name": "SWITCH-AREA",
+        "line": 149
+      },
+      {
+        "name": "WORK-AREA",
+        "line": 160
+      },
+      {
+        "name": "ACCEPT-DATA",
+        "line": 243
+      },
+      {
+        "name": "ACCEPT-TEL-NUMBER",
+        "line": 244
+      },
+      {
+        "name": "A1",
+        "line": 246
+      },
+      {
+        "name": "A2",
+        "line": 247
+      },
+      {
+        "name": "LINKBRH",
+        "line": 250
+      },
+      {
+        "name": "TEMP-AREA",
+        "line": 260
+      },
+      {
+        "name": "WS-CIKEY-FOREIGN",
+        "line": 272
+      },
+      {
+        "name": "DMY",
+        "line": 318
+      }
+    ]
+  },
+  {
+    "file": "CIS14/DLIFUNCT.TXT",
+    "lines": 17,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "COUNT-3",
+        "line": 2
+      },
+      {
+        "name": "COUNT-4",
+        "line": 3
+      },
+      {
+        "name": "FUNCTION-GU",
+        "line": 4
+      },
+      {
+        "name": "FUNCTION-GN",
+        "line": 5
+      },
+      {
+        "name": "FUNCTION-GNP",
+        "line": 6
+      },
+      {
+        "name": "FUNCTION-GHU",
+        "line": 7
+      },
+      {
+        "name": "FUNCTION-GHN",
+        "line": 8
+      },
+      {
+        "name": "FUNCTION-GHNP",
+        "line": 9
+      },
+      {
+        "name": "FUNCTION-ISRT",
+        "line": 10
+      },
+      {
+        "name": "FUNCTION-REPL",
+        "line": 11
+      },
+      {
+        "name": "FUNCTION-DLET",
+        "line": 12
+      },
+      {
+        "name": "FUNCTION-SYNC",
+        "line": 13
+      },
+      {
+        "name": "FUNCTION-ROLB",
+        "line": 14
+      },
+      {
+        "name": "FUNCTION-CHNG",
+        "line": 15
+      },
+      {
+        "name": "FUNCTION-PURG",
+        "line": 16
+      },
+      {
+        "name": "FUNCTION-RLSE",
+        "line": 17
+      }
+    ]
+  },
+  {
+    "file": "CIS14/IMSDBCOD.TXT",
+    "lines": 53,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "IMS-DB-STATUS-CODE",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBABDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "ABPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBATDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "ATPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBBCDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "BCPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBBMDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "BMPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBBSDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "BSPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBBTDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "BTPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBCHDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "CHPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBCIDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "CIPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBCKDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "CKPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBCLDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "CLPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBCNDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "CNPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBFDDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "FDPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBFRDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "FRPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBFTDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "FTPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBGADB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "GAPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBIBDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "IBPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBIPDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "IPPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBIRDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "IRPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBLADB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "LAPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBLCDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "LCPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBMBDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "MBPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBMSDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "MSPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBPBDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "PBPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBRTDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "RTPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBTCDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "TCPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBTDDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "TDPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBTPDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "TPPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBTRDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "TRPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBTSDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "TSPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBVADB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "VAPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/PCBVDDB.TXT",
+    "lines": 10,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "VDPCB",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "file": "CIS14/SSACIDB.TXT",
+    "lines": 123,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "UNQ-SSA-CICIR",
+        "line": 3
+      },
+      {
+        "name": "UNQ-SSA-CICSD",
+        "line": 6
+      },
+      {
+        "name": "UNQ-SSA-CIRAD",
+        "line": 9
+      },
+      {
+        "name": "UNQ-SSA-CICTB",
+        "line": 12
+      },
+      {
+        "name": "UNQ-SSA-CICIA",
+        "line": 15
+      },
+      {
+        "name": "UNQ-SSA-CICIU",
+        "line": 18
+      },
+      {
+        "name": "UNQ-SSA-CICIX",
+        "line": 21
+      },
+      {
+        "name": "UNQ-SSA-CICIY",
+        "line": 24
+      },
+      {
+        "name": "UNQ-SSA-CICIA-L",
+        "line": 27
+      },
+      {
+        "name": "SSA-CICIR",
+        "line": 32
+      },
+      {
+        "name": "SSA-CICSD",
+        "line": 39
+      },
+      {
+        "name": "SSA-CIRAD",
+        "line": 46
+      },
+      {
+        "name": "SSA-CICTB",
+        "line": 53
+      },
+      {
+        "name": "SSA-CICIA",
+        "line": 60
+      },
+      {
+        "name": "SSA-CICIU",
+        "line": 67
+      },
+      {
+        "name": "SSA-CIUCC",
+        "line": 75
+      },
+      {
+        "name": "SSA-CIUBH",
+        "line": 82
+      },
+      {
+        "name": "SSA-CICIX",
+        "line": 89
+      },
+      {
+        "name": "SSA-CICIX-GT",
+        "line": 98
+      },
+      {
+        "name": "SSA-CIXK1",
+        "line": 107
+      },
+      {
+        "name": "SSA-CICIY",
+        "line": 114
+      }
+    ]
+  },
+  {
+    "file": "CIS14/SUBCODES.TXT",
+    "lines": 877,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "DBCODES",
+        "line": 2
+      },
+      {
+        "name": "LA-CHAR-INQUIRY-CODE",
+        "line": 682
+      },
+      {
+        "name": "LA-INT-TYPE",
+        "line": 691
+      },
+      {
+        "name": "LA-CHAR-CODE",
+        "line": 705
+      },
+      {
+        "name": "LA-ADVANCE-CODE",
+        "line": 710
+      },
+      {
+        "name": "I-CODE-TRANS",
+        "line": 713
+      },
+      {
+        "name": "PBFSC-CODE",
+        "line": 718
+      },
+      {
+        "name": "CMP-LOAN-RATE-CODE",
+        "line": 723
+      },
+      {
+        "name": "I-OCCUP-TRADE-TAB",
+        "line": 728
+      },
+      {
+        "name": "I-OCCUP-TRADE-SET",
+        "line": 739
+      },
+      {
+        "name": "I-POSTING-CODE-TAB",
+        "line": 743
+      },
+      {
+        "name": "I-POSTING-CODE-SET",
+        "line": 748
+      },
+      {
+        "name": "MICR-TAIPEI-BRANCH",
+        "line": 752
+      },
+      {
+        "name": "FLAG-STOP",
+        "line": 766
+      },
+      {
+        "name": "FLAG-GROUP",
+        "line": 768
+      },
+      {
+        "name": "FLAG-OFF-LINE",
+        "line": 771
+      },
+      {
+        "name": "FLAG-HEAD-INQUIRY",
+        "line": 774
+      },
+      {
+        "name": "INTERBANK-CODE-TAB",
+        "line": 778
+      },
+      {
+        "name": "INTERBANK-CODE-SET",
+        "line": 781
+      },
+      {
+        "name": "INTERBANK-NUM",
+        "line": 784
+      },
+      {
+        "name": "TPSS-RETURN-CODES",
+        "line": 788
+      },
+      {
+        "name": "TPSS-COVER-CODE",
+        "line": 848
+      }
+    ]
+  },
+  {
+    "file": "CIS14/TAXCOMB.TXT",
+    "lines": 94,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "TAXCOMB",
+        "line": 2
+      }
+    ]
+  },
+  {
+    "file": "CIS14/TSYNCTSR.TXT",
+    "lines": 572,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "SYNC-CALLING",
+        "line": 4
+      }
+    ]
+  },
+  {
+    "file": "CIS14/VAVADSEG.TXT",
+    "lines": 1276,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "VADSEG",
+        "line": 2
+      }
+    ]
+  },
+  {
+    "file": "CKP02.TXT",
+    "lines": 102,
+    "language": "COBOL/copybook",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "IN-REF-REC",
+        "line": 26
+      },
+      {
+        "name": "USER-ITEM",
+        "line": 54
+      }
+    ]
+  },
+  {
+    "file": "STANCVT.TXT",
+    "lines": 73,
+    "language": "HLASM",
+    "copy": [],
+    "missing_copy": [],
+    "literal_calls": [],
+    "groups_or_labels": [
+      {
+        "name": "STANPRM",
+        "line": 10
+      },
+      {
+        "name": "STANCVT",
+        "line": 17
+      },
+      {
+        "name": "BEGIN",
+        "line": 29
+      }
+    ]
+  },
+  {
+    "file": "SYSOCP31.TXT",
+    "lines": 938,
+    "language": "HLASM",
+    "copy": [
+      {
+        "name": "IBBAR",
+        "line": 2
+      },
+      {
+        "name": "IBTPPCB",
+        "line": 3
+      },
+      {
+        "name": "IBIOPCB",
+        "line": 4
+      },
+      {
+        "name": "IBDBPCB",
+        "line": 5
+      },
+      {
+        "name": "ASMMSP",
+        "line": 6
+      },
+      {
+        "name": "IBDSECT",
+        "line": 8
+      },
+      {
+        "name": "FGSGEN1",
+        "line": 400
+      },
+      {
+        "name": "LINK5740",
+        "line": 908
+      },
+      {
+        "name": "CODELINK",
+        "line": 909
+      },
+      {
+        "name": "IBCODES",
+        "line": 910
+      },
+      {
+        "name": "IBOUTLU",
+        "line": 911
+      },
+      {
+        "name": "IBSSA",
+        "line": 912
+      },
+      {
+        "name": "LCTXLSEG",
+        "line": 932
+      }
+    ],
+    "missing_copy": [
+      "ASMMSP",
+      "CODELINK",
+      "FGSGEN1",
+      "IBBAR",
+      "IBCODES",
+      "IBDBPCB",
+      "IBDSECT",
+      "IBIOPCB",
+      "IBOUTLU",
+      "IBSSA",
+      "IBTPPCB",
+      "LCTXLSEG",
+      "LINK5740"
+    ],
+    "literal_calls": [
+      {
+        "name": "GBCODEA",
+        "line": 414
+      },
+      {
+        "name": "SYSCODEA",
+        "line": 416
+      },
+      {
+        "name": "I",
+        "line": 459
+      },
+      {
+        "name": "SYSDLD00",
+        "line": 469
+      },
+      {
+        "name": "SYSSNAP",
+        "line": 477
+      },
+      {
+        "name": "ASMTDLI",
+        "line": 534
+      },
+      {
+        "name": "SYSSNAP",
+        "line": 544
+      },
+      {
+        "name": "ASMTDLI",
+        "line": 551
+      },
+      {
+        "name": "ASMTDLI",
+        "line": 555
+      },
+      {
+        "name": "ASMTDLI",
+        "line": 561
+      },
+      {
+        "name": "ASMTDLI",
+        "line": 564
+      },
+      {
+        "name": "ASMTDLI",
+        "line": 566
+      },
+      {
+        "name": "SYSSNAP",
+        "line": 576
+      },
+      {
+        "name": "ASMTDLI",
+        "line": 596
+      },
+      {
+        "name": "SYSSNAP",
+        "line": 601
+      },
+      {
+        "name": "ASMTDLI",
+        "line": 610
+      },
+      {
+        "name": "SYSSNAP",
+        "line": 616
+      },
+      {
+        "name": "ASMTDLI",
+        "line": 627
+      },
+      {
+        "name": "SYSSNAP",
+        "line": 641
+      },
+      {
+        "name": "ASMTDLI",
+        "line": 667
+      },
+      {
+        "name": "SYSSNAP",
+        "line": 679
+      },
+      {
+        "name": "ASMTDLI",
+        "line": 689
+      },
+      {
+        "name": "ASMTDLI",
+        "line": 693
+      },
+      {
+        "name": "SYSSNAP",
+        "line": 707
+      },
+      {
+        "name": "STANGEN",
+        "line": 728
+      }
+    ],
+    "groups_or_labels": [
+      {
+        "name": "SYSOCP31",
+        "line": 9
+      },
+      {
+        "name": "OCPMSG",
+        "line": 65
+      },
+      {
+        "name": "PUTMSG",
+        "line": 92
+      },
+      {
+        "name": "CLINTSET",
+        "line": 228
+      },
+      {
+        "name": "SYNCGEN",
+        "line": 373
+      },
+      {
+        "name": "CODECNV",
+        "line": 408
+      },
+      {
+        "name": "OCPRTN",
+        "line": 425
+      },
+      {
+        "name": "FMTOUT",
+        "line": 450
+      },
+      {
+        "name": "DYLOAD",
+        "line": 465
+      },
+      {
+        "name": "ISRTMSG",
+        "line": 483
+      },
+      {
+        "name": "ISRTLOG",
+        "line": 582
+      },
+      {
+        "name": "ENQBMP",
+        "line": 607
+      },
+      {
+        "name": "OCPEHP",
+        "line": 621
+      },
+      {
+        "name": "REPODB",
+        "line": 648
+      },
+      {
+        "name": "REPOLC",
+        "line": 663
+      },
+      {
+        "name": "REPOAT",
+        "line": 684
+      },
+      {
+        "name": "REGSTAN",
+        "line": 712
+      },
+      {
+        "name": "SWHCLINT",
+        "line": 743
+      },
+      {
+        "name": "SENDERR",
+        "line": 776
+      },
+      {
+        "name": "PARMLIST",
+        "line": 887
+      }
+    ]
+  }
+]
