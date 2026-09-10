@@ -1,5 +1,5 @@
 (() => {
-  const key = 'tcb-bob-workshop-2026-v1';
+  const key = 'tcb-bob-workshop-2026-v2';
   let saved = {};
   try { saved = JSON.parse(localStorage.getItem(key) || '{}'); } catch { saved = {}; }
   if (!saved || typeof saved !== 'object') saved = {};
@@ -10,7 +10,7 @@
       try {
         if (!navigator.clipboard) throw new Error('clipboard unavailable');
         await navigator.clipboard.writeText(target.textContent);
-        status.textContent = '已複製，請貼至 Bob 對話或終端機。';
+        status.textContent = '已複製，請貼至對應的輸入欄位。';
       } catch {
         const range = document.createRange(); range.selectNodeContents(target);
         const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range);

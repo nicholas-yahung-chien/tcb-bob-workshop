@@ -1,0 +1,14 @@
+<h2 id="goal">任務目標</h2><p>使用pp4z解讀COBOL、Copybook與JCL，將程式知識整理成<code>program.md</code>、<code>impact-analysis.md</code>與<code>facts.json</code>。本單元約32分鐘。</p>
+<h2 id="explain">Step 1 · Z Code：Explain code</h2><ol><li>開啟<code>output/z-lab/CKP02.cbl</code>。</li><li>在Bob切換<strong>Z Code</strong>，點上方<strong>Start Workflow</strong>播放圖示，選<strong>Explain code</strong>並按Start。</li><li>依流程選取目前檔案與Developer視角，閱讀整支程式的說明。</li></ol>
+<p>也可在Z Code的對話輸入框選取<code>/explain</code>。這是整個檔案的解釋流程；針對段落的追問，使用下方一般文字Prompt。</p>{{z-explain|核對程式解釋|Z Code}}
+<details><summary>檢查重點</summary><p>IF的句點在84行結束；86行REWRITE不受該IF限制。R-ID群組為11位，R-NAME位於12–51，因此14–16位的EOF檢查在R-NAME內。主機code page與外部備份設定仍待確認。</p></details>
+<h2 id="copybook">Step 2 · 加入Copybook與JCL上下文</h2><p>用@加入<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>與<code>samples/jcl/IDSHIFT.jcl</code>，比較內嵌欄位與COPY。IDSHIFT的JCL是TESTSHIFT測試骨架，沒有CKP02正式DD配置。</p>{{z-context|比較COBOL、Copybook與JCL|Z Code}}
+<h2 id="document">Step 3 · pp4z：Generate documentation</h2><p>保持Z Code，從<strong>Start Workflow → Generate documentation → Start</strong>啟動文件化流程，選取<code>output/z-lab/CKP02.cbl</code>。如流程要求輸出位置，使用<code>output/z-lab/</code>。完成後閱讀產生的程式概要、資料使用與錯誤處理章節。</p>
+<p>切換<strong>Agent</strong>，將已產生的說明檔透過@加入同一Task，再用下方Prompt整理成指定的三份成果。</p>{{04-document|整理程式與影響文件|Agent}}
+<h2 id="verify">Step 4 · 檢查文件</h2>{{verify-docs|核對欄位與來源引文|Agent}}
+<p>檢查通過後仍需閱讀引用的來源行：原文存在不等於它能支持整段結論。比較規劃階段的影響分析，確認新增的發現有納入文件。</p>
+{{check:完成Explain與文件化流程}}{{check:能說明CKP02與IDSHIFT的I/O差異}}{{check:文件及三筆來源引文檢查通過}}
+<h2 id="extension">延伸練習 · CIS14</h2><p>開啟<code>output/z-lab/CIS14/CIS14.cbl</code>，加入同目錄的PCB、SSA與segment copybooks，以Z Architecture分析較完整的IMS相依。</p>{{06-customer-analysis|CIS14資料與控制流程|Z Architecture}}
+<details><summary>參考解答</summary><p>輸入300、分行表80、輸出917/1109。PROCESS-OK與PGM-OK作用不同；XIDCHK與BRHIDCNV實作未提供。YYYYMMDD減10000不等於完整曆法運算。</p><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/customer-analysis.md">查看完整解答</a></details>
+
+<h2 id="modernization">選做 · COBOL現代化規劃</h2><p>完成主線後，使用Z Architecture比較保留批次、抽出邏輯與API包裝的選項。先核對相同行為如何驗證，再評估架構變更。</p>{{z-modernization|比較現代化選項|Z Architecture}}

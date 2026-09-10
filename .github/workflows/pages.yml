@@ -26,7 +26,7 @@ jobs:
           python scripts/verify.py sources
           python scripts/build_site.py
           python scripts/check_site.py
-      - name: Validate instructor fallback
+      - name: Validate reference examples
         run: |
           python scripts/restore-reference.py all
           python scripts/verify.py all

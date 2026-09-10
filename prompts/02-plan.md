@@ -1,4 +1,4 @@
-請閱讀 AGENTS.md、SOURCE-MAP.md、specs/change-request.md、specs/customer-context.md、bank-source/reading/CKP02.TXT、samples/cobol/IDSHIFT.cbl與IDREC.cpy。
+請閱讀 AGENTS.md、SOURCE-MAP.md、specs/change-request.md、specs/customer-context.md、bank-source/reading/CKP02.TXT、samples/cobol/IDSHIFT.cbl與samples/cobol/IDREC.cpy。
 使用 Plan 模式規劃 CR-01，不修改程式、不執行任何主機或外部系統操作。
 本次教學範圍已限定為純Python行為模型與文件。未決的正式平台問題列入待確認，不需要等待其答案才完成教學計畫。
 請規劃 output/architecture.md 與 output/checklist.md 的完整內容：

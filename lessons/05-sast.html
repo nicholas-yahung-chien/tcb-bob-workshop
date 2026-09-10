@@ -1,0 +1,7 @@
+<h2 id="goal">任務目標</h2><p>練習從弱點報告定位source與sink，完成最小修補並檢查回歸測試。先用5分鐘走過finding → code → fix → test，再延伸閱讀修補報告。</p>
+<p>本題為CWE-89 SQL注入的合成finding，搭配本機SQLite與虛構資料；Fortify／Checkmarx報告可沿用相同的定位、修補及複掃步驟。</p>
+<h2 id="fix">Step 1 · 加入報告與程式</h2>{{08-sast|根據finding修補|Agent}}
+<h2 id="verify">Step 2 · 檢查修補與測試</h2>{{verify-sast|確認參數綁定與回歸結果|Agent}}
+<p>6個測試包含正常查詢、未知ID、合法單引號、注入字串、資料表保留及參數綁定。開啟修改差異，確認沒有用刪除引號破壞O’NEIL等合法資料。</p>
+<h2 id="report">Step 3 · 閱讀修補報告</h2><p>核對finding ID、來源行號、修補方式、實際測試與剩餘風險。正式工具複掃是獨立步驟；本機測試通過不能代替正式掃描結果。</p>
+{{check:source與sink能定位}}{{check:6個回歸測試通過}}{{check:修補報告完整且複掃狀態明確}}

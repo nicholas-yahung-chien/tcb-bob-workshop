@@ -1,4 +1,4 @@
-"""Instructor reference: pure ASCII-byte teaching model, no mainframe I/O."""
+"""Reference implementation: pure ASCII-byte teaching model, no mainframe I/O."""
 
 
 def transform(record: bytes) -> bytes:
