@@ -45,7 +45,8 @@ def docs():
     data = json.loads(document("facts.json", 2))
     expected = {"record_bytes":400,"id_bytes":10,"suffix_position":11,"marker_start":14,
                 "marker_length":3,"padding_positions":[9,10],"has_file_io":True,
-                "redefines_extra_bytes":0,"synthetic":False}
+                "redefines_extra_bytes":0,"synthetic":False,
+                "repeat_input":"0000123456","repeat_once":"00123456  ","repeat_twice":"123456    "}
     for key, value in expected.items():
         require(type(data.get(key)) is type(value) and data[key] == value, f"facts.json: incorrect {key}")
     evidence = data.get("evidence", [])
