@@ -1,5 +1,5 @@
 (() => {
-  const key = 'tcb-bob-workshop-2026-v2';
+  const key = 'tcb-bob-workshop-2026-v3';
   let saved = {};
   try { saved = JSON.parse(localStorage.getItem(key) || '{}'); } catch { saved = {}; }
   if (!saved || typeof saved !== 'object') saved = {};
@@ -10,7 +10,7 @@
       try {
         if (!navigator.clipboard) throw new Error('clipboard unavailable');
         await navigator.clipboard.writeText(target.textContent);
-        status.textContent = '已複製，請貼至對應的輸入欄位。';
+        status.textContent = button.dataset.copy === 'repository-url' ? '網址已複製，可以貼到 Git: Clone。' : '已複製，可以貼到 Bob 對話了。';
       } catch {
         const range = document.createRange(); range.selectNodeContents(target);
         const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range);
@@ -21,7 +21,7 @@
   const boxes = [...document.querySelectorAll('[data-check]')];
   const update = () => {
     const progress = document.querySelector('.progress');
-    if (progress) progress.textContent = boxes.length ? `本頁核對 ${boxes.filter(b => b.checked).length} / ${boxes.length}` : '依頁面步驟完成實作';
+    if (progress) progress.textContent = boxes.length ? `已完成 ${boxes.filter(b => b.checked).length} / ${boxes.length}` : '從上面的問題開始試試看';
   };
   boxes.forEach(box => {
     box.checked = saved[box.dataset.check] === true;

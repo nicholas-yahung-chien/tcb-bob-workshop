@@ -1,10 +1,16 @@
-<h2 id="goal">任務目標</h2><p>將轉換規則做成可執行的行為模型，並以測試確認正常、邊界與重跑結果。本單元約15分鐘；程式與報告都存入output。</p>
-<h2 id="cobol">Step 1 · Z Code：撰寫COBOL測試</h2><p>開啟IDSHIFT、IDREC與TESTSHIFT，以@加入對話。先分析測試driver已覆蓋哪些行為，再產生<code>cobol-test-plan.md</code>與<code>TESTSHIFT-EXT.cbl</code>。</p>{{z-tests|COBOL測試矩陣與程式|Z Code}}
-<p>COBOL driver的編譯與執行需要對應編譯器與環境。本次可執行驗收使用Python bytes行為模型；兩者應使用相同的欄位規則。</p>
-<h2 id="implement">Step 2 · Agent：實作模型與測試</h2>{{05-unit|完成模型及單元測試|Agent}}
-<table><tr><th>案例</th><th>預期結果</th></tr><tr><td>前十位0012345678，無EOF</td><td>12345678加兩空白；尾390 bytes不變</td></tr><tr><td>14–16位為EOF</td><td>內容不變，仍處理下一筆</td></tr><tr><td>dry-run</td><td>回原始資料副本；written=0</td></tr><tr><td>write模型</td><td>回轉換副本；written=changed</td></tr><tr><td>非法長度／型別</td><td>ValueError，先驗證整批</td></tr></table>
-<h2 id="verify">Step 3 · 檢查執行結果</h2>{{verify-unit|確認測試結果|Agent}}
-<p>展開Bob的執行命令結果，應看到11個契約測試及至少3個新增測試通過。開啟test-report.md核對實際結果。</p>
-<h2 id="repair">Step 4 · 修正失敗項目</h2><p>將失敗的完整訊息加入對話，再貼下方Prompt。若是單一項目失敗，只要求修正該項。</p>{{09-repair|依失敗證據修正|Agent}}
-<details><summary>重跑為什麼要測？</summary><p>0000123456第一次成為00123456加兩空白，第二次成為123456加四空白。規則不保證冪等，必須保留原始資料與重跑策略。</p></details>
-{{check:11個契約測試及至少3個新增測試通過}}{{check:原始碼與驗收測試未被修改}}{{check:報告區分模型執行與COBOL測試設計}}
+<h2 id="story">除了正常資料，還要試哪些情況？</h2>
+<p>程式看起來合理，還需要用資料試試看。這裡先請 Bob 補上 COBOL 測試，再用本機的 Python 範例檢查相同的轉換規則。</p>
+<h2 id="cobol">1. 從現有測試開始補</h2>
+<p>TESTSHIFT 已經有幾個簡單案例。把它和 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/testing.md">testing.md</a> 一起加入對話，讓 Bob 沿用現有寫法。</p>
+{{z-tests|補上 COBOL 測試|Z Code}}
+<p>完成後會有 cobol-test-plan.md 和 TESTSHIFT-EXT.cbl。編譯執行需要 COBOL 環境；還沒執行的案例，先保留為待執行。</p>
+<h2 id="implement">2. 在本機試跑轉換規則</h2>
+<p>Python 範例使用同樣的資料位置與轉換規則，可以在一般筆電執行。它也包含這次新需求的預覽與統計功能。</p>
+{{05-unit|完成範例並跑測試|Agent}}
+{{verify-unit|看看測試結果|Agent}}
+<p>在 Bob 的執行結果中，應有 11 個既有測試與 3 個新增測試。開啟 output/test-report.md，看看測了什麼、結果如何。</p>
+<h2 id="repair">3. 測試失敗時，接著怎麼問？</h2>
+<p>把完整的失敗訊息留在對話裡。Bob 已經有需求和程式，接下來只要針對這次失敗請它協助。</p>
+{{09-repair|找出原因再修正|Agent}}
+<details><summary>測試通過後，再看一件事</summary><p>預覽模式應保留原始資料，套用模式則回傳轉換結果。看看兩者的統計是否一致，也看看同一筆資料再跑一次的結果。Python 測試記錄和 COBOL 執行結果分開保存。</p></details>
+{{check:我有 COBOL 測試程式與案例說明}}{{check:14 個 Python 測試已通過}}{{check:我知道怎麼把失敗訊息交給 Bob 繼續處理}}

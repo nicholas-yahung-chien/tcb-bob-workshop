@@ -1,5 +1,4 @@
 customer-source/
-output/
 __pycache__/
 *.pyc
 .venv/

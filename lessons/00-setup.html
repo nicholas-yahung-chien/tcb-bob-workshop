@@ -1,10 +1,18 @@
-<h2 id="goal">準備工作區</h2><p>本課程使用VSCode中的IBM Bob對話面板與IBM Bob Premium Package for Z（pp4z）。請先完成帳號登入，確認pp4z已啟用，並備妥Git與Python 3.10以上。實作只使用Python標準庫。</p>
-<h2 id="download">Step 1 · 下載並開啟教材</h2><ol><li>在VSCode按Ctrl+Shift+P（macOS：⌘⇧P），選擇<strong>Git: Clone</strong>。</li><li>貼上下方網址，選擇儲存位置，完成後按<strong>Open</strong>開啟資料夾。</li><li>由左下角Git分支選單切換至<strong>workshop/tcb-2026</strong>，確認檔案總管看得到bank-source、samples、specs與prompts。</li></ol>
-<div class="prompt"><div class="prompt-head"><span>Git: Clone · Repository URL</span><button data-copy="repository-url">複製網址</button></div><pre id="repository-url">https://github.com/nicholas-yahung-chien/tcb-bob-workshop.git</pre><p class="copy-status" role="status"></p></div>
-<p>也可<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest">下載教材ZIP</a>，解壓後使用File → Open Folder開啟。請使用新的資料夾保存本次成果。</p>
-<h2 id="chat">Step 2 · 認識Bob輸入介面</h2><ol><li>開啟<strong>IBM BOB</strong>面板，按「＋」建立New Task。</li><li>點輸入框下方的模式選單（初始可能顯示Agent），依任務選Ask、Plan、Agent或pp4z的Z Code／Z Architecture。</li><li>輸入<strong>@</strong>並從清單選取檔案，確認附件已加入，再貼上頁面的Prompt。也可把檔案從檔案總管拖入輸入框。</li><li>按送出；遇到檔案寫入或執行命令的Permissions要求，核對內容後核准。完成後開啟output中的檔案檢查結果。</li></ol>
-<h2 id="ready">Step 3 · 檢查環境與準備pp4z來源</h2>{{z-prepare|準備本機工作區|Agent}}
-<p>完成後應有<code>output/z-lab/CKP02.cbl</code>、<code>output/z-lab/CIS14/CIS14.cbl</code>及同目錄的.cpy檔。這些閱讀副本保留原始行號；bank-source保留不變。若已有修改過的副本，準備程序會停止以保留內容。</p>
-<h2 id="premium">Step 4 · 確認pp4z入口</h2><p>在模式選單確認Z Code與Z Architecture（部分介面標示Z Architect），並點Bob面板上方的播放圖示<strong>Start Workflow</strong>，確認可選<strong>Explain code</strong>與<strong>Generate documentation</strong>。本機程式解讀使用工作區檔案；跨應用程式分析另需對應的Z Understand專案。</p>
-<p>未出現pp4z模式或Workflow時，請先確認套件啟用與登入狀態，參閱<a href="07-help.html#pp4z">常見問題</a>。</p>
-{{check:已開啟本次教材資料夾並登入Bob}}{{check:已確認pp4z模式及Workflow入口}}{{check:環境檢查通過且z-lab副本已建立}}
+<h2 id="download">下載練習程式</h2>
+<p>先準備好 Git、Python 3.10 以上版本，以及已登入的 IBM Bob。COBOL 解讀會使用 Premium Package for Z（pp4z）。</p>
+<ol><li>在 VSCode 按 Ctrl+Shift+P，選擇 <strong>Git: Clone</strong>。macOS 使用 ⌘⇧P。</li><li>貼上下方網址，選擇儲存位置，下載完成後按 <strong>Open</strong>。</li><li>從左下角的分支選單切換到 <strong>workshop/tcb-2026</strong>。</li></ol>
+<div class="prompt"><div class="prompt-head"><span>Repository 網址</span><button data-copy="repository-url">複製網址</button></div><pre id="repository-url">https://github.com/nicholas-yahung-chien/tcb-bob-workshop.git</pre><p class="copy-status" role="status"></p></div>
+<p>也可以<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest">下載 ZIP</a>，解壓後用 File → Open Folder 開啟。</p>
+<h2 id="chat">從 Bob 對話開始</h2>
+<p>開啟 <strong>IBM BOB</strong> 面板，按「＋」建立新對話。輸入框下方可以選擇 Ask、Plan、Agent，以及 pp4z 的 Z Code、Z Architecture。</p>
+<p>每個練習會列出要用的檔案。輸入 <strong>@</strong> 後選取檔案，或從檔案總管拖進對話，再送出問題。遇到 Permissions 提示時，看看 Bob 想讀取、修改或執行什麼，再核准操作。</p>
+<h2 id="questions">換成自己的問題，也可以這樣問</h2>
+<p>先說你正在做什麼，再說想弄清楚什麼。例如：「我剛接手這支程式，想知道它會修改哪些資料。」看完回答還不明白，就接著問：「可以用一筆資料舉例嗎？」需要留下文件時，再補上用途和格式。下方練習會沿著這個順序往下走，你也可以換成自己的說法。</p>
+<h2 id="ready">請 Bob 幫忙準備檔案</h2>
+<p><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/workspace.md">workspace.md</a> 寫好了環境檢查和檔案準備步驟。你可以像請同事照著作業說明操作一樣，把這份文件交給 Bob。</p>
+{{z-prepare|準備工作區|Agent}}
+<p>完成後，開啟 <code>output/z-lab/CKP02.cbl</code>。自己的成果都會放在 output，bank-source 則保留原始檔案。</p>
+<h2 id="premium">找到 pp4z 的功能</h2>
+<p>選擇 <strong>Z Code</strong>，點 Bob 面板上方的播放圖示 <strong>Start Workflow</strong>，看看清單裡是否有 <strong>Explain code</strong> 和 <strong>Generate documentation</strong>。接下來會用到這兩個功能。</p>
+<p>如果找不到，先看<a href="07-help.html#pp4z">常見問題</a>。部分版本會將 Z Architecture 顯示為 Z Architect。</p>
+{{check:我已開啟練習資料夾}}{{check:CKP02.cbl 已準備好}}{{check:我找得到 pp4z 的功能入口}}

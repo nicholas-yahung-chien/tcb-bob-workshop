@@ -1,14 +1,26 @@
-<h2 id="goal">任務目標</h2><p>使用pp4z解讀COBOL、Copybook與JCL，將程式知識整理成<code>program.md</code>、<code>impact-analysis.md</code>與<code>facts.json</code>。本單元約32分鐘。</p>
-<h2 id="explain">Step 1 · Z Code：Explain code</h2><ol><li>開啟<code>output/z-lab/CKP02.cbl</code>。</li><li>在Bob切換<strong>Z Code</strong>，點上方<strong>Start Workflow</strong>播放圖示，選<strong>Explain code</strong>並按Start。</li><li>依流程選取目前檔案與Developer視角，閱讀整支程式的說明。</li></ol>
-<p>也可在Z Code的對話輸入框選取<code>/explain</code>。這是整個檔案的解釋流程；針對段落的追問，使用下方一般文字Prompt。</p>{{z-explain|核對程式解釋|Z Code}}
-<details><summary>檢查重點</summary><p>IF的句點在84行結束；86行REWRITE不受該IF限制。R-ID群組為11位，R-NAME位於12–51，因此14–16位的EOF檢查在R-NAME內。主機code page與外部備份設定仍待確認。</p></details>
-<h2 id="copybook">Step 2 · 加入Copybook與JCL上下文</h2><p>用@加入<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>與<code>samples/jcl/IDSHIFT.jcl</code>，比較內嵌欄位與COPY。IDSHIFT的JCL是TESTSHIFT測試骨架，沒有CKP02正式DD配置。</p>{{z-context|比較COBOL、Copybook與JCL|Z Code}}
-<h2 id="document">Step 3 · pp4z：Generate documentation</h2><p>保持Z Code，從<strong>Start Workflow → Generate documentation → Start</strong>啟動文件化流程，選取<code>output/z-lab/CKP02.cbl</code>。如流程要求輸出位置，使用<code>output/z-lab/</code>。完成後閱讀產生的程式概要、資料使用與錯誤處理章節。</p>
-<p>切換<strong>Agent</strong>，將已產生的說明檔透過@加入同一Task，再用下方Prompt整理成指定的三份成果。</p>{{04-document|整理程式與影響文件|Agent}}
-<h2 id="verify">Step 4 · 檢查文件</h2>{{verify-docs|核對欄位與來源引文|Agent}}
-<p>檢查通過後仍需閱讀引用的來源行：原文存在不等於它能支持整段結論。核對重跑反例：0000123456第一次成為00123456加兩空白，第二次成為123456加四空白；第一次仍以00開頭。兩份文件與facts.json應說明相同行為，再與規劃階段的影響分析比較。</p>
-{{check:完成Explain與文件化流程}}{{check:能說明CKP02與IDSHIFT的I/O差異}}{{check:文件及三筆來源引文檢查通過}}
-<h2 id="extension">延伸練習 · CIS14</h2><p>開啟<code>output/z-lab/CIS14/CIS14.cbl</code>，加入同目錄的PCB、SSA與segment copybooks，以Z Architecture分析較完整的IMS相依。</p>{{06-customer-analysis|CIS14資料與控制流程|Z Architecture}}
-<details><summary>參考解答</summary><p>輸入300、分行表80、輸出917/1109。PROCESS-OK與PGM-OK作用不同；XIDCHK與BRHIDCNV實作未提供。YYYYMMDD減10000不等於完整曆法運算。</p><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/reference/customer-analysis.md">查看完整解答</a></details>
-
-<h2 id="modernization">選做 · COBOL現代化規劃</h2><p>完成主線後，使用Z Architecture比較保留批次、抽出邏輯與API包裝的選項。先核對相同行為如何驗證，再評估架構變更。</p>{{z-modernization|比較現代化選項|Z Architecture}}
+<h2 id="story">下次接手的人，會想問哪些問題？</h2>
+<p>知道程式「大概在做什麼」之後，還需要留下欄位、流程和注意事項。這個練習會用 pp4z 解讀 CKP02，再把說明整理成方便查閱的文件。</p>
+<h2 id="explain">1. 用 Explain code 閱讀程式</h2>
+<ol><li>開啟 <code>output/z-lab/CKP02.cbl</code>，選擇 <strong>Z Code</strong>。</li><li>點 <strong>Start Workflow → Explain code → Start</strong>。</li><li>依流程選取這個檔案及 Developer 視角，閱讀程式說明。</li></ol>
+<p>回覆談到轉換條件後，可以追問實際執行時會遇到的情況，例如同一份資料再跑一次。</p>
+{{z-explain|追問執行時的行為|Z Code}}
+<h2 id="copybook">2. 加入 Copybook 和 JCL</h2>
+<p>接著看看另一個小範例 IDSHIFT。它把資料定義放在 Copybook，另外附有測試程式和 JCL。把相關檔案一起交給 Bob，就能比較兩種寫法。</p>
+{{z-context|把相關檔案一起看|Z Code}}
+<h2 id="document">3. 整理成接手文件</h2>
+<p>保持 <strong>Z Code</strong>，從 <strong>Start Workflow → Generate documentation → Start</strong> 選取 CKP02.cbl。若需要指定儲存位置，放在 <code>output/z-lab/</code>。</p>
+<p>把產生的說明檔加入同一個對話，切換到 <strong>Plan</strong>，想想還有哪些內容需要補齊。</p>
+{{document-plan|規劃文件內容|Plan}}
+<p>確認內容後切換到 <strong>Agent</strong>。文件的章節、檔名與檢查方式都寫在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a>，沿用同一份規格即可。</p>
+{{04-document|完成程式文件|Agent}}
+<h2 id="verify">4. 回到程式，確認說明</h2>
+{{verify-docs|檢查文件中的例子|Agent}}
+<details><summary>對照文件時，可以先看哪些地方？</summary><ul><li>資料內的 EOF 會略過這一筆的轉換，接著仍會讀下一筆；READ 的 AT END 才會設定迴圈使用的 EOF 旗標。</li><li>記錄第 14–16 位，對應 R-NAME 的第 3–5 位。閱讀欄位位置時，先看看是從哪裡起算。</li><li>程式宣告 VALUE SPACE；實際空白編碼與資料集屬性，需要搭配主機環境確認。</li><li>範例 JCL 執行 TESTSHIFT。CKP02 的正式 JCL 尚未提供。</li></ul><p>檢查程式會核對格式與數值；閱讀這些段落，可以再確認正文有沒有把不同概念混在一起。</p></details>
+<details><summary>重跑的例子，應該怎麼看？</summary><p>使用需求文件中的 0000123456，並讓第 14–16 位不是 EOF。第一次轉換得到 00123456 加兩個空白，第二次得到 123456 加四個空白。第一次後仍以 00 開頭，所以不能只用一個例子就認定重跑結果都相同。</p></details>
+<p>output 裡會有 program.md、impact-analysis.md 和 facts.json。前兩份方便閱讀，facts.json 則用來檢查欄位及例子是否一致。</p>
+{{check:我試過 Explain code 與文件化}}{{check:我能說明 Copybook 和 JCL 的用途}}{{check:我已對照原始碼檢查文件}}
+<h2 id="extension">再試試看：CIS14</h2>
+<p>想進一步了解 IMS 程式，可以開啟 <code>output/z-lab/CIS14/CIS14.cbl</code>，加入同目錄的 Copybook，再從資料流開始問。</p>
+{{06-customer-analysis|閱讀 CIS14|Z Architecture}}
+<h2 id="modernization">再想一步：讓其他系統也能使用</h2>
+{{z-modernization|討論現代化選項|Z Architecture}}

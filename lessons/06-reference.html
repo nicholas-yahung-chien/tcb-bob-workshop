@@ -1,5 +1,12 @@
-<h2 id="results">完成成果</h2><table><tr><th>練習</th><th>output中的成果</th><th>檢查重點</th></tr><tr><td>需求規劃</td><td>architecture.md、checklist.md</td><td>七領域、來源、依賴、風險與回復</td></tr><tr><td>程式文件化</td><td>program.md、impact-analysis.md、facts.json</td><td>欄位、流程、COPY/JCL、引文</td></tr><tr><td>COBOL測試</td><td>cobol-test-plan.md、TESTSHIFT-EXT.cbl</td><td>預期記錄、判定方式與執行前提</td></tr><tr><td>行為模型測試</td><td>normalizer.py、test_authored.py、test-report.md</td><td>行為契約與實際結果</td></tr><tr><td>事件分析</td><td>log-analysis.md、log-facts.json</td><td>時間線、未知、證據</td></tr><tr><td>弱點修補</td><td>customer_lookup.py、sast-remediation.md</td><td>參數綁定與回歸測試</td></tr></table>
-<h2 id="reference">參考解答</h2><p>先完成自己的實作，再展開解答。比較來源事實與程式行為，不需要逐字相同。</p><details><summary>查看參考檔案</summary>{{references}}</details>
-<h2 id="compare">比較自己的成果</h2><p>在VSCode先右鍵自己的檔案選<strong>Select for Compare</strong>，再對reference中的對應檔案選<strong>Compare with Selected</strong>。將差異中需要釐清的段落透過@或選取文字加入Bob對話。</p>
-<h2 id="action">下一步行動計畫</h2>{{action-plan|把方法帶回日常工作|Agent}}
-{{check:至少完成一項實作及檢查}}{{check:能指出已知、提案與待確認項目}}{{check:已寫下下一個可驗收的小任務}}
+<h2 id="results">看看自己完成了哪些內容</h2>
+<p>打開 output，從已完成的練習開始看。比較時，重點是程式行為、文件中的理由，以及實際測試結果。</p>
+<table><tr><th>練習</th><th>成果檔案</th><th>可以回頭想想</th></tr><tr><td>需求規劃</td><td>architecture.md、checklist.md</td><td>哪些地方要改？還需要哪些資料？</td></tr><tr><td>程式文件</td><td>program.md、impact-analysis.md、facts.json</td><td>欄位和例子是否與程式一致？</td></tr><tr><td>COBOL 測試</td><td>cobol-test-plan.md、TESTSHIFT-EXT.cbl</td><td>測了哪些情況？哪些還沒執行？</td></tr><tr><td>Python 測試</td><td>normalizer.py、test_authored.py、test-report.md</td><td>正常、邊界和重跑結果如何？</td></tr><tr><td>事件分析</td><td>log-analysis.md、log-facts.json</td><td>哪些結果已知，哪些要繼續查？</td></tr><tr><td>查詢修正</td><td>customer_lookup.py、sast-remediation.md</td><td>修正問題後，正常查詢是否保留？</td></tr></table>
+<h2 id="reference">和參考解答比較</h2>
+<p>在 VSCode 對自己的檔案按右鍵，選 <strong>Select for Compare</strong>；再對 reference 裡的對應檔案選 <strong>Compare with Selected</strong>。不明白的差異，可以選取那一段問 Bob。</p>
+<p>也可以把兩份文件一起交給 Bob。比較時仍以原始碼為依據，看看不同寫法是否改變了程式的意思。</p>
+{{compare-docs|比較文件與解答|Agent}}
+<details><summary>查看參考檔案</summary>{{references}}</details>
+<h2 id="action">下次遇到自己的程式，可以怎麼開始？</h2>
+<p>想一支你正要接手的程式，或一個需要釐清的小需求。先準備相關檔案，再用自己的話說明想解決什麼。</p>
+{{action-plan|整理下一步|Agent}}
+{{check:我已看過自己的實作與測試結果}}{{check:我能用自己的話提出下一個問題}}
