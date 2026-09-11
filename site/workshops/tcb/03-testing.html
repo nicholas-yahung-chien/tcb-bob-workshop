@@ -2,12 +2,16 @@
 <p>程式看起來合理，還需要用資料試試看。這裡先請 Bob 補上 COBOL 測試，再用本機的 Python 範例檢查相同的轉換規則。</p>
 <h2 id="cobol">1. 從現有測試開始補</h2>
 <p>TESTSHIFT 已經有幾個簡單案例。把它和 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/testing.md">testing.md</a> 一起加入對話，讓 Bob 沿用現有寫法。</p>
-<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>specs/testing.md</code>、<code>samples/cobol/TESTSHIFT.cbl</code></p><div class="prompt"><div class="prompt-head"><span>補上 COBOL 測試</span><button type="button" data-copy="z-tests">複製 Prompt</button></div><pre id="z-tests">請參考現有的 TESTSHIFT，依 specs/testing.md 補上 COBOL 測試程式和案例說明，存到 output。我想知道除了正常轉換，還有哪些情況值得測試。
+<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>specs/testing.md</code>、<code>samples/cobol/TESTSHIFT.cbl</code></p><div class="prompt"><div class="prompt-head"><span>補上 COBOL 測試</span><button type="button" data-copy="z-tests">複製 Prompt</button></div><pre id="z-tests">請參考 TESTSHIFT 與實際轉換邏輯，依 specs/testing.md 補上 COBOL 測試和案例說明，存到 output。每個案例列出輸入、預期結果和對應條件。
+
+完成後說明哪些案例已執行、哪些還需要編譯或主機環境。
 </pre><div class="expected"><strong>預期回應</strong><p>COBOL 測試程式、案例說明及執行前提。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>完成後會有 cobol-test-plan.md 和 TESTSHIFT-EXT.cbl。編譯執行需要 COBOL 環境；還沒執行的案例，先保留為待執行。</p>
 <h2 id="implement">2. 在本機試跑轉換規則</h2>
 <p>Python 範例使用同樣的資料位置與轉換規則，可以在一般筆電執行。它也包含這次新需求的預覽與統計功能。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/change-request.md</code>、<code>specs/testing.md</code></p><div class="prompt"><div class="prompt-head"><span>完成範例並跑測試</span><button type="button" data-copy="05-unit">複製 Prompt</button></div><pre id="05-unit">請依 specs/change-request.md 和 specs/testing.md，完成 Python 轉換範例並補上測試，存到 output。完成後執行測試，告訴我結果，以及還有哪些情況需要確認。
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/change-request.md</code>、<code>specs/testing.md</code></p><div class="prompt"><div class="prompt-head"><span>完成範例並跑測試</span><button type="button" data-copy="05-unit">複製 Prompt</button></div><pre id="05-unit">請依 specs/change-request.md 和 specs/testing.md，完成 Python 轉換範例並補上測試，存到 output。
+
+新增案例請從需求推導輸入與預期結果，涵蓋正常情況及容易漏掉的邊界。完成後實際執行測試，記錄結果和修正內容，保留原有測試。
 </pre><div class="expected"><strong>預期回應</strong><p>完成的 Python 範例、三個新增測試和實際測試報告。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/testing.md</code></p><div class="prompt"><div class="prompt-head"><span>看看測試結果</span><button type="button" data-copy="verify-unit">複製 Prompt</button></div><pre id="verify-unit">請執行 specs/testing.md 裡的 Python 測試，說明哪些通過、哪些失敗，再把結果更新到測試報告。
 </pre><div class="expected"><strong>預期回應</strong><p>既有與新增測試的執行結果，並更新測試報告。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>

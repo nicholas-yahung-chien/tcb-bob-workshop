@@ -1,1 +1,3 @@
-請依剛才的計畫和 specs/change-request.md，完成架構文件與實作清單，存到 output。文件格式與檢查方式請依 DOC-SPEC.md。
+請依剛才確認的計畫和 specs/change-request.md，完成架構文件與實作清單，存到 output，格式依 DOC-SPEC.md。
+
+描述現況時，重新核對引用的原始碼；計畫中的建議保留為提案，需要環境資料才能確認的事項另外列出。完成後執行文件檢查並說明結果。
