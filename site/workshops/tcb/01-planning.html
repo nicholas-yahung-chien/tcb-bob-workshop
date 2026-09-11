@@ -2,26 +2,38 @@
 <p>假設你準備執行一支資料轉換程式，想先知道這次會改到多少筆，確認後再套用變更。我們就從這個需求開始，請 Bob 幫忙看現有程式、找出影響範圍，最後整理成計畫。</p>
 <h2 id="ask">1. 先認識這支程式</h2>
 <p>剛接手程式時，不必先知道每個欄位和段落的意思。先把 CKP02 加入對話，問一個接手工作時會問的問題。</p>
-<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>bank-source/reading/CKP02.TXT</code></p><div class="prompt"><div class="prompt-head"><span>認識 CKP02</span><button type="button" data-copy="01-ask">複製 Prompt</button></div><pre id="01-ask">我剛接手 CKP02，還不熟悉這支程式。請幫我說明它處理什麼資料、什麼情況會修改資料，以及整個批次是怎麼跑的。也請指出對應的程式段落，方便我一起看。
+<details id="enhance"><summary>試試 Enhance prompt：把想法說清楚</summary><p>先用自己的話寫需求，或把下面這段貼進輸入框，暫時不要送出。</p>
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>bank-source/reading/CKP02.TXT</code></p><div class="prompt"><div class="prompt-head"><span>先寫出想做的事</span><button type="button" data-copy="enhance-start">複製 Prompt</button></div><pre id="enhance-start">我剛接手 CKP02，想知道它如何處理資料。請幫我整理成方便接手的說明。
+</pre><div class="expected"><strong>預期回應</strong><p>先比較輸入框中改寫前後的提問，確認補充內容符合你的目的。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<ol><li>用 @ 加入 CKP02，將這段提問放進 Bob 輸入框。</li><li>點選輸入框旁的星光圖示 <strong>Enhance prompt</strong>，查看改寫後的提問。</li><li>比較它補了什麼：工作目的是否相同？是否要求根據程式回答？預期成果是否清楚？有沒有加入你沒提出的修改或環境假設？</li><li>保留符合目的的補充，調整不合適的內容。確認後送出，或改用下方的提問範例，擇一即可。</li></ol><p>先不用追求很長的提問。能說清楚這一步想知道什麼、根據什麼回答，就有了繼續追問的起點。改寫後的答案仍要回到程式核對。</p></details>
+<p>下方範例交代了接手背景、閱讀任務、原始碼依據和回覆方式。要求指出段落，是為了讓你能跟著看；列出缺少的資料，則能知道接下來還要找什麼。</p>
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>bank-source/reading/CKP02.TXT</code></p><div class="prompt"><div class="prompt-head"><span>認識 CKP02</span><button type="button" data-copy="01-ask">複製 Prompt</button></div><pre id="01-ask">我剛接手 CKP02，想先了解它如何處理一筆資料。請根據這支程式，依讀取、判斷、修改及寫回的順序說明，並指出對應段落。遇到需要其他檔案或執行環境才能確認的地方，請另外列出。先不用修改程式。
 </pre><div class="expected"><strong>預期回應</strong><p>程式的用途、讀寫流程，以及可以一起閱讀的段落。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>看完說明，如果還不容易想像資料怎麼變，可以接著請 Bob 舉例。</p>
-<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>bank-source/reading/CKP02.TXT</code></p><div class="prompt"><div class="prompt-head"><span>看一筆資料怎麼變</span><button type="button" data-copy="01-layout">複製 Prompt</button></div><pre id="01-layout">可以用一筆資料帶我走過轉換過程嗎？請把欄位位置、修改前後的內容，以及沒有被修改的部分整理成表格。
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>bank-source/reading/CKP02.TXT</code></p><div class="prompt"><div class="prompt-head"><span>看一筆資料怎麼變</span><button type="button" data-copy="01-layout">複製 Prompt</button></div><pre id="01-layout">可以用一筆資料帶我走過轉換過程嗎？請根據欄位宣告，整理修改前後的內容和保留的部分。表格中的位置請註明從哪裡起算，讓我能跟著程式核對。
 </pre><div class="expected"><strong>預期回應</strong><p>一筆資料的欄位表，搭配修改前後的例子。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <h2 id="impact">2. 看看需求會影響哪些地方</h2>
 <p>需求寫在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/change-request.md">change-request.md</a>。切換到 <strong>Z Architecture</strong>，從輸入框的 <code>/</code> 清單選取 <code>/impact-analysis</code>，再接上下方問題送出。</p>
-<p class="mode-guide"><strong>Z Architecture 模式</strong></p><p class="file-context">加入檔案：<code>output/z-lab/CKP02.cbl</code>、<code>specs/change-request.md</code></p><div class="prompt"><div class="prompt-head"><span>找出變更影響</span><button type="button" data-copy="z-impact">複製 Prompt</button></div><pre id="z-impact">如果要加入 specs/change-request.md 的預覽功能，哪些程式、資料和批次作業可能受到影響？請幫我區分已經查到的關係，以及還需要補資料才能確認的部分。
+<p class="mode-guide"><strong>Z Architecture 模式</strong></p><p class="file-context">加入檔案：<code>output/z-lab/CKP02.cbl</code>、<code>specs/change-request.md</code></p><div class="prompt"><div class="prompt-head"><span>找出變更影響</span><button type="button" data-copy="z-impact">複製 Prompt</button></div><pre id="z-impact">如果要加入 specs/change-request.md 的預覽功能，哪些程式、資料和批次作業可能受影響？請根據目前的程式與可查到的相依關係，說明修改位置及原因；缺少資料才能確認的關係另外列出。
 </pre><div class="expected"><strong>預期回應</strong><p>已確認的影響，以及需要補資料才能確認的關係。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>如果流程要求連線 Z Understand，請選擇包含這支程式的專案。手邊只有本機檔案時，先分析看得到的內容，跨系統的關係留待補齊資料後確認。</p>
 <h2 id="plan">3. 把需求整理成計畫</h2>
 <p>現在知道程式大致怎麼運作，就可以討論怎麼改。<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a> 約定文件的章節和檢查方式；提問時引用它，Bob 就有格式可以依循。</p>
-<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>specs/change-request.md</code>、<code>DOC-SPEC.md</code></p><div class="prompt"><div class="prompt-head"><span>規劃預覽功能</span><button type="button" data-copy="02-plan">複製 Prompt</button></div><pre id="02-plan">我想在批次執行前，先知道會改到多少筆資料。請閱讀 specs/change-request.md，分析這項需求會影響哪些程式與作業，再依 DOC-SPEC.md 規劃架構文件和實作清單。先討論計畫，不修改程式。
+<p>規劃新需求時，現有功能和建議做法容易混在一起。因此這次多補一句，請 Bob 分開說明，方便你判斷哪些已經存在、哪些還要做。</p>
+<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>specs/change-request.md</code>、<code>DOC-SPEC.md</code></p><div class="prompt"><div class="prompt-head"><span>規劃預覽功能</span><button type="button" data-copy="02-plan">複製 Prompt</button></div><pre id="02-plan">我想在批次執行前，先知道會改到多少筆資料。請閱讀 specs/change-request.md，對照現有程式分析影響，再依 DOC-SPEC.md 規劃架構文件和實作清單。
+
+請分開說明現有行為、建議的做法，以及還需要確認的資訊。主機程式和本機範例各自分析，先討論計畫，不修改程式。
 </pre><div class="expected"><strong>預期回應</strong><p>需要分析的範圍、文件內容，以及還需要確認的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>閱讀計畫時，想想兩件事：哪些建議有程式可以對照？哪些還需要業務或系統資料？有疑問的地方，直接在同一個對話追問。</p>
 <h2 id="deliver">4. 請 Bob 寫成文件</h2>
 <p>計畫確認後，在同一個對話切換到 <strong>Agent</strong>。前面已經說清楚的內容，這裡不用再重述一遍。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/change-request.md</code>、<code>DOC-SPEC.md</code></p><div class="prompt"><div class="prompt-head"><span>依計畫完成文件</span><button type="button" data-copy="03-plan-deliver">複製 Prompt</button></div><pre id="03-plan-deliver">請依剛才的計畫和 specs/change-request.md，完成架構文件與實作清單，存到 output。文件格式與檢查方式請依 DOC-SPEC.md。
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/change-request.md</code>、<code>DOC-SPEC.md</code></p><div class="prompt"><div class="prompt-head"><span>依計畫完成文件</span><button type="button" data-copy="03-plan-deliver">複製 Prompt</button></div><pre id="03-plan-deliver">請依剛才確認的計畫和 specs/change-request.md，完成架構文件與實作清單，存到 output，格式依 DOC-SPEC.md。
+
+描述現況時，重新核對引用的原始碼；計畫中的建議保留為提案，需要環境資料才能確認的事項另外列出。完成後執行文件檢查並說明結果。
 </pre><div class="expected"><strong>預期回應</strong><p>output 裡的架構文件和實作清單，附上檢查結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/architecture.md</code>、<code>output/checklist.md</code></p><div class="prompt"><div class="prompt-head"><span>一起檢查計畫</span><button type="button" data-copy="verify-plan">複製 Prompt</button></div><pre id="verify-plan">請重新打開文件引用的原始碼，依 DOC-SPEC.md 核對架構文件與實作清單。修正和程式不一致的說明，再執行檢查；還需要補資料的地方，請另外列出。
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/architecture.md</code>、<code>output/checklist.md</code>、<code>bank-source/reading/CKP02.TXT</code>、<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>、<code>samples/cobol/TESTSHIFT.cbl</code>、<code>samples/jcl/IDSHIFT.jcl</code>、<code>specs/change-request.md</code></p><div class="prompt"><div class="prompt-head"><span>一起檢查計畫</span><button type="button" data-copy="verify-plan">複製 Prompt</button></div><pre id="verify-plan">請對照原始碼與 specs/change-request.md，依 DOC-SPEC.md 核對架構文件和實作清單。現況描述是否有依據？提案是否滿足需求？引用的 JCL 和範例，是否確實屬於所描述的程式？
+
+修正文件中不一致的內容，再執行檢查；需要其他檔案或環境資料才能確定的事項另外列出。
 </pre><div class="expected"><strong>預期回應</strong><p>文件檢查結果，以及仍需要補齊的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <details><summary>完成後可以看什麼？</summary><p>開啟 output/architecture.md 和 output/checklist.md。前者說明現況、提案及影響，後者列出要做的工作、前置條件與完成標準。七個分析面向與詳細格式都在 DOC-SPEC.md。</p></details>
 <label class="check"><input type="checkbox" data-check="我能說明 CKP02 在處理什麼"><span>我能說明 CKP02 在處理什麼</span></label><label class="check"><input type="checkbox" data-check="我已看過架構文件與實作清單"><span>我已看過架構文件與實作清單</span></label><label class="check"><input type="checkbox" data-check="需要補充的資訊已列出"><span>需要補充的資訊已列出</span></label>

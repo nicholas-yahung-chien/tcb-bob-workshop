@@ -6,9 +6,11 @@
 </pre><div class="expected"><strong>預期回應</strong><p>依交易整理的時間線，每個判斷都能找到對應事件。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>留意 Bob 有沒有指出對應的事件編號。看到「可能原因」時，可以追問還需要什麼記錄來確認。</p>
 <h2 id="report">2. 留下分析結果</h2>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>samples/logs/ims-events.csv</code>、<code>specs/log-schema.md</code></p><div class="prompt"><div class="prompt-head"><span>整理成分析報告</span><button type="button" data-copy="07-logs">複製 Prompt</button></div><pre id="07-logs">請把這份交易事件記錄整理成分析報告，存到 output。內容包含交易經過、處理結果和接下來要查的資訊，格式與檢查方式請依 specs/log-schema.md。
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>samples/logs/ims-events.csv</code>、<code>specs/log-schema.md</code></p><div class="prompt"><div class="prompt-head"><span>整理成分析報告</span><button type="button" data-copy="07-logs">複製 Prompt</button></div><pre id="07-logs">請依 specs/log-schema.md，把這份交易事件記錄整理成分析報告，存到 output。每筆交易依時間列出經過與結果，判斷附上事件編號。
+
+將記錄中看得到的結果、可能原因及還需要追查的資訊分開寫。完成後執行分析檢查。
 </pre><div class="expected"><strong>預期回應</strong><p>log-analysis.md 和 log-facts.json，分開記錄結果與待查事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/log-schema.md</code>、<code>output/log-analysis.md</code></p><div class="prompt"><div class="prompt-head"><span>檢查結論有沒有根據</span><button type="button" data-copy="verify-logs">複製 Prompt</button></div><pre id="verify-logs">請依 specs/log-schema.md 檢查分析結果。有沒有把還不知道的事情寫成結論？需要補查哪些記錄？
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/log-schema.md</code>、<code>output/log-analysis.md</code></p><div class="prompt"><div class="prompt-head"><span>檢查結論有沒有根據</span><button type="button" data-copy="verify-logs">複製 Prompt</button></div><pre id="verify-logs">請重新對照事件記錄與 specs/log-schema.md，檢查每筆交易的結論是否有對應事件。有沒有把缺少的記錄當成已知結果，或把可能原因當成定論？修正分析後執行檢查，列出還需要追查的資訊。
 </pre><div class="expected"><strong>預期回應</strong><p>分析檢查結果，以及需要繼續追查的事件。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <details><summary>比較三筆交易</summary><p>DEMO-A 有正常結束記錄；DEMO-B 有回復操作及失敗結束；DEMO-C 沒有結束記錄，還不能判斷最後結果。單一慢事件也不足以確認原因。</p></details>
 <h2 id="next">換成自己的記錄時</h2>

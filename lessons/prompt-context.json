@@ -27,14 +27,21 @@
   },
   "document-plan": {
     "files": [
-      "DOC-SPEC.md"
+      "DOC-SPEC.md",
+      "bank-source/reading/CKP02.TXT",
+      "samples/cobol/IDSHIFT.cbl",
+      "samples/cobol/IDREC.cpy",
+      "samples/cobol/TESTSHIFT.cbl",
+      "samples/jcl/IDSHIFT.jcl",
+      "specs/change-request.md"
     ],
     "response": "程式說明與影響分析的章節，以及需要補充的內容。"
   },
   "04-document": {
     "files": [
       "DOC-SPEC.md",
-      "bank-source/reading/CKP02.TXT"
+      "bank-source/reading/CKP02.TXT",
+      "specs/change-request.md"
     ],
     "response": "program.md、impact-analysis.md、facts.json，以及文件檢查結果。"
   },
@@ -98,15 +105,27 @@
       "DOC-SPEC.md",
       "output/program.md",
       "output/impact-analysis.md",
-      "output/facts.json"
+      "output/facts.json",
+      "bank-source/reading/CKP02.TXT",
+      "samples/cobol/IDSHIFT.cbl",
+      "samples/cobol/IDREC.cpy",
+      "samples/cobol/TESTSHIFT.cbl",
+      "samples/jcl/IDSHIFT.jcl",
+      "specs/change-request.md"
     ],
-    "response": "格式檢查結果，以及需要回到原始碼確認的說明。"
+    "response": "條件分支與欄位的核對、文件修正說明，以及檢查結果。"
   },
   "verify-plan": {
     "files": [
       "DOC-SPEC.md",
       "output/architecture.md",
-      "output/checklist.md"
+      "output/checklist.md",
+      "bank-source/reading/CKP02.TXT",
+      "samples/cobol/IDSHIFT.cbl",
+      "samples/cobol/IDREC.cpy",
+      "samples/cobol/TESTSHIFT.cbl",
+      "samples/jcl/IDSHIFT.jcl",
+      "specs/change-request.md"
     ],
     "response": "文件檢查結果，以及仍需要補齊的資訊。"
   },
@@ -180,5 +199,11 @@
       "reference/",
       "bank-source/reading/CKP02.TXT"
     ]
+  },
+  "enhance-start": {
+    "files": [
+      "bank-source/reading/CKP02.TXT"
+    ],
+    "response": "先比較輸入框中改寫前後的提問，確認補充內容符合你的目的。"
   }
 }

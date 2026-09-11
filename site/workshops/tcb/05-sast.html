@@ -6,7 +6,9 @@
 <p>回覆應帶你從輸入值看到 SQL 執行的位置。看懂原因後，再討論怎麼改，會比直接接受修改更容易掌握結果。</p>
 <h2 id="fix">2. 修正並保留正常功能</h2>
 <p><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/sast-task.md">sast-task.md</a> 列出要保留的介面、測試和報告內容。正常查詢也要測，例如姓名或識別值中本來就有單引號的情況。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/sast-task.md</code>、<code>samples/reports/sast.json</code>、<code>samples/python/customer_lookup.py</code></p><div class="prompt"><div class="prompt-head"><span>完成查詢修正</span><button type="button" data-copy="08-sast">複製 Prompt</button></div><pre id="08-sast">請依 specs/sast-task.md 修正這個查詢問題，保留原本的查詢方式，並把結果存到 output。完成後跑測試，再整理修正內容和測試結果。
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/sast-task.md</code>、<code>samples/reports/sast.json</code>、<code>samples/python/customer_lookup.py</code></p><div class="prompt"><div class="prompt-head"><span>完成查詢修正</span><button type="button" data-copy="08-sast">複製 Prompt</button></div><pre id="08-sast">請依 specs/sast-task.md 修正這個查詢問題，保留函式介面與正常查詢功能，把修正存到 output。
+
+請用測試確認問題輸入與正常資料的處理結果，保留原有測試，再記錄修改理由和實際測試結果。
 </pre><div class="expected"><strong>預期回應</strong><p>修正後的程式、六個查詢測試結果，以及修補報告。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/sast-task.md</code></p><div class="prompt"><div class="prompt-head"><span>再檢查一次結果</span><button type="button" data-copy="verify-sast">複製 Prompt</button></div><pre id="verify-sast">請依 specs/sast-task.md 再檢查一次修正結果，確認正常查詢和異常輸入都有測到，並更新修補報告。
 </pre><div class="expected"><strong>預期回應</strong><p>查詢測試結果，以及更新後的修補報告。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
