@@ -22,13 +22,13 @@
 
 ## 2. 準備自己的作業
 
-切到 Agent，把 README.md 和 build_lab.py 加入對話，將中括號換成自己的設定：
+切到 Agent，把 BOB-GUIDE.md 和 templates/run.jcl 加入對話，將中括號換成自己的設定：
 
 ```text
-請依 host-lab/README.md，用現有產生器在 output/host-lab 建立 CKP02 的主機練習。我的 job 名稱是 [個人 job 名稱]，volume 是 [分配的 volume]，storage class 選項是 [分配的選項]。先不要提交；完成後請帶我看 run.jcl 的編譯、執行與比對步驟，確認每次都重新建立測資。
+請依 host-lab/BOB-GUIDE.md，從教材範本在 output/host-lab 建立 CKP02 的主機練習。我的 job 名稱是 [個人 job 名稱]，volume 是 [分配的 volume]，storage class 選項是 [分配的選項]。先不要提交；完成後請帶我看 run.jcl 的編譯、執行與比對步驟，確認每次都重新建立測資。
 ```
 
-這裡指定現有產生器，是為了讓大家從相同的程式與測資開始。原始程式不需要修改。先看 run.jcl，可以確認作業名稱與配置值是自己的設定，也知道稍後要在哪個步驟找結果；確認後再提交。
+這裡使用教材範本，是為了讓大家從相同的程式與測資開始。原始程式不需要修改。先看 run.jcl，可以確認作業名稱與配置值是自己的設定，也知道稍後要在哪個步驟找結果；確認後再提交。
 
 ## 3. 從編輯器提交
 

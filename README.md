@@ -12,7 +12,7 @@
 
 確認 IBM Bob 已登入並啟用 pp4z，主機連線需 Zowe Explorer。Git 只在 Git: Clone 下載時需要；[直接下載教材 ZIP](https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest/download/tcb-workshop.zip) 可略過 Git。兩種下載方式都包含根目錄的 Zowe 設定檔與 schema。
 
-本機 Python 3.10 以上是教材檢查、檔案準備、主機 JCL 產生與 Python 練習的額外條件，不是安裝 Bob 就保證具備；3.10 不是 3.1。本課程使用標準庫，不需另外安裝 pip 套件。請先核對工具版本，再從[課前準備](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/00-setup.html)開始。
+主流程不需要本機 Python。請將 host-lab/BOB-GUIDE.md 交給 Bob，完成教材檢查、個人 JCL 與實際主機紀錄分析。Git 僅在 Clone 下載時需要；Python 範例保留為另需執行環境的選做練習。
 
 ## 怎麼使用這些練習
 

@@ -1,8 +1,6 @@
 <h2 id="download">下載練習程式</h2>
-<p>先確認 IBM Bob 已安裝並登入，COBOL 解讀會使用 Premium Package for Z（pp4z），主機連線使用 Zowe Explorer。下列工具是本課程實作的額外條件，不能因為已安裝 Bob 就視為已備妥。</p>
-<table><tr><th>工具</th><th>什麼時候需要</th><th>準備方式</th></tr><tr><td>Git</td><td>使用 Git: Clone 下載與切換分支時</td><td>另行確認本機可執行 Git；若使用下方 ZIP 下載，可不安裝 Git</td></tr><tr><td>Python 3.10 以上</td><td>檢查教材、準備 .cbl 檔、產生主機 JCL，以及執行 Python 延伸練習時</td><td>另行安裝或使用本機既有的 Python；本課程只用標準庫，不需 pip 安裝套件</td></tr></table>
-<p><strong>3.10 是 Python 3 的第 10 個次版本，不是 3.1。</strong>只閱讀程式或設定 Zowe 連線不需要執行 Python，但後續教材準備與 JCL 產生步驟需要它。Bob 的執行功能會呼叫本機工具，不會取代 Git 或 Python。</p>
-<p>在 Bob 的終端機執行 <code>git --version</code>（使用 Git 下載者），以及 <code>python --version</code>；Windows 也可用 <code>py -3 --version</code>，macOS／Linux 可用 <code>python3 --version</code>。確認 Python 為 3.10 以上。若找不到，先依電腦的安裝規範備妥工具，再繼續。可從 <a href="https://git-scm.com/downloads">Git</a>、<a href="https://www.python.org/downloads/">Python</a> 官方網站取得安裝程式。</p>
+<p>準備已登入的 IBM Bob、Premium Package for Z（pp4z）與 Zowe Explorer。本課程主流程不需要安裝 Python：將 Markdown 指引交給 Bob，完成教材檢查、JCL 準備與主機測試紀錄分析。</p>
+<p>使用 Git: Clone 下載時才需要本機 Git；也可以直接下載 ZIP，省去 Git 安裝。程式與資料比對在主機執行，Bob 會依實際紀錄確認結果。</p>
 <ol><li>在 VSCode 按 Ctrl+Shift+P，選擇 <strong>Git: Clone</strong>。macOS 使用 ⌘⇧P。</li><li>貼上下方網址，選擇儲存位置，下載完成後按 <strong>Open</strong>。</li><li>從左下角的分支選單切換到 <strong>workshop/tcb-2026</strong>。</li></ol>
 <div class="prompt"><div class="prompt-head"><span>Repository 網址</span><button data-copy="repository-url">複製網址</button></div><pre id="repository-url">https://github.com/nicholas-yahung-chien/tcb-bob-workshop.git</pre><p class="copy-status" role="status"></p></div>
 <p>不使用 Git 時，可以直接<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest/download/tcb-workshop.zip">下載教材 ZIP</a>，解壓後用 File → Open Folder 開啟。ZIP 已包含完整教材、<code>host-lab</code>、<code>zowe.config.json</code> 與 <code>zowe.schema.json</code>，不需另取連線設定；ZIP 使用者不必切換分支。</p>

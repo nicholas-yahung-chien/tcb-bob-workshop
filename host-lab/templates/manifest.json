@@ -1,0 +1,23 @@
+{
+  "source_reading_sha256": "649c2d825277ef951717588af80668827a1118748cda9d28709c4daaf0eb37e3",
+  "build_source_sha256": "8865ec56c99205335a578285df2d8ee4b625680d669d5535f99168bf52352408",
+  "source_change": "Only non-ASCII comment translated; executable columns retained.",
+  "cases": 7,
+  "record_bytes": 400,
+  "runs": [
+    "once",
+    "twice",
+    "empty"
+  ],
+  "host_execution": "not inferred from generation",
+  "allocation_route": {
+    "volume": "DEVVS1",
+    "storage_class_selector": "SCNOSMS"
+  },
+  "sha256": {
+    "CHKCKP.cbl": "e4cf0a2ea80f50900767d5ab644259c5875f569415fd0dfe1e3d57acca57e8a5",
+    "CKP02.cbl": "8865ec56c99205335a578285df2d8ee4b625680d669d5535f99168bf52352408",
+    "GENCKP.cbl": "1b8f9fdf527f8b765b5351442c667ad68b68f1b1741ce04c1452e660f34ecde3",
+    "run.jcl": "97cfe1ad46667ded71652f5089246912bd3b189a6739828da4f8e4260b4cbcdb"
+  }
+}
