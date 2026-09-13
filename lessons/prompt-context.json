@@ -229,5 +229,11 @@
       "bank-source/reading/CKP02.TXT"
     ],
     "response": "先比較輸入框中改寫前後的提問，確認補充內容符合你的目的。"
+  },
+  "host-environment": {
+    "files": [
+      "host-lab/CONNECTION.md"
+    ],
+    "response": "output/host-lab/environment.md"
   }
 }

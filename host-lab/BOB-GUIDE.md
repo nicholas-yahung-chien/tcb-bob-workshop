@@ -11,7 +11,7 @@
 
 ## 二、建立個人 JCL
 
-1. 讀取 output/host-lab/environment.md。job 名稱必須以 TCB 開頭、共 4–8 個大寫英文字母或數字；缺少時先詢問。範本使用 DEVVS1、SCNOSMS，若配置不同，先指出落差，不猜替代值。
+1. 先確認 output/host-lab/environment.md 存在；若不存在，請學員依 CONNECTION.md 的「建立個人作業配置」完成文件並核對後，再繼續，不猜測配置。讀取並核對帳號、Zowe 連線、job 名稱、volume 與 storage class，不得含待填文字。job 名稱必須以 TCB 開頭、共 4–8 個大寫英文字母或數字；缺少時先詢問。範本使用 DEVVS1、SCNOSMS，若配置不同，先指出落差，不猜替代值。
 2. 複製 host-lab/templates 的三份 .cbl 和 run.jcl 至 output/host-lab，只將 JCL 第一行的 TCBP001 換成個人 job 名稱。已有檔案先比較，不覆寫學員成果。JCL 已內嵌來源，不需另外上傳程式。
 3. 核對 CKP02 副本與銀行來源：只翻譯中文註解，執行敘述不變；核對 JCL 內嵌來源與副本。不要重新生成銀行邏輯。
 4. 確認每行不超過 72 欄，//、/* 位置及 IF/ENDIF 配對正確。核對編譯器 IGY.V6R4M0.SIGYCOMP、LE 的 CEE.SCEELKED 與 CEE.SCEERUN。保留作業獨立的 && 暫存資料集、FB 與 LRECL=400，不新增共用永久資料集或 IMS 指令。
