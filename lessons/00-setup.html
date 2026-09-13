@@ -1,11 +1,15 @@
 <h2 id="download">下載練習程式</h2>
-<p>先準備好 Git、Python 3.10 以上版本，以及已登入的 IBM Bob。COBOL 解讀會使用 Premium Package for Z（pp4z）。</p>
+<p>先確認 IBM Bob 已安裝並登入，COBOL 解讀會使用 Premium Package for Z（pp4z），主機連線使用 Zowe Explorer。下列工具是本課程實作的額外條件，不能因為已安裝 Bob 就視為已備妥。</p>
+<table><tr><th>工具</th><th>什麼時候需要</th><th>準備方式</th></tr><tr><td>Git</td><td>使用 Git: Clone 下載與切換分支時</td><td>另行確認本機可執行 Git；若使用下方 ZIP 下載，可不安裝 Git</td></tr><tr><td>Python 3.10 以上</td><td>檢查教材、準備 .cbl 檔、產生主機 JCL，以及執行 Python 延伸練習時</td><td>另行安裝或使用本機既有的 Python；本課程只用標準庫，不需 pip 安裝套件</td></tr></table>
+<p><strong>3.10 是 Python 3 的第 10 個次版本，不是 3.1。</strong>只閱讀程式或設定 Zowe 連線不需要執行 Python，但後續教材準備與 JCL 產生步驟需要它。Bob 的執行功能會呼叫本機工具，不會取代 Git 或 Python。</p>
+<p>在 Bob 的終端機執行 <code>git --version</code>（使用 Git 下載者），以及 <code>python --version</code>；Windows 也可用 <code>py -3 --version</code>，macOS／Linux 可用 <code>python3 --version</code>。確認 Python 為 3.10 以上。若找不到，先依電腦的安裝規範備妥工具，再繼續。可從 <a href="https://git-scm.com/downloads">Git</a>、<a href="https://www.python.org/downloads/">Python</a> 官方網站取得安裝程式。</p>
 <ol><li>在 VSCode 按 Ctrl+Shift+P，選擇 <strong>Git: Clone</strong>。macOS 使用 ⌘⇧P。</li><li>貼上下方網址，選擇儲存位置，下載完成後按 <strong>Open</strong>。</li><li>從左下角的分支選單切換到 <strong>workshop/tcb-2026</strong>。</li></ol>
 <div class="prompt"><div class="prompt-head"><span>Repository 網址</span><button data-copy="repository-url">複製網址</button></div><pre id="repository-url">https://github.com/nicholas-yahung-chien/tcb-bob-workshop.git</pre><p class="copy-status" role="status"></p></div>
-<p>也可以<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest">下載 ZIP</a>，解壓後用 File → Open Folder 開啟。</p>
+<p>不使用 Git 時，可以直接<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest/download/tcb-workshop.zip">下載教材 ZIP</a>，解壓後用 File → Open Folder 開啟。ZIP 已包含完整教材、<code>host-lab</code>、<code>zowe.config.json</code> 與 <code>zowe.schema.json</code>，不需另取連線設定；ZIP 使用者不必切換分支。</p>
 <h2 id="chat">從 Bob 對話開始</h2>
+<p>主機練習會使用個人 z/OSMF 帳號與 Zowe Explorer。完成下方工作區準備後，再設定自己的主機連線。</p>
 <p>開啟 <strong>IBM BOB</strong> 面板，按「＋」建立新對話。輸入框下方可以選擇 Ask、Plan、Agent，以及 pp4z 的 Z Code、Z Architecture。</p>
-<p>每個練習會列出要用的檔案。輸入 <strong>@</strong> 後選取檔案，或從檔案總管拖進對話，再送出問題。遇到 Permissions 提示時，看看 Bob 想讀取、修改或執行什麼，再核准操作。</p>
+<p>每個練習會列出要用的檔案。在輸入框輸入 <strong>@</strong>，從彈出的清單找到並點選檔案，再送出問題。清單支援搜尋時，可輸入檔名縮小範圍，確認路徑後選取。單純貼上 <code>@檔案路徑</code> 不代表已加入檔案。遇到 Permissions 提示時，看看 Bob 想讀取、修改或執行什麼，再核准操作。</p>
 <p>同一段對話已加入的檔案，不必每一步重複加入。若改開新對話，請把該步列出的需求、程式與已有成果一起補上。</p>
 <h2 id="questions">換成自己的問題，也可以這樣問</h2>
 <p>把工作交給 Bob 時，可以像向同事說明需求一樣，交代下面幾件事。不必每次都重新寫一遍；同一段對話已經說清楚的內容，可以接著使用。</p>
@@ -15,6 +19,12 @@
 <p><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/workspace.md">workspace.md</a> 寫好了環境檢查和檔案準備步驟。你可以像請同事照著作業說明操作一樣，把這份文件交給 Bob。</p>
 {{z-prepare|準備工作區|Agent}}
 <p>完成後，開啟 <code>output/z-lab/CKP02.cbl</code>。自己的成果都會放在 output，bank-source 則保留原始檔案。</p>
+<h2 id="host-connection">準備自己的主機連線</h2>
+<p>教材根目錄已附上 <code>zowe.config.json</code> 與 <code>zowe.schema.json</code>。開啟設定檔，把唯一的 <code>YOUR_USER_ID</code> 換成自己的帳號，保留雙引號並儲存；其餘設定不需修改。</p>
+<p>在 Zowe Explorer 選取 <code>tcb-zosmf</code>，透過認證介面輸入密碼，再確認自己的 JOBS 與資料集。若尚未顯示連線，執行 Developer: Reload Window。本步直接使用教材設定，不需要請 Bob 建立 profile。</p>
+<p>本次個人 profile 使用 <code>rejectUnauthorized: false</code>，不需另外設定 CA；HTTPS 仍加密，但不驗證伺服器憑證，不應套用到正式系統。設定檔存在不代表已登入主機。</p>
+<p>依教材中的 <code>host-lab/CONNECTION.md</code> 設定連線，確認 JOBS owner 是自己，並將不含密碼的配置寫入 <code>output/host-lab/environment.md</code>。主機位址使用本場提供的資料。</p>
+<p>兩場使用不同帳號，成果可以分開保留。若下載後沒有 <code>host-lab</code>，先取得包含主機練習的教材版本，再進行<a href="03-testing.html#host">CKP02 主機實作</a>。</p>
 <h2 id="premium">找到 pp4z 的功能</h2>
 <p>選擇 <strong>Z Code</strong>，點 Bob 面板上方的播放圖示 <strong>Start Workflow</strong>，看看清單裡是否有 <strong>Explain code</strong> 和 <strong>Generate documentation</strong>。接下來會用到這兩個功能。</p>
 <p>如果找不到，先看<a href="07-help.html#pp4z">常見問題</a>。部分版本會將 Z Architecture 顯示為 Z Architect。</p>

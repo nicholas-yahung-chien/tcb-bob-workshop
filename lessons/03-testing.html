@@ -1,5 +1,14 @@
 <h2 id="story">除了正常資料，還要試哪些情況？</h2>
-<p>程式看起來合理，還需要用資料試試看。這裡先請 Bob 補上 COBOL 測試，再用本機的 Python 範例檢查相同的轉換規則。</p>
+<p>程式看起來合理，還需要用資料試試看。先用自己的主機帳號執行 CKP02，比較預期與實際結果；完成後，再選做補測試與本機需求練習。</p>
+<h2 id="host">在主機跑一次 CKP02</h2>
+<p>先完成<a href="00-setup.html#host-connection">個人主機連線</a>。開啟 CKP02 與七筆測資，先和 Bob 討論結果。</p>
+{{host-predict|先預測結果|Ask}}
+<p>接著加入自己的 environment.md，請 Bob 用教材產生器準備 JCL。作業會在主機編譯程式、執行兩次轉換與一次空檔測試，使用各作業獨立的暫存資料集。</p>
+{{host-build|準備自己的主機作業|Agent}}
+<ol><li>開啟 <code>output/host-lab/run.jcl</code>，核對 job 名稱、DEVVS1、SCNOSMS。</li><li>在編輯器按右鍵選 <strong>Submit as JCL</strong>，選自己的 z/OSMF profile。</li><li>記下回傳的 job ID，在 JOBS 核對 owner，等待 OUTPUT。</li><li>下載 JESMSGLG、JESYSMSG、CCKP 的 SYSPRINT，以及 CHECK1、CHECK2 的 SYSOUT，放在 <code>output/host-lab/logs/&lt;job ID&gt;/</code>，同名 DD 依 step 分開儲存。</li></ol>
+<p>將紀錄帶到<a href="04-logs.html#host">下一單元</a>，確認 RC 4 的來源、兩組七筆完整 400-byte 比對，以及 RUNEMPTY 的結果。詳細步驟也在 <code>host-lab/WORKTHROUGH.md</code>。</p>
+{{check:我已用自己的帳號提交 CKP02}}{{check:我已保存自己的 job ID 與主機紀錄}}
+<h2 id="optional">完成主機實作後，選擇延伸練習</h2>
 <h2 id="cobol">1. 從現有測試開始補</h2>
 <p>TESTSHIFT 已經有幾個簡單案例。把它和 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/testing.md">testing.md</a> 一起加入對話，讓 Bob 沿用現有寫法。</p>
 {{z-tests|補上 COBOL 測試|Z Code}}
