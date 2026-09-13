@@ -6,11 +6,17 @@
 
 ## 開啟工作區
 
+主機連線設定已放在根目錄的 `zowe.config.json`，只需將 `YOUR_USER_ID` 換成自己的帳號。`zowe.schema.json` 請一併保留；密碼透過 Zowe 認證介面輸入。詳細步驟見 [主機連線](host-lab/CONNECTION.md)。
+
 在 VSCode 用 Git: Clone 下載這個 repo，開啟後切換到 `workshop/tcb-2026` 分支。也可以下載 ZIP，解壓後用 File → Open Folder 開啟。
 
-準備好 Git、Python 3.10 以上版本，以及已登入並啟用 pp4z 的 IBM Bob，接著從[課前準備](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/00-setup.html)開始。
+確認 IBM Bob 已登入並啟用 pp4z，主機連線需 Zowe Explorer。Git 只在 Git: Clone 下載時需要；[直接下載教材 ZIP](https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest/download/tcb-workshop.zip) 可略過 Git。兩種下載方式都包含根目錄的 Zowe 設定檔與 schema。
+
+本機 Python 3.10 以上是教材檢查、檔案準備、主機 JCL 產生與 Python 練習的額外條件，不是安裝 Bob 就保證具備；3.10 不是 3.1。本課程使用標準庫，不需另外安裝 pip 套件。請先核對工具版本，再從[課前準備](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/00-setup.html)開始。
 
 ## 怎麼使用這些練習
+
+主機實作從 [個人連線](host-lab/CONNECTION.md) 開始，再依 [CKP02 實作步驟](host-lab/WORKTHROUGH.md) 分析程式、提交 JCL，並下載自己帳號的 JES 紀錄交給 Bob 核對。IMS 事件 CSV 與 SQLite 弱點修補是另外的延伸練習。
 
 每個單元先介紹一個情境，再提供可以直接問 Bob 的問題。將頁面列出的檔案用 @ 加入對話，選擇對應模式，就可以開始。看完回覆，再依自己的疑問追問。
 
@@ -28,6 +34,7 @@
 | 資料夾 | 內容 |
 |---|---|
 | bank-source | 45 份合庫原始檔及 UTF-8 閱讀版 |
+| host-lab | 個人主機連線、CKP02 JCL 產生器、測資與 log 核對步驟 |
 | samples | 轉換程式、測試、JCL、事件及查詢練習 |
 | prompts | 各單元的提問範例 |
 | reference | 可以比較的參考解答 |

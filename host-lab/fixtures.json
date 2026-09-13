@@ -1,0 +1,9 @@
+[
+  {"name":"normal", "id":"0012345678", "marker_position":14, "marker":"ABC", "once":"12345678  ", "twice":"12345678  "},
+  {"name":"other-prefix", "id":"AB12345678", "marker_position":14, "marker":"ABC", "once":"AB12345678", "twice":"AB12345678"},
+  {"name":"data-eof", "id":"0098765432", "marker_position":14, "marker":"EOF", "once":"0098765432", "twice":"0098765432"},
+  {"name":"repeat", "id":"0000123456", "marker_position":14, "marker":"ABC", "once":"00123456  ", "twice":"123456    "},
+  {"name":"nearby-eof", "id":"0012345678", "marker_position":12, "marker":"EOF", "once":"12345678  ", "twice":"12345678  "},
+  {"name":"nonnumeric", "id":"00ABCDEFGH", "marker_position":14, "marker":"ABC", "once":"ABCDEFGH  ", "twice":"ABCDEFGH  "},
+  {"name":"spaces", "id":"00        ", "marker_position":14, "marker":"ABC", "once":"          ", "twice":"          "}
+]

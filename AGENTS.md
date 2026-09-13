@@ -5,6 +5,7 @@ Do not read `reference/` unless the user explicitly selects the reference exampl
 `bank-source/` contains the authorized bank source set and must remain unchanged. `samples/` is synthetic teaching material, not a production banking system. `customer-source/` is optional local-only material.
 Do not read outside the workspace. Do not contact external services, send mail, deploy, or modify git history while performing a lab.
 Only write inside `output/` unless the user explicitly selects another exercise directory.
+Connection setup uses the supplied root zowe.config.json and zowe.schema.json. Learners replace only YOUR_USER_ID and enter passwords through Zowe. Do not generate, merge or redesign connection profiles as a course exercise; do not read or modify parent/global profiles or retrieve passwords. Begin Bob-led exercises with program analysis after connection setup.
 Do not modify `bank-source/`, `tests/`, `scripts/`, `samples/`, `specs/`, `prompts/`, or `reference/` to make checks pass.
 Separate source-proven facts, proposals, and missing evidence. Cite a real file and line or paragraph for each source claim.
 Never infer an actual Java/API/SQL/JCL system from a proposed architecture. Do not claim a mainframe compile, IMS execution, SAST rescan or premium feature was tested without evidence.

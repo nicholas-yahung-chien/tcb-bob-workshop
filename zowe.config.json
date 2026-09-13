@@ -1,0 +1,30 @@
+{
+  "$schema": "./zowe.schema.json",
+  "profiles": {
+    "tcb-zosmf": {
+      "type": "zosmf",
+      "properties": {
+        "port": 8192,
+        "protocol": "https",
+        "encoding": "IBM-1047"
+      },
+      "secure": []
+    },
+    "tcb-base": {
+      "type": "base",
+      "properties": {
+        "host": "165.192.134.122",
+        "user": "YOUR_USER_ID",
+        "rejectUnauthorized": false
+      },
+      "secure": [
+        "password"
+      ]
+    }
+  },
+  "defaults": {
+    "zosmf": "tcb-zosmf",
+    "base": "tcb-base"
+  },
+  "autoStore": true
+}
