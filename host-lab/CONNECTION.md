@@ -26,7 +26,7 @@
 
 ## 帳號與作業配置
 
-09/21 使用 TCB2101–TCB2110，09/24 使用 TCB2401–TCB2412。講師使用 TCBINS1–TCBINS3。兩場成果分開保留，不共用登入資訊。
+請使用分配給你的個人帳號，讓提交的作業與查詢結果都能對應到自己的練習。
 
 連線成功後，在 `output/host-lab/environment.md` 記下自己的帳號與 job 名稱，volume 使用 DEVVS1，storage class 使用 SCNOSMS。job 名稱最多八字元，例如 TCBINS1A。不要在這份文件放密碼。
 
