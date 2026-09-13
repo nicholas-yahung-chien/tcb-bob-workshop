@@ -4,8 +4,8 @@
 <p>先完成<a href="00-setup.html#host-connection">個人主機連線</a>。開啟 CKP02 與七筆測資，先和 Bob 討論結果。</p>
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>bank-source/reading/CKP02.TXT</code>、<code>host-lab/fixtures.json</code></p><div class="prompt"><div class="prompt-head"><span>先預測結果</span><button type="button" data-copy="host-predict">複製 Prompt</button></div><pre id="host-predict">我準備在主機執行 CKP02。請根據程式和這七筆測資，說明第一次、第二次執行後各會得到什麼，並指出程式依據。資料中的 EOF 和讀到檔尾有什麼不同？
 </pre><div class="expected"><strong>預期回應</strong><p>七筆資料兩次執行的預期結果，以及程式依據。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>接著加入自己的 environment.md，請 Bob 用教材產生器準備 JCL。作業會在主機編譯程式、執行兩次轉換與一次空檔測試，使用各作業獨立的暫存資料集。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/README.md</code>、<code>host-lab/build_lab.py</code>、<code>output/host-lab/environment.md</code></p><div class="prompt"><div class="prompt-head"><span>準備自己的主機作業</span><button type="button" data-copy="host-build">複製 Prompt</button></div><pre id="host-build">請依 host-lab/README.md，用現有產生器在 output/host-lab 建立 CKP02 的主機練習。我的帳號與配置寫在 environment.md。先不要提交；完成後帶我看 run.jcl 的編譯、執行與比對步驟，確認每次會重建自己的測資。
+<p>接著加入自己的 environment.md，請 Bob 依 BOB-GUIDE.md 從教材範本建立個人 JCL，不需 Python。作業會在主機編譯程式、執行兩次轉換與一次空檔測試，使用各作業獨立的暫存資料集。</p>
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/README.md</code>、<code>output/host-lab/environment.md</code>、<code>host-lab/BOB-GUIDE.md</code></p><div class="prompt"><div class="prompt-head"><span>準備自己的主機作業</span><button type="button" data-copy="host-build">複製 Prompt</button></div><pre id="host-build">請依 host-lab/BOB-GUIDE.md 和我的 environment.md，從教材範本建立個人 JCL，不使用 Python。先不要提交，完成後帶我核對作業設定與測試步驟。
 </pre><div class="expected"><strong>預期回應</strong><p>尚未提交的 run.jcl，以及各步驟與個人配置的說明。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <ol><li>開啟 <code>output/host-lab/run.jcl</code>，核對 job 名稱、DEVVS1、SCNOSMS。</li><li>在編輯器按右鍵選 <strong>Submit as JCL</strong>，選自己的 z/OSMF profile。</li><li>記下回傳的 job ID，在 JOBS 核對 owner，等待 OUTPUT。</li><li>下載 JESMSGLG、JESYSMSG、CCKP 的 SYSPRINT，以及 CHECK1、CHECK2 的 SYSOUT，放在 <code>output/host-lab/logs/&lt;job ID&gt;/</code>，同名 DD 依 step 分開儲存。</li></ol>
 <p>將紀錄帶到<a href="04-logs.html#host">下一單元</a>，確認 RC 4 的來源、兩組七筆完整 400-byte 比對，以及 RUNEMPTY 的結果。詳細步驟也在 <code>host-lab/WORKTHROUGH.md</code>。</p>
@@ -19,7 +19,7 @@
 </pre><div class="expected"><strong>預期回應</strong><p>COBOL 測試程式、案例說明及執行前提。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>完成後會有 cobol-test-plan.md 和 TESTSHIFT-EXT.cbl。編譯執行需要 COBOL 環境；還沒執行的案例，先保留為待執行。</p>
 <h2 id="implement">2. 在本機試跑轉換規則</h2>
-<p>Python 範例使用同樣的資料位置與轉換規則，可以在一般筆電執行。它也包含這次新需求的預覽與統計功能。</p>
+<p>以下為選做練習，另需本機 Python 3.10 以上；不影響前面的主機實作。Python 範例使用同樣的資料位置與轉換規則，可以在一般筆電執行。它也包含這次新需求的預覽與統計功能。</p>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/change-request.md</code>、<code>specs/testing.md</code></p><div class="prompt"><div class="prompt-head"><span>完成範例並跑測試</span><button type="button" data-copy="05-unit">複製 Prompt</button></div><pre id="05-unit">請依 specs/change-request.md 和 specs/testing.md，完成 Python 轉換範例並補上測試，存到 output。
 
 新增案例請從需求推導輸入與預期結果，涵蓋正常情況及容易漏掉的邊界。完成後實際執行測試，記錄結果和修正內容，保留原有測試。
@@ -32,5 +32,5 @@
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>output/</code></p><div class="prompt"><div class="prompt-head"><span>找出原因再修正</span><button type="button" data-copy="09-repair">複製 Prompt</button></div><pre id="09-repair">這是剛才的檢查結果。請幫我找出失敗原因，對照需求修正 output 裡的檔案，再跑一次相同的檢查。也請簡單說明你改了什麼。
 </pre><div class="expected"><strong>預期回應</strong><p>失敗原因、修改內容，以及重新檢查的結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <details><summary>測試通過後，再看一件事</summary><p>預覽模式應保留原始資料，套用模式則回傳轉換結果。看看兩者的統計是否一致，也看看同一筆資料再跑一次的結果。Python 測試記錄和 COBOL 執行結果分開保存。</p></details>
-<label class="check"><input type="checkbox" data-check="我有 COBOL 測試程式與案例說明"><span>我有 COBOL 測試程式與案例說明</span></label><label class="check"><input type="checkbox" data-check="14 個 Python 測試已通過"><span>14 個 Python 測試已通過</span></label><label class="check"><input type="checkbox" data-check="我知道怎麼把失敗訊息交給 Bob 繼續處理"><span>我知道怎麼把失敗訊息交給 Bob 繼續處理</span></label>
+<label class="check"><input type="checkbox" data-check="我有 COBOL 測試程式與案例說明"><span>我有 COBOL 測試程式與案例說明</span></label><label class="check"><input type="checkbox" data-check="選做者已記錄 Python 測試結果；未執行者標記未執行"><span>選做者已記錄 Python 測試結果；未執行者標記未執行</span></label><label class="check"><input type="checkbox" data-check="我知道怎麼把失敗訊息交給 Bob 繼續處理"><span>我知道怎麼把失敗訊息交給 Bob 繼續處理</span></label>
 </article><nav class="next" aria-label="前後單元"><a href="02-documentation.html">← COBOL 文件化</a><a href="04-logs.html">主機紀錄與 IMS 事件 →</a></nav></main></div><footer><p>合作金庫 IBM Bob Workshop</p><p>2026.09.21 / 09.24</p></footer></body></html>
