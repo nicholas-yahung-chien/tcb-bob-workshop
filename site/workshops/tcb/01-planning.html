@@ -5,11 +5,11 @@
 <h3 id="onboard">A. 先知道自己拿到了什麼</h3>
 <p>先加入檔案說明與準備好的程式目錄，請 Bob 帶你找閱讀入口。</p>
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>SOURCE-MAP.md</code>、<code>output/z-lab/</code></p><div class="prompt"><div class="prompt-head"><span>認識教材與閱讀順序</span><button type="button" data-copy="z-onboard">複製 Prompt</button></div><pre id="z-onboard">我剛接手這份主機程式教材。請先帶我認識有哪些程式、各目錄放什麼，以及從哪裡開始閱讀比較容易理解。
-</pre><div class="expected"><strong>預期回應</strong><p>CKP02, CIS14, Copybook</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+</pre><div class="expected"><strong>預期回應</strong><p>教材目錄的用途、主要程式與適合的閱讀順序。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p><strong>看回答時留意：</strong>是否說清楚 <code>output/z-lab</code> 的程式與 Copybook、<code>samples</code> 的獨立練習，以及 <code>host-lab</code> 的主機測試用途。你應能找到 CKP02.cbl，也知道 CIS14 的相依檔案放在哪裡。</p>
 <h3 id="roles">B. 理解程式各自的角色</h3>
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>output/z-lab/CKP02.cbl</code>、<code>output/z-lab/CIS14/CIS14.cbl</code>、<code>samples/cobol/IDSHIFT.cbl</code></p><div class="prompt"><div class="prompt-head"><span>分清用途與相依關係</span><button type="button" data-copy="z-roles">複製 Prompt</button></div><pre id="z-roles">這些程式各自負責什麼？請把看得到的用途與相依關係整理給我，指出程式依據；看不出有關聯的，就先分開說明。
-</pre><div class="expected"><strong>預期回應</strong><p>COPY / CALL / I-O</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+</pre><div class="expected"><strong>預期回應</strong><p>各程式的角色、有來源依據的相依關係與待確認事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p><strong>看回答時留意：</strong>Bob 應依程式中的 COPY、CALL 或 I/O 敘述說明關係，不能因為檔案放在一起就認定互相呼叫。CKP02 的檔案轉換、CIS14 的 IMS 相關處理，以及 IDSHIFT 的記憶體記錄轉換應分開理解；合成範例不是合庫正式系統的一部分。無法確認的業務用途先留下問題。</p>
 <h3 id="trace">C. 跟著一筆資料走過 CKP02</h3>
 <p>接著聚焦 CKP02。想知道「程式在做什麼」，可以先問資料從哪裡進來、經過哪些判斷，最後寫到哪裡。</p>
@@ -26,7 +26,7 @@
 <p><strong>看回答時留意：</strong>從 <code>1000-OPEN-RTN</code> 的 OPEN I-O 與首次 READ，到 <code>2000-PROCESS-RTN</code> 的判斷、REWRITE 與下一次 READ，最後到關檔。沒有進入轉換段落的記錄也會走到 REWRITE；不要把「內容沒變」當成「沒有回寫」。</p>
 <h3 id="meaning">D. 把程式條件說成可核對的規則</h3>
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>output/z-lab/CKP02.cbl</code></p><div class="prompt"><div class="prompt-head"><span>用白話說明轉換規則</span><button type="button" data-copy="z-rules">複製 Prompt</button></div><pre id="z-rules">如果要向接手的同事說明 CKP02，你會怎麼用白話解釋哪些資料會轉換、怎麼轉、哪些不轉？也請指出程式段落，並把還需要向業務確認的意思列出來。
-</pre><div class="expected"><strong>預期回應</strong><p>400 bytes / EOF / REWRITE</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+</pre><div class="expected"><strong>預期回應</strong><p>白話轉換規則、對應段落，以及需要向業務確認的問題。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p><strong>看回答時留意：</strong>前兩碼為 <code>00</code> 且第 14–16 位不是 <code>EOF</code> 才進行轉換；轉換是將原識別欄位第 3–10 位移到前面，再補兩個空白。資料裡的 EOF 與 READ AT END 是兩回事。註解提到公司統編，但這不代表程式有檢查統編有效性；完整業務定義仍需確認。</p>
 <p>如果回答太抽象，可以接著問：「請用前後各十個字元舉例，並把空白標出來。」若 Bob 提到資料庫、API 或未提供的呼叫者，追問：「這個判斷是從哪個檔案看出來的？」</p>
 <p>完成後，試著自己說明：CKP02 讀寫什麼、何時轉換、EOF 代表什麼，以及還有哪些業務問題待確認。後續<a href="02-documentation.html#story">程式文件單元</a>會再用 Z Code 的 Explain code 工作流程深入解讀，並整理成交接文件。</p>
