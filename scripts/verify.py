@@ -53,7 +53,7 @@ def docs():
     require(len(evidence) >= 3, "Need at least three source evidence entries")
     distinct = set()
     for item in evidence:
-        require(item.get("file") in ("output/z-lab/CKP02.cbl", "bank-source/reading/CKP02.TXT"), "Evidence must cite CKP02 source")
+        require(item.get("file") in ("z-lab/CKP02.cbl", "bank-source/reading/CKP02.TXT"), "Evidence must cite CKP02 source")
         number = item.get("line")
         require(type(number) is int, "Evidence line must be an integer")
         lines = (ROOT / item["file"]).read_text(encoding="utf-8").splitlines()

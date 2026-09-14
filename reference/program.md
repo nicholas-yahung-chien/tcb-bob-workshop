@@ -2,7 +2,7 @@
 
 ## 用途與入口
 
-PROGRAM-ID CKP02（第4行）；0000-MAIN-RTN（64）依序OPEN、迴圈PROCESS、CLOSE；來源皆為output/z-lab/CKP02.cbl。這是靜態解讀，未在主機執行。
+PROGRAM-ID CKP02（第4行）；0000-MAIN-RTN（64）依序OPEN、迴圈PROCESS、CLOSE；來源皆為z-lab/CKP02.cbl。這是靜態解讀，未在主機執行。
 
 ## 欄位與條件
 

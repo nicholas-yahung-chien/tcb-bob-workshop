@@ -1,10 +1,10 @@
 # 練習檔案說明
 
-先從 `output/z-lab/CKP02.cbl` 看起，再搭配 samples 裡的 IDSHIFT 比較。CKP02 會讀取和回寫檔案，IDSHIFT 則處理傳入的記憶體記錄。
+先從 `z-lab/CKP02.cbl` 看起，再搭配 samples 裡的 IDSHIFT 比較。CKP02 會讀取和回寫檔案，IDSHIFT 則處理傳入的記憶體記錄。
 
 ## 原始程式與閱讀版
 
-教材已在 output/z-lab 提供 45 份程式與相依檔案，使用 .cbl、.cpy、.asm 副檔名。source-manifest.json 記錄每份檔案的 SHA-256，供完整性核對。
+教材已在 z-lab 提供 45 份程式與相依檔案，使用 .cbl、.cpy、.asm 副檔名。source-manifest.json 記錄每份檔案的 SHA-256，供完整性核對。
 
 SYSOCP31 有少量無法以 CP950 解碼的 bytes，閱讀版以反斜線 x 序列保留標示。若要在主機編譯，仍需使用正確編碼的原始來源及對應設定。
 

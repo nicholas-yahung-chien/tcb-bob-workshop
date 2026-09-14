@@ -1,6 +1,6 @@
 # CR-01 影響分析參考答案
 
-直接來源：output/z-lab/CKP02.cbl:73的OPEN I-O與86的REWRITE，是正式dry-run設計需檢視的I/O點；82–84是條件，94–95是轉換。新增統計保留 400 字元的記錄佈局，另以計數或受控輸出記錄結果。
+直接來源：z-lab/CKP02.cbl:73的OPEN I-O與86的REWRITE，是正式dry-run設計需檢視的I/O點；82–84是條件，94–95是轉換。新增統計保留 400 字元的記錄佈局，另以計數或受控輸出記錄結果。
 
 本機實作影響output/normalizer.py、測試與文件；samples/cobol/IDSHIFT.cbl是純子程式對照，無READ/REWRITE/IMS。samples/jcl/IDSHIFT.jcl是TESTSHIFT骨架，不是合庫正式JCL。
 
