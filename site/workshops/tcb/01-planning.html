@@ -3,7 +3,7 @@
 <h2 id="ask">1. 先認識這支程式</h2>
 <p>先理解各支程式的角色，再跟著一筆資料看 CKP02 的處理與轉換規則。不必先讀懂所有 COBOL 語法；切換到 <strong>Ask</strong>，一次問一個問題，看完回答再追問。這一段先理解現況，不修改程式或提交作業。</p>
 <h3 id="roles">A. 理解程式各自的角色</h3>
-<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>output/z-lab/CKP02.cbl</code>、<code>output/z-lab/CIS14/CIS14.cbl</code>、<code>samples/cobol/IDSHIFT.cbl</code></p><div class="prompt"><div class="prompt-head"><span>分清用途與相依關係</span><button type="button" data-copy="z-roles">複製 Prompt</button></div><pre id="z-roles">這些程式各自負責什麼？請把看得到的用途與相依關係整理給我，指出程式依據；看不出有關聯的，就先分開說明。
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>output/z-lab</code></p><div class="prompt"><div class="prompt-head"><span>分清用途與相依關係</span><button type="button" data-copy="z-roles">複製 Prompt</button></div><pre id="z-roles">這是一個我完全陌生的專案，請幫我認識這個系統是做什麼的、這些程式各自負責什麼？主要業務功能與程式分組是什麼？請把看得到的用途與相依關係整理給我，指出程式依據；看不出有關聯的，就先分開說明。
 </pre><div class="expected"><strong>預期回應</strong><p>各程式的角色、有來源依據的相依關係與待確認事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p><strong>看回答時留意：</strong>Bob 應依程式中的 COPY、CALL 或 I/O 敘述說明關係，不能因為檔案放在一起就認定互相呼叫。CKP02 的檔案轉換、CIS14 的 IMS 相關處理，以及 IDSHIFT 的記憶體記錄轉換應分開理解；合成範例不是合庫正式系統的一部分。無法確認的業務用途先留下問題。</p>
 <h3 id="trace">B. 跟著一筆資料走過 CKP02</h3>

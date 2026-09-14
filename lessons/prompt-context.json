@@ -238,9 +238,7 @@
   },
   "z-roles": {
     "files": [
-      "output/z-lab/CKP02.cbl",
-      "output/z-lab/CIS14/CIS14.cbl",
-      "samples/cobol/IDSHIFT.cbl"
+      "output/z-lab"
     ],
     "response": "各程式的角色、有來源依據的相依關係與待確認事項。"
   },
