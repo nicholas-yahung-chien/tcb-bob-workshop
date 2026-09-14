@@ -21,7 +21,8 @@ SYSOCP31 有少量無法以 CP950 解碼的 bytes，閱讀版以反斜線 x 序�
 | samples/logs/ims-events.csv | 閱讀合成的 IMS 事件摘要 |
 | host-lab/CONNECTION.md | 以個人帳號連接 Wazi-JP 的 z/OSMF |
 | host-lab/WORKTHROUGH.md | 在主機執行 CKP02，再解讀自己的 JES 紀錄 |
-| host-lab/build_lab.py | 產生本次主機練習 JCL，並非合庫正式 JCL |
+| host-lab/BOB-GUIDE.md | 請 Bob 檢查教材、準備個人 JCL 並核對主機紀錄 |
+| host-lab/templates/run.jcl | 本次主機練習的 JCL 範本 |
 | samples/reports/sast.json | 對照查詢程式的練習弱點報告 |
 | specs/change-request.md | 閱讀預覽與統計需求 |
 | DOC-SPEC.md | 整理架構與程式文件 |

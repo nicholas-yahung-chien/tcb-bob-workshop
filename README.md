@@ -8,7 +8,13 @@
 
 主機連線設定已放在根目錄的 `zowe.config.json`，只需將 `YOUR_USER_ID` 換成自己的帳號。`zowe.schema.json` 請一併保留；密碼透過 Zowe 認證介面輸入。詳細步驟見 [主機連線](host-lab/CONNECTION.md)。
 
-在 VSCode 用 Git: Clone 下載這個 repo，開啟後切換到 `workshop/tcb-2026` 分支。也可以下載 ZIP，解壓後用 File → Open Folder 開啟。
+使用 ZIP 解壓後，用 File → Open Folder 開啟。若使用 Git，請直接下載教材分支：
+
+```text
+git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.com/nicholas-yahung-chien/tcb-bob-workshop.git
+```
+
+開啟下載的資料夾，即可開始。課程步驟請閱讀上方「開始練習」連結。
 
 確認 IBM Bob 已登入並啟用 pp4z，主機連線需 Zowe Explorer。Git 只在 Git: Clone 下載時需要；[直接下載教材 ZIP](https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest/download/tcb-workshop.zip) 可略過 Git。兩種下載方式都包含根目錄的 Zowe 設定檔與 schema。
 
@@ -34,10 +40,12 @@
 | 資料夾 | 內容 |
 |---|---|
 | bank-source | 45 份合庫原始檔及 UTF-8 閱讀版 |
-| host-lab | 個人主機連線、CKP02 JCL 產生器、測資與 log 核對步驟 |
+| host-lab | 個人主機連線、CKP02 JCL 範本、測資與 Bob 操作指引 |
 | samples | 轉換程式、測試、JCL、事件及查詢練習 |
 | prompts | 各單元的提問範例 |
 | reference | 可以比較的參考解答 |
+| tests | 選做 Python 練習的測試案例 |
+| scripts/verify.py | 選做練習使用的驗收工具 |
 | output | 自己完成的文件與程式 |
 
 Python 與 SQLite 可以在本機執行。COBOL、IMS 和 JCL 則需要對應環境，測試結果分開記錄。
