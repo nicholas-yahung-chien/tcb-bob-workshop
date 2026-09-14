@@ -4,7 +4,7 @@
 
 ## 已知基準
 
-主要來源為 `bank-source/reading/CKP02.TXT`；另外閱讀 `samples/cobol/IDSHIFT.cbl` 與 `IDREC.cpy` 作為純子程式對照。原始CKP02有READ/REWRITE，合成IDSHIFT沒有I/O。每筆固定 400 bytes，前十位為識別欄位，第十一位為附加碼，餘下389位在合成模型統稱payload。
+主要來源為 `output/z-lab/CKP02.cbl`；另外閱讀 `samples/cobol/IDSHIFT.cbl` 與 `IDREC.cpy` 作為純子程式對照。原始CKP02有READ/REWRITE，合成IDSHIFT沒有I/O。每筆固定 400 bytes，前十位為識別欄位，第十一位為附加碼，餘下389位在合成模型統稱payload。
 Python 範例以 ASCII bytes 表示資料。只有前兩位是 ASCII `00` 且原始記錄第14–16位不是 `EOF` 時，前十位變成舊第3–10位加兩個 ASCII 空白；第11–400位不變。
 `EOF` 是資料內條件，不代表停止處理批次。不檢核統編真假。REDEFINES 不增加長度。
 

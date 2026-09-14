@@ -1,13 +1,13 @@
 {
   "01-ask": {
     "files": [
-      "bank-source/reading/CKP02.TXT"
+      "output/z-lab/CKP02.cbl"
     ],
     "response": "程式的用途、讀寫流程，以及可以一起閱讀的段落。"
   },
   "01-layout": {
     "files": [
-      "bank-source/reading/CKP02.TXT"
+      "output/z-lab/CKP02.cbl"
     ],
     "response": "一筆資料的欄位表，搭配修改前後的例子。"
   },
@@ -28,7 +28,7 @@
   "document-plan": {
     "files": [
       "DOC-SPEC.md",
-      "bank-source/reading/CKP02.TXT",
+      "output/z-lab/CKP02.cbl",
       "samples/cobol/IDSHIFT.cbl",
       "samples/cobol/IDREC.cpy",
       "samples/cobol/TESTSHIFT.cbl",
@@ -40,7 +40,7 @@
   "04-document": {
     "files": [
       "DOC-SPEC.md",
-      "bank-source/reading/CKP02.TXT",
+      "output/z-lab/CKP02.cbl",
       "specs/change-request.md"
     ],
     "response": "program.md、impact-analysis.md、facts.json，以及文件檢查結果。"
@@ -106,7 +106,7 @@
       "output/program.md",
       "output/impact-analysis.md",
       "output/facts.json",
-      "bank-source/reading/CKP02.TXT",
+      "output/z-lab/CKP02.cbl",
       "samples/cobol/IDSHIFT.cbl",
       "samples/cobol/IDREC.cpy",
       "samples/cobol/TESTSHIFT.cbl",
@@ -120,7 +120,7 @@
       "DOC-SPEC.md",
       "output/architecture.md",
       "output/checklist.md",
-      "bank-source/reading/CKP02.TXT",
+      "output/z-lab/CKP02.cbl",
       "samples/cobol/IDSHIFT.cbl",
       "samples/cobol/IDREC.cpy",
       "samples/cobol/TESTSHIFT.cbl",
@@ -150,7 +150,7 @@
   },
   "z-context": {
     "files": [
-      "bank-source/reading/CKP02.TXT",
+      "output/z-lab/CKP02.cbl",
       "samples/cobol/IDSHIFT.cbl",
       "samples/cobol/IDREC.cpy",
       "samples/cobol/TESTSHIFT.cbl",
@@ -174,7 +174,7 @@
   },
   "z-modernization": {
     "files": [
-      "bank-source/reading/CKP02.TXT",
+      "output/z-lab/CKP02.cbl",
       "specs/change-request.md"
     ],
     "response": "不同做法的適用情況，以及開始之前需要確認的事項。"
@@ -197,12 +197,12 @@
     "files": [
       "output/",
       "reference/",
-      "bank-source/reading/CKP02.TXT"
+      "output/z-lab/CKP02.cbl"
     ]
   },
   "host-predict": {
     "files": [
-      "bank-source/reading/CKP02.TXT",
+      "output/z-lab/CKP02.cbl",
       "host-lab/fixtures.json"
     ],
     "response": "七筆資料兩次執行的預期結果，以及程式依據。"
@@ -226,7 +226,7 @@
   },
   "enhance-start": {
     "files": [
-      "bank-source/reading/CKP02.TXT"
+      "output/z-lab/CKP02.cbl"
     ],
     "response": "先比較輸入框中改寫前後的提問，確認補充內容符合你的目的。"
   },
