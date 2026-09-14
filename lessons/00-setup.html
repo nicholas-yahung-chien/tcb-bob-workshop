@@ -1,8 +1,8 @@
 <h2 id="download">下載練習程式</h2>
 <p>準備已登入的 IBM Bob、Premium Package for Z（pp4z）與 Zowe Explorer。本課程主流程不需要安裝 Python：將 Markdown 指引交給 Bob，完成教材檢查、JCL 準備與主機測試紀錄分析。</p>
 <p>使用 Git: Clone 下載時才需要本機 Git；也可以直接下載 ZIP，省去 Git 安裝。程式與資料比對在主機執行，Bob 會依實際紀錄確認結果。</p>
-<ol><li>在 VSCode 按 Ctrl+Shift+P，選擇 <strong>Git: Clone</strong>。macOS 使用 ⌘⇧P。</li><li>貼上下方網址，選擇儲存位置，下載完成後按 <strong>Open</strong>。</li><li>從左下角的分支選單切換到 <strong>workshop/tcb-2026</strong>。</li></ol>
-<div class="prompt"><div class="prompt-head"><span>Repository 網址</span><button data-copy="repository-url">複製網址</button></div><pre id="repository-url">https://github.com/nicholas-yahung-chien/tcb-bob-workshop.git</pre><p class="copy-status" role="status"></p></div>
+<p>使用 Git 時，在預計存放教材的位置開啟終端機，執行下方指令，直接取得 <code>workshop/tcb-2026</code> 教材分支。完成後在 Bob 用 <strong>File → Open Folder</strong> 開啟下載的資料夾。</p>
+<div class="prompt"><div class="prompt-head"><span>下載教材分支</span><button data-copy="repository-url">複製指令</button></div><pre id="repository-url">git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.com/nicholas-yahung-chien/tcb-bob-workshop.git</pre><p class="copy-status" role="status"></p></div>
 <p>不使用 Git 時，可以直接<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest/download/tcb-workshop.zip">下載教材 ZIP</a>，解壓後用 File → Open Folder 開啟。ZIP 已包含完整教材、<code>host-lab</code>、<code>zowe.config.json</code> 與 <code>zowe.schema.json</code>，不需另取連線設定；ZIP 使用者不必切換分支。</p>
 <h2 id="chat">從 Bob 對話開始</h2>
 <p>主機練習會使用個人 z/OSMF 帳號與 Zowe Explorer。完成下方工作區準備後，再設定自己的主機連線。</p>
