@@ -42,11 +42,12 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 | z-lab | 已備妥的 45 份程式與相依檔案 |
 | host-lab | 個人主機連線、CKP02 JCL 範本、測資與 Bob 操作指引 |
 | samples | 轉換程式、測試、JCL、事件及查詢練習 |
-| reference | 可以比較的參考解答 |
 | tests | 選做 Python 練習的測試案例 |
 | scripts/verify.py | 選做練習使用的驗收工具 |
 | output | 自己完成的文件與程式 |
 
 Python 與 SQLite 可以在本機執行。COBOL、IMS 和 JCL 則需要對應環境，測試結果分開記錄。
+
+參考解答不包含在教材中。完成練習後，可從課程網頁「成果與解答」下載獨立 ZIP，再依頁面指引比較自己的成果。
 
 原始碼權利歸原權利人，本 repo 不另行授予原始程式授權。
