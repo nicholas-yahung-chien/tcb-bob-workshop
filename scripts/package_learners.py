@@ -1,8 +1,8 @@
 """Export only learner-required tracked files; never package the working directory."""
 from pathlib import Path
-import argparse, subprocess, zipfile, json
+import argparse, subprocess, zipfile, json, hashlib
 ROOT=Path(__file__).resolve().parents[1]
-DIRS=('bank-source/','samples/','specs/','reference/','tests/')
+DIRS=('samples/','specs/','reference/','tests/')
 FILES={'AGENTS.md','README.md','SOURCE-MAP.md','DOC-SPEC.md','zowe.config.json','zowe.schema.json','.gitignore','.gitattributes','scripts/verify.py',
 'host-lab/BOB-GUIDE.md','host-lab/CONNECTION.md','host-lab/README.md','host-lab/fixtures.json',
 'host-lab/templates/CKP02.cbl','host-lab/templates/GENCKP.cbl','host-lab/templates/CHKCKP.cbl','host-lab/templates/run.jcl','host-lab/templates/manifest.json'}
@@ -15,6 +15,19 @@ def export(dest,archive):
  assert [n for n in names if n.startswith('scripts/')]==['scripts/verify.py']
  for n in names:
   p=dest/n; p.parent.mkdir(parents=True,exist_ok=True); p.write_bytes((ROOT/n).read_bytes())
+ manifest=[]
+ original=json.loads((ROOT/'bank-source/manifest.json').read_text(encoding='utf-8'))
+ for item in original:
+  rel=Path(item['file'])
+  suffix='.cbl' if rel.stem in ('CKP02','CIS14') else '.asm' if rel.stem in ('STANCVT','SYSOCP31') else '.cpy'
+  name=(Path('output/z-lab')/rel.with_suffix(suffix)).as_posix()
+  data=(ROOT/'bank-source/reading'/rel).read_bytes()
+  assert hashlib.sha256(data).hexdigest()==item['reading_sha256']
+  target=dest/name; target.parent.mkdir(parents=True,exist_ok=True); target.write_bytes(data)
+  names.append(name); manifest.append({'file':name,'sha256':item['reading_sha256']})
+ assert len(manifest)==45
+ name='source-manifest.json'
+ (dest/name).write_bytes((json.dumps(manifest,indent=2)+'\n').encode('utf-8')); names.append(name)
  config=json.loads((dest/'zowe.config.json').read_text(encoding='utf-8'))
  assert config['profiles']['tcb-base']['properties']['user']=='YOUR_USER_ID'
  assert 'password' not in config['profiles']['tcb-base']['properties']
