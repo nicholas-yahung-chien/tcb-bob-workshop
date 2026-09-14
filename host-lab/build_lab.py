@@ -140,7 +140,7 @@ def build(out,jobname,volume=None,storage_class=None,source_dataset='YOURUSER.TC
             raise ValueError('Invalid volume or storage class')
     if volume and len(volume)>6: raise ValueError('Volume serial exceeds six characters')
     if not re.fullmatch(r'TCB[A-Z0-9]{1,5}',jobname): raise ValueError('Use TCB-prefixed job name, max 8 characters')
-    cases=json.loads((ROOT/'host-lab/fixtures.json').read_text(encoding='utf-8'))
+    cases=json.loads((ROOT/'z-tests/fixtures.json').read_text(encoding='utf-8'))
     for c in cases:
         assert all(len(c[k])==10 and c[k].isascii() for k in ['id','once','twice'])
     sources={'GENCKP':generator(cases),'CHKCKP':checker(len(cases))}

@@ -4,8 +4,8 @@ import argparse, subprocess, zipfile, json, hashlib
 ROOT=Path(__file__).resolve().parents[1]
 DIRS=('samples/','specs/','tests/')
 FILES={'AGENTS.md','README.md','SOURCE-MAP.md','DOC-SPEC.md','zowe.config.json','zowe.schema.json','.gitignore','.gitattributes','scripts/verify.py',
-'host-lab/BOB-GUIDE.md','host-lab/CONNECTION.md','host-lab/README.md','host-lab/fixtures.json',
-'host-lab/templates/GENCKP.cbl','host-lab/templates/CHKCKP.cbl','host-lab/templates/run.jcl','host-lab/templates/manifest.json'}
+'host-lab/BOB-GUIDE.md','host-lab/CONNECTION.md','host-lab/README.md','z-tests/fixtures.json',
+'z-tests/GENCKP.cbl','z-tests/CHKCKP.cbl','z-tests/run.jcl','z-tests/manifest.json'}
 def selected():
  names=subprocess.check_output(['git','ls-files'],cwd=ROOT,text=True).splitlines()
  return [n for n in names if n in FILES or n.startswith(DIRS)]

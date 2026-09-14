@@ -1,7 +1,7 @@
 <h2 id="story">除了正常資料，還要試哪些情況？</h2>
 <p>程式看起來合理，還需要用資料試試看。先用自己的主機帳號執行 CKP02，比較預期與實際結果；完成後，再選做補測試與本機需求練習。</p>
 <h2 id="host">在主機跑一次 CKP02</h2>
-<p>先完成<a href="00-setup.html#host-connection">個人主機連線</a>。開啟 CKP02 與七筆測資，先和 Bob 討論結果。</p>
+<p>先完成<a href="00-setup.html#host-connection">個人主機連線</a>。開啟 CKP02 與 <code>z-tests/fixtures.json</code> 的七筆測資，先和 Bob 討論結果。</p>
 {{host-predict|先預測結果|Ask}}
 <h3 id="upload-source">把剛才讀的程式存入主機</h3>
 <p>接下來執行的，就是同一份 <code>z-lab/CKP02.cbl</code>。本機檔案保留 UTF-8 與 LF，透過 <code>tcb-zosmf</code> 以 IBM-937 存入自己的來源資料集，中文註解也一起保留。</p>
@@ -9,7 +9,7 @@
 <p>找不到 SRC937 時，先核對帳號與搜尋條件，再請講師協助。此步只更新自己的來源資料集；稍後 JCL 從這裡編譯 CKP02，不會使用另一份 CKP02 範本。</p>
 {{check:我已把 z-lab 的 CKP02 存入自己的 SRC937 並重新開啟核對}}
 <h3>準備並提交作業</h3>
-<p>接著加入自己的 environment.md，請 Bob 依 BOB-GUIDE.md 從教材範本建立個人 JCL，不需 Python。作業會在主機編譯程式、執行兩次轉換與一次空檔測試，使用各作業獨立的暫存資料集。</p>
+<p>接著加入自己的 environment.md，請 Bob 依 BOB-GUIDE.md 從 <code>z-tests/run.jcl</code> 建立個人 JCL，不需 Python。作業會在主機編譯程式、執行兩次轉換與一次空檔測試，使用各作業獨立的暫存資料集。</p>
 {{host-build|準備自己的主機作業|Agent}}
 <ol><li>開啟 <code>host-lab/run.jcl</code>，核對 job 名稱、DEVVS1、SCNOSMS，以及 CCKP 的 SYSIN 是自己的 <code>&lt;帳號&gt;.TCBLAB.SRC937</code>，編譯選項包含 <code>CODEPAGE(937),DBCS</code>。</li><li>在編輯器按右鍵選 <strong>Submit as JCL</strong>，選 <code>tcb-jobs</code>（IBM-1047）連線。</li><li>記下回傳的 job ID，在 JOBS 的 <code>tcb-jobs</code> 核對 owner，等待 OUTPUT。</li><li>下載 JESMSGLG、JESYSMSG、CCKP 的 SYSPRINT，以及 CHECK1、CHECK2 的 SYSOUT，放在 <code>host-lab/logs/&lt;job ID&gt;/</code>，同名 DD 依 step 分開儲存。</li></ol>
 <p>將紀錄帶到<a href="04-logs.html#host">下一單元</a>，確認 RC 4 的來源、兩組七筆完整 400-byte 比對，以及 RUNEMPTY 的結果。請依本頁步驟操作，再到下一單元核對紀錄。</p>

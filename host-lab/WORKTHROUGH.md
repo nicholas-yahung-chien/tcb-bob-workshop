@@ -8,11 +8,11 @@
 
 連線步驟見 [CONNECTION.md](CONNECTION.md)。把自己的帳號、job 名稱、volume 與 storage class 寫入 host-lab/environment.md，後面的提問可以直接引用這份資料。
 
-你會用到 `z-lab/CKP02.cbl`、`host-lab/fixtures.json` 和 `host-lab/README.md`。主機連線與配置值以本場提供的設定為準。
+你會用到 `z-lab/CKP02.cbl`、`z-tests/fixtures.json` 和 `host-lab/README.md`。主機連線與配置值以本場提供的設定為準。
 
 ## 1. 先猜結果，再執行
 
-把 CKP02 和 fixtures.json 加入 Bob 對話，切到 Ask，輸入：
+把 CKP02 和 z-tests/fixtures.json 加入 Bob 對話，切到 Ask，輸入：
 
 ```text
 我準備用這七筆資料測試 CKP02。請依程式說明每筆資料第一次、第二次執行後會變成什麼，並指出判斷依據。特別看看資料中的 EOF 和讀到檔尾有什麼不同，以及同一筆資料重跑會不會再變一次。
@@ -24,7 +24,7 @@
 
 依課程網頁「把剛才讀的程式存入主機」，以 tcb-zosmf（IBM-937）將 z-lab/CKP02.cbl 存入自己的 <帳號>.TCBLAB.SRC937，重新開啟核對中文註解與完整內容。保留本機 UTF-8、LF，不產生另一份 CKP02。
 
-切到 Agent，把 BOB-GUIDE.md 和 templates/run.jcl 加入對話，將中括號換成自己的設定：
+切到 Agent，把 BOB-GUIDE.md 和 z-tests/run.jcl 加入對話，將中括號換成自己的設定：
 
 ```text
 請依 host-lab/BOB-GUIDE.md，從教材範本在 host-lab 建立 CKP02 的主機練習。我的 job 名稱是 [個人 job 名稱]，volume 是 [分配的 volume]，storage class 選項是 [分配的選項]。先不要提交；完成後請帶我看 run.jcl 的編譯、執行與比對步驟，確認每次都重新建立測資。

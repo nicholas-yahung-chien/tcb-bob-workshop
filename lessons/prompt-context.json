@@ -203,7 +203,7 @@
   "host-predict": {
     "files": [
       "z-lab/CKP02.cbl",
-      "host-lab/fixtures.json"
+      "z-tests/fixtures.json"
     ],
     "response": "七筆資料兩次執行的預期結果，以及程式依據。"
   },
