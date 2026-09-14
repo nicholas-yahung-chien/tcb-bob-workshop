@@ -235,5 +235,26 @@
       "host-lab/CONNECTION.md"
     ],
     "response": "output/host-lab/environment.md"
+  },
+  "z-onboard": {
+    "files": [
+      "SOURCE-MAP.md",
+      "output/z-lab/"
+    ],
+    "response": "CKP02, CIS14, Copybook"
+  },
+  "z-roles": {
+    "files": [
+      "output/z-lab/CKP02.cbl",
+      "output/z-lab/CIS14/CIS14.cbl",
+      "samples/cobol/IDSHIFT.cbl"
+    ],
+    "response": "COPY / CALL / I-O"
+  },
+  "z-rules": {
+    "files": [
+      "output/z-lab/CKP02.cbl"
+    ],
+    "response": "400 bytes / EOF / REWRITE"
   }
 }
