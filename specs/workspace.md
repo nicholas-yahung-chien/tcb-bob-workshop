@@ -11,3 +11,5 @@
 確認 pp4z 入口時，在 IBM BOB 面板選 Z Code → Start Workflow。工作區選單請選本機教材資料夾（Run Workflow in 加上資料夾名稱），核對顯示的本機路徑。進入 Bob workflows 後，確認 Explain code 與 Generate program documentation 可見；此時不必啟動。程式文件單元再點對應功能的 Start。
 
 主機測試材料集中在 z-tests/：GENCKP.cbl、CHKCKP.cbl、fixtures.json、run.jcl 與 manifest.json。確認五份檔案齊全；個人配置、產生的 JCL、報告與紀錄仍放在 host-lab/。
+
+確認 `.bob/skills/cobol-explain-zh-tw/SKILL.md` 與 `.bob/skills/program-docs-zh-tw/SKILL.md` 齊全；保留 `.bob/rules/language.md`。請學員在 Bob Settings → Skills 核對兩個技能皆為 Workspace 且 Active 已開啟。Explain code 使用前者；Generate program documentation 完成後，依課程網頁在一般對話呼叫後者整理台灣繁體中文。檔案存在不等於已確認技能啟用，不要在準備階段自動執行工作流程。

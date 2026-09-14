@@ -254,5 +254,9 @@
       "requests/change-application.docx"
     ],
     "response": "業務期待、待確認問題，以及需要向申請人補問的資訊。"
+  },
+  "workflow-docs-zh-tw": {
+    "files": [],
+    "response": "output/zh-TW/ 中的繁體中文副本、原始文件保留情形，以及需要確認的內容。"
   }
 }

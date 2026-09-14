@@ -3,6 +3,11 @@
 <h2 id="pp4z">找不到 Z Code 或文件化功能</h2>
 <p>確認已登入 Bob，且帳號已啟用 Premium Package for Z。重新開啟面板，再看模式選單和上方的 Start Workflow。點選後若先出現工作區選單，選擇顯示本機教材路徑的項目，再到 Bob workflows 找 Explain code 或 Generate program documentation。部分版本將 Z Architecture 顯示為 Z Architect。</p>
 <p>Z Understand 是跨應用程式分析使用的額外連線。只有本機程式時，可以先閱讀本機檔案，將其他系統的關係留待確認。</p>
+<h2 id="workflow-language">工作流程產生的文件仍是英文</h2>
+<p>先在 <strong>Bob Settings → Skills</strong> 確認教材的 <code>cobol-explain-zh-tw</code> 與 <code>program-docs-zh-tw</code> 已啟用，來源為目前的 <strong>Workspace</strong>。若找不到，確認開啟的是包含 <code>.bob/skills/</code> 的教材根目錄，執行 <strong>Developer: Reload Window</strong> 後再查看。</p>
+<p><strong>Explain code：</strong>執行時應看到「已使用技能 cobol-explain-zh-tw」。若仍產生英文，不必反覆重跑；保留輸出文件，依<a href="02-documentation.html#document">整理成接手文件</a>的操作，在一般對話中加入該文件並呼叫 <code>/program-docs-zh-tw</code>，產生繁體中文副本。</p>
+<p><strong>Generate program documentation：</strong>與 Explain code 的語言處理方式不同，不需要等待同樣的技能使用訊息。完成後依課程呼叫 <code>/program-docs-zh-tw</code>，統一台灣繁體中文用語。若 <code>/</code> 清單沒有此項目，先確認技能已啟用；也可以直接加入 <code>.bob/skills/program-docs-zh-tw/SKILL.md</code> 與要整理的文件，請 Agent 依技能內容執行。</p>
+<p>主要說明應使用繁體中文；程式名稱、指令及程式碼保留原文。翻譯完成後仍需對照原始碼，確認條件、數值、單位與推論是否正確。</p>
 <h2 id="plan">已經有計畫，卻沒有產生檔案</h2>
 <p>Plan 主要用來討論計畫。確認後，在同一個對話切換 Agent，再請 Bob 依計畫執行。如果換了新對話，把需求、規格和已有計畫一起加入，就能接著做。</p>
 <h2 id="permissions">出現 Permissions 提示</h2>

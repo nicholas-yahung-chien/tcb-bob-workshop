@@ -2,14 +2,17 @@
 <p>知道程式「大概在做什麼」之後，還需要留下欄位、流程和注意事項。這個練習會用 pp4z 解讀 CKP02，再把說明整理成方便查閱的文件。</p>
 <h2 id="explain">1. 用 Explain code 閱讀程式</h2>
 <ol><li>開啟 <code>z-lab/CKP02.cbl</code>，選擇 <strong>Z Code</strong>。</li><li>點 <strong>Start Workflow</strong>，在工作區選單選擇本機教材資料夾的 <strong>Run Workflow in〈你開啟的教材資料夾名稱〉</strong>，並核對下方顯示的本機路徑。</li><li>在 <strong>Bob workflows</strong> 找到 <strong>Explain code</strong>，點右側的 <strong>Start</strong>。</li><li>依流程選取這個檔案及 Developer 視角，閱讀程式說明。</li></ol>
+<p>執行到 <strong>Generate explanation</strong> 時，確認出現「已使用技能 <code>cobol-explain-zh-tw</code>」。完成後開啟結果連結，確認主要說明、章節與表格使用繁體中文，程式識別字保留原文。若未看到技能或文件仍為英文，請依<a href="07-help.html#workflow-language">中文文件的排解步驟</a>處理。</p>
 <p>回覆談到轉換條件後，可以追問實際執行時會遇到的情況，例如同一份資料再跑一次。</p>
 {{z-explain|追問執行時的行為|Z Code}}
 <h2 id="copybook">2. 加入 Copybook 和 JCL</h2>
 <p>接著看看另一個小範例 IDSHIFT。它把資料定義放在 Copybook，另外附有測試程式和 JCL。把相關檔案一起交給 Bob，就能比較兩種寫法。</p>
 {{z-context|把相關檔案一起看|Z Code}}
 <h2 id="document">3. 整理成接手文件</h2>
-<p>保持 <strong>Z Code</strong>，點 <strong>Start Workflow</strong>，先選擇本機教材工作區，再於 <strong>Bob workflows</strong> 找到 <strong>Generate program documentation</strong>，點右側的 <strong>Start</strong>。依流程選取 CKP02.cbl；若需要指定儲存位置，放在 <code>output/</code>。</p>
-<p>把產生的說明檔加入同一個對話，切換到 <strong>Plan</strong>，想想還有哪些內容需要補齊。</p>
+<p>保持 <strong>Z Code</strong>，點 <strong>Start Workflow</strong>，先選擇本機教材工作區，再於 <strong>Bob workflows</strong> 找到 <strong>Generate program documentation</strong>，點右側的 <strong>Start</strong>。依流程選取 CKP02.cbl，完成後從結果連結開啟產生的文件。</p>
+<p>接著統一文件用語：開啟一般 Bob 對話，切換到 <strong>Agent</strong>，加入剛才產生的 Markdown 文件。從輸入框的 <code>/</code> 清單選取 <code>/program-docs-zh-tw</code>，再接上下方要求送出。這個技能在工作流程完成後使用；已是繁體中文的內容會核對用語，英文內容則翻譯並保留技術細節。</p>
+{{workflow-docs-zh-tw|整理為台灣繁體中文|Agent}}
+<p>開啟 Bob 回報的 <code>output/zh-TW/</code> 中文副本，確認章節、表格與關鍵數值完整，原始文件仍保留。把中文副本加入對話，切換到 <strong>Plan</strong>，想想還有哪些內容需要補齊。</p>
 <p>這裡也加入需求申請單與前面釐清的內容：程式說明回答「現在怎麼運作」，影響分析則回答「為了新需求，接下來要改什麼」。兩份資料一起看，才能區分既有功能與新增工作。</p>
 {{document-plan|規劃文件內容|Plan}}
 <p>確認內容後切換到 <strong>Agent</strong>。文件的章節、檔名與檢查方式都寫在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a>，沿用同一份規格即可。</p>

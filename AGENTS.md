@@ -1,6 +1,7 @@
 # Workshop workspace rules
 
 Use Traditional Chinese for learning artifacts. Read `SOURCE-MAP.md` and the requested prompt before acting.
+The supplied cobol-explain-zh-tw skill supports Explain code. The program-docs-zh-tw skill runs in a normal conversation after Generate program documentation; do not claim it is automatically injected into that workflow. Preserve workflow-generated documents under docs/ and write localized copies to output/zh-TW/. Follow the course website for when to invoke each skill.
 Use 支 for programs, 項 for jobs, 行 for source lines, and 筆 for data records or transactions. Explicitly distinguish program change scope from data conversion counts.
 Do not read `reference/` unless the user explicitly selects the reference examples.
 `z-lab/` contains the supplied bank source set and must remain unchanged; verify it using source-manifest.json. `samples/` is synthetic teaching material, not a production banking system. `customer-source/` is optional local-only material.
