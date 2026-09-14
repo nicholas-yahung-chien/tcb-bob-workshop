@@ -4,7 +4,7 @@
 
 開始前，先確認自己的主機連線可用，並備妥本場提供的作業名稱與配置值。操作步驟與對話範例請看 [課程網頁](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/03-testing.html#host)。
 
-連線與帳號使用方式請看 [CONNECTION.md](CONNECTION.md)。將不含密碼的個人配置放在 output/host-lab/environment.md；Bob 應保留這份檔案。
+連線與帳號使用方式請看 [CONNECTION.md](CONNECTION.md)。將不含密碼的個人配置放在 host-lab/environment.md；Bob 應保留這份檔案。
 
 在 Bob 對話中，可以先請它閱讀 `fixtures.json` 和 CKP02，說明每筆資料應如何變化，再檢視產生的 JCL。`GENCKP` 建立測資，`CHKCKP` 比較整筆 400 bytes；這兩支是練習的輔助程式。CKP02 本身沒有新增 log 或 IMS 呼叫。
 

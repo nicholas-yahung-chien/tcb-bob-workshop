@@ -16,14 +16,14 @@ def export(dest,archive):
  for n in names:
   data=(ROOT/n).read_bytes()
   if n.startswith('reference/'):
-   data=data.replace(b'bank-source/reading/CKP02.TXT',b'output/z-lab/CKP02.cbl')
+   data=data.replace(b'bank-source/reading/CKP02.TXT',b'z-lab/CKP02.cbl')
   p=dest/n; p.parent.mkdir(parents=True,exist_ok=True); p.write_bytes(data)
  manifest=[]
  original=json.loads((ROOT/'bank-source/manifest.json').read_text(encoding='utf-8'))
  for item in original:
   rel=Path(item['file'])
   suffix='.cbl' if rel.stem in ('CKP02','CIS14') else '.asm' if rel.stem in ('STANCVT','SYSOCP31') else '.cpy'
-  name=(Path('output/z-lab')/rel.with_suffix(suffix)).as_posix()
+  name=(Path('z-lab')/rel.with_suffix(suffix)).as_posix()
   data=(ROOT/'bank-source/reading'/rel).read_bytes()
   assert hashlib.sha256(data).hexdigest()==item['reading_sha256']
   target=dest/name; target.parent.mkdir(parents=True,exist_ok=True); target.write_bytes(data)

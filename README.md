@@ -39,7 +39,7 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 
 | 資料夾 | 內容 |
 |---|---|
-| output/z-lab | 已備妥的 45 份程式與相依檔案 |
+| z-lab | 已備妥的 45 份程式與相依檔案 |
 | host-lab | 個人主機連線、CKP02 JCL 範本、測資與 Bob 操作指引 |
 | samples | 轉換程式、測試、JCL、事件及查詢練習 |
 | reference | 可以比較的參考解答 |

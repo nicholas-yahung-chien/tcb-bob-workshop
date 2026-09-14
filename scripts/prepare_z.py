@@ -8,7 +8,7 @@ import sys
 root=Path(__file__).resolve().parents[1]
 if subprocess.call([sys.executable,str(root/'scripts/verify.py'),'sources'],cwd=root):
     raise SystemExit('Source integrity check failed')
-dest=root/'output/z-lab'
+dest=root/'z-lab'
 mapping=[]
 sources=sorted((root/'bank-source/reading').rglob('*.TXT'))
 for source in sources:
@@ -24,4 +24,4 @@ for source,target,data in mapping:
     if not target.exists(): target.write_bytes(data)
 manifest=[{'source':s.relative_to(root).as_posix(),'copy':t.relative_to(root).as_posix(),'sha256':hashlib.sha256(d).hexdigest()} for s,t,d in mapping]
 (dest/'source-map.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
-print('PASS: 45 local pp4z copies ready in output/z-lab; source bytes and line numbers preserved.')
+print('PASS: 45 local pp4z copies ready in z-lab; source bytes and line numbers preserved.')

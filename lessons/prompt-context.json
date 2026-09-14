@@ -1,13 +1,13 @@
 {
   "01-ask": {
     "files": [
-      "output/z-lab/CKP02.cbl"
+      "z-lab/CKP02.cbl"
     ],
     "response": "程式的用途、讀寫流程，以及可以一起閱讀的段落。"
   },
   "01-layout": {
     "files": [
-      "output/z-lab/CKP02.cbl"
+      "z-lab/CKP02.cbl"
     ],
     "response": "一筆資料的欄位表，搭配修改前後的例子。"
   },
@@ -28,7 +28,7 @@
   "document-plan": {
     "files": [
       "DOC-SPEC.md",
-      "output/z-lab/CKP02.cbl",
+      "z-lab/CKP02.cbl",
       "samples/cobol/IDSHIFT.cbl",
       "samples/cobol/IDREC.cpy",
       "samples/cobol/TESTSHIFT.cbl",
@@ -40,7 +40,7 @@
   "04-document": {
     "files": [
       "DOC-SPEC.md",
-      "output/z-lab/CKP02.cbl",
+      "z-lab/CKP02.cbl",
       "specs/change-request.md"
     ],
     "response": "program.md、impact-analysis.md、facts.json，以及文件檢查結果。"
@@ -54,8 +54,8 @@
   },
   "06-customer-analysis": {
     "files": [
-      "output/z-lab/CIS14/CIS14.cbl",
-      "output/z-lab/CIS14/"
+      "z-lab/CIS14/CIS14.cbl",
+      "z-lab/CIS14/"
     ],
     "response": "主要資料流、Copybook 與 IMS 呼叫，以及需要補充的程式。"
   },
@@ -106,7 +106,7 @@
       "output/program.md",
       "output/impact-analysis.md",
       "output/facts.json",
-      "output/z-lab/CKP02.cbl",
+      "z-lab/CKP02.cbl",
       "samples/cobol/IDSHIFT.cbl",
       "samples/cobol/IDREC.cpy",
       "samples/cobol/TESTSHIFT.cbl",
@@ -120,7 +120,7 @@
       "DOC-SPEC.md",
       "output/architecture.md",
       "output/checklist.md",
-      "output/z-lab/CKP02.cbl",
+      "z-lab/CKP02.cbl",
       "samples/cobol/IDSHIFT.cbl",
       "samples/cobol/IDREC.cpy",
       "samples/cobol/TESTSHIFT.cbl",
@@ -150,7 +150,7 @@
   },
   "z-context": {
     "files": [
-      "output/z-lab/CKP02.cbl",
+      "z-lab/CKP02.cbl",
       "samples/cobol/IDSHIFT.cbl",
       "samples/cobol/IDREC.cpy",
       "samples/cobol/TESTSHIFT.cbl",
@@ -160,21 +160,21 @@
   },
   "z-explain": {
     "files": [
-      "output/z-lab/CKP02.cbl",
+      "z-lab/CKP02.cbl",
       "specs/change-request.md"
     ],
     "response": "不符合條件和重跑時的處理過程，附上對應程式位置。"
   },
   "z-impact": {
     "files": [
-      "output/z-lab/CKP02.cbl",
+      "z-lab/CKP02.cbl",
       "specs/change-request.md"
     ],
     "response": "已確認的影響，以及需要補資料才能確認的關係。"
   },
   "z-modernization": {
     "files": [
-      "output/z-lab/CKP02.cbl",
+      "z-lab/CKP02.cbl",
       "specs/change-request.md"
     ],
     "response": "不同做法的適用情況，以及開始之前需要確認的事項。"
@@ -197,12 +197,12 @@
     "files": [
       "output/",
       "reference/",
-      "output/z-lab/CKP02.cbl"
+      "z-lab/CKP02.cbl"
     ]
   },
   "host-predict": {
     "files": [
-      "output/z-lab/CKP02.cbl",
+      "z-lab/CKP02.cbl",
       "host-lab/fixtures.json"
     ],
     "response": "七筆資料兩次執行的預期結果，以及程式依據。"
@@ -210,15 +210,15 @@
   "host-build": {
     "files": [
       "host-lab/README.md",
-      "output/host-lab/environment.md",
+      "host-lab/environment.md",
       "host-lab/BOB-GUIDE.md"
     ],
     "response": "尚未提交的 run.jcl，以及各步驟與個人配置的說明。"
   },
   "host-logs": {
     "files": [
-      "output/host-lab/run.jcl",
-      "output/host-lab/logs/",
+      "host-lab/run.jcl",
+      "host-lab/logs/",
       "host-lab/README.md",
       "host-lab/BOB-GUIDE.md"
     ],
@@ -226,7 +226,7 @@
   },
   "enhance-start": {
     "files": [
-      "output/z-lab/CKP02.cbl"
+      "z-lab/CKP02.cbl"
     ],
     "response": "先比較輸入框中改寫前後的提問，確認補充內容符合你的目的。"
   },
@@ -234,17 +234,17 @@
     "files": [
       "host-lab/CONNECTION.md"
     ],
-    "response": "output/host-lab/environment.md"
+    "response": "host-lab/environment.md"
   },
   "z-roles": {
     "files": [
-      "output/z-lab"
+      "z-lab"
     ],
     "response": "各程式的角色、有來源依據的相依關係與待確認事項。"
   },
   "z-rules": {
     "files": [
-      "output/z-lab/CKP02.cbl"
+      "z-lab/CKP02.cbl"
     ],
     "response": "白話轉換規則、對應段落，以及需要向業務確認的問題。"
   }

@@ -2,7 +2,7 @@
 <p>打開 output，從已完成的練習開始看。比較時，重點是程式行為、文件中的理由，以及實際測試結果。</p>
 <table><tr><th>練習</th><th>成果檔案</th><th>可以回頭想想</th></tr><tr><td>需求規劃</td><td>architecture.md、checklist.md</td><td>哪些地方要改？還需要哪些資料？</td></tr><tr><td>程式文件</td><td>program.md、impact-analysis.md、facts.json</td><td>欄位和例子是否與程式一致？</td></tr><tr><td>COBOL 測試</td><td>cobol-test-plan.md、TESTSHIFT-EXT.cbl</td><td>測了哪些情況？哪些還沒執行？</td></tr><tr><td>Python 測試</td><td>normalizer.py、test_authored.py、test-report.md</td><td>正常、邊界和重跑結果如何？</td></tr><tr><td>事件分析</td><td>log-analysis.md、log-facts.json</td><td>哪些結果已知，哪些要繼續查？</td></tr><tr><td>查詢修正</td><td>customer_lookup.py、sast-remediation.md</td><td>修正問題後，正常查詢是否保留？</td></tr></table>
 <h2 id="reference">和參考解答比較</h2>
-<p>完成主機練習後，也檢查 <code>output/host-lab/run.jcl</code> 與 <code>output/host-lab/logs/</code>。留下自己的 job ID、owner、執行時間及各步驟結果，區分程式預測與主機實測。</p>
+<p>完成主機練習後，也檢查 <code>host-lab/run.jcl</code> 與 <code>host-lab/logs/</code>。留下自己的 job ID、owner、執行時間及各步驟結果，區分程式預測與主機實測。</p>
 <p>在 VSCode 對自己的檔案按右鍵，選 <strong>Select for Compare</strong>；再對 reference 裡的對應檔案選 <strong>Compare with Selected</strong>。不明白的差異，可以選取那一段問 Bob。</p>
 <p>也可以把兩份文件一起交給 Bob。比較時仍以原始碼為依據，看看不同寫法是否改變了程式的意思。</p>
 {{compare-docs|比較文件與解答|Agent}}
