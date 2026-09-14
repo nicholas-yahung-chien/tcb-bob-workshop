@@ -5,3 +5,5 @@
 請依 host-lab/BOB-GUIDE.md 的「一、檢查教材與準備副本」完成工作區準備，不執行 Python 腳本。保留銀行原始碼及已有的學員修改，將實際檢查結果存入 output/workspace-check.md。
 
 完成後開啟 output/z-lab/CKP02.cbl。連線依 host-lab/CONNECTION.md 使用教材預設設定檔。後續 JCL 與測試也依 BOB-GUIDE.md 進行。
+
+確認 pp4z 入口時，在 IBM BOB 面板選 Z Code → Start Workflow。工作區選單請選本機教材資料夾（Run Workflow in 加上資料夾名稱），核對顯示的本機路徑。進入 Bob workflows 後，確認 Explain code 與 Generate program documentation 可見；此時不必啟動。程式文件單元再點對應功能的 Start。
