@@ -1,6 +1,6 @@
 # 測試規格
 
-先閱讀 `requests/customer-email.eml` 了解業務期待，再由 z-lab/CKP02.cbl 核對現有轉換規則。來件不是完成訪談後的規格；未確認的問題要保留。這裡分成 COBOL 測試程式，以及可以在本機執行的 Python 範例。
+先閱讀 `requests/change-application.docx` 了解業務期待，再由 z-lab/CKP02.cbl 核對現有轉換規則。來件不是完成訪談後的規格；未確認的問題要保留。這裡分成 COBOL 測試程式，以及可以在本機執行的 Python 範例。
 
 ## COBOL 測試
 

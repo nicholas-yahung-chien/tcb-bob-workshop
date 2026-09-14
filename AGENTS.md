@@ -18,3 +18,5 @@ When blocked, name the missing prerequisite and use the documented fallback. Do 
 
 Learners use the IBM Bob chat panel in VSCode with Premium Package for Z (pp4z). Use the selected mode and attached file context. Ask for approval through the IDE permission dialog when required. For pp4z workflows, use the language-extension copies in z-lab/; keep supplied z-lab/ sources unchanged.
 Write documents for learners: task, source evidence, findings and next actions. Report only observed test commands, timestamps and results.
+
+For requirements exercises, use requests/change-application.docx as the primary business input. Do not invoke Puppeteer, browser automation, external conversion services, or install/create an MCP server to read request documents. If DOCX cannot be read with available local file capabilities, ask the learner to open it in Word and paste its text. Keep requests/customer-email.eml as an optional email example; do not parse it automatically.
