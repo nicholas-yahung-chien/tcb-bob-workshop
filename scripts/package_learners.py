@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse, subprocess, zipfile, json, hashlib
 ROOT=Path(__file__).resolve().parents[1]
 DIRS=('samples/','specs/','tests/','requests/')
-FILES={'AGENTS.md','README.md','SOURCE-MAP.md','DOC-SPEC.md','zowe.config.json','zowe.schema.json','.gitignore','.gitattributes',
+FILES={'.bob/rules/language.md','AGENTS.md','README.md','SOURCE-MAP.md','DOC-SPEC.md','zowe.config.json','zowe.schema.json','.gitignore','.gitattributes',
 'host-lab/BOB-GUIDE.md','host-lab/CONNECTION.md','host-lab/README.md','z-tests/fixtures.json',
 'z-tests/GENCKP.cbl','z-tests/CHKCKP.cbl','z-tests/run.jcl','z-tests/manifest.json'}
 def selected():
