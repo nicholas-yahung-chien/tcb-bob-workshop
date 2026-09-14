@@ -2,18 +2,18 @@
 
 本流程使用 Bob 的檔案操作與系統既有工具，不執行 Python、不安裝 Python，也不另寫 Python 取代舊腳本。程式執行與資料比對由 z/OS 完成，Bob 負責準備、審閱與分析證據。
 
-## 一、檢查教材與準備副本
+## 一、檢查已備妥的程式
 
-1. 閱讀 SOURCE-MAP.md 與 bank-source/manifest.json，逐筆確認 raw、reading 各 45 份來源存在，並確認 fixtures.json、templates/run.jcl、根目錄 Zowe 設定與 schema 齊全。缺檔時請學員重新取得完整教材，不補寫原始碼。
-2. 使用系統既有雜湊工具（Windows 可用 Get-FileHash）核對 raw 的 sha256 與 reading 的 reading_sha256。工具不可用時記錄「雜湊未驗證」，不能把閱讀內容當成完整性驗證。
-3. 將 reading 的 TXT 複製至 output/z-lab，保留相對目錄與原始位元組。CKP02、CIS14 改為 .cbl；STANCVT、SYSOCP31 改為 .asm；其他改為 .cpy。已有相同副本則沿用，有差異則保留學員修改並說明，不覆寫。
-4. 保存 output/workspace-check.md，列出來源與目標、實際檢查方法、結果和未確認事項。請學員開啟 output/z-lab/CKP02.cbl，確認 pp4z 功能。檔案檢查不代表已登入主機或啟用 pp4z。
+1. 閱讀 SOURCE-MAP.md 與 source-manifest.json，確認 output/z-lab 中的 45 份 .cbl、.cpy、.asm 檔案存在，並確認 fixtures.json、templates/run.jcl、根目錄 Zowe 設定與 schema 齊全。檔案已隨教材提供，不複製、不轉檔，也不新增另一套程式。
+2. 使用系統既有雜湊工具（Windows 可用 Get-FileHash）核對 manifest 各 file 的 SHA-256。工具不可用時記錄「雜湊未驗證」，不能把閱讀內容當成完整性驗證。
+3. 缺檔或雜湊不同時，列出路徑並請學員確認是否修改過；保留修改，不覆寫，也不自行補寫原始碼。需要還原時重新下載教材並解壓到另一個資料夾比較。
+4. 保存 output/workspace-check.md，列出實際檢查方法、結果與未確認事項。請學員開啟 output/z-lab/CKP02.cbl，確認 pp4z 功能。檔案檢查不代表已登入主機或啟用 pp4z。
 
 ## 二、建立個人 JCL
 
 1. 先確認 output/host-lab/environment.md 存在；若不存在，請學員依 CONNECTION.md 的「建立個人作業配置」完成文件並核對後，再繼續，不猜測配置。讀取並核對帳號、Zowe 連線、job 名稱、volume 與 storage class，不得含待填文字。job 名稱必須以 TCB 開頭、共 4–8 個大寫英文字母或數字；缺少時先詢問。範本使用 DEVVS1、SCNOSMS，若配置不同，先指出落差，不猜替代值。
 2. 複製 host-lab/templates 的三份 .cbl 和 run.jcl 至 output/host-lab，只將 JCL 第一行的 TCBP001 換成個人 job 名稱。已有檔案先比較，不覆寫學員成果。JCL 已內嵌來源，不需另外上傳程式。
-3. 核對 CKP02 副本與銀行來源：只翻譯中文註解，執行敘述不變；核對 JCL 內嵌來源與副本。不要重新生成銀行邏輯。
+3. 核對 host-lab/templates/CKP02.cbl 與 output/z-lab/CKP02.cbl：只翻譯中文註解，執行敘述不變；核對 JCL 內嵌來源與副本。不要重新生成銀行邏輯。
 4. 確認每行不超過 72 欄，//、/* 位置及 IF/ENDIF 配對正確。核對編譯器 IGY.V6R4M0.SIGYCOMP、LE 的 CEE.SCEELKED 與 CEE.SCEERUN。保留作業獨立的 && 暫存資料集、FB 與 LRECL=400，不新增共用永久資料集或 IMS 指令。
 5. 對照 fixtures.json 的七筆 id、marker_position、once、twice，確認 GENCKP 建立測資、兩組預期與空檔；CHKCKP 比對完整 400 bytes、筆數與讀取狀態。不修改預期值來讓測試通過。
 6. 將變更與檢查證據存入 output/host-lab/jcl-review.md。可使用系統文字工具量測行長；未量測的項目如實標記。帶學員看編譯、連結、測資與測試步驟，不宣稱已在主機通過。

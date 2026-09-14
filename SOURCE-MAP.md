@@ -4,7 +4,7 @@
 
 ## 原始程式與閱讀版
 
-`bank-source/raw/` 保存 45 份原始 TXT；`bank-source/reading/` 是 UTF-8 閱讀版。manifest.json 記錄檔案雜湊、編碼與行數，方便確認拿到的內容一致。
+教材已在 output/z-lab 提供 45 份程式與相依檔案，使用 .cbl、.cpy、.asm 副檔名。source-manifest.json 記錄每份檔案的 SHA-256，供完整性核對。
 
 SYSOCP31 有少量無法以 CP950 解碼的 bytes，閱讀版以反斜線 x 序列保留標示。若要在主機編譯，仍需使用正確編碼的原始來源及對應設定。
 

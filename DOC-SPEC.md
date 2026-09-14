@@ -8,7 +8,7 @@
 
 程式的現有行為附上來源檔名和行號；變更建議另列。資料沒有提供的地方，說明還需要什麼資訊。例如程式的欄位宣告能說明長度，實際編碼、資料集屬性與外部備份則需要環境資料才能確認。
 
-課程閱讀與文件化使用 `output/z-lab/CKP02.cbl`。它是準備工作區時從 `bank-source/reading/CKP02.TXT` 保留位元組複製的程式副本。先確認副本存在且未修改；缺少時依 `specs/workspace.md` 準備，不改用 TXT 啟動程式工作流程。對照範例包括 `samples/cobol/IDSHIFT.cbl`、`IDREC.cpy`、`TESTSHIFT.cbl` 及 `samples/jcl/IDSHIFT.jcl`。兩組程式分別說明，引用時使用完整路徑。
+課程閱讀與文件化使用教材已附的 output/z-lab/CKP02.cbl；以 source-manifest.json 確認內容完整。對照範例使用 samples/cobol 下的 IDSHIFT.cbl、IDREC.cpy、TESTSHIFT.cbl 與 samples/jcl/IDSHIFT.jcl，兩組程式分開說明。
 
 ## 先核對，再整理說明
 
@@ -68,7 +68,7 @@
 | repeat_input / repeat_once / repeat_twice | CR-01 重跑案例的三個十字元字串，保留空白 |
 | evidence | 至少三筆來源引文，分別使用不同的行號 |
 
-每筆 evidence 包含 `file`、`line`、`quote`。facts.json 的 file 使用原始來源識別 `bank-source/reading/CKP02.TXT`，供來源核對使用；這不表示要將 TXT 加入課程對話。確認 `output/z-lab/CKP02.cbl` 與來源位元組相同後，可將副本的行號與原文對應至此來源。line 從 1 起算；quote 取該行實際存在的一段文字，不加行號或改寫。若副本已修改，不沿用原始來源的行號或宣稱二者相同；先列出差異。一般 Markdown 說明引用實際閱讀的 .cbl 路徑。
+每筆 evidence 包含 file、line、quote。file 使用 output/z-lab/CKP02.cbl；line 從 1 起算，quote 取該行實際原文，不改寫。引用前核對程式與 source-manifest.json；若學員已修改程式，先說明差異，不宣稱仍是原始版本。
 
 ## 完成後怎麼檢查
 

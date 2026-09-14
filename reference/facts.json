@@ -12,8 +12,8 @@
   "repeat_once": "00123456  ",
   "repeat_twice": "123456    ",
   "evidence": [
-    {"file":"bank-source/reading/CKP02.TXT","line":25,"quote":"RECORD CONTAINS 400 CHARACTERS."},
-    {"file":"bank-source/reading/CKP02.TXT","line":83,"quote":"IN-REF-REC (14:3) NOT = \"EOF\""},
-    {"file":"bank-source/reading/CKP02.TXT","line":86,"quote":"REWRITE IN-REF-REC."}
+    {"file":"output/z-lab/CKP02.cbl","line":25,"quote":"RECORD CONTAINS 400 CHARACTERS."},
+    {"file":"output/z-lab/CKP02.cbl","line":83,"quote":"IN-REF-REC (14:3) NOT = \"EOF\""},
+    {"file":"output/z-lab/CKP02.cbl","line":86,"quote":"REWRITE IN-REF-REC."}
   ]
 }
