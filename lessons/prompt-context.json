@@ -235,5 +235,26 @@
       "host-lab/CONNECTION.md"
     ],
     "response": "output/host-lab/environment.md"
+  },
+  "z-onboard": {
+    "files": [
+      "SOURCE-MAP.md",
+      "output/z-lab/"
+    ],
+    "response": "教材目錄的用途、主要程式與適合的閱讀順序。"
+  },
+  "z-roles": {
+    "files": [
+      "output/z-lab/CKP02.cbl",
+      "output/z-lab/CIS14/CIS14.cbl",
+      "samples/cobol/IDSHIFT.cbl"
+    ],
+    "response": "各程式的角色、有來源依據的相依關係與待確認事項。"
+  },
+  "z-rules": {
+    "files": [
+      "output/z-lab/CKP02.cbl"
+    ],
+    "response": "白話轉換規則、對應段落，以及需要向業務確認的問題。"
   }
 }
