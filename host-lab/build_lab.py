@@ -71,7 +71,7 @@ def checker(count):
       '    IF ERRORS = ZERO MOVE ZERO TO RETURN-CODE',
       '    ELSE MOVE 8 TO RETURN-CODE END-IF.', '    STOP RUN.'])
 
-def compile_step(step,name,source):
+def compile_step(step,name,source,source_dataset):
     s=[f'//{step} EXEC PGM=IGYCRCTL,REGION=256M,',
       "// PARM='LIB,OBJECT,RENT,LIST,MAP,XREF'",
       '//STEPLIB DD DSN=IGY.V6R4M0.SIGYCOMP,DISP=SHR',
@@ -80,7 +80,12 @@ def compile_step(step,name,source):
       '// UNIT=SYSDA,SPACE=(TRK,(5,5)),DCB=(RECFM=FB,LRECL=80)',
       '//SYSMDECK DD UNIT=SYSDA,SPACE=(TRK,(1,1))']
     for n in range(1,16): s += [f'//SYSUT{n} DD UNIT=SYSDA,SPACE=(CYL,(1,1))']
-    s += ['//SYSIN DD *',source.rstrip(),'/*',f'// IF ({step}.RC LE 4) THEN',
+    if name == 'CKP02':
+        s[1] = "// PARM='LIB,OBJECT,RENT,LIST,MAP,XREF,CODEPAGE(937),DBCS'"
+        s += [f'//SYSIN DD DSN={source_dataset},DISP=SHR']
+    else:
+        s += ['//SYSIN DD *',source.rstrip(),'/*']
+    s += [f'// IF ({step}.RC LE 4) THEN',
       f'//L{name} EXEC PGM=IEWL,PARM=\'LIST,MAP,XREF\'',
       '//SYSLIB DD DSN=CEE.SCEELKED,DISP=SHR',
       f'//SYSLIN DD DSN=&&{name},DISP=(OLD,DELETE)',
@@ -94,7 +99,7 @@ def run_step(step,program):
       '// DD DSN=CEE.SCEERUN,DISP=SHR','//SYSOUT DD SYSOUT=*',
       '//CEEDUMP DD DUMMY','//SYSUDUMP DD DUMMY']
 
-def make_jcl(jobname,sources):
+def make_jcl(jobname,sources,source_dataset):
     s=[f"//{jobname} JOB (ACCT),'TCB CKP02 LAB',CLASS=A,MSGCLASS=H,",
        '// MSGLEVEL=(1,1),NOTIFY=&SYSUID',
        '//* Each job owns its temporary data; no production datasets.',
@@ -103,7 +108,7 @@ def make_jcl(jobname,sources):
        '// SPACE=(CYL,(2,1,10)),DSNTYPE=LIBRARY,DCB=(RECFM=U)',
        '// IF (ALLOC.RC EQ 0) THEN']
     for step,name in [('CGEN','GENCKP'),('CCKP','CKP02'),('CCHK','CHKCKP')]:
-        s+=compile_step(step,name,sources[name])
+        s+=compile_step(step,name,sources.get(name),source_dataset)
     s+=['// IF ((CGEN.RC LE 4) & (LGENCKP.RC EQ 0) &',
         '// (CCKP.RC LE 4) & (LCKP02.RC EQ 0) &',
         '// (CCHK.RC LE 4) & (LCHKCKP.RC EQ 0)) THEN']+run_step('GENERATE','GENCKP')
@@ -125,7 +130,9 @@ def make_jcl(jobname,sources):
     assert all(len(x)<=80 for x in result.split('\n')), 'JCL exceeds 80 columns'
     return result
 
-def build(out,jobname,volume=None,storage_class=None):
+def build(out,jobname,volume=None,storage_class=None,source_dataset='YOURUSER.TCBLAB.SRC937'):
+    if not re.fullmatch(r'[A-Z][A-Z0-9]{0,7}\.TCBLAB\.SRC937',source_dataset):
+        raise ValueError('Use the personal source dataset <USER>.TCBLAB.SRC937')
     if bool(volume) != bool(storage_class):
         raise ValueError('Specify both verified volume and ACS storage-class selector')
     for value in (volume,storage_class):
@@ -136,25 +143,21 @@ def build(out,jobname,volume=None,storage_class=None):
     cases=json.loads((ROOT/'host-lab/fixtures.json').read_text(encoding='utf-8'))
     for c in cases:
         assert all(len(c[k])==10 and c[k].isascii() for k in ['id','once','twice'])
-    original=(ROOT/'bank-source/reading/CKP02.TXT').read_bytes()
-    rows=original.decode('utf-8').split('\n')
-    for i,row in enumerate(rows):
-        if not row.isascii():
-            assert row[6]=='*', 'Non-ASCII executable source requires review'
-            rows[i]='      * Identifier conversion when prefix matches.'
-    source='\n'.join(row.rstrip() for row in rows).rstrip()+'\n'
-    sources={'CKP02':source,'GENCKP':generator(cases),'CHKCKP':checker(len(cases))}
+    sources={'GENCKP':generator(cases),'CHKCKP':checker(len(cases))}
+    if (out/'CKP02.cbl').exists():
+        raise ValueError('Output contains an obsolete CKP02 copy; use a new output directory')
     out.mkdir(parents=True,exist_ok=True)
     for name,src in sources.items(): (out/(name+'.cbl')).write_text(src,encoding='ascii',newline='\n')
-    jcl=make_jcl(jobname,sources)
+    jcl=make_jcl(jobname,sources,source_dataset)
     if volume:
         jcl=jcl.replace('UNIT=SYSDA,',f'UNIT=3390,\n// VOL=SER={volume},STORCLAS={storage_class},\n// ')
         jcl=jcl.replace('// \n','')
     assert all(len(row)<=72 for row in jcl.split('\n')), 'JCL exceeds statement columns'
     (out/'run.jcl').write_text(jcl,encoding='ascii',newline='\n')
-    manifest={'source_reading_sha256':hashlib.sha256(original).hexdigest(),
-      'build_source_sha256':hashlib.sha256(source.encode('ascii')).hexdigest(),
-      'source_change':'Only non-ASCII comment translated; executable columns retained.',
+    manifest={'source':'z-lab/CKP02.cbl','source_dataset':source_dataset,
+      'local_encoding':'UTF-8','local_newline':'LF',
+      'source_transfer_encoding':'IBM-937','compiler_options':['CODEPAGE(937)','DBCS'],
+      'jcl_encoding':'IBM-1047','source_change':'None; upload the supplied z-lab source, including Chinese comments.',
       'cases':len(cases),'record_bytes':400,'runs':['once','twice','empty'],
       'host_execution':'not inferred from generation',
       'allocation_route':{'volume':volume,'storage_class_selector':storage_class},
@@ -164,5 +167,5 @@ def build(out,jobname,volume=None,storage_class=None):
 
 if __name__=='__main__':
     a=argparse.ArgumentParser(); a.add_argument('--out',type=Path,required=True); a.add_argument('--jobname',default='TCBP001')
-    a.add_argument('--volume'); a.add_argument('--storage-class')
-    args=a.parse_args(); build(args.out,args.jobname,args.volume,args.storage_class)
+    a.add_argument('--volume'); a.add_argument('--storage-class'); a.add_argument('--source-dataset',default='YOURUSER.TCBLAB.SRC937')
+    args=a.parse_args(); build(args.out,args.jobname,args.volume,args.storage_class,args.source_dataset)

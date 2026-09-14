@@ -1,6 +1,7 @@
 <h2 id="host">先看自己剛跑的 CKP02</h2>
 <p>將上一單元下載的 JES、編譯與比對紀錄加入 Bob 對話，連同 run.jcl 一起看。這些是自己帳號在主機產生的實際紀錄。</p>
 {{host-logs|核對自己的執行結果|Ask}}
+<p>先從 CCKP 的 SYSPRINT 核對 <code>CODEPAGE(937)</code> 與 <code>DBCS</code>，確認編譯來源是自己的 SRC937。一般 JES 與比對紀錄使用 tcb-jobs（IBM-1047）；若編譯清單中的中文註解顯示異常，先保留該 DD 的畫面並確認解碼方式，不修改原始程式或所有連線的編碼。</p>
 <p>CHECK1、CHECK2 應各有七筆 <code>PASS ALL 400 BYTES</code>，結尾為 <code>CHECKED=0007 ERRORS=0000</code>；RUNONCE、RUNTWICE、RUNEMPTY 均應 RC 0。CCKP 的 RC 4 必須與 README 列出的編譯警告核對，不能只看整體 return code。</p>
 <p>CKP02 沒有呼叫 IMS，因此這些紀錄不能用來判斷 IMS 交易是否完成。若缺少某個 step 的紀錄，先從相同 job ID 補下載，再請 Bob 接著確認。</p>
 {{check:我能指出主機結果所依據的 job 與 step}}

@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 DIRS=('samples/','specs/','tests/')
 FILES={'AGENTS.md','README.md','SOURCE-MAP.md','DOC-SPEC.md','zowe.config.json','zowe.schema.json','.gitignore','.gitattributes','scripts/verify.py',
 'host-lab/BOB-GUIDE.md','host-lab/CONNECTION.md','host-lab/README.md','host-lab/fixtures.json',
-'host-lab/templates/CKP02.cbl','host-lab/templates/GENCKP.cbl','host-lab/templates/CHKCKP.cbl','host-lab/templates/run.jcl','host-lab/templates/manifest.json'}
+'host-lab/templates/GENCKP.cbl','host-lab/templates/CHKCKP.cbl','host-lab/templates/run.jcl','host-lab/templates/manifest.json'}
 def selected():
  names=subprocess.check_output(['git','ls-files'],cwd=ROOT,text=True).splitlines()
  return [n for n in names if n in FILES or n.startswith(DIRS)]
@@ -26,8 +26,9 @@ def export(dest,archive):
   name=(Path('z-lab')/rel.with_suffix(suffix)).as_posix()
   data=(ROOT/'bank-source/reading'/rel).read_bytes()
   assert hashlib.sha256(data).hexdigest()==item['reading_sha256']
+  data=data.replace(b'\r\n',b'\n')  # UTF-8/LF for the same source on Windows and z/OSMF
   target=dest/name; target.parent.mkdir(parents=True,exist_ok=True); target.write_bytes(data)
-  names.append(name); manifest.append({'file':name,'sha256':item['reading_sha256']})
+  names.append(name); manifest.append({'file':name,'sha256':hashlib.sha256(data).hexdigest()})
  assert len(manifest)==45
  name='source-manifest.json'
  (dest/name).write_bytes((json.dumps(manifest,indent=2)+'\n').encode('utf-8')); names.append(name)

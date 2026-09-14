@@ -211,7 +211,8 @@
     "files": [
       "host-lab/README.md",
       "host-lab/environment.md",
-      "host-lab/BOB-GUIDE.md"
+      "host-lab/BOB-GUIDE.md",
+      "z-lab/CKP02.cbl"
     ],
     "response": "尚未提交的 run.jcl，以及各步驟與個人配置的說明。"
   },
