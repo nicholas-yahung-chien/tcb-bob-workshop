@@ -30,7 +30,7 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 
 需求和文件格式放在獨立檔案裡，提問時引用即可：
 
-- `specs/change-request.md`：這次要解決什麼問題，以及範例介面。
+- `requests/`：業務寄來的需求信件與 Word 申請單，作為需求釐清的起點。
 - `DOC-SPEC.md`：文件內容、檔名和檢查方式。
 - `specs/testing.md`：COBOL 與 Python 測試。
 - `specs/log-schema.md`、`specs/sast-task.md`：事件分析和查詢修正。

@@ -21,7 +21,12 @@
 <p>如果回答太抽象，可以接著問：「請用前後各十個字元舉例，並把空白標出來。」若 Bob 提到資料庫、API 或未提供的呼叫者，追問：「這個判斷是從哪個檔案看出來的？」</p>
 <p>完成後，試著自己說明：CKP02 讀寫什麼、何時轉換、EOF 代表什麼，以及還有哪些業務問題待確認。後續<a href="02-documentation.html#story">程式文件單元</a>會再用 Z Code 的 Explain code 工作流程深入解讀，並整理成交接文件。</p>
 <h2 id="impact">2. 看看需求會影響哪些地方</h2>
-<p>需求寫在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/change-request.md">change-request.md</a>。切換到 <strong>Z Architecture</strong>，從輸入框的 <code>/</code> 清單選取 <code>/impact-analysis</code>，再接上下方問題送出。</p>
+<p>這次收到的是一封業務信件與一張 Word 需求申請單，描述的是同一件事。先閱讀教材的 <code>requests/customer-email.txt</code>，也可以用郵件軟體開啟 <code>requests/customer-email.eml</code>，或用 Word 開啟 <code>requests/change-application.docx</code>。兩種來件都還有需要問清楚的地方。</p>
+<p><a href="https://raw.githubusercontent.com/nicholas-yahung-chien/tcb-bob-workshop/refs/heads/workshop/tcb-2026/requests/customer-email.eml">下載需求信件</a> · <a href="https://raw.githubusercontent.com/nicholas-yahung-chien/tcb-bob-workshop/refs/heads/workshop/tcb-2026/requests/change-application.docx">下載 Word 需求申請單</a>。兩份文件也已包含在教材 ZIP。</p>
+<p>將信件加入 Bob 對話；若想使用 Word 申請單但目前版本無法讀取 DOCX，可貼上單內文字，或改用同資料夾的純文字信件。先切換到 <strong>Ask</strong>，請 Bob 協助整理問題。</p>
+{{request-clarify|先釐清業務想做什麼|Ask}}
+<p>看看 Bob 是否問到「預計改幾筆」的計算方式、試跑後誰來確認、正式處理時資料是否可能已改變，以及重跑的期待。由你扮演需求提出者補充回答；尚無答案就標為待確認，先在明確標示的假設下評估，不把 Bob 的建議當成業務已同意。</p>
+<p>接著切換到 <strong>Z Architecture</strong>，從輸入框的 <code>/</code> 清單選取 <code>/impact-analysis</code>，再接上下方問題送出。</p>
 {{z-impact|找出變更影響|Z Architecture}}
 <p>如果流程要求連線 Z Understand，請選擇包含這支程式的專案。手邊只有本機檔案時，先分析看得到的內容，跨系統的關係留待補齊資料後確認。</p>
 <h2 id="plan">3. 把需求整理成計畫</h2>

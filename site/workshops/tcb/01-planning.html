@@ -26,25 +26,31 @@
 <p>如果回答太抽象，可以接著問：「請用前後各十個字元舉例，並把空白標出來。」若 Bob 提到資料庫、API 或未提供的呼叫者，追問：「這個判斷是從哪個檔案看出來的？」</p>
 <p>完成後，試著自己說明：CKP02 讀寫什麼、何時轉換、EOF 代表什麼，以及還有哪些業務問題待確認。後續<a href="02-documentation.html#story">程式文件單元</a>會再用 Z Code 的 Explain code 工作流程深入解讀，並整理成交接文件。</p>
 <h2 id="impact">2. 看看需求會影響哪些地方</h2>
-<p>需求寫在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/change-request.md">change-request.md</a>。切換到 <strong>Z Architecture</strong>，從輸入框的 <code>/</code> 清單選取 <code>/impact-analysis</code>，再接上下方問題送出。</p>
-<p class="mode-guide"><strong>Z Architecture 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>specs/change-request.md</code></p><div class="prompt"><div class="prompt-head"><span>找出變更影響</span><button type="button" data-copy="z-impact">複製 Prompt</button></div><pre id="z-impact">如果要加入 specs/change-request.md 的預覽功能，哪些程式、資料和批次作業可能受影響？請根據目前的程式與可查到的相依關係，說明修改位置及原因；缺少資料才能確認的關係另外列出。
+<p>這次收到的是一封業務信件與一張 Word 需求申請單，描述的是同一件事。先閱讀教材的 <code>requests/customer-email.txt</code>，也可以用郵件軟體開啟 <code>requests/customer-email.eml</code>，或用 Word 開啟 <code>requests/change-application.docx</code>。兩種來件都還有需要問清楚的地方。</p>
+<p><a href="https://raw.githubusercontent.com/nicholas-yahung-chien/tcb-bob-workshop/refs/heads/workshop/tcb-2026/requests/customer-email.eml">下載需求信件</a> · <a href="https://raw.githubusercontent.com/nicholas-yahung-chien/tcb-bob-workshop/refs/heads/workshop/tcb-2026/requests/change-application.docx">下載 Word 需求申請單</a>。兩份文件也已包含在教材 ZIP。</p>
+<p>將信件加入 Bob 對話；若想使用 Word 申請單但目前版本無法讀取 DOCX，可貼上單內文字，或改用同資料夾的純文字信件。先切換到 <strong>Ask</strong>，請 Bob 協助整理問題。</p>
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>requests/customer-email.txt</code></p><div class="prompt"><div class="prompt-head"><span>先釐清業務想做什麼</span><button type="button" data-copy="request-clarify">複製 Prompt</button></div><pre id="request-clarify">這是業務剛寄來的信件。請先用白話整理他們遇到什麼問題、希望改善什麼，再列出開始評估前最需要問清楚的幾個問題。把信裡已經說明的事、你的推測和還要請對方確認的事分開，先不要替他們決定做法。
+</pre><div class="expected"><strong>預期回應</strong><p>業務期待、待確認問題，以及需要向申請人補問的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>看看 Bob 是否問到「預計改幾筆」的計算方式、試跑後誰來確認、正式處理時資料是否可能已改變，以及重跑的期待。由你扮演需求提出者補充回答；尚無答案就標為待確認，先在明確標示的假設下評估，不把 Bob 的建議當成業務已同意。</p>
+<p>接著切換到 <strong>Z Architecture</strong>，從輸入框的 <code>/</code> 清單選取 <code>/impact-analysis</code>，再接上下方問題送出。</p>
+<p class="mode-guide"><strong>Z Architecture 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>requests/customer-email.txt</code></p><div class="prompt"><div class="prompt-head"><span>找出變更影響</span><button type="button" data-copy="z-impact">複製 Prompt</button></div><pre id="z-impact">根據這封需求信件與剛才釐清的內容，哪些程式、資料和批次作業可能受影響？請對照目前看得到的程式，說明修改位置與原因；尚未確認的需求和相依關係請分開列出，不要當成已定案。
 </pre><div class="expected"><strong>預期回應</strong><p>已確認的影響，以及需要補資料才能確認的關係。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>如果流程要求連線 Z Understand，請選擇包含這支程式的專案。手邊只有本機檔案時，先分析看得到的內容，跨系統的關係留待補齊資料後確認。</p>
 <h2 id="plan">3. 把需求整理成計畫</h2>
 <p>現在知道程式大致怎麼運作，就可以討論怎麼改。<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a> 約定文件的章節和檢查方式；提問時引用它，Bob 就有格式可以依循。</p>
 <p>規劃新需求時，現有功能和建議做法容易混在一起。因此這次多補一句，請 Bob 分開說明，方便你判斷哪些已經存在、哪些還要做。</p>
-<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>specs/change-request.md</code>、<code>DOC-SPEC.md</code></p><div class="prompt"><div class="prompt-head"><span>規劃預覽功能</span><button type="button" data-copy="02-plan">複製 Prompt</button></div><pre id="02-plan">我想在批次執行前，先知道會改到多少筆資料。請閱讀 specs/change-request.md，對照現有程式分析影響，再依 DOC-SPEC.md 規劃架構文件和實作清單。
+<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>requests/customer-email.txt</code>、<code>DOC-SPEC.md</code></p><div class="prompt"><div class="prompt-head"><span>規劃預覽功能</span><button type="button" data-copy="02-plan">複製 Prompt</button></div><pre id="02-plan">我想在批次執行前，先知道會改到多少筆資料。請閱讀 requests/customer-email.txt，對照現有程式分析影響，再依 DOC-SPEC.md 規劃架構文件和實作清單。
 
 請分開說明現有行為、建議的做法，以及還需要確認的資訊。主機程式和本機範例各自分析，先討論計畫，不修改程式。
 </pre><div class="expected"><strong>預期回應</strong><p>需要分析的範圍、文件內容，以及還需要確認的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>閱讀計畫時，想想兩件事：哪些建議有程式可以對照？哪些還需要業務或系統資料？有疑問的地方，直接在同一個對話追問。</p>
 <h2 id="deliver">4. 請 Bob 寫成文件</h2>
 <p>計畫確認後，在同一個對話切換到 <strong>Agent</strong>。前面已經說清楚的內容，這裡不用再重述一遍。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/change-request.md</code>、<code>DOC-SPEC.md</code></p><div class="prompt"><div class="prompt-head"><span>依計畫完成文件</span><button type="button" data-copy="03-plan-deliver">複製 Prompt</button></div><pre id="03-plan-deliver">請依剛才確認的計畫和 specs/change-request.md，完成架構文件與實作清單，存到 output，格式依 DOC-SPEC.md。
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>requests/customer-email.txt</code>、<code>DOC-SPEC.md</code></p><div class="prompt"><div class="prompt-head"><span>依計畫完成文件</span><button type="button" data-copy="03-plan-deliver">複製 Prompt</button></div><pre id="03-plan-deliver">請依剛才確認的計畫和 requests/customer-email.txt，完成架構文件與實作清單，存到 output，格式依 DOC-SPEC.md。
 
 描述現況時，重新核對引用的原始碼；計畫中的建議保留為提案，需要環境資料才能確認的事項另外列出。完成後執行文件檢查並說明結果。
 </pre><div class="expected"><strong>預期回應</strong><p>output 裡的架構文件和實作清單，附上檢查結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/architecture.md</code>、<code>output/checklist.md</code>、<code>z-lab/CKP02.cbl</code>、<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>、<code>samples/cobol/TESTSHIFT.cbl</code>、<code>samples/jcl/IDSHIFT.jcl</code>、<code>specs/change-request.md</code></p><div class="prompt"><div class="prompt-head"><span>一起檢查計畫</span><button type="button" data-copy="verify-plan">複製 Prompt</button></div><pre id="verify-plan">請對照原始碼與 specs/change-request.md，依 DOC-SPEC.md 核對架構文件和實作清單。現況描述是否有依據？提案是否滿足需求？引用的 JCL 和範例，是否確實屬於所描述的程式？
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/architecture.md</code>、<code>output/checklist.md</code>、<code>z-lab/CKP02.cbl</code>、<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>、<code>samples/cobol/TESTSHIFT.cbl</code>、<code>samples/jcl/IDSHIFT.jcl</code>、<code>requests/customer-email.txt</code></p><div class="prompt"><div class="prompt-head"><span>一起檢查計畫</span><button type="button" data-copy="verify-plan">複製 Prompt</button></div><pre id="verify-plan">請對照原始碼與 requests/customer-email.txt，依 DOC-SPEC.md 核對架構文件和實作清單。現況描述是否有依據？提案是否滿足需求？引用的 JCL 和範例，是否確實屬於所描述的程式？
 
 修正文件中不一致的內容，再執行檢查；需要其他檔案或環境資料才能確定的事項另外列出。
 </pre><div class="expected"><strong>預期回應</strong><p>文件檢查結果，以及仍需要補齊的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>

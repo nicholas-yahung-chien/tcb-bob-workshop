@@ -3,9 +3,9 @@
 <h2 id="explain">1. 用 Explain code 閱讀程式</h2>
 <ol><li>開啟 <code>z-lab/CKP02.cbl</code>，選擇 <strong>Z Code</strong>。</li><li>點 <strong>Start Workflow</strong>，在工作區選單選擇本機教材資料夾的 <strong>Run Workflow in〈你開啟的教材資料夾名稱〉</strong>，並核對下方顯示的本機路徑。</li><li>在 <strong>Bob workflows</strong> 找到 <strong>Explain code</strong>，點右側的 <strong>Start</strong>。</li><li>依流程選取這個檔案及 Developer 視角，閱讀程式說明。</li></ol>
 <p>回覆談到轉換條件後，可以追問實際執行時會遇到的情況，例如同一份資料再跑一次。</p>
-<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>specs/change-request.md</code></p><div class="prompt"><div class="prompt-head"><span>追問執行時的行為</span><button type="button" data-copy="z-explain">複製 Prompt</button></div><pre id="z-explain">如果資料符合或不符合轉換條件，接下來分別會執行哪些動作？何時會讀下一筆，何時結束？請沿著程式段落說明。
+<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>requests/customer-email.txt</code></p><div class="prompt"><div class="prompt-head"><span>追問執行時的行為</span><button type="button" data-copy="z-explain">複製 Prompt</button></div><pre id="z-explain">如果資料符合或不符合轉換條件，接下來分別會執行哪些動作？何時會讀下一筆，何時結束？請沿著程式段落說明。
 
-再用 specs/change-request.md 的重跑案例，逐步推導連續執行兩次的結果。
+再用 識別欄位 0000123456 的重跑案例（第 14–16 位不是 EOF），逐步推導連續執行兩次的結果。
 </pre><div class="expected"><strong>預期回應</strong><p>不符合條件和重跑時的處理過程，附上對應程式位置。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <h2 id="copybook">2. 加入 Copybook 和 JCL</h2>
 <p>接著看看另一個小範例 IDSHIFT。它把資料定義放在 Copybook，另外附有測試程式和 JCL。把相關檔案一起交給 Bob，就能比較兩種寫法。</p>
@@ -14,23 +14,23 @@
 <h2 id="document">3. 整理成接手文件</h2>
 <p>保持 <strong>Z Code</strong>，點 <strong>Start Workflow</strong>，先選擇本機教材工作區，再於 <strong>Bob workflows</strong> 找到 <strong>Generate program documentation</strong>，點右側的 <strong>Start</strong>。依流程選取 CKP02.cbl；若需要指定儲存位置，放在 <code>output/</code>。</p>
 <p>把產生的說明檔加入同一個對話，切換到 <strong>Plan</strong>，想想還有哪些內容需要補齊。</p>
-<p>這裡也加入 change-request.md：程式說明回答「現在怎麼運作」，影響分析則回答「為了新需求，接下來要改什麼」。兩份資料一起看，才能區分既有功能與新增工作。</p>
-<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>、<code>samples/cobol/TESTSHIFT.cbl</code>、<code>samples/jcl/IDSHIFT.jcl</code>、<code>specs/change-request.md</code></p><div class="prompt"><div class="prompt-head"><span>規劃文件內容</span><button type="button" data-copy="document-plan">複製 Prompt</button></div><pre id="document-plan">我希望下次接手的人能從文件了解 CKP02。請對照原始碼與剛才的解讀，並閱讀 specs/change-request.md，依 DOC-SPEC.md 規劃程式說明和變更影響分析。
+<p>這裡也加入需求信件與前面釐清的內容：程式說明回答「現在怎麼運作」，影響分析則回答「為了新需求，接下來要改什麼」。兩份資料一起看，才能區分既有功能與新增工作。</p>
+<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>、<code>samples/cobol/TESTSHIFT.cbl</code>、<code>samples/jcl/IDSHIFT.jcl</code>、<code>requests/customer-email.txt</code></p><div class="prompt"><div class="prompt-head"><span>規劃文件內容</span><button type="button" data-copy="document-plan">複製 Prompt</button></div><pre id="document-plan">我希望下次接手的人能從文件了解 CKP02。請對照原始碼與剛才的解讀，並閱讀 requests/customer-email.txt，依 DOC-SPEC.md 規劃程式說明和變更影響分析。
 
 先列出要說明的流程、欄位和例子，以及還需要補充的資料。不同程式與執行環境的內容分開整理，這一步先確認文件計畫。
 </pre><div class="expected"><strong>預期回應</strong><p>程式說明與影響分析的章節，以及需要補充的內容。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>確認內容後切換到 <strong>Agent</strong>。文件的章節、檔名與檢查方式都寫在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a>，沿用同一份規格即可。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>specs/change-request.md</code></p><div class="prompt"><div class="prompt-head"><span>完成程式文件</span><button type="button" data-copy="04-document">複製 Prompt</button></div><pre id="04-document">請依剛才的計畫和 DOC-SPEC.md，完成 CKP02 的程式說明與影響分析，存到 output。影響分析以 specs/change-request.md 的新需求為準，區分既有功能與新增工作。
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>requests/customer-email.txt</code></p><div class="prompt"><div class="prompt-head"><span>完成程式文件</span><button type="button" data-copy="04-document">複製 Prompt</button></div><pre id="04-document">請依剛才的計畫和 DOC-SPEC.md，完成 CKP02 的程式說明與影響分析，存到 output。影響分析以 requests/customer-email.txt 的新需求為準，區分既有功能與新增工作。
 
 先重新閱讀原始碼，確認各條件成立和不成立時會執行哪些動作，再整理成文件。欄位與例子附上對應段落，位置註明從哪裡起算。先前解讀若與程式不同，以程式為準；需要環境資料才能確定的內容另外列出。完成後執行文件檢查。
 </pre><div class="expected"><strong>預期回應</strong><p>program.md、impact-analysis.md、facts.json，以及文件檢查結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <h2 id="verify">4. 回到程式，確認說明</h2>
 <p>寫完文件後，請 Bob 重新看原始碼，沿著條件成立與不成立的路徑各走一次。這樣比較容易發現摘要和詳細說明是否前後不同，也能看到條件之後還會做哪些事。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/program.md</code>、<code>output/impact-analysis.md</code>、<code>output/facts.json</code>、<code>z-lab/CKP02.cbl</code>、<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>、<code>samples/cobol/TESTSHIFT.cbl</code>、<code>samples/jcl/IDSHIFT.jcl</code>、<code>specs/change-request.md</code></p><div class="prompt"><div class="prompt-head"><span>檢查文件中的例子</span><button type="button" data-copy="verify-docs">複製 Prompt</button></div><pre id="verify-docs">請重新閱讀原始碼，依 DOC-SPEC.md 核對剛才的程式文件。每個判斷條件成立和不成立時，都各走一次，看看接下來會執行哪些動作、何時讀下一筆、何時結束。
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/program.md</code>、<code>output/impact-analysis.md</code>、<code>output/facts.json</code>、<code>z-lab/CKP02.cbl</code>、<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>、<code>samples/cobol/TESTSHIFT.cbl</code>、<code>samples/jcl/IDSHIFT.jcl</code>、<code>requests/customer-email.txt</code></p><div class="prompt"><div class="prompt-head"><span>檢查文件中的例子</span><button type="button" data-copy="verify-docs">複製 Prompt</button></div><pre id="verify-docs">請重新閱讀原始碼，依 DOC-SPEC.md 核對剛才的程式文件。每個判斷條件成立和不成立時，都各走一次，看看接下來會執行哪些動作、何時讀下一筆、何時結束。
 
 也請重新計算欄位位置，檢查摘要、表格和例子是否一致。若文件與程式不同，修正文件並指出依據，再執行檢查。
 
-影響分析請另外對照 specs/change-request.md，確認沒有把既有功能寫成這次要新增的工作。
+影響分析請另外對照 requests/customer-email.txt，確認沒有把既有功能寫成這次要新增的工作。
 </pre><div class="expected"><strong>預期回應</strong><p>條件分支與欄位的核對、文件修正說明，以及檢查結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <details><summary>對照文件時，可以先看哪些地方？</summary><ul><li>資料內的 EOF 會略過這一筆的轉換，接著仍會讀下一筆；READ 的 AT END 才會設定迴圈使用的 EOF 旗標。</li><li>記錄第 14–16 位，對應 R-NAME 的第 3–5 位。閱讀欄位位置時，先看看是從哪裡起算。</li><li>程式宣告 VALUE SPACE；實際空白編碼與資料集屬性，需要搭配主機環境確認。</li><li>範例 JCL 執行 TESTSHIFT。CKP02 的正式 JCL 尚未提供。</li></ul><p>檢查程式會核對格式與數值；閱讀這些段落，可以再確認正文有沒有把不同概念混在一起。</p></details>
 <details><summary>重跑的例子，應該怎麼看？</summary><p>使用需求文件中的 0000123456，並讓第 14–16 位不是 EOF。第一次轉換得到 00123456 加兩個空白，第二次得到 123456 加四個空白。第一次後仍以 00 開頭，所以不能只用一個例子就認定重跑結果都相同。</p></details>
@@ -44,6 +44,6 @@
 遇到查不到資料或日期異常時，請沿著分支說明後續動作。若缺少外部程式或 IMS 定義，列出還需要的資料。
 </pre><div class="expected"><strong>預期回應</strong><p>主要資料流、Copybook 與 IMS 呼叫，以及需要補充的程式。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <h2 id="modernization">再想一步：讓其他系統也能使用</h2>
-<p class="mode-guide"><strong>Z Architecture 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>specs/change-request.md</code></p><div class="prompt"><div class="prompt-head"><span>討論現代化選項</span><button type="button" data-copy="z-modernization">複製 Prompt</button></div><pre id="z-modernization">如果之後想把這段批次功能提供給其他系統使用，可以有哪些做法？請比較保留批次、抽出轉換邏輯和提供 API 這幾種選擇，並說明各自需要先確認的事情。
+<p class="mode-guide"><strong>Z Architecture 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>requests/customer-email.txt</code></p><div class="prompt"><div class="prompt-head"><span>討論現代化選項</span><button type="button" data-copy="z-modernization">複製 Prompt</button></div><pre id="z-modernization">如果之後想把這段批次功能提供給其他系統使用，可以有哪些做法？請比較保留批次、抽出轉換邏輯和提供 API 這幾種選擇，並說明各自需要先確認的事情。
 </pre><div class="expected"><strong>預期回應</strong><p>不同做法的適用情況，以及開始之前需要確認的事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 </article><nav class="next" aria-label="前後單元"><a href="01-planning.html">← 需求規劃</a><a href="03-testing.html">測試與修正 →</a></nav></main></div><footer><p>合作金庫 IBM Bob Workshop</p><p>2026.09.21 / 09.24</p></footer></body></html>

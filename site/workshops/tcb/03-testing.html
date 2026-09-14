@@ -26,9 +26,7 @@
 <p>完成後會有 cobol-test-plan.md 和 TESTSHIFT-EXT.cbl。編譯執行需要 COBOL 環境；還沒執行的案例，先保留為待執行。</p>
 <h2 id="implement">2. 在本機試跑轉換規則</h2>
 <p>以下為選做練習，另需本機 Python 3.10 以上；不影響前面的主機實作。Python 範例使用同樣的資料位置與轉換規則，可以在一般筆電執行。它也包含這次新需求的預覽與統計功能。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/change-request.md</code>、<code>specs/testing.md</code></p><div class="prompt"><div class="prompt-head"><span>完成範例並跑測試</span><button type="button" data-copy="05-unit">複製 Prompt</button></div><pre id="05-unit">請依 specs/change-request.md 和 specs/testing.md，完成 Python 轉換範例並補上測試，存到 output。
-
-新增案例請從需求推導輸入與預期結果，涵蓋正常情況及容易漏掉的邊界。完成後實際執行測試，記錄結果和修正內容，保留原有測試。
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>requests/customer-email.txt</code>、<code>specs/testing.md</code></p><div class="prompt"><div class="prompt-head"><span>完成範例並跑測試</span><button type="button" data-copy="05-unit">複製 Prompt</button></div><pre id="05-unit">請依 specs/testing.md 中選做練習的介面約定，完成 Python 轉換範例並補上測試，存到 output。這些介面約定只用於本機練習。
 </pre><div class="expected"><strong>預期回應</strong><p>完成的 Python 範例、三個新增測試和實際測試報告。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/testing.md</code></p><div class="prompt"><div class="prompt-head"><span>看看測試結果</span><button type="button" data-copy="verify-unit">複製 Prompt</button></div><pre id="verify-unit">請執行 specs/testing.md 裡的 Python 測試，說明哪些通過、哪些失敗，再把結果更新到測試報告。
 </pre><div class="expected"><strong>預期回應</strong><p>既有與新增測試的執行結果，並更新測試報告。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
