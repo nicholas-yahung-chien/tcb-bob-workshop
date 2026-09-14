@@ -6,7 +6,7 @@
       "properties": {
         "port": 8192,
         "protocol": "https",
-        "encoding": "IBM-1047"
+        "encoding": "IBM-937"
       },
       "secure": []
     },
@@ -20,6 +20,15 @@
       "secure": [
         "password"
       ]
+    },
+    "tcb-jobs": {
+      "type": "zosmf",
+      "properties": {
+        "port": 8192,
+        "protocol": "https",
+        "encoding": "IBM-1047"
+      },
+      "secure": []
     }
   },
   "defaults": {
