@@ -40,7 +40,7 @@ def content(name):
     import re
     body=(ROOT/'lessons'/name).read_text(encoding='utf-8')
     body=re.sub(r"\{\{check:(.*?)\}\}",lambda m:check(m[1]),body)
-    links=''.join(f'<li><a href="{BASE}/blob/workshop/tcb-2026/reference/{p.name}">{p.name}</a></li>' for p in sorted((ROOT/'reference').glob('*')) if p.is_file())
+    links=''.join(f'<li>{escape(p.name)}</li>' for p in sorted((ROOT/'reference').glob('*')) if p.is_file())
     body=body.replace('{{references}}','<ul>'+links+'</ul>')
     return re.sub(r"\{\{([^|{}]+)\|([^|{}]+)\|([^{}]+)\}\}",lambda m:prompt(m[1],m[2],m[3]),body)
 

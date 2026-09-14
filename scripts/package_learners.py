@@ -2,7 +2,7 @@
 from pathlib import Path
 import argparse, subprocess, zipfile, json, hashlib
 ROOT=Path(__file__).resolve().parents[1]
-DIRS=('samples/','specs/','reference/','tests/')
+DIRS=('samples/','specs/','tests/')
 FILES={'AGENTS.md','README.md','SOURCE-MAP.md','DOC-SPEC.md','zowe.config.json','zowe.schema.json','.gitignore','.gitattributes','scripts/verify.py',
 'host-lab/BOB-GUIDE.md','host-lab/CONNECTION.md','host-lab/README.md','host-lab/fixtures.json',
 'host-lab/templates/CKP02.cbl','host-lab/templates/GENCKP.cbl','host-lab/templates/CHKCKP.cbl','host-lab/templates/run.jcl','host-lab/templates/manifest.json'}
@@ -37,6 +37,10 @@ def export(dest,archive):
  if archive:
   with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
    for n in names: z.write(dest/n,'tcb-workshop/'+n)
+  with zipfile.ZipFile(archive.with_name('tcb-reference.zip'),'w',zipfile.ZIP_DEFLATED) as z:
+   for p in sorted((ROOT/'reference').iterdir()):
+    if p.is_file():
+     z.writestr('reference/'+p.name,p.read_bytes().replace(b'bank-source/reading/CKP02.TXT',b'z-lab/CKP02.cbl'))
  print('Exported',len(names),'learner files')
 if __name__=='__main__':
  p=argparse.ArgumentParser(); p.add_argument('--out',type=Path,required=True); p.add_argument('--zip',type=Path)
