@@ -13,14 +13,14 @@
   },
   "02-plan": {
     "files": [
-      "requests/customer-email.txt",
+      "requests/customer-email.eml",
       "DOC-SPEC.md"
     ],
     "response": "需要分析的範圍、文件內容，以及還需要確認的資訊。"
   },
   "03-plan-deliver": {
     "files": [
-      "requests/customer-email.txt",
+      "requests/customer-email.eml",
       "DOC-SPEC.md"
     ],
     "response": "output 裡的架構文件和實作清單，附上檢查結果。"
@@ -33,7 +33,7 @@
       "samples/cobol/IDREC.cpy",
       "samples/cobol/TESTSHIFT.cbl",
       "samples/jcl/IDSHIFT.jcl",
-      "requests/customer-email.txt"
+      "requests/customer-email.eml"
     ],
     "response": "程式說明與影響分析的章節，以及需要補充的內容。"
   },
@@ -41,13 +41,13 @@
     "files": [
       "DOC-SPEC.md",
       "z-lab/CKP02.cbl",
-      "requests/customer-email.txt"
+      "requests/customer-email.eml"
     ],
     "response": "program.md、impact-analysis.md、facts.json，以及文件檢查結果。"
   },
   "05-unit": {
     "files": [
-      "requests/customer-email.txt",
+      "requests/customer-email.eml",
       "specs/testing.md"
     ],
     "response": "完成的 Python 範例、三個新增測試和實際測試報告。"
@@ -111,7 +111,7 @@
       "samples/cobol/IDREC.cpy",
       "samples/cobol/TESTSHIFT.cbl",
       "samples/jcl/IDSHIFT.jcl",
-      "requests/customer-email.txt"
+      "requests/customer-email.eml"
     ],
     "response": "條件分支與欄位的核對、文件修正說明，以及檢查結果。"
   },
@@ -125,7 +125,7 @@
       "samples/cobol/IDREC.cpy",
       "samples/cobol/TESTSHIFT.cbl",
       "samples/jcl/IDSHIFT.jcl",
-      "requests/customer-email.txt"
+      "requests/customer-email.eml"
     ],
     "response": "文件檢查結果，以及仍需要補齊的資訊。"
   },
@@ -161,21 +161,21 @@
   "z-explain": {
     "files": [
       "z-lab/CKP02.cbl",
-      "requests/customer-email.txt"
+      "requests/customer-email.eml"
     ],
     "response": "不符合條件和重跑時的處理過程，附上對應程式位置。"
   },
   "z-impact": {
     "files": [
       "z-lab/CKP02.cbl",
-      "requests/customer-email.txt"
+      "requests/customer-email.eml"
     ],
     "response": "已確認的影響，以及需要補資料才能確認的關係。"
   },
   "z-modernization": {
     "files": [
       "z-lab/CKP02.cbl",
-      "requests/customer-email.txt"
+      "requests/customer-email.eml"
     ],
     "response": "不同做法的適用情況，以及開始之前需要確認的事項。"
   },
@@ -251,7 +251,7 @@
   },
   "request-clarify": {
     "files": [
-      "requests/customer-email.txt"
+      "requests/customer-email.eml"
     ],
     "response": "業務期待、待確認問題，以及需要向申請人補問的資訊。"
   }
