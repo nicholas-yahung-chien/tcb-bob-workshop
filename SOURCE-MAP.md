@@ -23,7 +23,7 @@ SYSOCP31 有少量無法以 CP950 解碼的 bytes，閱讀版以反斜線 x 序�
 | host-lab/BOB-GUIDE.md | 請 Bob 檢查教材、準備個人 JCL 並核對主機紀錄 |
 | z-tests/ | 主機測試用的 GENCKP、CHKCKP、七筆測資、JCL 範本與雜湊清單 |
 | samples/reports/sast.json | 對照查詢程式的練習弱點報告 |
-| specs/change-request.md | 閱讀預覽與統計需求 |
+| requests/ | 業務需求信件（EML／純文字）與 Word 申請單；同一項尚待釐清的需求 |
 | DOC-SPEC.md | 整理架構與程式文件 |
 | specs/testing.md | 準備及執行測試 |
 

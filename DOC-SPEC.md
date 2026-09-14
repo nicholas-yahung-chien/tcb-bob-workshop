@@ -25,7 +25,7 @@
 
 ## 架構文件與實作清單
 
-依 `specs/change-request.md` 的 CR-01 需求建立：
+依 `requests/customer-email.txt` 與課堂討論建立，區分來件明確提出、課堂已確認、假設與待確認事項：
 
 | 檔案 | 內容 |
 |---|---|
@@ -43,14 +43,14 @@
 | marker_field | 資料內 EOF 標記所在的欄位名稱；只填名稱 |
 | rewrite_scope | 每筆讀入都回寫填 all-read-records；僅符合轉換條件才回寫填 eligible-only |
 | mainframe_encoding_confirmed | 原始資料能否確認主機編碼，布林值 |
-| repeat_input / repeat_once / repeat_twice | CR-01 重跑案例的原值、第一次及第二次結果；各保留十字元，含尾端空白 |
+| repeat_input / repeat_once / repeat_twice | 教學重跑案例的原值、第一次及第二次結果；各保留十字元，含尾端空白 |
 
 ## 程式說明與影響分析
 
 | 檔案 | 內容 |
 |---|---|
 | program.md | 用途、入口、欄位位置與長度、處理流程、轉換例子、錯誤處理及測試案例 |
-| impact-analysis.md | CR-01 直接要改的部分、可能受影響的部分，以及需要補充的資料 |
+| impact-analysis.md | 需求信件與已確認討論直接要改的部分、可能受影響的部分，以及需要補充的資料 |
 | facts.json | 下表的欄位資料、重跑結果與來源引文，使用純 JSON |
 
 說明 CKP02 的資料宣告和 IDSHIFT 的 Copybook 用法，並分開描述檔案讀寫與記憶體修改。JCL 的執行對象和需要填入的設定也列入文件。
@@ -65,7 +65,7 @@
 | has_file_io | 布林值；CKP02 是否有檔案讀寫 |
 | redefines_extra_bytes | 整數；REDEFINES 額外占用的長度 |
 | synthetic | 布林值；所描述的 CKP02 是否為合成範例 |
-| repeat_input / repeat_once / repeat_twice | CR-01 重跑案例的三個十字元字串，保留空白 |
+| repeat_input / repeat_once / repeat_twice | 教學重跑案例的三個十字元字串，保留空白 |
 | evidence | 至少三筆來源引文，分別使用不同的行號 |
 
 每筆 evidence 包含 file、line、quote。file 使用 z-lab/CKP02.cbl；line 從 1 起算，quote 取該行實際原文，不改寫。引用前核對程式與 source-manifest.json；若學員已修改程式，先說明差異，不宣稱仍是原始版本。
@@ -83,7 +83,7 @@
 
 1. 逐項加總欄位長度，確認表格與程式宣告相符。
 2. 看 IF 的句點、REWRITE 和下一筆 READ，確認流程圖或文字沒有改變其範圍。
-3. 將 CR-01 的重跑案例實際推導兩次。第一次之後是否仍符合條件？兩份 Markdown 和 JSON 的說法應相同。
+3. 將 識別欄位 0000123456（第 14–16 位不是 EOF）的教學重跑案例實際推導兩次。第一次之後是否仍符合條件？兩份 Markdown 和 JSON 的說法應相同。
 4. 找出讀檔結束與資料內 EOF 的處理位置，確認兩者的說明沒有混在一起。
 5. 欄位位置註明是從整筆記錄還是欄位本身起算；空白的實際編碼則依執行環境確認。
 6. 打開 JCL，核對 EXEC 和 DD 的實際內容，確認文件描述的是這份檔案。
