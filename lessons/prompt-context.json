@@ -236,13 +236,6 @@
     ],
     "response": "output/host-lab/environment.md"
   },
-  "z-onboard": {
-    "files": [
-      "SOURCE-MAP.md",
-      "output/z-lab/"
-    ],
-    "response": "教材目錄的用途、主要程式與適合的閱讀順序。"
-  },
   "z-roles": {
     "files": [
       "output/z-lab/CKP02.cbl",
