@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse, subprocess, zipfile, json, hashlib
 ROOT=Path(__file__).resolve().parents[1]
 DIRS=('samples/','specs/','tests/','requests/')
-FILES={'AGENTS.md','README.md','SOURCE-MAP.md','DOC-SPEC.md','zowe.config.json','zowe.schema.json','.gitignore','.gitattributes','scripts/verify.py',
+FILES={'AGENTS.md','README.md','SOURCE-MAP.md','DOC-SPEC.md','zowe.config.json','zowe.schema.json','.gitignore','.gitattributes',
 'host-lab/BOB-GUIDE.md','host-lab/CONNECTION.md','host-lab/README.md','z-tests/fixtures.json',
 'z-tests/GENCKP.cbl','z-tests/CHKCKP.cbl','z-tests/run.jcl','z-tests/manifest.json'}
 def selected():
@@ -12,7 +12,7 @@ def selected():
 def export(dest,archive):
  names=selected()
  assert all(n.split('/')[0] not in {'.github','site','web','lessons','docs','output'} for n in names)
- assert [n for n in names if n.startswith('scripts/')]==['scripts/verify.py']
+ assert not any(n.startswith('scripts/') for n in names)
  for n in names:
   data=(ROOT/n).read_bytes()
   if n.startswith('reference/'):

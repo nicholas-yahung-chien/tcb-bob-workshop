@@ -43,7 +43,6 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 | host-lab | 個人主機連線、CKP02 JCL 範本、測資與 Bob 操作指引 |
 | samples | 轉換程式、測試、JCL、事件及查詢練習 |
 | tests | 選做 Python 練習的測試案例 |
-| scripts/verify.py | 選做練習使用的驗收工具 |
 | output | 自己完成的文件與程式 |
 
 Python 與 SQLite 可以在本機執行。COBOL、IMS 和 JCL 則需要對應環境，測試結果分開記錄。

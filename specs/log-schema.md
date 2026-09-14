@@ -22,4 +22,4 @@ JSON 使用以下六個鍵，文字說明放在 Markdown：
 | slow_event_ids | elapsed_ms 大於等於 1000 的 event_id 陣列 |
 | root_cause_confirmed | 布林值；現有記錄是否足以確認根因 |
 
-完成後執行 `python scripts/verify.py logs`，再閱讀時間線與結論是否一致。Windows 若只有 py 指令，使用 py -3。檢查失敗時修正 output 的分析檔。
+完成後請 Bob 逐一核對每個 correlation_id 的事件順序、結束狀態與耗時，為 JSON 中每個分類列出 event_id 證據。學員對照 CSV 與報告核對；缺少結束記錄或根因證據時保留待確認。本步不需 Python，發現落差時修正 output 的分析檔。
