@@ -2,7 +2,7 @@
 <p>程式看起來合理，還需要用資料試試看。先用自己的主機帳號執行 CKP02，比較預期與實際結果；完成後，再選做補測試與本機需求練習。</p>
 <h2 id="host">在主機跑一次 CKP02</h2>
 <p>先完成<a href="00-setup.html#host-connection">個人主機連線</a>。開啟 CKP02 與七筆測資，先和 Bob 討論結果。</p>
-<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>bank-source/reading/CKP02.TXT</code>、<code>host-lab/fixtures.json</code></p><div class="prompt"><div class="prompt-head"><span>先預測結果</span><button type="button" data-copy="host-predict">複製 Prompt</button></div><pre id="host-predict">我準備在主機執行 CKP02。請根據程式和這七筆測資，說明第一次、第二次執行後各會得到什麼，並指出程式依據。資料中的 EOF 和讀到檔尾有什麼不同？
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>output/z-lab/CKP02.cbl</code>、<code>host-lab/fixtures.json</code></p><div class="prompt"><div class="prompt-head"><span>先預測結果</span><button type="button" data-copy="host-predict">複製 Prompt</button></div><pre id="host-predict">我準備在主機執行 CKP02。請根據程式和這七筆測資，說明第一次、第二次執行後各會得到什麼，並指出程式依據。資料中的 EOF 和讀到檔尾有什麼不同？
 </pre><div class="expected"><strong>預期回應</strong><p>七筆資料兩次執行的預期結果，以及程式依據。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>接著加入自己的 environment.md，請 Bob 依 BOB-GUIDE.md 從教材範本建立個人 JCL，不需 Python。作業會在主機編譯程式、執行兩次轉換與一次空檔測試，使用各作業獨立的暫存資料集。</p>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/README.md</code>、<code>output/host-lab/environment.md</code>、<code>host-lab/BOB-GUIDE.md</code></p><div class="prompt"><div class="prompt-head"><span>準備自己的主機作業</span><button type="button" data-copy="host-build">複製 Prompt</button></div><pre id="host-build">請依 host-lab/BOB-GUIDE.md 和我的 environment.md，從教材範本建立個人 JCL，不使用 Python。先不要提交，完成後帶我核對作業設定與測試步驟。

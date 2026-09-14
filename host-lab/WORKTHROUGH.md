@@ -8,7 +8,7 @@
 
 連線步驟見 [CONNECTION.md](CONNECTION.md)。把自己的帳號、job 名稱、volume 與 storage class 寫入 output/host-lab/environment.md，後面的提問可以直接引用這份資料。
 
-你會用到 `bank-source/reading/CKP02.TXT`、`host-lab/fixtures.json` 和 `host-lab/README.md`。主機連線與配置值以本場提供的設定為準。
+你會用到 `output/z-lab/CKP02.cbl`、`host-lab/fixtures.json` 和 `host-lab/README.md`。主機連線與配置值以本場提供的設定為準。
 
 ## 1. 先猜結果，再執行
 
