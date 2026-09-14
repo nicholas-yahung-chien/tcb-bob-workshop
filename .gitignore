@@ -2,7 +2,10 @@ customer-source/
 __pycache__/
 *.pyc
 .venv/
-.bob/
+.bob/*
+!.bob/rules/
+.bob/rules/*
+!.bob/rules/language.md
 .env*
 !/.env.example
 .DS_Store
