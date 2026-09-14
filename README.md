@@ -22,7 +22,7 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 
 ## 怎麼使用這些練習
 
-主機實作從 [個人連線](host-lab/CONNECTION.md) 開始，再依 [CKP02 實作步驟](host-lab/WORKTHROUGH.md) 分析程式、提交 JCL，並下載自己帳號的 JES 紀錄交給 Bob 核對。IMS 事件 CSV 與 SQLite 弱點修補是另外的延伸練習。
+主機實作從 [個人連線](host-lab/CONNECTION.md) 開始，再依 [CKP02 實作步驟](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/03-testing.html#host) 分析程式、提交 JCL，並下載自己帳號的 JES 紀錄交給 Bob 核對。IMS 事件 CSV 與 SQLite 弱點修補是另外的延伸練習。
 
 每個單元先介紹一個情境，再提供可以直接問 Bob 的問題。將頁面列出的檔案用 @ 加入對話，選擇對應模式，就可以開始。看完回覆，再依自己的疑問追問。
 
@@ -42,7 +42,6 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 | bank-source | 45 份合庫原始檔及 UTF-8 閱讀版 |
 | host-lab | 個人主機連線、CKP02 JCL 範本、測資與 Bob 操作指引 |
 | samples | 轉換程式、測試、JCL、事件及查詢練習 |
-| prompts | 各單元的提問範例 |
 | reference | 可以比較的參考解答 |
 | tests | 選做 Python 練習的測試案例 |
 | scripts/verify.py | 選做練習使用的驗收工具 |
