@@ -20,3 +20,5 @@ Learners use the IBM Bob chat panel in VSCode with Premium Package for Z (pp4z).
 Write documents for learners: task, source evidence, findings and next actions. Report only observed test commands, timestamps and results.
 
 For requirements exercises, use requests/change-application.docx as the primary business input. Do not invoke Puppeteer, browser automation, external conversion services, or install/create an MCP server to read request documents. If DOCX cannot be read with available local file capabilities, ask the learner to open it in Word and paste its text. Keep requests/customer-email.eml as an optional email example; do not parse it automatically.
+
+For planning, follow DOC-SPEC.md decision tracing and environment classification. Never expand ambiguous user answers into multiple confirmed decisions. Keep course baseline execution separate from proposed changes and production deployment. Correct incomplete designs before claiming implementation readiness.
