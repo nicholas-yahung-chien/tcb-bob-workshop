@@ -6,6 +6,10 @@ __pycache__/
 !.bob/rules/
 .bob/rules/*
 !.bob/rules/language.md
+!.bob/skills/
+.bob/skills/*
+!.bob/skills/cobol-explain-zh-tw/
+!.bob/skills/program-docs-zh-tw/
 .env*
 !/.env.example
 .DS_Store
