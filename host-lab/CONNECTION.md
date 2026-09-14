@@ -28,11 +28,7 @@
 
 請使用分配給你的個人帳號，讓提交的作業與查詢結果都能對應到自己的練習。
 
-`output/host-lab/environment.md` 是這一步才建立的個人文件，下載教材或登入 Zowe 時不會自動產生。確認已能查詢自己的資料集與作業後，在 Bob 選擇 Agent，輸入：
-
-```text
-我已用自己的帳號查詢到主機資料集與作業。請依 host-lab/CONNECTION.md，幫我建立 output/host-lab/environment.md，完成後列出內容讓我核對。只記錄個人作業配置，不要修改連線設定或提交作業。
-```
+`output/host-lab/environment.md` 是這一步才建立的個人文件，下載教材或登入 Zowe 時不會自動產生。確認已能查詢自己的資料集與作業後，從課程網頁複製「記下我的作業配置」prompt，交給 Bob 執行。
 
 Bob 建立文件時，依序完成以下事項：
 
@@ -55,7 +51,7 @@ Bob 建立文件時，依序完成以下事項：
 
 ## 執行與保留成果
 
-依 WORKTHROUGH.md 分析 CKP02、產生並提交 run.jcl，從回傳的 job ID 開啟紀錄並核對 owner。將 spool 保存於 `output/host-lab/logs/<job ID>/`，同名 DD 依 step 分開放置。
+依課程網頁的主機實作步驟分析 CKP02、產生並提交 run.jcl，從回傳的 job ID 開啟紀錄並核對 owner。將 spool 保存於 `output/host-lab/logs/<job ID>/`，同名 DD 依 step 分開放置。
 
 每項作業重新建立自己的暫存測資。教材與下載的 log 保存在本機；USS 個人目錄只存輕量設定。讀取逾時可以重新整理；提交逾時先搜尋自己的 jobs，確認是否已建立工作，不立即重送。
 

@@ -2,7 +2,7 @@
 
 這個練習在 z/OS 編譯並執行 CKP02，使用七筆合成資料比較第一次與第二次執行的結果，再確認空檔能正常結束。每項作業使用獨立暫存資料集。
 
-開始前，先確認自己的主機連線可用，並備妥本場提供的作業名稱與配置值。操作步驟與對話範例請看 [WORKTHROUGH.md](WORKTHROUGH.md)。
+開始前，先確認自己的主機連線可用，並備妥本場提供的作業名稱與配置值。操作步驟與對話範例請看 [課程網頁](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/03-testing.html#host)。
 
 連線與帳號使用方式請看 [CONNECTION.md](CONNECTION.md)。將不含密碼的個人配置放在 output/host-lab/environment.md；Bob 應保留這份檔案。
 
