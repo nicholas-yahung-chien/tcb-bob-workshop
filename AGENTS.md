@@ -1,6 +1,7 @@
 # Workshop workspace rules
 
 Use Traditional Chinese for learning artifacts. Read `SOURCE-MAP.md` and the requested prompt before acting.
+Use 支 for programs, 項 for jobs, 行 for source lines, and 筆 for data records or transactions. Explicitly distinguish program change scope from data conversion counts.
 Do not read `reference/` unless the user explicitly selects the reference examples.
 `bank-source/` contains the authorized bank source set and must remain unchanged. `samples/` is synthetic teaching material, not a production banking system. `customer-source/` is optional local-only material.
 Do not read outside the workspace. Do not contact external services, send mail, deploy, or modify git history while performing a lab.

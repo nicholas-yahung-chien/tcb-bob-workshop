@@ -57,6 +57,6 @@ Bob 建立文件時，依序完成以下事項：
 
 依 WORKTHROUGH.md 分析 CKP02、產生並提交 run.jcl，從回傳的 job ID 開啟紀錄並核對 owner。將 spool 保存於 `output/host-lab/logs/<job ID>/`，同名 DD 依 step 分開放置。
 
-每份作業重新建立自己的暫存測資。教材與下載的 log 保存在本機；USS 個人目錄只存輕量設定。讀取逾時可以重新整理；提交逾時先搜尋自己的 jobs，確認是否已建立工作，不立即重送。
+每項作業重新建立自己的暫存測資。教材與下載的 log 保存在本機；USS 個人目錄只存輕量設定。讀取逾時可以重新整理；提交逾時先搜尋自己的 jobs，確認是否已建立工作，不立即重送。
 
 CKP02 不呼叫 IMS，JES、編譯清單與比較結果不是 IMS transaction log。這個練習不需要啟停 IMS region 或 console 操作權限。
