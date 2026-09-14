@@ -43,6 +43,7 @@
 
 請分開說明現有行為、建議的做法，以及還需要確認的資訊。主機程式和本機範例各自分析，先討論計畫，不修改程式。
 </pre><div class="expected"><strong>預期回應</strong><p>需要分析的範圍、文件內容，以及還需要確認的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>若 Bob 一次問了多個問題，請用「Q1：…、Q2：…」分別回答；設計方案另外選擇。請核對它記錄的答案，不讓未回答的事項變成已確認決策。</p>
 <p>閱讀計畫時，想想兩件事：哪些建議有程式可以對照？哪些還需要業務或系統資料？有疑問的地方，直接在同一個對話追問。</p>
 <h2 id="deliver">4. 請 Bob 寫成文件</h2>
 <p>計畫確認後，在同一個對話切換到 <strong>Agent</strong>。前面已經說清楚的內容，這裡不用再重述一遍。</p>
@@ -50,10 +51,11 @@
 
 描述現況時，重新核對引用的原始碼；計畫中的建議保留為提案，需要環境資料才能確認的事項另外列出。完成後執行文件檢查並說明結果。
 </pre><div class="expected"><strong>預期回應</strong><p>output 裡的架構文件和實作清單，附上檢查結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/architecture.md</code>、<code>output/checklist.md</code>、<code>z-lab/CKP02.cbl</code>、<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>、<code>samples/cobol/TESTSHIFT.cbl</code>、<code>samples/jcl/IDSHIFT.jcl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>一起檢查計畫</span><button type="button" data-copy="verify-plan">複製 Prompt</button></div><pre id="verify-plan">請對照原始碼與 requests/change-application.docx，依 DOC-SPEC.md 核對架構文件和實作清單。現況描述是否有依據？提案是否滿足需求？引用的 JCL 和範例，是否確實屬於所描述的程式？
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/architecture.md</code>、<code>output/checklist.md</code>、<code>z-lab/CKP02.cbl</code>、<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>、<code>samples/cobol/TESTSHIFT.cbl</code>、<code>samples/jcl/IDSHIFT.jcl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>一起檢查計畫</span><button type="button" data-copy="verify-plan">複製 Prompt</button></div><pre id="verify-plan">請對照原始碼、需求申請單和實際對話，依 DOC-SPEC.md 核對架構文件與實作清單。每個「已確認」決策是否都有對應的回答？設計能否達成需求，還有哪些矛盾或缺口？
 
-修正文件中不一致的內容，再執行檢查；需要其他檔案或環境資料才能確定的事項另外列出。
+修正有證據可判斷的錯誤；回答有歧義的決策退回待確認，不替我選。請分開列出課程已知環境、業務待確認、設計提案，以及尚未取得的本次執行證據，說明哪些會影響後續實作。
 </pre><div class="expected"><strong>預期回應</strong><p>文件檢查結果，以及仍需要補齊的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>出現待確認事項是正常的，但先核對它們屬於業務問題、設計選擇，還是尚未執行的測試。課程已提供來源編碼與測試配置，不需取得生產資料集才能繼續。第 03 單元會驗證原有 CKP02；本單元的新功能提案仍需完成決策與設計後，才能另行實作。</p>
 <details><summary>完成後可以看什麼？</summary><p>開啟 output/architecture.md 和 output/checklist.md。前者說明現況、提案及影響，後者列出要做的工作、前置條件與完成標準。七個分析面向與詳細格式都在 DOC-SPEC.md。</p></details>
 <label class="check"><input type="checkbox" data-check="我能說明 CKP02 在處理什麼"><span>我能說明 CKP02 在處理什麼</span></label><label class="check"><input type="checkbox" data-check="我已看過架構文件與實作清單"><span>我已看過架構文件與實作清單</span></label><label class="check"><input type="checkbox" data-check="需要補充的資訊已列出"><span>需要補充的資訊已列出</span></label>
 </article><nav class="next" aria-label="前後單元"><a href="00-setup.html">← 課前準備</a><a href="02-documentation.html">COBOL 文件化 →</a></nav></main></div><footer><p>合作金庫 IBM Bob Workshop</p><p>2026.09.21 / 09.24</p></footer></body></html>
