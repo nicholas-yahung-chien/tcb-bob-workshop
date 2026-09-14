@@ -14,7 +14,10 @@ def export(dest,archive):
  assert all(n.split('/')[0] not in {'.github','site','web','lessons','docs','output'} for n in names)
  assert [n for n in names if n.startswith('scripts/')]==['scripts/verify.py']
  for n in names:
-  p=dest/n; p.parent.mkdir(parents=True,exist_ok=True); p.write_bytes((ROOT/n).read_bytes())
+  data=(ROOT/n).read_bytes()
+  if n.startswith('reference/'):
+   data=data.replace(b'bank-source/reading/CKP02.TXT',b'output/z-lab/CKP02.cbl')
+  p=dest/n; p.parent.mkdir(parents=True,exist_ok=True); p.write_bytes(data)
  manifest=[]
  original=json.loads((ROOT/'bank-source/manifest.json').read_text(encoding='utf-8'))
  for item in original:
