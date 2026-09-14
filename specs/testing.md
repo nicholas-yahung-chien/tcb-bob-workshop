@@ -21,7 +21,14 @@
 2. 遇到資料內的 EOF，仍會處理下一筆。
 3. 預覽不改動呼叫方的原始資料。
 
-先建立 `output/test-report.md`，記錄待測項目，再執行 `python scripts/verify.py unit`。完成後更新實際命令、結果，以及修正過的問題。Windows 若只有 py 指令，改用 py -3。
+先建立 `output/test-report.md`，記錄待測項目。在教材根目錄依序執行：
+
+```text
+python -m unittest discover -s tests -p test_normalizer.py -v
+python -m unittest discover -s output -p test_authored.py -v
+```
+
+確認第一組實際執行 11 個測試，第二組至少 3 個，而且都成功；零個測試不能算通過。Bob 應核對新增案例是否涵蓋上述三個情況，並更新報告的實際命令、測試數、結果與修正內容。Windows 若只有 py 指令，改用 py -3。
 
 失敗時修正 output 的程式；來源、規格與 tests 保留。測試報告約 300 字即可，尚未執行的 COBOL 或 IMS 項目另列。
 
