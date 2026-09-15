@@ -1,4 +1,12 @@
 {
+  "document-questions": {
+    "files": [],
+    "response": "完整問題、已有證據、缺少的資訊，以及各項問題影響的範圍。"
+  },
+  "document-plan-reply": {
+    "files": ["DOC-SPEC.md", "z-lab/CKP02.cbl", "requests/change-application.docx"],
+    "response": "CKP02 文件與 facts.json、來源核對結果，以及仍待確認的需求或正式環境資訊。"
+  },
   "01-ask": {
     "files": [
       "z-lab/CKP02.cbl"

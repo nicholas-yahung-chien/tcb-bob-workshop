@@ -15,6 +15,22 @@
 <p>直接閱讀工作流程產生的文件，確認章節、表格與關鍵數值完整。把這份文件加入 Bob 對話，切換到 <strong>Plan</strong>，想想還有哪些內容需要補齊。</p>
 <p>這裡也加入需求申請單與前面釐清的內容：程式說明回答「現在怎麼運作」，影響分析則回答「為了新需求，接下來要改什麼」。兩份資料一起看，才能區分既有功能與新增工作。</p>
 {{document-plan|規劃文件內容|Plan}}
+<details id="plan-reply"><summary>回覆參考：Bob 提出確認問題時，可以怎麼回答？</summary>
+<p>先核對 Bob 的完整問題，再依自己的練習範圍調整回覆。每次對話的問題編號可能不同，請按問題內容回答；下面的範例不代表正式環境設定或業務決策已獲確認。</p>
+<p>如果 Bob 只問「Q1–Q5 哪些可以回答」，卻沒有列出問題，先留在 <strong>Plan</strong> 模式，請它說明：</p>
+{{document-questions|請先列出完整問題|Plan}}
+<p>若問題與下列情況相同，可以將正式環境與新需求設計保留為待確認，同時繼續撰寫已有程式證據的說明。</p>
+<table><thead><tr><th>Bob 詢問的內容</th><th>本次文件可以怎麼處理</th></tr></thead><tbody>
+<tr><td>正式 INPUT1 資料集名稱、DSORG、RECFM、LRECL</td><td>課程測試配置與正式環境分開記錄，正式配置待確認。</td></tr>
+<tr><td>排程是否防止重複執行</td><td>排程機制待確認；程式重跑行為可以依原始碼推導。</td></tr>
+<tr><td>處理前後資料是否保留、保留多久</td><td>列為新需求的設計與保存政策待確認事項。</td></tr>
+<tr><td>計數結果放在 SYSOUT 或另外的資料集</td><td>依申請單保留討論，不代替業務決定。</td></tr>
+<tr><td>正式資料中的 EOF 標記是否存在、用途為何</td><td>正式資料與業務用途待確認；目前程式如何處理則依原始碼說明。</td></tr>
+</tbody></table>
+<p>確認文件計畫符合你的範圍後，切換到 <strong>Agent</strong>，可使用下方回覆接續產生文件。範例以未選做 IDSHIFT 為前提；若你有選做，請修改該句。已明確回答過的事項請沿用，不必重複確認。</p>
+{{document-plan-reply|確認文件範圍並開始撰寫|Agent}}
+<p>這份回覆可替代下方「完成程式文件」提示，不必兩份都送出。若 Bob 問的是其他問題，先判斷是否影響文件的正確性，不要直接套用上述答案。</p>
+</details>
 <p>確認內容後切換到 <strong>Agent</strong>。文件的章節、檔名與檢查方式都寫在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a>，沿用同一份規格即可。</p>
 {{04-document|完成程式文件|Agent}}
 <h2 id="verify">3. 回到程式，確認說明</h2>
