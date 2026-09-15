@@ -19,6 +19,9 @@
   "source_change": "None; source members are provisioned before class from the supplied files, including Chinese comments.",
   "cases": 7,
   "record_bytes": 400,
+  "data_encoding": "IBM-937",
+  "printdd_encoding": "IBM-937",
+  "printdd_record_bytes": 402,
   "runs": [
     "once",
     "twice",
@@ -35,7 +38,7 @@
   },
   "sha256": {
     "CHKCKP.cbl": "dcf292c882aafc259f07693ab4653d51c6f47c89b1140e10c6c7501226628e19",
-    "GENCKP.cbl": "80250384d171153816efce683a7f93f63b57bf38875ac88c91c32c31a54b3ab5",
+    "GENCKP.cbl": "9b34b8022e74a5d403faccbd3e2e22c4e975d5d8b1586923cb9f6b35f838a16b",
     "run.jcl": "a6e780684ddebf49a54bf5b3f75f1c820a79485d56701baae9c14326de932042"
   }
 }

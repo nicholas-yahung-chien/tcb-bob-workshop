@@ -4,9 +4,24 @@ import argparse, hashlib, json, re
 
 ROOT = Path(__file__).resolve().parents[1]
 
+def mixed_byte_length(value):
+    """Length for the verified ASCII/CJK fixture repertoire in IBM-937.
+
+    Actual character mappings and source bytes are checked on the host before
+    release. Count SO/SI for each Chinese run, not Python Unicode characters.
+    """
+    length=0; double=False
+    for char in value:
+        assert char in '\n\r' or ' '<=char<='~' or '\u4e00'<=char<='\u9fff', char
+        next_double=ord(char)>127
+        if next_double!=double: length+=1
+        length+=2 if next_double else 1
+        double=next_double
+    return length+int(double)
+
 def fixed(lines):
     result=['       '+s if s else '      *' for s in lines]
-    assert all(len(s)<=72 for s in result), [s for s in result if len(s)>72]
+    assert all(mixed_byte_length(s)<=72 for s in result), [s for s in result if mixed_byte_length(s)>72]
     return '\n'.join(result)+'\n'
 
 def generator(cases):
@@ -30,7 +45,7 @@ def generator(cases):
         pos=11
         for field,width in layout:
             value=c['fields'][field]
-            assert value.isascii() and len(value)<=width and '"' not in value
+            assert mixed_byte_length(value)<=width and '"' not in value
             if field in ['R-AC1','R-AC2','R-AC3','R-RJD']:
                 assert len(value)==width and value.isdigit()
             if value:
@@ -39,7 +54,11 @@ def generator(cases):
         assert pos==401
         lines += [f'    DISPLAY "CASE {i:04d} ORIGINAL RECORD; LENGTH=400".',
           """    DISPLAY 'ID="' REC-A(1:10) '"'.""",
-          """    DISPLAY 'BYTES-014-016="' REC-A(14:3) '"'.""",
+          '    IF REC-A(14:3) = "EOF"',
+          '        DISPLAY "EOF-MARKER-AT-014=YES"',
+          '    ELSE',
+          '        DISPLAY "EOF-MARKER-AT-014=NO"',
+          '    END-IF.',
           '''    MOVE '"' TO REC-P(1:1) REC-P(402:1).''',
           '    MOVE REC-A TO REC-P(2:400).',
           '    WRITE REC-P.']
@@ -187,7 +206,7 @@ def build(out,jobname,volume=None,storage_class=None,source_dataset='YOURUSER.TC
     if (out/'CKP02.cbl').exists():
         raise ValueError('Output contains an obsolete CKP02 copy; use a new output directory')
     out.mkdir(parents=True,exist_ok=True)
-    for name,src in sources.items(): (out/(name+'.cbl')).write_text(src,encoding='ascii',newline='\n')
+    for name,src in sources.items(): (out/(name+'.cbl')).write_text(src,encoding='utf-8',newline='\n')
     jcl=make_jcl(jobname,sources,source_dataset)
     if volume:
         jcl=jcl.replace('UNIT=SYSDA,',f'UNIT=3390,\n// VOL=SER={volume},STORCLAS={storage_class},\n// ')
@@ -200,7 +219,9 @@ def build(out,jobname,volume=None,storage_class=None,source_dataset='YOURUSER.TC
       'local_encoding':'UTF-8','local_newline':'LF',
       'source_transfer_encoding':'IBM-937','compiler_options':['CODEPAGE(937)','DBCS'],
       'jcl_encoding':'IBM-1047','source_change':'None; source members are provisioned before class from the supplied files, including Chinese comments.',
-      'cases':len(cases),'record_bytes':400,'runs':['once','twice','empty'],
+      'cases':len(cases),'record_bytes':400,'data_encoding':'IBM-937',
+      'printdd_encoding':'IBM-937','printdd_record_bytes':402,
+      'runs':['once','twice','empty'],
       'before_snapshots':{'CHECK1':'SNAP1 copies actual WORK before RUNONCE',
                           'CHECK2':'SNAP2 copies actual WORK before RUNTWICE'},
       'host_execution':'not inferred from generation',

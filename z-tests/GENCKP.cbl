@@ -24,11 +24,11 @@
            OPEN OUTPUT FILE-A FILE-B FILE-C FILE-D FILE-P.
            MOVE SPACES TO REC-A.
            MOVE "0012345678" TO REC-A(1:10).
-           MOVE "FORMOSA DEMO TRADING CO LTD"
+           MOVE "星河模擬股份有限公司"
              TO REC-A(12:40).
-           MOVE "CHEN DEMO CONTACT"
+           MOVE "陳怡君"
              TO REC-A(63:40).
-           MOVE "NO 10, DEMO RD, ZHONGZHENG DIST, TAIPEI"
+           MOVE "臺北市中正區模擬路10號"
              TO REC-A(103:64).
            MOVE "000000000"
              TO REC-A(209:9).
@@ -38,11 +38,15 @@
              TO REC-A(227:9).
            MOVE "20260915"
              TO REC-A(236:8).
-           MOVE "SYNTHETIC WORKSHOP DATA - NOT A REAL CUSTOMER"
+           MOVE "課程虛構資料,非真實客戶"
              TO REC-A(250:60).
            DISPLAY "CASE 0001 ORIGINAL RECORD; LENGTH=400".
            DISPLAY 'ID="' REC-A(1:10) '"'.
-           DISPLAY 'BYTES-014-016="' REC-A(14:3) '"'.
+           IF REC-A(14:3) = "EOF"
+               DISPLAY "EOF-MARKER-AT-014=YES"
+           ELSE
+               DISPLAY "EOF-MARKER-AT-014=NO"
+           END-IF.
            MOVE '"' TO REC-P(1:1) REC-P(402:1).
            MOVE REC-A TO REC-P(2:400).
            WRITE REC-P.
@@ -54,11 +58,11 @@
            WRITE REC-C.
            MOVE SPACES TO REC-A.
            MOVE "AB12345678" TO REC-A(1:10).
-           MOVE "LIN DEMO CUSTOMER"
+           MOVE "林小明"
              TO REC-A(12:40).
-           MOVE "CHEN DEMO CONTACT"
+           MOVE "林小明"
              TO REC-A(63:40).
-           MOVE "NO 11, DEMO RD, ZHONGZHENG DIST, TAIPEI"
+           MOVE "臺北市中正區模擬路11號"
              TO REC-A(103:64).
            MOVE "000000000"
              TO REC-A(209:9).
@@ -68,11 +72,15 @@
              TO REC-A(227:9).
            MOVE "20260915"
              TO REC-A(236:8).
-           MOVE "SYNTHETIC WORKSHOP DATA - NOT A REAL CUSTOMER"
+           MOVE "課程虛構資料,非真實客戶"
              TO REC-A(250:60).
            DISPLAY "CASE 0002 ORIGINAL RECORD; LENGTH=400".
            DISPLAY 'ID="' REC-A(1:10) '"'.
-           DISPLAY 'BYTES-014-016="' REC-A(14:3) '"'.
+           IF REC-A(14:3) = "EOF"
+               DISPLAY "EOF-MARKER-AT-014=YES"
+           ELSE
+               DISPLAY "EOF-MARKER-AT-014=NO"
+           END-IF.
            MOVE '"' TO REC-P(1:1) REC-P(402:1).
            MOVE REC-A TO REC-P(2:400).
            WRITE REC-P.
@@ -94,11 +102,15 @@
              TO REC-A(227:9).
            MOVE "00000000"
              TO REC-A(236:8).
-           MOVE "SYNTHETIC EOF CONTROL RECORD"
+           MOVE "課程模擬尾筆標記"
              TO REC-A(250:60).
            DISPLAY "CASE 0003 ORIGINAL RECORD; LENGTH=400".
            DISPLAY 'ID="' REC-A(1:10) '"'.
-           DISPLAY 'BYTES-014-016="' REC-A(14:3) '"'.
+           IF REC-A(14:3) = "EOF"
+               DISPLAY "EOF-MARKER-AT-014=YES"
+           ELSE
+               DISPLAY "EOF-MARKER-AT-014=NO"
+           END-IF.
            MOVE '"' TO REC-P(1:1) REC-P(402:1).
            MOVE REC-A TO REC-P(2:400).
            WRITE REC-P.
@@ -110,11 +122,11 @@
            WRITE REC-C.
            MOVE SPACES TO REC-A.
            MOVE "0000123456" TO REC-A(1:10).
-           MOVE "TAIPEI DEMO INDUSTRIAL CO LTD"
+           MOVE "青山模擬實業有限公司"
              TO REC-A(12:40).
-           MOVE "CHEN DEMO CONTACT"
+           MOVE "王志宏"
              TO REC-A(63:40).
-           MOVE "NO 13, DEMO RD, ZHONGZHENG DIST, TAIPEI"
+           MOVE "臺北市中正區模擬路13號"
              TO REC-A(103:64).
            MOVE "000000000"
              TO REC-A(209:9).
@@ -124,11 +136,15 @@
              TO REC-A(227:9).
            MOVE "20260915"
              TO REC-A(236:8).
-           MOVE "SYNTHETIC WORKSHOP DATA - NOT A REAL CUSTOMER"
+           MOVE "課程虛構資料,非真實客戶"
              TO REC-A(250:60).
            DISPLAY "CASE 0004 ORIGINAL RECORD; LENGTH=400".
            DISPLAY 'ID="' REC-A(1:10) '"'.
-           DISPLAY 'BYTES-014-016="' REC-A(14:3) '"'.
+           IF REC-A(14:3) = "EOF"
+               DISPLAY "EOF-MARKER-AT-014=YES"
+           ELSE
+               DISPLAY "EOF-MARKER-AT-014=NO"
+           END-IF.
            MOVE '"' TO REC-P(1:1) REC-P(402:1).
            MOVE REC-A TO REC-P(2:400).
            WRITE REC-P.
@@ -140,11 +156,11 @@
            WRITE REC-C.
            MOVE SPACES TO REC-A.
            MOVE "0012345678" TO REC-A(1:10).
-           MOVE "EOF DEMO TRADING CO LTD"
+           MOVE "EOF 模擬公司"
              TO REC-A(12:40).
-           MOVE "CHEN DEMO CONTACT"
+           MOVE "張雅雯"
              TO REC-A(63:40).
-           MOVE "NO 14, DEMO RD, ZHONGZHENG DIST, TAIPEI"
+           MOVE "臺北市中正區模擬路14號"
              TO REC-A(103:64).
            MOVE "000000000"
              TO REC-A(209:9).
@@ -154,11 +170,15 @@
              TO REC-A(227:9).
            MOVE "20260915"
              TO REC-A(236:8).
-           MOVE "SYNTHETIC WORKSHOP DATA - NOT A REAL CUSTOMER"
+           MOVE "課程虛構資料,非真實客戶"
              TO REC-A(250:60).
            DISPLAY "CASE 0005 ORIGINAL RECORD; LENGTH=400".
            DISPLAY 'ID="' REC-A(1:10) '"'.
-           DISPLAY 'BYTES-014-016="' REC-A(14:3) '"'.
+           IF REC-A(14:3) = "EOF"
+               DISPLAY "EOF-MARKER-AT-014=YES"
+           ELSE
+               DISPLAY "EOF-MARKER-AT-014=NO"
+           END-IF.
            MOVE '"' TO REC-P(1:1) REC-P(402:1).
            MOVE REC-A TO REC-P(2:400).
            WRITE REC-P.
@@ -170,11 +190,11 @@
            WRITE REC-C.
            MOVE SPACES TO REC-A.
            MOVE "00ABCDEFGH" TO REC-A(1:10).
-           MOVE "INVALID ID TEST COMPANY"
+           MOVE "非數字識別值測試公司"
              TO REC-A(12:40).
-           MOVE "CHEN DEMO CONTACT"
+           MOVE "李文華"
              TO REC-A(63:40).
-           MOVE "NO 15, DEMO RD, ZHONGZHENG DIST, TAIPEI"
+           MOVE "臺北市中正區模擬路15號"
              TO REC-A(103:64).
            MOVE "000000000"
              TO REC-A(209:9).
@@ -184,11 +204,15 @@
              TO REC-A(227:9).
            MOVE "20260915"
              TO REC-A(236:8).
-           MOVE "SYNTHETIC WORKSHOP DATA - NOT A REAL CUSTOMER"
+           MOVE "課程虛構資料,非真實客戶"
              TO REC-A(250:60).
            DISPLAY "CASE 0006 ORIGINAL RECORD; LENGTH=400".
            DISPLAY 'ID="' REC-A(1:10) '"'.
-           DISPLAY 'BYTES-014-016="' REC-A(14:3) '"'.
+           IF REC-A(14:3) = "EOF"
+               DISPLAY "EOF-MARKER-AT-014=YES"
+           ELSE
+               DISPLAY "EOF-MARKER-AT-014=NO"
+           END-IF.
            MOVE '"' TO REC-P(1:1) REC-P(402:1).
            MOVE REC-A TO REC-P(2:400).
            WRITE REC-P.
@@ -200,11 +224,11 @@
            WRITE REC-C.
            MOVE SPACES TO REC-A.
            MOVE "00        " TO REC-A(1:10).
-           MOVE "MISSING ID TEST COMPANY"
+           MOVE "空白識別值測試公司"
              TO REC-A(12:40).
-           MOVE "CHEN DEMO CONTACT"
+           MOVE "黃美玲"
              TO REC-A(63:40).
-           MOVE "NO 16, DEMO RD, ZHONGZHENG DIST, TAIPEI"
+           MOVE "臺北市中正區模擬路16號"
              TO REC-A(103:64).
            MOVE "000000000"
              TO REC-A(209:9).
@@ -214,11 +238,15 @@
              TO REC-A(227:9).
            MOVE "20260915"
              TO REC-A(236:8).
-           MOVE "SYNTHETIC WORKSHOP DATA - NOT A REAL CUSTOMER"
+           MOVE "課程虛構資料,非真實客戶"
              TO REC-A(250:60).
            DISPLAY "CASE 0007 ORIGINAL RECORD; LENGTH=400".
            DISPLAY 'ID="' REC-A(1:10) '"'.
-           DISPLAY 'BYTES-014-016="' REC-A(14:3) '"'.
+           IF REC-A(14:3) = "EOF"
+               DISPLAY "EOF-MARKER-AT-014=YES"
+           ELSE
+               DISPLAY "EOF-MARKER-AT-014=NO"
+           END-IF.
            MOVE '"' TO REC-P(1:1) REC-P(402:1).
            MOVE REC-A TO REC-P(2:400).
            WRITE REC-P.
