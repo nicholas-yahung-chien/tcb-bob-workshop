@@ -24,14 +24,18 @@
     "twice",
     "empty"
   ],
+  "before_snapshots": {
+    "CHECK1": "SNAP1 copies actual WORK before RUNONCE",
+    "CHECK2": "SNAP2 copies actual WORK before RUNTWICE"
+  },
   "host_execution": "not inferred from generation",
   "allocation_route": {
     "volume": "DEVVS1",
     "storage_class_selector": "SCNOSMS"
   },
   "sha256": {
-    "CHKCKP.cbl": "8958aa96bc63a0a57ef4844ce62f7af27e29d999bd8c5e17689c90964732705f",
+    "CHKCKP.cbl": "dcf292c882aafc259f07693ab4653d51c6f47c89b1140e10c6c7501226628e19",
     "GENCKP.cbl": "1b8f9fdf527f8b765b5351442c667ad68b68f1b1741ce04c1452e660f34ecde3",
-    "run.jcl": "948d55bd591a7d7370059363cbbf5184ab2c14a5e8a0b8e4223876fec553f50b"
+    "run.jcl": "afc9c51a6113b07e7742a242936c742696a26e33f9be248126a480de6469332f"
   }
 }
