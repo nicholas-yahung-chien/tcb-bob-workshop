@@ -39,10 +39,8 @@
 <details><summary>對照文件時，可以先看哪些地方？</summary><ul><li>資料內的 EOF 會略過這一筆的轉換，接著仍會讀下一筆；READ 的 AT END 才會設定迴圈使用的 EOF 旗標。</li><li>記錄第 14–16 位，對應 R-NAME 的第 3–5 位。閱讀欄位位置時，先看看是從哪裡起算。</li><li>程式宣告 VALUE SPACE；實際空白編碼與資料集屬性，需要搭配主機環境確認。</li><li>範例 JCL 執行 TESTSHIFT。CKP02 的正式 JCL 尚未提供。</li></ul><p>檢查程式會核對格式與數值；閱讀這些段落，可以再確認正文有沒有把不同概念混在一起。</p></details>
 <details><summary>重跑的例子，應該怎麼看？</summary><p>使用需求文件中的 0000123456，並讓第 14–16 位不是 EOF。第一次轉換得到 00123456 加兩個空白，第二次得到 123456 加四個空白。第一次後仍以 00 開頭，所以不能只用一個例子就認定重跑結果都相同。</p></details>
 <p>output 裡會有 program.md、impact-analysis.md 和 facts.json。前兩份方便閱讀，facts.json 則用來檢查欄位及例子是否一致。</p>
-{{check:我試過 Explain code 與文件化}}{{check:我已對照原始碼檢查文件}}
-<h2 id="extension">再試試看：CIS14</h2>
-<p>CIS14 在這裡用於程式閱讀。Wazi-JP 有 IMS 服務，不代表已部署合庫的 PSB、DBD、交易與資料；這段不要求把 CIS14 提交到主機執行。</p>
-<p>想進一步了解 IMS 程式，可以開啟 <code>z-lab/CIS14/CIS14.cbl</code>，加入同目錄的 Copybook，再從資料流開始問。</p>
-{{06-customer-analysis|閱讀 CIS14|Z Architecture}}
-<h2 id="modernization">再想一步：讓其他系統也能使用</h2>
-{{z-modernization|討論現代化選項|Z Architecture}}
+<h2 id="development">4. 接下來，要怎麼開發？</h2>
+<p>文件核對完成後，切換到 <strong>Plan</strong>，請 Bob 把分析整理成容易說明的開發方向。沿用剛才的對話，加入需求申請單與已完成的分析文件。</p>
+{{development-summary|請 Bob 說明接下來的開發工作|Plan}}
+<p>看完後，確認自己能說明要新增或修改哪些程式、各自負責什麼，以及還有哪些事情需要討論。這裡整理的是開發建議；下一單元會先執行原版 CKP02，驗證目前的行為。</p>
+{{check:我試過 Explain code 與文件化}}{{check:我已對照原始碼檢查文件}}{{check:我能說明接下來的開發方向與待確認事項}}

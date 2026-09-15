@@ -1,4 +1,8 @@
 {
+  "development-summary": {
+    "files": ["requests/change-application.docx", "z-lab/CKP02.cbl", "output/architecture.md", "output/checklist.md", "output/program.md", "output/impact-analysis.md"],
+    "response": "容易理解的開發建議、預計新增或修改的程式與作業流程，以及仍待確認的事項。"
+  },
   "document-questions": {
     "files": [],
     "response": "完整問題、已有證據、缺少的資訊，以及各項問題影響的範圍。"
