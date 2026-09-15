@@ -11,7 +11,7 @@
 
 ## 二、核對已備妥的個人 JCL
 
-1. 先確認 host-lab/environment.md 存在；若不存在，請學員依 CONNECTION.md 的「建立個人作業配置」完成並核對後再繼續。核對帳號、來源連線 tcb-zosmf（IBM-937）、作業連線 tcb-jobs（IBM-1047）、來源成員、JCL 成員、job 名稱、volume 與 storage class，不得含待填文字。job 名稱是自己的帳號加 A；配置為 DEVVS1、SCNOSMS。有落差先指出，不猜替代值。
+1. 先確認 host-lab/environment.md 存在；若不存在，請學員依 CONNECTION.md 的「建立個人作業配置」完成並核對後再繼續。核對帳號、來源連線 tcb-rse（IBM-937）、作業連線 tcb-jobs（IBM-1047）、來源成員、JCL 成員、job 名稱、volume 與 storage class，不得含待填文字。job 名稱是自己的帳號加 A；配置為 DEVVS1、SCNOSMS。有落差先指出，不猜替代值。
 2. 課程已在每個帳號的 <帳號>.TCBLAB.COBOL 準備 CKP02、GENCKP、CHKCKP，在 <帳號>.TCBLAB.JCL 準備 RUN，兩個資料集皆為 PDSE、FB、LRECL=80。CKP02 來自 z-lab/CKP02.cbl，兩支輔助程式來自 z-tests 中的同名 .cbl。三支來源均以 IBM-937 傳輸，包含原始中文註解；這是內容編碼，不是資料集 CCSID 標籤。請學員開啟並核對，不要求上傳、貼上或重建來源。缺少成員時請講師協助，不覆寫已有修改。
 3. 請學員以 tcb-jobs 開啟自己 TCBLAB.JCL(RUN)，依課程網頁使用 Download Member... 下載為本機 host-lab/run.jcl。已有個人檔案先保留並比較。以 z-tests/run.jcl 核對這份 JCL：預設 TCBP001 已替換為個人 job 名稱，YOURUSER 已替換為自己的帳號。不要重新產生已備妥的作業，也不要自動提交。
 4. CGEN、CCKP、CCHK 的 SYSIN 必須分別讀取自己的 TCBLAB.COBOL(GENCKP)、TCBLAB.COBOL(CKP02)、TCBLAB.COBOL(CHKCKP)，全部保留 CODEPAGE(937),DBCS。JCL 不內嵌任何一支 COBOL；教材來源不修改，不另存另一份 CKP02。
