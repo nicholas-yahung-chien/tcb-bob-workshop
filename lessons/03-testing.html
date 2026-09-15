@@ -12,14 +12,15 @@
 <tr><td><code>z-tests/run.jcl</code></td><td><code>&lt;帳號&gt;.TCBLAB.JCL(RUN)</code></td><td>已填入自己帳號的測試作業</td></tr>
 </tbody></table>
 <p>主機以資料集中的「成員」（member）保存檔案，所以 <code>CKP02.cbl</code> 對應成員 <code>CKP02</code>，<code>run.jcl</code> 對應成員 <code>RUN</code>。</p>
-<ol><li>在 Zowe Explorer 的「資料集」展開 <code>tcb-zosmf</code>（IBM-937），搜尋 <code>&lt;自己的帳號&gt;.TCBLAB.COBOL</code>。</li><li>展開資料集，開啟 <code>CKP02</code>。確認名稱開頭是自己的帳號，並核對 <code>PROGRAM-ID. CKP02.</code>、中文註解「公司統編時，轉換格式」及檔案最後一行。</li><li>確認同一個資料集也有 <code>GENCKP</code>、<code>CHKCKP</code>。這兩支是測試輔助程式。</li></ol>
+<ol><li>在 Zowe Explorer 的「資料集」展開 <code>tcb-rse</code>（IBM-937），搜尋 <code>&lt;自己的帳號&gt;.TCBLAB.COBOL</code>。</li><li>展開資料集，開啟 <code>CKP02</code>。確認名稱開頭是自己的帳號，並核對 <code>PROGRAM-ID. CKP02.</code>、中文註解「公司統編時，轉換格式」及檔案最後一行。</li><li>確認同一個資料集也有 <code>GENCKP</code>、<code>CHKCKP</code>。這兩支是測試輔助程式。</li></ol>
 <p>若缺少成員或內容顯示異常，先核對帳號與連線，再請講師協助。保留現有內容，不直接覆寫。</p>
+<details><summary>更新教材後，程式仍擠成一行？</summary><p>關閉原先以 tcb-zosmf 開啟的遠端分頁，不儲存。按 Ctrl+Shift+P 執行 <strong>Developer: Reload Window</strong>，再從 <code>tcb-rse</code> 開啟 CKP02。確認程式正常分行，並保留中文註解。若未顯示 tcb-rse，確認 IBM Z Open Editor 與 Zowe Explorer 都已啟用。</p><p>本次 COBOL 使用 tcb-rse（IBM-937）；JCL 與作業紀錄使用 tcb-jobs（IBM-1047）。請勿把兩者都設為 IBM-937。</p></details>
 {{check:我已開啟自己主機上的 CKP02，並確認三支程式已備妥}}
 <h3>核對並提交已準備好的作業</h3>
 <ol><li>在「資料集」改用 <code>tcb-jobs</code>（IBM-1047），搜尋 <code>&lt;自己的帳號&gt;.TCBLAB.JCL</code>，展開並開啟 <code>RUN</code>。</li><li>在 RUN 成員上按右鍵，選 <strong>Download Member...</strong>，下載到教材的 <code>host-lab</code> 資料夾，供 Bob 閱讀並保留本次執行版本。</li><li>下載選項取消 <strong>Generate Directory Structure</strong> 與 <strong>Use Uppercase Names</strong>，勾選 <strong>Override File Extension</strong> 並輸入 <code>jcl</code>，讓本機檔案命名為 <code>host-lab/run.jcl</code>。取消 <strong>Overwrite</strong>，避免覆寫既有成果；若已有檔案，先下載到另一個資料夾比較。編碼沿用 tcb-jobs 的 IBM-1047。</li></ol>
 <p>把這份 JCL 與自己的 environment.md 加入對話，請 Bob 帶你看編譯、執行與比對的步驟。每項作業都會重新建立獨立測資，執行兩次 CKP02，再測試空檔；不需要手動準備或貼上資料。</p>
 {{host-build|一起看這份主機作業|Agent}}
-<ol><li>核對 <code>host-lab/run.jcl</code> 的 job 名稱是自己的帳號加 A，配置為 DEVVS1、SCNOSMS；CGEN、CCKP、CCHK 的 SYSIN 分別讀取自己 <code>TCBLAB.COBOL</code> 裡的 GENCKP、CKP02、CHKCKP，編譯選項包含 <code>CODEPAGE(937),DBCS</code>。</li><li>在本機 JCL 編輯器按右鍵選 <strong>Submit as JCL</strong>，選 <code>tcb-jobs</code>（IBM-1047）連線。</li><li>記下回傳的 job ID，在 JOBS 的 <code>tcb-jobs</code> 核對 owner，等待 OUTPUT。</li><li>下載 JESMSGLG、JESYSMSG、CCKP 的 SYSPRINT，以及 CHECK1、CHECK2 的 SYSOUT，放在 <code>host-lab/logs/&lt;job ID&gt;/</code>，同名 DD 依 step 分開儲存。</li></ol>
+<ol><li>核對 <code>host-lab/run.jcl</code> 的 job 名稱是自己的帳號加 A，配置為 DEVVS1、SCNOSMS；CGEN、CCKP、CCHK 的 SYSIN 分別讀取自己 <code>TCBLAB.COBOL</code> 裡的 GENCKP、CKP02、CHKCKP，編譯選項包含 <code>CODEPAGE(937),DBCS</code>。</li><li>在本機 JCL 編輯器按右鍵選 <strong>Submit as JCL</strong>，選 <code>tcb-jobs</code>（RSE、IBM-1047）連線。</li><li>記下回傳的 job ID，在 JOBS 的 <code>tcb-jobs</code> 核對 owner，等待作業完成。</li><li>下載 JESMSGLG、JESYSMSG、CCKP 的 SYSPRINT，以及 CHECK1、CHECK2 的 SYSOUT，放在 <code>host-lab/logs/&lt;job ID&gt;/</code>，同名 DD 依 step 分開儲存。</li></ol>
 <p>將紀錄帶到<a href="04-logs.html#host">下一單元</a>，確認 RC 4 的來源、兩組七筆完整 400-byte 比對，以及 RUNEMPTY 的結果。請依本頁步驟操作，再到下一單元核對紀錄。</p>
 {{check:我已用自己的帳號提交 CKP02}}{{check:我已保存自己的 job ID 與主機紀錄}}
 <h2 id="optional">完成主機實作後，選擇延伸練習</h2>

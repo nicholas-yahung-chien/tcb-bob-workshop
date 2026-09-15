@@ -1,5 +1,7 @@
 # IBM-937 教材驗證紀錄
 
+**目前連線已改為 RSE API。** z/OSMF 的 IBM-937 文字回應包含 NEL，先前 splitlines() 比對漏掉編輯器分行問題。來源儲存與編譯的歷史證據仍有效，但不代表 GUI 相容性。最新 profile、LF 嚴格比對與 RSE 全流程測試見 [RSE 換行修正驗證](rse-newline-validation.md)。以下 z/OSMF 配置屬歷史紀錄。
+
 2026-09-14：教材以 `z-lab/CKP02.cbl` 為閱讀與編譯的共同來源。封裝時將閱讀版 CRLF 統一為 LF，內容、中文註解及欄位位置不變；`source-manifest.json` 記錄封裝後的雜湊。此文件供維護使用，不納入學員 ZIP。
 
 ## 2026-09-15 同名成員與預先配置

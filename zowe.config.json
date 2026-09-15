@@ -1,10 +1,11 @@
 {
   "$schema": "./zowe.schema.json",
   "profiles": {
-    "tcb-zosmf": {
-      "type": "zosmf",
+    "tcb-rse": {
+      "type": "rse",
       "properties": {
-        "port": 8192,
+        "port": 8195,
+        "basePath": "rseapi",
         "protocol": "https",
         "encoding": "IBM-937"
       },
@@ -22,9 +23,10 @@
       ]
     },
     "tcb-jobs": {
-      "type": "zosmf",
+      "type": "rse",
       "properties": {
-        "port": 8192,
+        "port": 8195,
+        "basePath": "rseapi",
         "protocol": "https",
         "encoding": "IBM-1047"
       },
@@ -32,8 +34,8 @@
     }
   },
   "defaults": {
-    "zosmf": "tcb-zosmf",
-    "base": "tcb-base"
+    "base": "tcb-base",
+    "rse": "tcb-rse"
   },
   "autoStore": true
 }

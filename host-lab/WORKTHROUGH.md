@@ -22,7 +22,7 @@
 
 ## 2. 開啟已備妥的來源與作業
 
-依課程網頁，以 tcb-zosmf（IBM-937）開啟自己的 <帳號>.TCBLAB.COBOL(CKP02)，核對中文註解與本機 z-lab/CKP02.cbl 的內容。同一資料集也已備妥 GENCKP、CHKCKP，不需上傳或貼上。
+依課程網頁，以 tcb-rse（IBM-937）開啟自己的 <帳號>.TCBLAB.COBOL(CKP02)，核對中文註解與本機 z-lab/CKP02.cbl 的內容。同一資料集也已備妥 GENCKP、CHKCKP，不需上傳或貼上。
 
 以 tcb-jobs（IBM-1047）開啟 <帳號>.TCBLAB.JCL(RUN)，另存本機 host-lab/run.jcl。將它與 environment.md、BOB-GUIDE.md 加入對話，使用課程網頁的「一起看這份主機作業」Prompt。
 
