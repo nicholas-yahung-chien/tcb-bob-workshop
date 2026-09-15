@@ -1,9 +1,21 @@
 <!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="從現有測試出發，看看正常、例外和重跑時的結果。"><title>IBM Bob - 合庫 workshop · 賦能 Z 開發</title><link rel="icon" type="image/svg+xml" href="../../assets/bob-icon.svg"><link rel="alternate icon" href="../../assets/bob-favicon.ico"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/app.js" defer></script></head><body><a class="skip" href="#main">跳至主要內容</a><div class="utility">IBM Bob · 合作金庫 Workshop · 2026.09</div><header><a class="brand" href="../../index.html">IBM <span>Bob</span></a><nav aria-label="主要導覽"><a href="../../workshops/tcb/index.html">課程首頁</a><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop">GitHub ↗</a></nav></header><div class="layout with-side"><aside><p class="side-label">練習單元</p><nav aria-label="課程導覽"><a  href="00-setup.html">00　課前準備</a><a  href="01-planning.html">01　需求規劃</a><a  href="02-documentation.html">02　COBOL 文件化</a><a aria-current=page href="03-testing.html">03　測試與修正</a><a  href="04-logs.html">04　主機紀錄與 IMS 事件</a><a  href="05-sast.html">05　查詢弱點修補</a><a  href="06-reference.html">06　成果與解答</a><a  href="07-help.html">07　常見問題</a><a  href="08-source-map.html">08　認識練習程式</a></nav><p class="progress" aria-live="polite"></p></aside><main id="main"><section class="hero"><p class="eyebrow">測試與修正</p><h1>換一筆資料，結果還對嗎？</h1><p class="lead">從現有測試出發，看看正常、例外和重跑時的結果。</p></section><article><h2 id="story">除了正常資料，還要試哪些情況？</h2>
-<p>程式看起來合理，還需要用資料試試看。先用自己的主機帳號執行 CKP02，比較預期與實際結果；完成後，再選做補測試與本機需求練習。</p>
+<p>程式看起來合理，還需要用資料試試看。先用自己的主機帳號執行 CKP02，比較預期與實際結果；想多練習時，可以展開相關步驟旁的延伸練習。</p>
 <h2 id="host">在主機跑一次 CKP02</h2>
 <p>先完成<a href="00-setup.html#host-connection">個人主機連線</a>。開啟 CKP02 與 <code>z-tests/fixtures.json</code> 的七筆測資，先和 Bob 討論結果。</p>
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>z-tests/fixtures.json</code></p><div class="prompt"><div class="prompt-head"><span>先預測結果</span><button type="button" data-copy="host-predict">複製 Prompt</button></div><pre id="host-predict">我準備在主機執行 CKP02。請根據程式和這七筆測資，說明第一次、第二次執行後各會得到什麼，並指出程式依據。資料中的 EOF 和讀到檔尾有什麼不同？
 </pre><div class="expected"><strong>預期回應</strong><p>七筆資料兩次執行的預期結果，以及程式依據。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<details id="cobol"><summary>延伸練習：替 IDSHIFT 補上 COBOL 測試（選做）</summary>
+<p>如果你在上一單元選讀過 IDSHIFT，可以接著練習補測試。TESTSHIFT 是呼叫 IDSHIFT 的獨立測試程式，與本次 CKP02 主機測試分開；未選讀者可略過，直接繼續下方的主機實作。</p>
+<p>TESTSHIFT 已經有幾個簡單案例。把它和 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/testing.md">testing.md</a> 一起加入對話，讓 Bob 沿用現有寫法。</p>
+<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>specs/testing.md</code>、<code>samples/cobol/TESTSHIFT.cbl</code></p><div class="prompt"><div class="prompt-head"><span>補上 COBOL 測試</span><button type="button" data-copy="z-tests">複製 Prompt</button></div><pre id="z-tests">請參考 TESTSHIFT 與實際轉換邏輯，依 specs/testing.md 補上 COBOL 測試和案例說明，存到 output。每個案例列出輸入、預期結果和對應條件。
+
+完成後說明哪些案例已執行、哪些還需要編譯或主機環境。
+</pre><div class="expected"><strong>預期回應</strong><p>COBOL 測試程式、案例說明及執行前提。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>完成後會有 cobol-test-plan.md 和 TESTSHIFT-EXT.cbl。編譯執行需要 COBOL 環境；還沒執行的案例，先保留為待執行。</p>
+<label class="check"><input type="checkbox" data-check="選做者已保存 COBOL 測試程式與案例說明"><span>選做者已保存 COBOL 測試程式與案例說明</span></label>
+<p>完成後回到 CKP02，繼續開啟主機上已準備好的程式。</p>
+</details>
+
 <h3 id="upload-source">開啟主機上已準備好的程式</h3>
 <p>主機已為每個帳號準備好本次練習的程式與 JCL。主機上的 CKP02 與剛才閱讀的 <code>z-lab/CKP02.cbl</code> 內容相同，包含中文註解；不需要再複製貼上或上傳。</p>
 <table><thead><tr><th>教材檔案</th><th>自己的主機位置</th><th>用途</th></tr></thead><tbody>
@@ -26,27 +38,22 @@
 </pre><div class="expected"><strong>預期回應</strong><p>作業步驟與個人配置的說明，以及 host-lab/jcl-review.md 的核對結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <ol><li>核對 <code>host-lab/run.jcl</code> 的 job 名稱是自己的帳號加 A，配置為 DEVVS1、SCNOSMS；CGEN、CCKP、CCHK 的 SYSIN 分別讀取自己 <code>TCBLAB.COBOL</code> 裡的 GENCKP、CKP02、CHKCKP，編譯選項包含 <code>CODEPAGE(937),DBCS</code>。</li><li>在本機 JCL 編輯器按右鍵選 <strong>Submit as JCL</strong>，選 <code>tcb-jobs</code>（RSE、IBM-1047）連線。</li><li>記下回傳的 job ID，在 JOBS 的 <code>tcb-jobs</code> 核對 owner，等待作業完成。</li><li>從 tcb-jobs 開啟 JESMSGLG、JESYSMSG、CHECK1／SYSOUT、CHECK2／SYSOUT；再從 tcb-rse 開啟同一個 job ID 的 CCKP／SYSPRINT。核對中文及雙引號內的識別值後，將各分頁以 <strong>檔案 → 另存新檔</strong> 保存到 <code>host-lab/logs/&lt;job ID&gt;/&lt;step&gt;/</code>，避免同名 DD 互相覆蓋。</li></ol>
 <p>目前整批下載作業紀錄的功能可能未沿用連線的編碼；請依上一步開啟並另存各份紀錄。若看到中文失真，先確認連線，保留原檔，不把異常文字交給 Bob 當作程式內容。</p>
-<p>將紀錄帶到<a href="04-logs.html#host">下一單元</a>，確認 RC 4 的來源、兩組七筆完整 400-byte 比對，以及 RUNEMPTY 的結果。請依本頁步驟操作，再到下一單元核對紀錄。</p>
 <label class="check"><input type="checkbox" data-check="我已用自己的帳號提交 CKP02"><span>我已用自己的帳號提交 CKP02</span></label><label class="check"><input type="checkbox" data-check="我已保存自己的 job ID 與主機紀錄"><span>我已保存自己的 job ID 與主機紀錄</span></label>
-<h2 id="optional">完成主機實作後，選擇延伸練習</h2>
-<h2 id="cobol">1. 從現有測試開始補</h2>
-<p>TESTSHIFT 已經有幾個簡單案例。把它和 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/testing.md">testing.md</a> 一起加入對話，讓 Bob 沿用現有寫法。</p>
-<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>specs/testing.md</code>、<code>samples/cobol/TESTSHIFT.cbl</code></p><div class="prompt"><div class="prompt-head"><span>補上 COBOL 測試</span><button type="button" data-copy="z-tests">複製 Prompt</button></div><pre id="z-tests">請參考 TESTSHIFT 與實際轉換邏輯，依 specs/testing.md 補上 COBOL 測試和案例說明，存到 output。每個案例列出輸入、預期結果和對應條件。
-
-完成後說明哪些案例已執行、哪些還需要編譯或主機環境。
-</pre><div class="expected"><strong>預期回應</strong><p>COBOL 測試程式、案例說明及執行前提。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>完成後會有 cobol-test-plan.md 和 TESTSHIFT-EXT.cbl。編譯執行需要 COBOL 環境；還沒執行的案例，先保留為待執行。</p>
-<h2 id="implement">2. 在本機試跑轉換規則</h2>
-<p>以下為選做練習，另需本機 Python 3.10 以上；不影響前面的主機實作。Python 範例使用同樣的資料位置與轉換規則，可以在一般筆電執行。它也包含這次新需求的預覽與統計功能。</p>
+<details id="implement"><summary>延伸練習：在本機試跑預覽與轉換規則（選做）</summary>
+<p id="optional">完成主機實作後，若想試做需求中的預覽與統計功能，可以使用這個獨立的 Python 範例。它使用同樣的資料位置與轉換規則，另需本機 Python 3.10 以上；不代表 CKP02 已完成需求變更。你可以略過，直接前往下一單元分析主機紀錄。</p>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code>、<code>specs/testing.md</code></p><div class="prompt"><div class="prompt-head"><span>完成範例並跑測試</span><button type="button" data-copy="05-unit">複製 Prompt</button></div><pre id="05-unit">請依 specs/testing.md 中選做練習的介面約定，完成 Python 轉換範例並補上測試，存到 output。這些介面約定只用於本機練習。
 </pre><div class="expected"><strong>預期回應</strong><p>完成的 Python 範例、三個新增測試和實際測試報告。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/testing.md</code></p><div class="prompt"><div class="prompt-head"><span>看看測試結果</span><button type="button" data-copy="verify-unit">複製 Prompt</button></div><pre id="verify-unit">請執行 specs/testing.md 裡的 Python 測試，說明哪些通過、哪些失敗，再把結果更新到測試報告。
 </pre><div class="expected"><strong>預期回應</strong><p>既有與新增測試的執行結果，並更新測試報告。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>在 Bob 的執行結果中，應有 11 個既有測試與 3 個新增測試。開啟 output/test-report.md，看看測了什麼、結果如何。</p>
-<h2 id="repair">3. 測試失敗時，接著怎麼問？</h2>
-<p>把完整的失敗訊息留在對話裡。Bob 已經有需求和程式，接下來只要針對這次失敗請它協助。</p>
+<details id="repair"><summary>測試失敗時：請 Bob 找出原因並修正</summary>
+<p>如果剛才的本機測試失敗，把完整訊息留在對話裡，再請 Bob 對照需求修正 output 裡的檔案。</p>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>output/</code></p><div class="prompt"><div class="prompt-head"><span>找出原因再修正</span><button type="button" data-copy="09-repair">複製 Prompt</button></div><pre id="09-repair">這是剛才的檢查結果。請幫我找出失敗原因，對照需求修正 output 裡的檔案，再跑一次相同的檢查。也請簡單說明你改了什麼。
 </pre><div class="expected"><strong>預期回應</strong><p>失敗原因、修改內容，以及重新檢查的結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<details><summary>測試通過後，再看一件事</summary><p>預覽模式應保留原始資料，套用模式則回傳轉換結果。看看兩者的統計是否一致，也看看同一筆資料再跑一次的結果。Python 測試記錄和 COBOL 執行結果分開保存。</p></details>
-<label class="check"><input type="checkbox" data-check="我有 COBOL 測試程式與案例說明"><span>我有 COBOL 測試程式與案例說明</span></label><label class="check"><input type="checkbox" data-check="選做者已記錄 Python 測試結果；未執行者標記未執行"><span>選做者已記錄 Python 測試結果；未執行者標記未執行</span></label><label class="check"><input type="checkbox" data-check="我知道怎麼把失敗訊息交給 Bob 繼續處理"><span>我知道怎麼把失敗訊息交給 Bob 繼續處理</span></label>
+<label class="check"><input type="checkbox" data-check="我已記錄失敗原因與重新測試的結果"><span>我已記錄失敗原因與重新測試的結果</span></label>
+</details>
+<p>測試通過後，再確認預覽模式保留原始資料，套用模式回傳轉換結果；比較兩者的統計，以及同一筆資料再跑一次的結果。Python 測試記錄和 COBOL 執行結果分開保存。</p>
+<label class="check"><input type="checkbox" data-check="選做者已記錄 Python 測試結果；未執行者標記未執行"><span>選做者已記錄 Python 測試結果；未執行者標記未執行</span></label>
+</details>
+<p>將紀錄帶到<a href="04-logs.html#host">下一單元</a>，確認 RC 4 的來源、兩組七筆完整 400-byte 比對，以及 RUNEMPTY 的結果。請依本頁步驟操作，再到下一單元核對紀錄。</p>
 </article><nav class="next" aria-label="前後單元"><a href="02-documentation.html">← COBOL 文件化</a><a href="04-logs.html">主機紀錄與 IMS 事件 →</a></nav></main></div><footer><p>合作金庫 IBM Bob Workshop</p><p>2026.09.21 / 09.24</p></footer></body></html>
