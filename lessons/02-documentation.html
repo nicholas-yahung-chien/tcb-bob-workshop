@@ -5,10 +5,12 @@
 <p>執行到 <strong>Generate explanation</strong> 時，確認出現「已使用技能 <code>cobol-explain-zh-tw</code>」。完成後開啟結果連結，確認主要說明、章節與表格使用繁體中文，程式識別字保留原文。若未看到技能或文件仍為英文，請依<a href="07-help.html#workflow-language">中文文件的排解步驟</a>處理。</p>
 <p>回覆談到轉換條件後，可以追問實際執行時會遇到的情況，例如同一份資料再跑一次。</p>
 {{z-explain|追問執行時的行為|Z Code}}
-<h2 id="copybook">2. 加入 Copybook 和 JCL</h2>
-<p>接著看看另一個小範例 IDSHIFT。它把資料定義放在 Copybook，另外附有測試程式和 JCL。把相關檔案一起交給 Bob，就能比較兩種寫法。</p>
+<details id="copybook"><summary>延伸閱讀：用 IDSHIFT 認識 Copybook 與 JCL（選做）</summary>
+<p>IDSHIFT 是獨立的教學範例，用來練習辨識 Copybook、子程式呼叫與 JCL 的關係。它處理記憶體中的單筆資料，並非 CKP02 的新版，也未實作需求單中的試跑與統計功能。你可以略過這段，直接進行下一步 CKP02 文件化。</p>
+<p>想比較兩種寫法時，再把下列檔案一起交給 Bob：IDSHIFT 使用 IDREC.cpy 定義資料，由 TESTSHIFT 呼叫；範例 JCL 執行 TESTSHIFT。請從檔案找出這些關係的依據。</p>
 {{z-context|把相關檔案一起看|Z Code}}
-<h2 id="document">3. 整理成接手文件</h2>
+<p>完成後回到 CKP02。這段比較可另外保留筆記，不是後續程式文件的必填內容。</p></details>
+<h2 id="document">2. 整理成接手文件</h2>
 <p>保持 <strong>Z Code</strong>，點 <strong>Start Workflow</strong>，先選擇本機教材工作區，再於 <strong>Bob workflows</strong> 找到 <strong>Generate program documentation</strong>，點右側的 <strong>Start</strong>。依流程選取 CKP02.cbl，完成後從結果連結開啟產生的文件。</p>
 <p>接著統一文件用語：開啟一般 Bob 對話，切換到 <strong>Agent</strong>，加入剛才產生的 Markdown 文件。從輸入框的 <code>/</code> 清單選取 <code>/program-docs-zh-tw</code>，再接上下方要求送出。這個技能在工作流程完成後使用；已是繁體中文的內容會核對用語，英文內容則翻譯並保留技術細節。</p>
 {{workflow-docs-zh-tw|整理為台灣繁體中文|Agent}}
@@ -17,13 +19,13 @@
 {{document-plan|規劃文件內容|Plan}}
 <p>確認內容後切換到 <strong>Agent</strong>。文件的章節、檔名與檢查方式都寫在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a>，沿用同一份規格即可。</p>
 {{04-document|完成程式文件|Agent}}
-<h2 id="verify">4. 回到程式，確認說明</h2>
+<h2 id="verify">3. 回到程式，確認說明</h2>
 <p>寫完文件後，請 Bob 重新看原始碼，沿著條件成立與不成立的路徑各走一次。這樣比較容易發現摘要和詳細說明是否前後不同，也能看到條件之後還會做哪些事。</p>
 {{verify-docs|檢查文件中的例子|Agent}}
 <details><summary>對照文件時，可以先看哪些地方？</summary><ul><li>資料內的 EOF 會略過這一筆的轉換，接著仍會讀下一筆；READ 的 AT END 才會設定迴圈使用的 EOF 旗標。</li><li>記錄第 14–16 位，對應 R-NAME 的第 3–5 位。閱讀欄位位置時，先看看是從哪裡起算。</li><li>程式宣告 VALUE SPACE；實際空白編碼與資料集屬性，需要搭配主機環境確認。</li><li>範例 JCL 執行 TESTSHIFT。CKP02 的正式 JCL 尚未提供。</li></ul><p>檢查程式會核對格式與數值；閱讀這些段落，可以再確認正文有沒有把不同概念混在一起。</p></details>
 <details><summary>重跑的例子，應該怎麼看？</summary><p>使用需求文件中的 0000123456，並讓第 14–16 位不是 EOF。第一次轉換得到 00123456 加兩個空白，第二次得到 123456 加四個空白。第一次後仍以 00 開頭，所以不能只用一個例子就認定重跑結果都相同。</p></details>
 <p>output 裡會有 program.md、impact-analysis.md 和 facts.json。前兩份方便閱讀，facts.json 則用來檢查欄位及例子是否一致。</p>
-{{check:我試過 Explain code 與文件化}}{{check:我能說明 Copybook 和 JCL 的用途}}{{check:我已對照原始碼檢查文件}}
+{{check:我試過 Explain code 與文件化}}{{check:我已對照原始碼檢查文件}}
 <h2 id="extension">再試試看：CIS14</h2>
 <p>CIS14 在這裡用於程式閱讀。Wazi-JP 有 IMS 服務，不代表已部署合庫的 PSB、DBD、交易與資料；這段不要求把 CIS14 提交到主機執行。</p>
 <p>想進一步了解 IMS 程式，可以開啟 <code>z-lab/CIS14/CIS14.cbl</code>，加入同目錄的 Copybook，再從資料流開始問。</p>

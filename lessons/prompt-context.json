@@ -29,10 +29,6 @@
     "files": [
       "DOC-SPEC.md",
       "z-lab/CKP02.cbl",
-      "samples/cobol/IDSHIFT.cbl",
-      "samples/cobol/IDREC.cpy",
-      "samples/cobol/TESTSHIFT.cbl",
-      "samples/jcl/IDSHIFT.jcl",
       "requests/change-application.docx"
     ],
     "response": "程式說明與影響分析的章節，以及需要補充的內容。"
@@ -107,10 +103,6 @@
       "output/impact-analysis.md",
       "output/facts.json",
       "z-lab/CKP02.cbl",
-      "samples/cobol/IDSHIFT.cbl",
-      "samples/cobol/IDREC.cpy",
-      "samples/cobol/TESTSHIFT.cbl",
-      "samples/jcl/IDSHIFT.jcl",
       "requests/change-application.docx"
     ],
     "response": "條件分支與欄位的核對、文件修正說明，以及檢查結果。"
@@ -121,10 +113,6 @@
       "output/architecture.md",
       "output/checklist.md",
       "z-lab/CKP02.cbl",
-      "samples/cobol/IDSHIFT.cbl",
-      "samples/cobol/IDREC.cpy",
-      "samples/cobol/TESTSHIFT.cbl",
-      "samples/jcl/IDSHIFT.jcl",
       "requests/change-application.docx"
     ],
     "response": "文件檢查結果，以及仍需要補齊的資訊。"

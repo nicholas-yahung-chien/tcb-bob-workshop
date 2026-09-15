@@ -8,7 +8,7 @@
 
 程式的現有行為附上來源檔名和行號；變更建議另列。資料沒有提供的地方，說明還需要什麼資訊。例如程式的欄位宣告能說明長度，實際編碼、資料集屬性與外部備份則需要環境資料才能確認。
 
-課程閱讀與文件化使用教材已附的 z-lab/CKP02.cbl；以 source-manifest.json 確認內容完整。對照範例使用 samples/cobol 下的 IDSHIFT.cbl、IDREC.cpy、TESTSHIFT.cbl 與 samples/jcl/IDSHIFT.jcl，兩組程式分開說明。
+課程閱讀與文件化使用教材已附的 z-lab/CKP02.cbl；以 source-manifest.json 確認內容完整。IDSHIFT 是選做延伸閱讀：只有學員選擇該練習時，才讀取 samples/cobol 下的 IDSHIFT.cbl、IDREC.cpy、TESTSHIFT.cbl 與 samples/jcl/IDSHIFT.jcl，並與 CKP02 分開說明。它不是需求變更的實作；未選做不影響主流程文件的完成。
 
 ## 先核對，再整理說明
 
@@ -81,7 +81,7 @@
 | impact-analysis.md | 需求申請單與已確認討論直接要改的部分、可能受影響的部分，以及需要補充的資料 |
 | facts.json | 下表的欄位資料、重跑結果與來源引文，使用純 JSON |
 
-說明 CKP02 的資料宣告和 IDSHIFT 的 Copybook 用法，並分開描述檔案讀寫與記憶體修改。JCL 的執行對象和需要填入的設定也列入文件。
+主流程說明 CKP02 的資料宣告與檔案讀寫。若選做 IDSHIFT 延伸閱讀，可另附 Copybook 用法、記憶體修改、JCL 執行對象及待填設定的比較筆記；未選做時不要求提供這些內容。
 
 | facts.json 的鍵 | 型別與用途 |
 |---|---|
@@ -114,6 +114,6 @@
 3. 將 識別欄位 0000123456（第 14–16 位不是 EOF）的教學重跑案例實際推導兩次。第一次之後是否仍符合條件？兩份 Markdown 和 JSON 的說法應相同。
 4. 找出讀檔結束與資料內 EOF 的處理位置，確認兩者的說明沒有混在一起。
 5. 欄位位置註明是從整筆記錄還是欄位本身起算；空白的實際編碼則依執行環境確認。
-6. 打開 JCL，核對 EXEC 和 DD 的實際內容，確認文件描述的是這份檔案。
+6. 若文件引用了已提供的 JCL，打開該檔案核對 EXEC 和 DD 的實際內容。未選做 IDSHIFT 時，不要求讀取或說明它的範例 JCL。
 
 JSON 與 Markdown 的數值、例子及結論應一致。Bob 的判斷仍需由學員對照原始碼；缺少證據的項目保留待確認。發現落差時修正 output，保留來源、規格與測試。
