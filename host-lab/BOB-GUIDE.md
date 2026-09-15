@@ -16,16 +16,16 @@
 3. 先使用現有的 host-lab/run.jcl，不要求重新下載。只有本機缺少這份檔案時，才請學員以 tcb-jobs 開啟自己 TCBLAB.JCL(RUN)，依課程網頁的收合指引下載一次。已有個人修改時保留，以本次要提交的版本核對。以 z-tests/run.jcl 核對這份 JCL：預設 TCBP001 已替換為個人 job 名稱，YOURUSER 已替換為自己的帳號。不要重新產生已備妥的作業，也不要自動提交。
 4. CGEN、CCKP、CCHK 的 SYSIN 必須分別讀取自己的 TCBLAB.COBOL(GENCKP)、TCBLAB.COBOL(CKP02)、TCBLAB.COBOL(CHKCKP)，全部保留 CODEPAGE(937),DBCS。JCL 不內嵌任何一支 COBOL；教材來源不修改，不另存另一份 CKP02。
 5. 確認 JCL 敘述不超過 72 欄，// 位置及 IF/ENDIF 配對正確。本次 JCL 使用英文註解，以 IBM-1047 提交；COBOL 原始中文註解仍保留。核對 IGY.V6R4M0.SIGYCOMP、CEE.SCEELKED、CEE.SCEERUN。保留每項作業獨立的 && 暫存資料集、FB 與 LRECL=400，不新增共用永久測資或 IMS 指令。GENCKP 會自動建立測資，不要求學員貼上測試資料。
-6. 對照 z-tests/fixtures.json 的七筆 id、marker_position、once、twice，確認 GENCKP 建立測資、兩組預期與空檔；SNAP1 在 RUNONCE 前複製實際 &&WORK 至 &&BEFORE1，SNAP2 在 RUNTWICE 前複製當時的 &&WORK 至 &&BEFORE2；兩者都必須 RC 0 才進行該次轉換。CHECK1、CHECK2 的 BEFOREDD 分別讀取這兩份快照，不得使用原始測資或 EXPECTDD 代替。CHKCKP 同步讀取 before、actual、expected，檢查筆數與讀取狀態，並比對 actual 與 expected 的完整 400 bytes。不修改預期值來讓測試通過。
+6. 對照 z-tests/fixtures.json 的七筆 id、fields、once、twice，確認 GENCKP 建立測資、兩組預期與空檔；SNAP1 在 RUNONCE 前複製實際 &&WORK 至 &&BEFORE1，SNAP2 在 RUNTWICE 前複製當時的 &&WORK 至 &&BEFORE2；兩者都必須 RC 0 才進行該次轉換。CHECK1、CHECK2 的 BEFOREDD 分別讀取這兩份快照，不得使用原始測資或 EXPECTDD 代替。CHKCKP 同步讀取 before、actual、expected，檢查筆數與讀取狀態，並比對 actual 與 expected 的完整 400 bytes。不修改預期值來讓測試通過。
 7. 將檢查證據存入 host-lab/jcl-review.md。可使用系統文字工具量測行長；未量測的項目如實標記。帶學員看編譯、連結、測資與測試步驟。預先配置不代表學員自己的這次作業已執行。
 
 由學員在本機 host-lab/run.jcl 使用 tcb-jobs（IBM-1047）及 Submit as JCL 提交，記錄 job ID，再下載紀錄。
 
 ## 三、分析實際測試
 
-讀取實際 run.jcl、z-tests/fixtures.json 與 host-lab/logs/<job ID>/ 的 JESMSGLG、JESYSMSG、CCKP/SYSPRINT、GENERATE/SYSOUT、CHECK1/SYSOUT、CHECK2/SYSOUT。同名 DD 依 step 分開存放。缺檔時請學員下載，不能借用其他作業結果。
+讀取實際 run.jcl、z-tests/fixtures.json 與 host-lab/logs/<job ID>/ 的 JESMSGLG、JESYSMSG、CCKP/SYSPRINT、GENERATE/SYSOUT、GENERATE/PRINTDD、CHECK1/SYSOUT、CHECK2/SYSOUT。同名 DD 依 step 分開存放。缺檔時請學員下載，不能借用其他作業結果。
 
-JES 系統紀錄以 tcb-jobs（IBM-1047）開啟；GENERATE/SYSOUT、CHECK1/SYSOUT、CHECK2/SYSOUT 也以 tcb-jobs 開啟；CCKP/SYSPRINT 以 tcb-rse（IBM-937）開啟，再由編輯器另存新檔。整批下載入口可能未傳入 encoding；若中文失真，重新依此方式取得，不把失真內容當作程式事實。RSE 可能在 LF 前附帶 U+0085 NEL；分析時忽略該行末控制字元，保留原始檔案與欄位中的空白。若整理閱讀版，另存副本；不要為消除 NEL 而改用 IBM-1047，導致中文解碼錯誤。
+JES 系統紀錄以 tcb-jobs（IBM-1047）開啟；GENERATE/SYSOUT、GENERATE/PRINTDD、CHECK1/SYSOUT、CHECK2/SYSOUT 也以 tcb-jobs 開啟；CCKP/SYSPRINT 以 tcb-rse（IBM-937）開啟，再由編輯器另存新檔。整批下載入口可能未傳入 encoding；若中文失真，重新依此方式取得，不把失真內容當作程式事實。RSE 可能在 LF 前附帶 U+0085 NEL；分析時忽略該行末控制字元，保留原始檔案與欄位中的空白。若整理閱讀版，另存副本；不要為消除 NEL 而改用 IBM-1047，導致中文解碼錯誤。
 
 - 記錄 owner、job 名稱、job ID 與紀錄時間。
 - 核對 ALLOC、CGEN、LGENCKP、CCKP、LCKP02、CCHK、LCHKCKP、GENERATE、SNAP1、RUNONCE、CHECK1、SNAP2、RUNTWICE、CHECK2、RUNEMPTY 共 15 步是否實際執行。跳過的步驟不能算通過。
@@ -38,4 +38,4 @@ JES 系統紀錄以 tcb-jobs（IBM-1047）開啟；GENERATE/SYSOUT、CHECK1/SYSO
 
 Bob 的靜態檢查不能取代編譯與執行。這些紀錄也不是 IMS transaction log。沒有主機證據就保留待執行，不生成模擬成功紀錄。
 
-GENERATE／SYSOUT 會逐筆印出完整的原始 400 bytes，每筆分成五行、每行 80 bytes；行首 0001–0080 至 0321–0400 表示原始位置，雙引號內的空白也屬於資料。ID 與 BYTES-014-016 分別另外顯示第 1–10 位和第 14–16 位。CASE 0003 雖然以 00 開頭，第 14–16 位卻是 EOF，因此不轉換；CASE 0005 的 EOF 位於第 12–14 位，第 14–16 位為 FQQ，仍符合轉換條件。這是合成測資的原始內容，不是需求中的預覽功能。
+GENERATE／PRINTDD 每筆以單一完整 400-byte 資料行印出，不切成多段；前後各加一個雙引號以保留 RSE 會省略的行尾空白，引號內恰好 400 bytes，引號不屬於資料。GENERATE／SYSOUT 另外顯示 CASE、ID 與 BYTES-014-016，分別用來辨認案例、第 1–10 位及第 14–16 位。若畫面自動折行，可關閉編輯器的自動換行並水平捲動。CASE 0003 的第 14–16 位為 EOF，因此不轉換；CASE 0005 的名稱以 EOF 開頭，EOF 位於第 12–14 位，第 14–16 位為 F 加兩個空白，仍符合轉換條件。測資採虛構公司名稱、聯絡人及地址，數字欄位填數字、保留欄位填空白；異常識別值與 EOF 列為邊界案例，不視為正常客戶資料。這是測資內容輸出，尚未實作需求中的預覽功能。

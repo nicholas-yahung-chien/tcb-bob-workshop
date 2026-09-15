@@ -12,27 +12,43 @@ def fixed(lines):
 def generator(cases):
     lines=['IDENTIFICATION DIVISION.','PROGRAM-ID. GENCKP.',
       'ENVIRONMENT DIVISION.','INPUT-OUTPUT SECTION.','FILE-CONTROL.']
-    for f,dd in [('A','WORKDD'),('B','EXP1DD'),('C','EXP2DD'),('D','EMPTYDD')]:
+    for f,dd in [('A','WORKDD'),('B','EXP1DD'),('C','EXP2DD'),('D','EMPTYDD'),('P','PRINTDD')]:
         lines += [f'    SELECT FILE-{f} ASSIGN TO {dd}.']
     lines+=['DATA DIVISION.','FILE SECTION.']
-    for f in 'ABCD': lines += [f'FD FILE-{f} RECORD CONTAINS 400 CHARACTERS.',f'01 REC-{f} PIC X(400).']
-    lines+=['PROCEDURE DIVISION.','    OPEN OUTPUT FILE-A FILE-B FILE-C FILE-D.']
+    for f in 'ABCDP':
+        width=402 if f=='P' else 400
+        lines += [f'FD FILE-{f} RECORD CONTAINS {width} CHARACTERS.',f'01 REC-{f} PIC X({width}).']
+    lines+=['PROCEDURE DIVISION.','    OPEN OUTPUT FILE-A FILE-B FILE-C FILE-D FILE-P.']
+    layout=[('R-ID-2',1),('R-NAME',40),('R-PID-1',10),
+      ('R-PID-2',1),('R-PNAME',40),('R-ADR',64),('R-BK1',14),
+      ('R-BK2',14),('R-BK3',14),('R-AC1',9),('R-AC2',9),
+      ('R-AC3',9),('R-RJD',8),('R-RJN',6),('R-NOTE',60),
+      ('FILLER',91)]
     for i,c in enumerate(cases,1):
-        lines += ['    MOVE ALL "Q" TO REC-A.',f'    MOVE "{c["id"]}" TO REC-A(1:10).',
-          '    MOVE "K" TO REC-A(11:1).',
-          f'    MOVE "{c["marker"]}" TO REC-A({c["marker_position"]}:3).',
-          f'    MOVE "{i:04d}" TO REC-A(397:4).']
+        lines += ['    MOVE SPACES TO REC-A.',
+          f'    MOVE "{c["id"]}" TO REC-A(1:10).']
+        pos=11
+        for field,width in layout:
+            value=c['fields'][field]
+            assert value.isascii() and len(value)<=width and '"' not in value
+            if field in ['R-AC1','R-AC2','R-AC3','R-RJD']:
+                assert len(value)==width and value.isdigit()
+            if value:
+                lines += [f'    MOVE "{value}"',f'      TO REC-A({pos}:{width}).']
+            pos+=width
+        assert pos==401
         lines += [f'    DISPLAY "CASE {i:04d} ORIGINAL RECORD; LENGTH=400".',
-          '''    DISPLAY 'ID="' REC-A(1:10) '"'.''',
-          '''    DISPLAY 'BYTES-014-016="' REC-A(14:3) '"'.''']
-        for start in range(1, 401, 80):
-            lines += [f'''    DISPLAY '{start:04d}-{start+79:04d}="' REC-A({start}:80) '"'.''']
+          """    DISPLAY 'ID="' REC-A(1:10) '"'.""",
+          """    DISPLAY 'BYTES-014-016="' REC-A(14:3) '"'.""",
+          '''    MOVE '"' TO REC-P(1:1) REC-P(402:1).''',
+          '    MOVE REC-A TO REC-P(2:400).',
+          '    WRITE REC-P.']
         lines += [
           '    MOVE REC-A TO REC-B REC-C.',
           f'    MOVE "{c["once"]}" TO REC-B(1:10).',
           f'    MOVE "{c["twice"]}" TO REC-C(1:10).',
           '    WRITE REC-A.','    WRITE REC-B.','    WRITE REC-C.']
-    lines+=['    CLOSE FILE-A FILE-B FILE-C FILE-D.',
+    lines+=['    CLOSE FILE-A FILE-B FILE-C FILE-D FILE-P.',
       f'    DISPLAY "FIXTURES={len(cases)}; RECORD-LENGTH=400".',
       '    MOVE ZERO TO RETURN-CODE.','    STOP RUN.']
     return fixed(lines)
@@ -104,7 +120,8 @@ def compile_step(step,name,source,source_dataset):
 def run_step(step,program):
     return [f'//{step} EXEC PGM={program},REGION=64M,TIME=(0,1)',
       '//STEPLIB DD DSN=&&LOAD,DISP=(OLD,PASS)',
-      '// DD DSN=CEE.SCEERUN,DISP=SHR','//SYSOUT DD SYSOUT=*',
+      '// DD DSN=CEE.SCEERUN,DISP=SHR',
+      '//SYSOUT DD SYSOUT=*',
       '//CEEDUMP DD DUMMY','//SYSUDUMP DD DUMMY']
 
 
@@ -129,6 +146,7 @@ def make_jcl(jobname,sources,source_dataset):
     s+=['// IF ((CGEN.RC LE 4) & (LGENCKP.RC EQ 0) &',
         '// (CCKP.RC LE 4) & (LCKP02.RC EQ 0) &',
         '// (CCHK.RC LE 4) & (LCHKCKP.RC EQ 0)) THEN']+run_step('GENERATE','GENCKP')
+    s+=['//PRINTDD DD SYSOUT=*,DCB=(RECFM=FB,LRECL=402,BLKSIZE=0)']
     for dd,ds in [('WORKDD','WORK'),('EXP1DD','EXP1'),('EXP2DD','EXP2'),('EMPTYDD','EMPTY')]:
         s += [f'//{dd} DD DSN=&&{ds},DISP=(NEW,PASS),UNIT=SYSDA,',
           '// SPACE=(TRK,(1,1)),DCB=(DSORG=PS,RECFM=FB,LRECL=400,',
