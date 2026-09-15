@@ -23,9 +23,9 @@
 
 ## 三、分析實際測試
 
-讀取實際 run.jcl、z-tests/fixtures.json 與 host-lab/logs/<job ID>/ 的 JESMSGLG、JESYSMSG、CCKP/SYSPRINT、CHECK1/SYSOUT、CHECK2/SYSOUT。同名 DD 依 step 分開存放。缺檔時請學員下載，不能借用其他作業結果。
+讀取實際 run.jcl、z-tests/fixtures.json 與 host-lab/logs/<job ID>/ 的 JESMSGLG、JESYSMSG、CCKP/SYSPRINT、GENERATE/SYSOUT、CHECK1/SYSOUT、CHECK2/SYSOUT。同名 DD 依 step 分開存放。缺檔時請學員下載，不能借用其他作業結果。
 
-JES 系統紀錄以 tcb-jobs（IBM-1047）開啟；CHECK1/SYSOUT、CHECK2/SYSOUT 也以 tcb-jobs 開啟；CCKP/SYSPRINT 以 tcb-rse（IBM-937）開啟，再由編輯器另存新檔。整批下載入口可能未傳入 encoding；若中文失真，重新依此方式取得，不把失真內容當作程式事實。RSE 可能在 LF 前附帶 U+0085 NEL；分析時忽略該行末控制字元，保留原始檔案與欄位中的空白。若整理閱讀版，另存副本；不要為消除 NEL 而改用 IBM-1047，導致中文解碼錯誤。
+JES 系統紀錄以 tcb-jobs（IBM-1047）開啟；GENERATE/SYSOUT、CHECK1/SYSOUT、CHECK2/SYSOUT 也以 tcb-jobs 開啟；CCKP/SYSPRINT 以 tcb-rse（IBM-937）開啟，再由編輯器另存新檔。整批下載入口可能未傳入 encoding；若中文失真，重新依此方式取得，不把失真內容當作程式事實。RSE 可能在 LF 前附帶 U+0085 NEL；分析時忽略該行末控制字元，保留原始檔案與欄位中的空白。若整理閱讀版，另存副本；不要為消除 NEL 而改用 IBM-1047，導致中文解碼錯誤。
 
 - 記錄 owner、job 名稱、job ID 與紀錄時間。
 - 核對 ALLOC、CGEN、LGENCKP、CCKP、LCKP02、CCHK、LCHKCKP、GENERATE、SNAP1、RUNONCE、CHECK1、SNAP2、RUNTWICE、CHECK2、RUNEMPTY 共 15 步是否實際執行。跳過的步驟不能算通過。
@@ -37,3 +37,5 @@ JES 系統紀錄以 tcb-jobs（IBM-1047）開啟；CHECK1/SYSOUT、CHECK2/SYSOUT
 - 保存 host-lab/test-report.md，逐項列出預期、實際 step/DD/訊息與通過、失敗或待確認。失敗時先指出證據與最小修正；保留原始 log，重跑使用新 job ID。
 
 Bob 的靜態檢查不能取代編譯與執行。這些紀錄也不是 IMS transaction log。沒有主機證據就保留待執行，不生成模擬成功紀錄。
+
+GENERATE／SYSOUT 會逐筆印出完整的原始 400 bytes，每筆分成五行、每行 80 bytes；行首 0001–0080 至 0321–0400 表示原始位置，雙引號內的空白也屬於資料。ID 與 BYTES-014-016 分別另外顯示第 1–10 位和第 14–16 位。CASE 0003 雖然以 00 開頭，第 14–16 位卻是 EOF，因此不轉換；CASE 0005 的 EOF 位於第 12–14 位，第 14–16 位為 FQQ，仍符合轉換條件。這是合成測資的原始內容，不是需求中的預覽功能。

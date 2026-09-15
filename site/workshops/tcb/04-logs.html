@@ -3,6 +3,7 @@
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/run.jcl</code>、<code>host-lab/logs/</code>、<code>host-lab/README.md</code>、<code>host-lab/BOB-GUIDE.md</code></p><div class="prompt"><div class="prompt-head"><span>核對自己的執行結果</span><button type="button" data-copy="host-logs">複製 Prompt</button></div><pre id="host-logs">這是我剛執行 CKP02 的主機紀錄。請依 host-lab/BOB-GUIDE.md 幫我確認哪些步驟真的有執行、RC 4 來自哪裡，以及兩次比對和空檔測試是否成功。請指出 job ID、step 和對應訊息；缺少的紀錄先列為待確認。
 </pre><div class="expected"><strong>預期回應</strong><p>依實際 job、step 與訊息核對的執行結果，以及仍需補充的紀錄。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>先從 CCKP 的 SYSPRINT 核對 <code>CODEPAGE(937)</code> 與 <code>DBCS</code>，確認編譯來源是自己的 <code>TCBLAB.COBOL(CKP02)</code>。JESMSGLG、JESJCL、JESYSMSG 從 tcb-jobs（IBM-1047）開啟；CHECK1、CHECK2 比對紀錄也從 tcb-jobs 開啟，識別值以雙引號包住，例如 <code>ACTUAL-ID="12345678  "</code>。CCKP 編譯清單從 tcb-rse（IBM-937）開啟，以正確顯示中文註解。</p>
+<p>先從 tcb-jobs（IBM-1047）開啟 GENERATE／SYSOUT。GENERATE／SYSOUT 會逐筆印出完整的原始 400 bytes，每筆分成五行、每行 80 bytes；行首 0001–0080 至 0321–0400 表示原始位置，雙引號內的空白也屬於資料。ID 與 BYTES-014-016 分別另外顯示第 1–10 位和第 14–16 位。CASE 0003 雖然以 00 開頭，第 14–16 位卻是 EOF，因此不轉換；CASE 0005 的 EOF 位於第 12–14 位，第 14–16 位為 FQQ，仍符合轉換條件。這是合成測資的原始內容，不是需求中的預覽功能。</p>
 <p>每筆輸出中的 <code>BEFORE-ID</code> 是這一次執行 CKP02 前的實際識別值，<code>ACTUAL-ID</code> 是執行後的實際值，<code>EXPECT-ID</code> 是預期結果。CHECK2 的 BEFORE-ID 來自第二次執行前的快照，應等於 CHECK1 的 ACTUAL-ID。</p>
 <pre><code>CHECK1 / CASE 0004
 BEFORE-ID="0000123456"

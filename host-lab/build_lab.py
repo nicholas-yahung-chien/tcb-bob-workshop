@@ -21,7 +21,13 @@ def generator(cases):
         lines += ['    MOVE ALL "Q" TO REC-A.',f'    MOVE "{c["id"]}" TO REC-A(1:10).',
           '    MOVE "K" TO REC-A(11:1).',
           f'    MOVE "{c["marker"]}" TO REC-A({c["marker_position"]}:3).',
-          f'    MOVE "{i:04d}" TO REC-A(397:4).',
+          f'    MOVE "{i:04d}" TO REC-A(397:4).']
+        lines += [f'    DISPLAY "CASE {i:04d} ORIGINAL RECORD; LENGTH=400".',
+          '''    DISPLAY 'ID="' REC-A(1:10) '"'.''',
+          '''    DISPLAY 'BYTES-014-016="' REC-A(14:3) '"'.''']
+        for start in range(1, 401, 80):
+            lines += [f'''    DISPLAY '{start:04d}-{start+79:04d}="' REC-A({start}:80) '"'.''']
+        lines += [
           '    MOVE REC-A TO REC-B REC-C.',
           f'    MOVE "{c["once"]}" TO REC-B(1:10).',
           f'    MOVE "{c["twice"]}" TO REC-C(1:10).',
