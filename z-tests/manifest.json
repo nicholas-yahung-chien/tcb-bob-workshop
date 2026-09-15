@@ -1,6 +1,13 @@
 {
   "source": "z-lab/CKP02.cbl",
-  "source_dataset": "YOURUSER.TCBLAB.SRC937",
+  "source_dataset": "YOURUSER.TCBLAB.COBOL(CKP02)",
+  "source_library": "YOURUSER.TCBLAB.COBOL",
+  "source_members": [
+    "CKP02",
+    "GENCKP",
+    "CHKCKP"
+  ],
+  "job_member": "YOURUSER.TCBLAB.JCL(RUN)",
   "local_encoding": "UTF-8",
   "local_newline": "LF",
   "source_transfer_encoding": "IBM-937",
@@ -9,7 +16,7 @@
     "DBCS"
   ],
   "jcl_encoding": "IBM-1047",
-  "source_change": "None; upload the supplied z-lab source, including Chinese comments.",
+  "source_change": "None; source members are provisioned before class from the supplied files, including Chinese comments.",
   "cases": 7,
   "record_bytes": 400,
   "runs": [
@@ -23,8 +30,8 @@
     "storage_class_selector": "SCNOSMS"
   },
   "sha256": {
-    "GENCKP.cbl": "1b8f9fdf527f8b765b5351442c667ad68b68f1b1741ce04c1452e660f34ecde3",
     "CHKCKP.cbl": "e4cf0a2ea80f50900767d5ab644259c5875f569415fd0dfe1e3d57acca57e8a5",
-    "run.jcl": "0f27627e884f8acdfff6b15b8d3ac98166cbeb6c88f2c966cfb145b99eed0e30"
+    "GENCKP.cbl": "1b8f9fdf527f8b765b5351442c667ad68b68f1b1741ce04c1452e660f34ecde3",
+    "run.jcl": "948d55bd591a7d7370059363cbbf5184ab2c14a5e8a0b8e4223876fec553f50b"
   }
 }

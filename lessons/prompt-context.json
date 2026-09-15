@@ -1,6 +1,13 @@
 {
   "development-summary": {
-    "files": ["requests/change-application.docx", "z-lab/CKP02.cbl", "output/architecture.md", "output/checklist.md", "output/program.md", "output/impact-analysis.md"],
+    "files": [
+      "requests/change-application.docx",
+      "z-lab/CKP02.cbl",
+      "output/architecture.md",
+      "output/checklist.md",
+      "output/program.md",
+      "output/impact-analysis.md"
+    ],
     "response": "容易理解的開發建議、預計新增或修改的程式與作業流程，以及仍待確認的事項。"
   },
   "document-questions": {
@@ -8,7 +15,11 @@
     "response": "完整問題、已有證據、缺少的資訊，以及各項問題影響的範圍。"
   },
   "document-plan-reply": {
-    "files": ["DOC-SPEC.md", "z-lab/CKP02.cbl", "requests/change-application.docx"],
+    "files": [
+      "DOC-SPEC.md",
+      "z-lab/CKP02.cbl",
+      "requests/change-application.docx"
+    ],
     "response": "CKP02 文件與 facts.json、來源核對結果，以及仍待確認的需求或正式環境資訊。"
   },
   "01-ask": {
@@ -209,12 +220,12 @@
   },
   "host-build": {
     "files": [
-      "host-lab/README.md",
-      "host-lab/environment.md",
       "host-lab/BOB-GUIDE.md",
-      "z-lab/CKP02.cbl"
+      "host-lab/environment.md",
+      "host-lab/run.jcl",
+      "z-tests/run.jcl"
     ],
-    "response": "尚未提交的 run.jcl，以及各步驟與個人配置的說明。"
+    "response": "作業步驟與個人配置的說明，以及 host-lab/jcl-review.md 的核對結果。"
   },
   "host-logs": {
     "files": [

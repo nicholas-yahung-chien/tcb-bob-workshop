@@ -73,18 +73,14 @@ def checker(count):
 
 def compile_step(step,name,source,source_dataset):
     s=[f'//{step} EXEC PGM=IGYCRCTL,REGION=256M,',
-      "// PARM='LIB,OBJECT,RENT,LIST,MAP,XREF'",
+      "// PARM='LIB,OBJECT,RENT,LIST,MAP,XREF,CODEPAGE(937),DBCS'",
       '//STEPLIB DD DSN=IGY.V6R4M0.SIGYCOMP,DISP=SHR',
       '//SYSPRINT DD SYSOUT=*',
       f'//SYSLIN DD DSN=&&{name},DISP=(NEW,PASS),',
       '// UNIT=SYSDA,SPACE=(TRK,(5,5)),DCB=(RECFM=FB,LRECL=80)',
       '//SYSMDECK DD UNIT=SYSDA,SPACE=(TRK,(1,1))']
     for n in range(1,16): s += [f'//SYSUT{n} DD UNIT=SYSDA,SPACE=(CYL,(1,1))']
-    if name == 'CKP02':
-        s[1] = "// PARM='LIB,OBJECT,RENT,LIST,MAP,XREF,CODEPAGE(937),DBCS'"
-        s += [f'//SYSIN DD DSN={source_dataset},DISP=SHR']
-    else:
-        s += ['//SYSIN DD *',source.rstrip(),'/*']
+    s += [f'//SYSIN DD DSN={source_dataset}({name}),DISP=SHR']
     s += [f'// IF ({step}.RC LE 4) THEN',
       f'//L{name} EXEC PGM=IEWL,PARM=\'LIST,MAP,XREF\'',
       '//SYSLIB DD DSN=CEE.SCEELKED,DISP=SHR',
@@ -130,9 +126,9 @@ def make_jcl(jobname,sources,source_dataset):
     assert all(len(x)<=80 for x in result.split('\n')), 'JCL exceeds 80 columns'
     return result
 
-def build(out,jobname,volume=None,storage_class=None,source_dataset='YOURUSER.TCBLAB.SRC937'):
-    if not re.fullmatch(r'[A-Z][A-Z0-9]{0,7}\.TCBLAB\.SRC937',source_dataset):
-        raise ValueError('Use the personal source dataset <USER>.TCBLAB.SRC937')
+def build(out,jobname,volume=None,storage_class=None,source_dataset='YOURUSER.TCBLAB.COBOL'):
+    if not re.fullmatch(r'[A-Z][A-Z0-9]{0,7}\.TCBLAB\.COBOL',source_dataset):
+        raise ValueError('Use the personal source library <USER>.TCBLAB.COBOL')
     if bool(volume) != bool(storage_class):
         raise ValueError('Specify both verified volume and ACS storage-class selector')
     for value in (volume,storage_class):
@@ -154,18 +150,20 @@ def build(out,jobname,volume=None,storage_class=None,source_dataset='YOURUSER.TC
         jcl=jcl.replace('// \n','')
     assert all(len(row)<=72 for row in jcl.split('\n')), 'JCL exceeds statement columns'
     (out/'run.jcl').write_text(jcl,encoding='ascii',newline='\n')
-    manifest={'source':'z-lab/CKP02.cbl','source_dataset':source_dataset,
+    manifest={'source':'z-lab/CKP02.cbl','source_dataset':source_dataset+'(CKP02)',
+      'source_library':source_dataset,'source_members':['CKP02','GENCKP','CHKCKP'],
+      'job_member':source_dataset.removesuffix('.COBOL')+'.JCL(RUN)',
       'local_encoding':'UTF-8','local_newline':'LF',
       'source_transfer_encoding':'IBM-937','compiler_options':['CODEPAGE(937)','DBCS'],
-      'jcl_encoding':'IBM-1047','source_change':'None; upload the supplied z-lab source, including Chinese comments.',
+      'jcl_encoding':'IBM-1047','source_change':'None; source members are provisioned before class from the supplied files, including Chinese comments.',
       'cases':len(cases),'record_bytes':400,'runs':['once','twice','empty'],
       'host_execution':'not inferred from generation',
       'allocation_route':{'volume':volume,'storage_class_selector':storage_class},
       'sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in out.iterdir() if p.suffix in ['.cbl','.jcl']}}
-    (out/'manifest.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
+    (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8',newline='\n')
     print('Built',out,'; not submitted')
 
 if __name__=='__main__':
     a=argparse.ArgumentParser(); a.add_argument('--out',type=Path,required=True); a.add_argument('--jobname',default='TCBP001')
-    a.add_argument('--volume'); a.add_argument('--storage-class'); a.add_argument('--source-dataset',default='YOURUSER.TCBLAB.SRC937')
+    a.add_argument('--volume'); a.add_argument('--storage-class'); a.add_argument('--source-dataset',default='YOURUSER.TCBLAB.COBOL')
     args=a.parse_args(); build(args.out,args.jobname,args.volume,args.storage_class,args.source_dataset)

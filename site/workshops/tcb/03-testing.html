@@ -4,16 +4,24 @@
 <p>先完成<a href="00-setup.html#host-connection">個人主機連線</a>。開啟 CKP02 與 <code>z-tests/fixtures.json</code> 的七筆測資，先和 Bob 討論結果。</p>
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>z-tests/fixtures.json</code></p><div class="prompt"><div class="prompt-head"><span>先預測結果</span><button type="button" data-copy="host-predict">複製 Prompt</button></div><pre id="host-predict">我準備在主機執行 CKP02。請根據程式和這七筆測資，說明第一次、第二次執行後各會得到什麼，並指出程式依據。資料中的 EOF 和讀到檔尾有什麼不同？
 </pre><div class="expected"><strong>預期回應</strong><p>七筆資料兩次執行的預期結果，以及程式依據。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<h3 id="upload-source">把剛才讀的程式存入主機</h3>
-<p>接下來執行的，就是同一份 <code>z-lab/CKP02.cbl</code>。本機檔案保留 UTF-8 與 LF，透過 <code>tcb-zosmf</code> 以 IBM-937 存入自己的來源資料集，中文註解也一起保留。</p>
-<ol><li>開啟本機 <code>z-lab/CKP02.cbl</code>，確認右下角為 UTF-8、LF，按 Ctrl+A、Ctrl+C 複製完整內容。</li><li>在 Zowe Explorer 的「資料集」展開 <code>tcb-zosmf</code>，搜尋並開啟 <code>&lt;自己的帳號&gt;.TCBLAB.SRC937</code>。這是本次 CKP02 專用的循序資料集，不需要建立 member。確認名稱開頭是自己的帳號。</li><li>在主機資料集的編輯分頁按 Ctrl+A、Ctrl+V，將內容換成本機 CKP02，確認換行為 LF，再按 Ctrl+S 儲存。保留本機 z-lab 檔案不變。若既有內容是自己的修改，先保留修改，不直接取代。</li><li>關閉主機資料集分頁，重新整理後再開啟，確認 <code>PROGRAM-ID. CKP02.</code>、中文註解「公司統編時，轉換格式」及檔案最後一行均與本機一致。若多出空行、文字變成問號或出現截斷訊息，先保留錯誤畫面，確認連線與換行後再繼續。</li></ol>
-<p>找不到 SRC937 時，先核對帳號與搜尋條件，再請講師協助。此步只更新自己的來源資料集；稍後 JCL 從這裡編譯 CKP02，不會使用另一份 CKP02 範本。</p>
-<label class="check"><input type="checkbox" data-check="我已把 z-lab 的 CKP02 存入自己的 SRC937 並重新開啟核對"><span>我已把 z-lab 的 CKP02 存入自己的 SRC937 並重新開啟核對</span></label>
-<h3>準備並提交作業</h3>
-<p>接著加入自己的 environment.md，請 Bob 依 BOB-GUIDE.md 從 <code>z-tests/run.jcl</code> 建立個人 JCL，不需 Python。作業會在主機編譯程式、執行兩次轉換與一次空檔測試，使用各作業獨立的暫存資料集。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/README.md</code>、<code>host-lab/environment.md</code>、<code>host-lab/BOB-GUIDE.md</code>、<code>z-lab/CKP02.cbl</code></p><div class="prompt"><div class="prompt-head"><span>準備自己的主機作業</span><button type="button" data-copy="host-build">複製 Prompt</button></div><pre id="host-build">請依 host-lab/BOB-GUIDE.md 和我的 environment.md，為剛才存入主機的 z-lab/CKP02.cbl 建立個人 JCL，不使用 Python。請確認編譯時讀取我的 SRC937，使用 CODEPAGE(937),DBCS。先不要提交，完成後帶我核對作業設定與測試步驟。
-</pre><div class="expected"><strong>預期回應</strong><p>尚未提交的 run.jcl，以及各步驟與個人配置的說明。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<ol><li>開啟 <code>host-lab/run.jcl</code>，核對 job 名稱、DEVVS1、SCNOSMS，以及 CCKP 的 SYSIN 是自己的 <code>&lt;帳號&gt;.TCBLAB.SRC937</code>，編譯選項包含 <code>CODEPAGE(937),DBCS</code>。</li><li>在編輯器按右鍵選 <strong>Submit as JCL</strong>，選 <code>tcb-jobs</code>（IBM-1047）連線。</li><li>記下回傳的 job ID，在 JOBS 的 <code>tcb-jobs</code> 核對 owner，等待 OUTPUT。</li><li>下載 JESMSGLG、JESYSMSG、CCKP 的 SYSPRINT，以及 CHECK1、CHECK2 的 SYSOUT，放在 <code>host-lab/logs/&lt;job ID&gt;/</code>，同名 DD 依 step 分開儲存。</li></ol>
+<h3 id="upload-source">開啟主機上已準備好的程式</h3>
+<p>主機已為每個帳號準備好本次練習的程式與 JCL。主機上的 CKP02 與剛才閱讀的 <code>z-lab/CKP02.cbl</code> 內容相同，包含中文註解；不需要再複製貼上或上傳。</p>
+<table><thead><tr><th>教材檔案</th><th>自己的主機位置</th><th>用途</th></tr></thead><tbody>
+<tr><td><code>z-lab/CKP02.cbl</code></td><td><code>&lt;帳號&gt;.TCBLAB.COBOL(CKP02)</code></td><td>剛才理解的原始程式</td></tr>
+<tr><td><code>z-tests/GENCKP.cbl</code></td><td><code>&lt;帳號&gt;.TCBLAB.COBOL(GENCKP)</code></td><td>建立七筆測資、預期結果與空檔</td></tr>
+<tr><td><code>z-tests/CHKCKP.cbl</code></td><td><code>&lt;帳號&gt;.TCBLAB.COBOL(CHKCKP)</code></td><td>逐筆比對完整 400 bytes</td></tr>
+<tr><td><code>z-tests/run.jcl</code></td><td><code>&lt;帳號&gt;.TCBLAB.JCL(RUN)</code></td><td>已填入自己帳號的測試作業</td></tr>
+</tbody></table>
+<p>主機以資料集中的「成員」（member）保存檔案，所以 <code>CKP02.cbl</code> 對應成員 <code>CKP02</code>，<code>run.jcl</code> 對應成員 <code>RUN</code>。</p>
+<ol><li>在 Zowe Explorer 的「資料集」展開 <code>tcb-zosmf</code>（IBM-937），搜尋 <code>&lt;自己的帳號&gt;.TCBLAB.COBOL</code>。</li><li>展開資料集，開啟 <code>CKP02</code>。確認名稱開頭是自己的帳號，並核對 <code>PROGRAM-ID. CKP02.</code>、中文註解「公司統編時，轉換格式」及檔案最後一行。</li><li>確認同一個資料集也有 <code>GENCKP</code>、<code>CHKCKP</code>。這兩支是測試輔助程式。</li></ol>
+<p>若缺少成員或內容顯示異常，先核對帳號與連線，再請講師協助。保留現有內容，不直接覆寫。</p>
+<label class="check"><input type="checkbox" data-check="我已開啟自己主機上的 CKP02，並確認三支程式已備妥"><span>我已開啟自己主機上的 CKP02，並確認三支程式已備妥</span></label>
+<h3>核對並提交已準備好的作業</h3>
+<ol><li>在「資料集」改用 <code>tcb-jobs</code>（IBM-1047），搜尋 <code>&lt;自己的帳號&gt;.TCBLAB.JCL</code>，展開並開啟 <code>RUN</code>。</li><li>在 RUN 成員上按右鍵，選 <strong>Download Member...</strong>，下載到教材的 <code>host-lab</code> 資料夾，供 Bob 閱讀並保留本次執行版本。</li><li>下載選項取消 <strong>Generate Directory Structure</strong> 與 <strong>Use Uppercase Names</strong>，勾選 <strong>Override File Extension</strong> 並輸入 <code>jcl</code>，讓本機檔案命名為 <code>host-lab/run.jcl</code>。取消 <strong>Overwrite</strong>，避免覆寫既有成果；若已有檔案，先下載到另一個資料夾比較。編碼沿用 tcb-jobs 的 IBM-1047。</li></ol>
+<p>把這份 JCL 與自己的 environment.md 加入對話，請 Bob 帶你看編譯、執行與比對的步驟。每項作業都會重新建立獨立測資，執行兩次 CKP02，再測試空檔；不需要手動準備或貼上資料。</p>
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/BOB-GUIDE.md</code>、<code>host-lab/environment.md</code>、<code>host-lab/run.jcl</code>、<code>z-tests/run.jcl</code></p><div class="prompt"><div class="prompt-head"><span>一起看這份主機作業</span><button type="button" data-copy="host-build">複製 Prompt</button></div><pre id="host-build">這是主機上已經幫我準備好的作業，我把它另存成 host-lab/run.jcl 了。請依 host-lab/BOB-GUIDE.md 和我的 environment.md，帶我看它會編譯哪幾支程式、怎麼準備測試資料，以及如何確認結果。也幫我核對是不是使用我自己的帳號，將檢查結果記在 host-lab/jcl-review.md。先不要提交。
+</pre><div class="expected"><strong>預期回應</strong><p>作業步驟與個人配置的說明，以及 host-lab/jcl-review.md 的核對結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<ol><li>核對 <code>host-lab/run.jcl</code> 的 job 名稱是自己的帳號加 A，配置為 DEVVS1、SCNOSMS；CGEN、CCKP、CCHK 的 SYSIN 分別讀取自己 <code>TCBLAB.COBOL</code> 裡的 GENCKP、CKP02、CHKCKP，編譯選項包含 <code>CODEPAGE(937),DBCS</code>。</li><li>在本機 JCL 編輯器按右鍵選 <strong>Submit as JCL</strong>，選 <code>tcb-jobs</code>（IBM-1047）連線。</li><li>記下回傳的 job ID，在 JOBS 的 <code>tcb-jobs</code> 核對 owner，等待 OUTPUT。</li><li>下載 JESMSGLG、JESYSMSG、CCKP 的 SYSPRINT，以及 CHECK1、CHECK2 的 SYSOUT，放在 <code>host-lab/logs/&lt;job ID&gt;/</code>，同名 DD 依 step 分開儲存。</li></ol>
 <p>將紀錄帶到<a href="04-logs.html#host">下一單元</a>，確認 RC 4 的來源、兩組七筆完整 400-byte 比對，以及 RUNEMPTY 的結果。請依本頁步驟操作，再到下一單元核對紀錄。</p>
 <label class="check"><input type="checkbox" data-check="我已用自己的帳號提交 CKP02"><span>我已用自己的帳號提交 CKP02</span></label><label class="check"><input type="checkbox" data-check="我已保存自己的 job ID 與主機紀錄"><span>我已保存自己的 job ID 與主機紀錄</span></label>
 <h2 id="optional">完成主機實作後，選擇延伸練習</h2>

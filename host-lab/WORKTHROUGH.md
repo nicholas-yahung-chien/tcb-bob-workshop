@@ -20,17 +20,13 @@
 
 這則問題先交代「要測什麼」，再把注意力放在容易看錯的兩個地方。你也可以先問正常資料，理解後再追問 EOF 和重跑案例。
 
-## 2. 存入同一份來源並準備自己的作業
+## 2. 開啟已備妥的來源與作業
 
-依課程網頁「把剛才讀的程式存入主機」，以 tcb-zosmf（IBM-937）將 z-lab/CKP02.cbl 存入自己的 <帳號>.TCBLAB.SRC937，重新開啟核對中文註解與完整內容。保留本機 UTF-8、LF，不產生另一份 CKP02。
+依課程網頁，以 tcb-zosmf（IBM-937）開啟自己的 <帳號>.TCBLAB.COBOL(CKP02)，核對中文註解與本機 z-lab/CKP02.cbl 的內容。同一資料集也已備妥 GENCKP、CHKCKP，不需上傳或貼上。
 
-切到 Agent，把 BOB-GUIDE.md 和 z-tests/run.jcl 加入對話，將中括號換成自己的設定：
+以 tcb-jobs（IBM-1047）開啟 <帳號>.TCBLAB.JCL(RUN)，另存本機 host-lab/run.jcl。將它與 environment.md、BOB-GUIDE.md 加入對話，使用課程網頁的「一起看這份主機作業」Prompt。
 
-```text
-請依 host-lab/BOB-GUIDE.md，從教材範本在 host-lab 建立 CKP02 的主機練習。我的 job 名稱是 [個人 job 名稱]，volume 是 [分配的 volume]，storage class 選項是 [分配的選項]。先不要提交；完成後請帶我看 run.jcl 的編譯、執行與比對步驟，確認每次都重新建立測資。
-```
-
-這裡使用教材範本，是為了讓大家從相同的程式與測資開始。CCKP 的 SYSIN 讀取自己的 SRC937，使用 CODEPAGE(937),DBCS；只有 GENCKP 與 CHKCKP 輔助程式仍內嵌於 JCL。原始程式不需要修改。先看 run.jcl，可以確認作業名稱與配置值是自己的設定，也知道稍後要在哪個步驟找結果；確認後再提交。
+三個編譯步驟分別從自己的 COBOL 資料集讀取同名成員，都使用 CODEPAGE(937),DBCS。RUN 已填入自己的帳號與 job 名稱。請 Bob 帶你核對編譯、執行與比對流程，再由你提交。七筆測資與空檔由 GENCKP 自動建立。
 
 ## 3. 從編輯器提交
 

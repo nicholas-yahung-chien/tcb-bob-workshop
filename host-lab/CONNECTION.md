@@ -18,7 +18,7 @@
 
 1. 確認 Zowe Explorer 已啟用。儲存設定後若尚未看到 `tcb-zosmf`，執行 Developer: Reload Window，再查看資料集與工作區塊。
 2. 選取 `tcb-zosmf`，使用 Zowe 的認證介面輸入分配的密碼。密碼只在認證欄位輸入，不寫進 JSON，也不貼到 Bob 對話。
-3. 在資料集的 tcb-zosmf 搜尋 `<自己的帳號>.TCBLAB.*`，應能找到預先配置的 `<自己的帳號>.TCBLAB.SRC937`。在 JOBS 選 tcb-jobs，將 owner 篩選為自己的帳號；尚未提交作業時，作業清單可能為空。來源資料集找不到時先確認帳號與篩選條件，再請講師協助，不使用其他帳號的資料集。
+3. 在資料集的 tcb-zosmf 搜尋 `<自己的帳號>.TCBLAB.*`，應能找到已備妥的 `<自己的帳號>.TCBLAB.COBOL`（CKP02、GENCKP、CHKCKP 三個成員）與 `<自己的帳號>.TCBLAB.JCL`（RUN 成員）。COBOL 以 tcb-zosmf 開啟；JCL 以 tcb-jobs 開啟。在 JOBS 選 tcb-jobs，將 owner 篩選為自己的帳號；尚未提交作業時，作業清單可能為空。來源資料集找不到時先確認帳號與篩選條件，再請講師協助，不使用其他帳號的資料集。
 
 若只看到舊的 `zosmf` 或 `rse`，先確認開啟的是本次教材根目錄。不要修改父資料夾或全域 profile。其他 IBM-1047 文字資料集使用 tcb-jobs 讀寫；無中文不代表字碼完全相容。不要把 IBM-937 套用到所有 USS 檔案、binary 資料或 load module。若出現 `profLoc` 等擴充套件錯誤，保留訊息及目前設定檔位置，先停止更新認證；不能只憑這個錯誤判定密碼錯誤或主機拒絕登入。
 
@@ -44,7 +44,9 @@ Bob 建立文件時，依序完成以下事項：
 - 來源連線：tcb-zosmf（IBM-937）
 - 作業連線：tcb-jobs（IBM-1047）
 - 本機來源：z-lab/CKP02.cbl（UTF-8、LF）
-- 來源資料集：[自己的帳號].TCBLAB.SRC937（PS、FB、LRECL=80）
+- 來源資料集：[自己的帳號].TCBLAB.COBOL(CKP02)（PDSE、FB、LRECL=80）
+- 測試輔助程式：同一 COBOL 資料集的 GENCKP、CHKCKP 成員
+- 已備妥作業：[自己的帳號].TCBLAB.JCL(RUN)（PDSE、FB、LRECL=80）
 - 編譯選項：CODEPAGE(937),DBCS
 - Job 名稱：[帳號加 A]
 - Volume：DEVVS1
@@ -55,7 +57,7 @@ Bob 建立文件時，依序完成以下事項：
 
 ## 執行與保留成果
 
-依課程網頁的主機實作步驟分析 CKP02、產生並提交 run.jcl，從回傳的 job ID 開啟紀錄並核對 owner。將 spool 保存於 `host-lab/logs/<job ID>/`，同名 DD 依 step 分開放置。
+依課程網頁的主機實作步驟開啟已備妥的 CKP02 與 RUN、另存本機 run.jcl 並核對後提交，從回傳的 job ID 開啟紀錄並核對 owner。將 spool 保存於 `host-lab/logs/<job ID>/`，同名 DD 依 step 分開放置。
 
 每項作業重新建立自己的暫存測資。教材與下載的 log 保存在本機；USS 個人目錄只存輕量設定。讀取逾時可以重新整理；提交逾時先搜尋自己的 jobs，確認是否已建立工作，不立即重送。
 
