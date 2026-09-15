@@ -2,6 +2,17 @@
 <p>將上一單元下載的 JES、編譯與比對紀錄加入 Bob 對話，連同 run.jcl 一起看。這些是自己帳號在主機產生的實際紀錄。</p>
 {{host-logs|核對自己的執行結果|Ask}}
 <p>先從 CCKP 的 SYSPRINT 核對 <code>CODEPAGE(937)</code> 與 <code>DBCS</code>，確認編譯來源是自己的 <code>TCBLAB.COBOL(CKP02)</code>。JESMSGLG、JESJCL、JESYSMSG 從 tcb-jobs（IBM-1047）開啟；CHECK1、CHECK2 比對紀錄也從 tcb-jobs 開啟，識別值以雙引號包住，例如 <code>ACTUAL-ID="12345678  "</code>。CCKP 編譯清單從 tcb-rse（IBM-937）開啟，以正確顯示中文註解。</p>
+<p>每筆輸出中的 <code>BEFORE-ID</code> 是這一次執行 CKP02 前的實際識別值，<code>ACTUAL-ID</code> 是執行後的實際值，<code>EXPECT-ID</code> 是預期結果。CHECK2 的 BEFORE-ID 來自第二次執行前的快照，應等於 CHECK1 的 ACTUAL-ID。</p>
+<pre><code>CHECK1 / CASE 0004
+BEFORE-ID="0000123456"
+ACTUAL-ID="00123456  "
+EXPECT-ID="00123456  "
+
+CHECK2 / CASE 0004
+BEFORE-ID="00123456  "
+ACTUAL-ID="123456    "
+EXPECT-ID="123456    "</code></pre>
+<p>先從 JESYSMSG 確認 SNAP1、SNAP2 都有執行且 RC 0。這份輸出呈現識別值的前後差異；PASS 仍代表整筆 400 bytes 符合預期，不是只比對顯示的十個字元。</p>
 <p>CHECK1、CHECK2 應各有七筆 <code>PASS ALL 400 BYTES</code>，結尾為 <code>CHECKED=0007 ERRORS=0000</code>；RUNONCE、RUNTWICE、RUNEMPTY 均應 RC 0。CCKP 的 RC 4 必須與 README 列出的編譯警告核對，不能只看整體 return code。</p>
 <p>CKP02 沒有呼叫 IMS，因此這些紀錄不能用來判斷 IMS 交易是否完成。若缺少某個 step 的紀錄，先從相同 job ID 補下載，再請 Bob 接著確認。</p>
 {{check:我能指出主機結果所依據的 job 與 step}}

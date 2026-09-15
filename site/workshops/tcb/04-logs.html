@@ -3,6 +3,17 @@
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/run.jcl</code>、<code>host-lab/logs/</code>、<code>host-lab/README.md</code>、<code>host-lab/BOB-GUIDE.md</code></p><div class="prompt"><div class="prompt-head"><span>核對自己的執行結果</span><button type="button" data-copy="host-logs">複製 Prompt</button></div><pre id="host-logs">這是我剛執行 CKP02 的主機紀錄。請依 host-lab/BOB-GUIDE.md 幫我確認哪些步驟真的有執行、RC 4 來自哪裡，以及兩次比對和空檔測試是否成功。請指出 job ID、step 和對應訊息；缺少的紀錄先列為待確認。
 </pre><div class="expected"><strong>預期回應</strong><p>依實際 job、step 與訊息核對的執行結果，以及仍需補充的紀錄。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>先從 CCKP 的 SYSPRINT 核對 <code>CODEPAGE(937)</code> 與 <code>DBCS</code>，確認編譯來源是自己的 <code>TCBLAB.COBOL(CKP02)</code>。JESMSGLG、JESJCL、JESYSMSG 從 tcb-jobs（IBM-1047）開啟；CHECK1、CHECK2 比對紀錄也從 tcb-jobs 開啟，識別值以雙引號包住，例如 <code>ACTUAL-ID="12345678  "</code>。CCKP 編譯清單從 tcb-rse（IBM-937）開啟，以正確顯示中文註解。</p>
+<p>每筆輸出中的 <code>BEFORE-ID</code> 是這一次執行 CKP02 前的實際識別值，<code>ACTUAL-ID</code> 是執行後的實際值，<code>EXPECT-ID</code> 是預期結果。CHECK2 的 BEFORE-ID 來自第二次執行前的快照，應等於 CHECK1 的 ACTUAL-ID。</p>
+<pre><code>CHECK1 / CASE 0004
+BEFORE-ID="0000123456"
+ACTUAL-ID="00123456  "
+EXPECT-ID="00123456  "
+
+CHECK2 / CASE 0004
+BEFORE-ID="00123456  "
+ACTUAL-ID="123456    "
+EXPECT-ID="123456    "</code></pre>
+<p>先從 JESYSMSG 確認 SNAP1、SNAP2 都有執行且 RC 0。這份輸出呈現識別值的前後差異；PASS 仍代表整筆 400 bytes 符合預期，不是只比對顯示的十個字元。</p>
 <p>CHECK1、CHECK2 應各有七筆 <code>PASS ALL 400 BYTES</code>，結尾為 <code>CHECKED=0007 ERRORS=0000</code>；RUNONCE、RUNTWICE、RUNEMPTY 均應 RC 0。CCKP 的 RC 4 必須與 README 列出的編譯警告核對，不能只看整體 return code。</p>
 <p>CKP02 沒有呼叫 IMS，因此這些紀錄不能用來判斷 IMS 交易是否完成。若缺少某個 step 的紀錄，先從相同 job ID 補下載，再請 Bob 接著確認。</p>
 <label class="check"><input type="checkbox" data-check="我能指出主機結果所依據的 job 與 step"><span>我能指出主機結果所依據的 job 與 step</span></label>

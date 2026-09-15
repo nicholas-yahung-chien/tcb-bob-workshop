@@ -21,7 +21,7 @@
 <table><thead><tr><th>教材檔案</th><th>自己的主機位置</th><th>用途</th></tr></thead><tbody>
 <tr><td><code>z-lab/CKP02.cbl</code></td><td><code>&lt;帳號&gt;.TCBLAB.COBOL(CKP02)</code></td><td>剛才理解的原始程式</td></tr>
 <tr><td><code>z-tests/GENCKP.cbl</code></td><td><code>&lt;帳號&gt;.TCBLAB.COBOL(GENCKP)</code></td><td>建立七筆測資、預期結果與空檔</td></tr>
-<tr><td><code>z-tests/CHKCKP.cbl</code></td><td><code>&lt;帳號&gt;.TCBLAB.COBOL(CHKCKP)</code></td><td>逐筆比對完整 400 bytes</td></tr>
+<tr><td><code>z-tests/CHKCKP.cbl</code></td><td><code>&lt;帳號&gt;.TCBLAB.COBOL(CHKCKP)</code></td><td>顯示當次轉換前後識別值，並比對完整 400 bytes</td></tr>
 <tr><td><code>z-tests/run.jcl</code></td><td><code>&lt;帳號&gt;.TCBLAB.JCL(RUN)</code></td><td>已填入自己帳號的測試作業</td></tr>
 </tbody></table>
 <p>主機以資料集中的「成員」（member）保存檔案，所以 <code>CKP02.cbl</code> 對應成員 <code>CKP02</code>，<code>run.jcl</code> 對應成員 <code>RUN</code>。</p>
@@ -30,10 +30,10 @@
 <details><summary>更新教材後，程式仍擠成一行？</summary><p>關閉原先以 tcb-zosmf 開啟的遠端分頁，不儲存。按 Ctrl+Shift+P 執行 <strong>Developer: Reload Window</strong>，再從 <code>tcb-rse</code> 開啟 CKP02。確認程式正常分行，並保留中文註解。若未顯示 tcb-rse，確認 IBM Z Open Editor 與 Zowe Explorer 都已啟用。</p><p>本次 COBOL 使用 tcb-rse（IBM-937）；JCL 與 JES 系統紀錄使用 tcb-jobs（IBM-1047）。</p></details>
 <label class="check"><input type="checkbox" data-check="我已開啟自己主機上的 CKP02，並確認三支程式已備妥"><span>我已開啟自己主機上的 CKP02，並確認三支程式已備妥</span></label>
 <h3>核對並提交已準備好的作業</h3>
-<p>先開啟本機 <code>host-lab/run.jcl</code>。本次 JCL 使用英文註解；若沿用舊版，先將其中的中文註解改為英文。其他內容已是自己的配置時，直接沿用，不需要重新從主機下載。</p>
+<p>先開啟本機 <code>host-lab/run.jcl</code>。本次 JCL 使用英文註解；若沿用舊版，先將其中的中文註解改為英文。請確認 JCL 包含 SNAP1、SNAP2 與兩個 BEFOREDD；若沿用更早的版本，依新版 z-tests/run.jcl 更新個人作業並保留自己的帳號。內容已是新版個人配置時，直接沿用，不需要重新從主機下載。</p>
 <p><code>z-tests/run.jcl</code> 是共用範本，仍含 <code>TCBP001</code> 與 <code>YOURUSER</code>；<code>host-lab/run.jcl</code> 和遠端 <code>&lt;自己的帳號&gt;.TCBLAB.JCL(RUN)</code> 則是填入個人帳號的版本。本機使用 UTF-8，主機使用 IBM-1047，作業內容相同；若曾自行修改，以本次要提交的本機版本核對。</p>
 <details><summary>本機還沒有 host-lab/run.jcl 時，再下載一次</summary><ol><li>在「資料集」選取 <code>tcb-jobs</code>（IBM-1047），搜尋 <code>&lt;自己的帳號&gt;.TCBLAB.JCL</code>，展開並開啟 <code>RUN</code>。</li><li>在 RUN 成員上按右鍵，選 <strong>Download Member...</strong>，下載到教材的 <code>host-lab</code> 資料夾，供 Bob 閱讀並保留本次執行版本。</li><li>下載選項取消 <strong>Generate Directory Structure</strong> 與 <strong>Use Uppercase Names</strong>，勾選 <strong>Override File Extension</strong> 並輸入 <code>jcl</code>，讓本機檔案命名為 <code>host-lab/run.jcl</code>。取消 <strong>Overwrite</strong>，避免覆寫既有成果。編碼沿用 tcb-jobs 的 IBM-1047。</li></ol></details>
-<p>把這份 JCL 與自己的 environment.md 加入對話，請 Bob 帶你看編譯、執行與比對的步驟。每項作業都會重新建立獨立測資，執行兩次 CKP02，再測試空檔；不需要手動準備或貼上資料。</p>
+<p>把這份 JCL 與自己的 environment.md 加入對話，請 Bob 帶你看編譯、執行與比對的步驟。每項作業都會重新建立獨立測資，執行兩次 CKP02，再測試空檔。SNAP1、SNAP2 會在各次執行前保存當時的實際輸入，供 CHECK1、CHECK2 印出 BEFORE-ID；不需要手動準備或貼上資料。</p>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/BOB-GUIDE.md</code>、<code>host-lab/environment.md</code>、<code>host-lab/run.jcl</code>、<code>z-tests/run.jcl</code></p><div class="prompt"><div class="prompt-head"><span>一起看這份主機作業</span><button type="button" data-copy="host-build">複製 Prompt</button></div><pre id="host-build">這是主機上已經幫我準備好的作業，我把它另存成 host-lab/run.jcl 了。請依 host-lab/BOB-GUIDE.md 和我的 environment.md，帶我看它會編譯哪幾支程式、怎麼準備測試資料，以及如何確認結果。也幫我核對是不是使用我自己的帳號，將檢查結果記在 host-lab/jcl-review.md。先不要提交。
 </pre><div class="expected"><strong>預期回應</strong><p>作業步驟與個人配置的說明，以及 host-lab/jcl-review.md 的核對結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <ol><li>核對 <code>host-lab/run.jcl</code> 的 job 名稱是自己的帳號加 A，配置為 DEVVS1、SCNOSMS；CGEN、CCKP、CCHK 的 SYSIN 分別讀取自己 <code>TCBLAB.COBOL</code> 裡的 GENCKP、CKP02、CHKCKP，編譯選項包含 <code>CODEPAGE(937),DBCS</code>。</li><li>在本機 JCL 編輯器按右鍵選 <strong>Submit as JCL</strong>，選 <code>tcb-jobs</code>（RSE、IBM-1047）連線。</li><li>記下回傳的 job ID，在 JOBS 的 <code>tcb-jobs</code> 核對 owner，等待作業完成。</li><li>從 tcb-jobs 開啟 JESMSGLG、JESYSMSG、CHECK1／SYSOUT、CHECK2／SYSOUT；再從 tcb-rse 開啟同一個 job ID 的 CCKP／SYSPRINT。核對中文及雙引號內的識別值後，將各分頁以 <strong>檔案 → 另存新檔</strong> 保存到 <code>host-lab/logs/&lt;job ID&gt;/&lt;step&gt;/</code>，避免同名 DD 互相覆蓋。</li></ol>
