@@ -2,6 +2,8 @@
 
 2026-09-15。此文件供教材維護，不納入學員 ZIP。
 
+本頁記錄 v1.9.1 的歷史驗證。後續實測已修正「一般作業紀錄不可統一 IBM-937」的結論：本次課程改為 tcb-rse 的 encoding 與 jobEncoding 均為 IBM-937，詳見 [JCL 與 spool 驗證](jcl937-validation.md)。舊測試只比對 PASS 字串，未驗證 IBM-937 程式輸出的中括號，不能據此宣稱 IBM-1047 適用所有 spool。
+
 ## 問題與修正
 
 z/OSMF 以 IBM-937 讀取 CKP02 時，回應有 102 個 U+0085 NEL，沒有 LF。原始 FB80 位元組仍符合已配置的來源雜湊。先前驗證使用 Python splitlines()，把 NEL 與 LF 視為相同，漏掉 VS Code 分行相容性；來源編譯成功不等於 Zowe Explorer 顯示成功。
@@ -25,7 +27,7 @@ default rse=tcb-rse，提交及閱覽 JCL/JES 時明確選 tcb-jobs。移除教�
 
 ## 限制與操作核對
 
-本輪驗證為 API 與本機設定/schema/教材檢查，尚待使用者依逐步指引在 IBM Bob 視窗重新載入並開啟程式。不可宣稱 computer-use 或 GUI 已通過。原始來源在課程中只讀；不改寫 z-lab 或主機基準程式。
+本輪最初驗證為 API 與本機設定/schema/教材檢查；使用者後續已提供 IBM Bob 畫面，確認經 tcb-rse 開啟 CKP02 能正常分行並顯示中文註解。JCL 與 spool 的 GUI 操作另行核對，不由來源畫面推論通過。原始來源在課程中只讀；不改寫 z-lab 或主機基準程式。
 
 另測的 JSON records 原樣回寫未通過 FB80 完全一致檢查，不能列為寫入往返成功；該測試僅使用臨時 NLTEST，已移除，沒有覆寫現用程式。若未來課程新增遠端編輯步驟，須另驗證實際 SDK 的讀取／儲存流程與末端空白記錄，不沿用本次只讀結論。
 

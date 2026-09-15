@@ -149,13 +149,15 @@ def build(out,jobname,volume=None,storage_class=None,source_dataset='YOURUSER.TC
         jcl=jcl.replace('UNIT=SYSDA,',f'UNIT=3390,\n// VOL=SER={volume},STORCLAS={storage_class},\n// ')
         jcl=jcl.replace('// \n','')
     assert all(len(row)<=72 for row in jcl.split('\n')), 'JCL exceeds statement columns'
-    (out/'run.jcl').write_text(jcl,encoding='ascii',newline='\n')
+    jcl=jcl.replace('//* Each job owns its temporary data; no production datasets.',
+                    '//* 本項作業使用獨立的暫存測試資料。')
+    (out/'run.jcl').write_text(jcl,encoding='utf-8',newline='\n')
     manifest={'source':'z-lab/CKP02.cbl','source_dataset':source_dataset+'(CKP02)',
       'source_library':source_dataset,'source_members':['CKP02','GENCKP','CHKCKP'],
       'job_member':source_dataset.removesuffix('.COBOL')+'.JCL(RUN)',
       'local_encoding':'UTF-8','local_newline':'LF',
       'source_transfer_encoding':'IBM-937','compiler_options':['CODEPAGE(937)','DBCS'],
-      'jcl_encoding':'IBM-1047','source_change':'None; source members are provisioned before class from the supplied files, including Chinese comments.',
+      'jcl_encoding':'IBM-937','source_change':'None; source members are provisioned before class from the supplied files, including Chinese comments.',
       'cases':len(cases),'record_bytes':400,'runs':['once','twice','empty'],
       'host_execution':'not inferred from generation',
       'allocation_route':{'volume':volume,'storage_class_selector':storage_class},

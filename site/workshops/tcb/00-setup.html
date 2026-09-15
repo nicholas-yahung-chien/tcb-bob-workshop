@@ -20,7 +20,7 @@
 <p>完成後，開啟 <code>z-lab/CKP02.cbl</code>。程式已隨教材放在 z-lab，不需要轉檔；檢查報告會存到 output/workspace-check.md。</p>
 <h2 id="host-connection">準備自己的主機連線</h2>
 <p>接下來，用分配給你的帳號登入主機，查看自己的資料集與作業。教材已備妥連線設定，你只需要填入帳號，再於登入時輸入密碼。</p>
-<ol><li>開啟教材根目錄的 <code>zowe.config.json</code>，將 <code>YOUR_USER_ID</code> 換成自己的帳號，保留雙引號並儲存。其餘欄位維持原值。</li><li>開啟 <strong>Zowe Explorer</strong>，在「資料集」展開 <code>tcb-rse</code>。出現密碼欄位時，輸入分配給你的密碼並按 Enter；密碼只在此輸入，不貼到 Bob 對話或教材檔案。</li><li>點選連線旁的搜尋圖示，輸入 <code>&lt;自己的帳號&gt;.TCBLAB.*</code>。例如帳號是 TCB2101，就輸入 <code>TCB2101.TCBLAB.*</code>。</li><li>在「工作」（JOBS）選取 <code>tcb-jobs</code> 連線，將 <strong>Owner</strong> 設為自己的帳號，查看自己的作業清單。</li></ol>
+<ol><li>開啟教材根目錄的 <code>zowe.config.json</code>，將 <code>YOUR_USER_ID</code> 換成自己的帳號，保留雙引號並儲存。其餘欄位維持原值。</li><li>開啟 <strong>Zowe Explorer</strong>，在「資料集」展開 <code>tcb-rse</code>。出現密碼欄位時，輸入分配給你的密碼並按 Enter；密碼只在此輸入，不貼到 Bob 對話或教材檔案。</li><li>點選連線旁的搜尋圖示，輸入 <code>&lt;自己的帳號&gt;.TCBLAB.*</code>。例如帳號是 TCB2101，就輸入 <code>TCB2101.TCBLAB.*</code>。</li><li>在「工作」（JOBS）選取 <code>tcb-rse</code> 連線，將 <strong>Owner</strong> 設為自己的帳號，查看自己的作業清單。</li></ol>
 <p>查詢完成且沒有認證或連線錯誤，就可以繼續。資料集清單應包含 <code>&lt;自己的帳號&gt;.TCBLAB.COBOL</code> 與 <code>&lt;自己的帳號&gt;.TCBLAB.JCL</code>，裡面已準備好練習程式與個人作業。作業清單可能是空的；稍後提交 CKP02 後，就能在這裡找到自己的作業。</p>
 <details><summary>找不到連線，或登入時遇到問題？</summary><p>若沒有顯示 <code>tcb-rse</code>，先確認 <strong>IBM Z Open Editor</strong> 與 <strong>Zowe Explorer</strong> 已啟用，再按 Ctrl+Shift+P，執行 <strong>Developer: Reload Window</strong>，再開啟 Zowe Explorer。若仍有錯誤，保留完整訊息，依 <code>host-lab/CONNECTION.md</code> 的說明檢查。</p><p>本練習不需另外安裝 CA 憑證。教材的連線設定保留 HTTPS 加密，但略過伺服器憑證驗證，僅供本次練習使用。</p></details>
 <h3 id="host-environment-setup">建立個人作業配置</h3>
@@ -28,7 +28,7 @@
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/CONNECTION.md</code></p><div class="prompt"><div class="prompt-head"><span>記下我的作業配置</span><button type="button" data-copy="host-environment">複製 Prompt</button></div><pre id="host-environment">我已用自己的帳號查詢到主機資料集與作業。請依 host-lab/CONNECTION.md，幫我建立 host-lab/environment.md，完成後列出內容讓我核對。只記錄個人作業配置，不要修改連線設定或提交作業。
 </pre><div class="expected"><strong>預期回應</strong><p>host-lab/environment.md</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>完成後，開啟 <code>host-lab/environment.md</code>，核對以下內容：</p>
-<ul><li>帳號與你登入 Zowe 的帳號一致，來源連線為 <code>tcb-rse</code>（IBM-937），作業連線為 <code>tcb-jobs</code>（IBM-1047）。</li><li>來源資料集為 <code>&lt;自己的帳號&gt;.TCBLAB.COBOL(CKP02)</code>，本機來源為 <code>z-lab/CKP02.cbl</code>。</li><li>Job 名稱為自己的帳號加 A，例如 TCB2101A。</li><li>Volume 為 <code>DEVVS1</code>，Storage class 為 <code>SCNOSMS</code>。</li><li>文件沒有待填文字或密碼。</li></ul>
+<ul><li>帳號與你登入 Zowe 的帳號一致，來源連線為 <code>tcb-rse</code>（IBM-937），作業連線為 <code>tcb-rse</code>（IBM-937）。</li><li>來源資料集為 <code>&lt;自己的帳號&gt;.TCBLAB.COBOL(CKP02)</code>，本機來源為 <code>z-lab/CKP02.cbl</code>。</li><li>Job 名稱為自己的帳號加 A，例如 TCB2101A。</li><li>Volume 為 <code>DEVVS1</code>，Storage class 為 <code>SCNOSMS</code>。</li><li>文件沒有待填文字或密碼。</li></ul>
 <p>進行 <a href="03-testing.html#host">CKP02 主機實作</a>時，Bob 會使用這份文件核對主機上已準備好的 JCL。</p>
 <label class="check"><input type="checkbox" data-check="我的 environment.md 已建立並核對完成"><span>我的 environment.md 已建立並核對完成</span></label>
 <h2 id="premium">找到 pp4z 的功能</h2>

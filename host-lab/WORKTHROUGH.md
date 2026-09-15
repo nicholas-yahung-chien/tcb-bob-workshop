@@ -24,13 +24,13 @@
 
 依課程網頁，以 tcb-rse（IBM-937）開啟自己的 <帳號>.TCBLAB.COBOL(CKP02)，核對中文註解與本機 z-lab/CKP02.cbl 的內容。同一資料集也已備妥 GENCKP、CHKCKP，不需上傳或貼上。
 
-以 tcb-jobs（IBM-1047）開啟 <帳號>.TCBLAB.JCL(RUN)，另存本機 host-lab/run.jcl。將它與 environment.md、BOB-GUIDE.md 加入對話，使用課程網頁的「一起看這份主機作業」Prompt。
+以 tcb-rse（IBM-937）開啟 <帳號>.TCBLAB.JCL(RUN)，另存本機 host-lab/run.jcl。將它與 environment.md、BOB-GUIDE.md 加入對話，使用課程網頁的「一起看這份主機作業」Prompt。
 
 三個編譯步驟分別從自己的 COBOL 資料集讀取同名成員，都使用 CODEPAGE(937),DBCS。RUN 已填入自己的帳號與 job 名稱。請 Bob 帶你核對編譯、執行與比對流程，再由你提交。七筆測資與空檔由 GENCKP 自動建立。
 
 ## 3. 從編輯器提交
 
-開啟 `host-lab/run.jcl`。在編輯器按右鍵，選擇 **Submit as JCL**，再選擇 tcb-jobs（IBM-1047）連線。記下回傳的 job ID，從 JOBS 檢視找到這一項作業。
+開啟 `host-lab/run.jcl`。在編輯器按右鍵，選擇 **Submit as JCL**，再選擇 tcb-rse（IBM-937）連線。記下回傳的 job ID，從 JOBS 檢視找到這一項作業。
 
 先確認 owner 是自己，再看作業是否已完成。整體 RC 4 不代表每一步都失敗：這版 CKP02 有已核對的編譯警告，仍須打開清單確認內容。
 
