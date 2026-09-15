@@ -8,7 +8,7 @@
 
 主機連線設定已放在根目錄的 `zowe.config.json`，只需將 `YOUR_USER_ID` 換成自己的帳號。`zowe.schema.json` 請一併保留；密碼透過 Zowe 認證介面輸入。詳細步驟見 [主機連線](host-lab/CONNECTION.md)。
 
-程式、JCL 與作業紀錄統一透過 IBM RSE API 連線。開啟 COBOL 選 `tcb-rse`（IBM-937）；開啟 JCL、提交作業與查看紀錄選 `tcb-rse`（IBM-937）。IBM Z Open Editor 與 Zowe Explorer 需保持啟用。
+程式、JCL 與作業紀錄統一透過 IBM RSE API 連線。開啟 COBOL 選 `tcb-rse`（IBM-937）；開啟 JCL、提交作業與查看 JES 系統紀錄選 `tcb-jobs`（IBM-1047）；含中文的編譯清單及 CHECK1／CHECK2 輸出選 `tcb-rse`（IBM-937）。IBM Z Open Editor 與 Zowe Explorer 需保持啟用。
 
 使用 ZIP 解壓後，用 File → Open Folder 開啟。若使用 Git，請直接下載教材分支：
 

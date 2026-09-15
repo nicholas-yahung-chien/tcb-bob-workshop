@@ -1,6 +1,6 @@
 //TCBP001 JOB (ACCT),'TCB CKP02 LAB',CLASS=A,MSGCLASS=H,
 // MSGLEVEL=(1,1),NOTIFY=&SYSUID
-//* 本項作業使用獨立的暫存測試資料。
+//* Each job owns its temporary data; no production datasets.
 //ALLOC EXEC PGM=IEFBR14
 //LOAD DD DSN=&&LOAD,DISP=(NEW,PASS),UNIT=3390,
 // VOL=SER=DEVVS1,STORCLAS=SCNOSMS,

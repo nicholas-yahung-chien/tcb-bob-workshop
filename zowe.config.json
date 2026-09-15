@@ -8,7 +8,7 @@
         "basePath": "rseapi",
         "protocol": "https",
         "encoding": "IBM-937",
-        "jobEncoding": "IBM-937"
+        "jobEncoding": "IBM-1047"
       },
       "secure": []
     },
@@ -29,7 +29,8 @@
         "port": 8195,
         "basePath": "rseapi",
         "protocol": "https",
-        "encoding": "IBM-1047"
+        "encoding": "IBM-1047",
+        "jobEncoding": "IBM-1047"
       },
       "secure": []
     }

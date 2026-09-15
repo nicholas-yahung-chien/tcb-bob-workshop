@@ -15,7 +15,7 @@
     "CODEPAGE(937)",
     "DBCS"
   ],
-  "jcl_encoding": "IBM-937",
+  "jcl_encoding": "IBM-1047",
   "source_change": "None; source members are provisioned before class from the supplied files, including Chinese comments.",
   "cases": 7,
   "record_bytes": 400,
@@ -32,6 +32,6 @@
   "sha256": {
     "CHKCKP.cbl": "e4cf0a2ea80f50900767d5ab644259c5875f569415fd0dfe1e3d57acca57e8a5",
     "GENCKP.cbl": "1b8f9fdf527f8b765b5351442c667ad68b68f1b1741ce04c1452e660f34ecde3",
-    "run.jcl": "a87944f9b10c863741bbec146f50fc80029f89733891cd7ec08ab7a2da0c7b6a"
+    "run.jcl": "948d55bd591a7d7370059363cbbf5184ab2c14a5e8a0b8e4223876fec553f50b"
   }
 }
