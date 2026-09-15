@@ -8,7 +8,9 @@
 
 在 Bob 對話中，可以先請它閱讀 `z-tests/fixtures.json` 和 CKP02，說明每筆資料應如何變化，再檢視產生的 JCL。`GENCKP` 建立測資，`CHKCKP` 比較整筆 400 bytes；這兩支是練習的輔助程式。CKP02 本身沒有新增 log 或 IMS 呼叫。
 
-請將 [BOB-GUIDE.md](BOB-GUIDE.md) 交給 Bob，依第二節從 z-tests/run.jcl 建立個人作業，依第三節分析實際紀錄。不需要本機 Python。理解與執行共用 z-lab/CKP02.cbl，不另提供翻譯註解的版本。先以 tcb-zosmf（IBM-937）存入自己的 <帳號>.TCBLAB.SRC937，再替換 JCL 的個人 job 名稱與來源資料集。CCKP 使用 CODEPAGE(937),DBCS；GENCKP、CHKCKP 仍為內嵌測試輔助程式。完成後先審閱，再以 tcb-jobs（IBM-1047）提交。
+主機已為自己的帳號準備好 `<帳號>.TCBLAB.COBOL` 的 CKP02、GENCKP、CHKCKP，以及 `<帳號>.TCBLAB.JCL(RUN)`。成員名稱對應教材中的同名程式與 run.jcl。CKP02 保留 z-lab/CKP02.cbl 的完整內容與中文註解；GENCKP、CHKCKP 來自 z-tests。三支程式皆以 IBM-937 保存，編譯採 CODEPAGE(937),DBCS。
+
+請依 [BOB-GUIDE.md](BOB-GUIDE.md) 第二節核對已備妥的個人作業，依第三節分析實際紀錄。以 tcb-zosmf 開啟 COBOL 成員，以 tcb-jobs 開啟 JCL 的 RUN，另存本機 host-lab/run.jcl。請 Bob 說明並核對後，再以 tcb-jobs（IBM-1047）提交。不需要上傳程式、貼上測資或執行本機 Python。七筆測資與空檔由每項作業自動重新建立。
 
 作業應依序完成配置、三支程式的編譯與連結、測資建立、第一次執行與比對、第二次執行與比對，以及空檔執行。編譯警告需要逐項核對，連結必須 RC 0；提交成功不等於作業成功。兩次比對各應顯示 `CHECKED=0007 ERRORS=0000`，且每筆完整 400 bytes 相同。
 
