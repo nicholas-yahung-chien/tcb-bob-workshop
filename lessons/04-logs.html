@@ -1,8 +1,8 @@
 <h2 id="host">先看自己剛跑的 CKP02</h2>
 <p>將上一單元下載的 JES、編譯與比對紀錄加入 Bob 對話，連同 run.jcl 一起看。這些是自己帳號在主機產生的實際紀錄。</p>
 {{host-logs|核對自己的執行結果|Ask}}
-<p>先從 CCKP 的 SYSPRINT 核對 <code>CODEPAGE(937)</code> 與 <code>DBCS</code>，確認編譯來源是自己的 <code>TCBLAB.COBOL(CKP02)</code>。JESMSGLG、JESJCL、JESYSMSG 從 tcb-jobs（IBM-1047）開啟；CHECK1、CHECK2 比對紀錄也從 tcb-jobs 開啟，識別值以雙引號包住，例如 <code>ACTUAL-ID="12345678  "</code>。CCKP 編譯清單從 tcb-rse（IBM-937）開啟，以正確顯示中文註解。</p>
-<p>GENERATE／SYSOUT 使用 tcb-jobs；中文 PRINTDD 依上一單元的 CLI 步驟先讀取，再從 tcb-rse（IBM-937）開啟。GENERATE／PRINTDD 使用中文 IBM-937 測資，每筆以單一完整 400-byte 資料行印出；前後雙引號用來保留尾端空白，不屬於資料。中文包含雙位元字元與 SO／SI 控制碼，因此解碼後的字數、畫面欄號不等於主機 byte 位置。GENERATE／SYSOUT 另外顯示 CASE、ID 與 EOF-MARKER-AT-014=YES/NO，表示第 14–16 bytes 是否為 EOF；不直接印出可能切到半個中文字的三個 bytes。CASE 0003 為 YES，所以不轉換；CASE 0005 的 EOF 位於第 12–14 bytes，判斷為 NO，仍轉換。公司、姓名、地址及備註均為虛構中文；未知代碼留空，數字欄位保留數字。這是測資輸出，尚未實作需求中的預覽功能。</p>
+<p>先從 CCKP 的 SYSPRINT 核對 <code>CODEPAGE(937)</code> 與 <code>DBCS</code>，確認編譯來源是自己的 <code>TCBLAB.COBOL(CKP02)</code>。JESMSGLG、JESJCL、JESYSMSG 從 tcb-rse（IBM-1371）開啟；CHECK1、CHECK2 比對紀錄也從 tcb-rse 開啟，識別值以雙引號包住，例如 <code>ACTUAL-ID="12345678  "</code>。CCKP 編譯清單從 tcb-rse（IBM-1371）開啟，以正確顯示中文註解。</p>
+<p>GENERATE／SYSOUT 使用 tcb-rse；中文 PRINTDD 同樣從 tcb-rse（IBM-1371）開啟。GENERATE／PRINTDD 使用中文 IBM-937 測資，每筆以單一完整 400-byte 資料行印出；前後雙引號用來保留尾端空白，不屬於資料。中文包含雙位元字元與 SO／SI 控制碼，因此解碼後的字數、畫面欄號不等於主機 byte 位置。GENERATE／SYSOUT 另外顯示 CASE、ID 與 EOF-MARKER-AT-014=YES/NO，表示第 14–16 bytes 是否為 EOF；不直接印出可能切到半個中文字的三個 bytes。CASE 0003 為 YES，所以不轉換；CASE 0005 的 EOF 位於第 12–14 bytes，判斷為 NO，仍轉換。公司、姓名、地址及備註均為虛構中文；未知代碼留空，數字欄位保留數字。這是測資輸出，尚未實作需求中的預覽功能。</p>
 <p>每筆輸出中的 <code>BEFORE-ID</code> 是這一次執行 CKP02 前的實際識別值，<code>ACTUAL-ID</code> 是執行後的實際值，<code>EXPECT-ID</code> 是預期結果。CHECK2 的 BEFORE-ID 來自第二次執行前的快照，應等於 CHECK1 的 ACTUAL-ID。</p>
 <pre><code>CHECK1 / CASE 0004
 BEFORE-ID="0000123456"
@@ -17,7 +17,7 @@ EXPECT-ID="123456    "</code></pre>
 <p>CHECK1、CHECK2 應各有七筆 <code>PASS ALL 400 BYTES</code>，結尾為 <code>CHECKED=0007 ERRORS=0000</code>；RUNONCE、RUNTWICE、RUNEMPTY 均應 RC 0。CCKP 的 RC 4 必須與 README 列出的編譯警告核對，不能只看整體 return code。</p>
 <p>CKP02 沒有呼叫 IMS，因此這些紀錄不能用來判斷 IMS 交易是否完成。若缺少某個 step 的紀錄，先從相同 job ID 補下載，再請 Bob 接著確認。</p>
 {{check:我能指出主機結果所依據的 job 與 step}}
-<details><summary>紀錄中出現額外的控制字元？</summary><p>JES 系統紀錄使用 tcb-jobs（IBM-1047）可避免本次遇到的行尾 NEL。CHECK1、CHECK2 已改用雙引號，使用 tcb-jobs 可正確顯示且沒有行尾 NEL。含中文的編譯清單仍使用 IBM-937，RSE 回應可能在行末保留 NEL，正常換行仍存在。先保留下載原檔；請 Bob 分析時忽略行末的 NEL，不要因此切換成 IBM-1047，以免中文顯示錯誤。若需整理閱讀版，另存副本並保留原始紀錄。</p></details>
+<details><summary>紀錄中出現額外的控制字元？</summary><p>JES 系統紀錄使用 tcb-rse（IBM-1371）可避免本次遇到的行尾 NEL。CHECK1、CHECK2 已改用雙引號，使用 tcb-rse 可正確顯示且沒有行尾 NEL。中文 PRINTDD 與編譯清單同樣使用 tcb-rse（IBM-1371）。若仍異常，關閉舊分頁並重新載入視窗，再依 CONNECTION.md 排查；保留原始紀錄。</p></details>
 <h2 id="story">延伸：IMS 交易到底完成了沒有？</h2>
 <p>看到一行錯誤記錄，往往還不能知道整筆交易的結果。先把前後事件串起來，再決定要往哪裡查。</p>
 <p>這份 CSV 是練習用的 IMS 事件摘要，欄位定義在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/log-schema.md">log-schema.md</a>。它已經整理成可閱讀的事件，和主機原始 binary log 不同。</p>

@@ -22,15 +22,15 @@
 
 ## 2. 開啟已備妥的來源與作業
 
-依課程網頁，以 tcb-rse（IBM-937）開啟自己的 <帳號>.TCBLAB.COBOL(CKP02)，核對中文註解與本機 z-lab/CKP02.cbl 的內容。同一資料集也已備妥 GENCKP、CHKCKP，不需上傳或貼上。
+依課程網頁，以 tcb-rse（IBM-1371）開啟自己的 <帳號>.TCBLAB.COBOL(CKP02)，核對中文註解與本機 z-lab/CKP02.cbl 的內容。同一資料集也已備妥 GENCKP、CHKCKP，不需上傳或貼上。
 
-先使用本機 host-lab/run.jcl；只有缺檔時，才以 tcb-jobs（IBM-1047）從 <帳號>.TCBLAB.JCL(RUN) 下載一次。將它與 environment.md、BOB-GUIDE.md 加入對話，使用課程網頁的「一起看這份主機作業」Prompt。
+先使用本機 host-lab/run.jcl；只有缺檔時，才以 tcb-rse（IBM-1371）從 <帳號>.TCBLAB.JCL(RUN) 下載一次。將它與 environment.md、BOB-GUIDE.md 加入對話，使用課程網頁的「一起看這份主機作業」Prompt。
 
 三個編譯步驟分別從自己的 COBOL 資料集讀取同名成員，都使用 CODEPAGE(937),DBCS。RUN 已填入自己的帳號與 job 名稱。請 Bob 帶你核對編譯、執行與比對流程，再由你提交。七筆測資與空檔由 GENCKP 自動建立。
 
 ## 3. 從編輯器提交
 
-開啟 `host-lab/run.jcl`。在編輯器按右鍵，選擇 **Submit as JCL**，再選擇 tcb-jobs（IBM-1047）連線。記下回傳的 job ID，從 JOBS 檢視找到這一項作業。
+開啟 `host-lab/run.jcl`。在編輯器按右鍵，選擇 **Submit as JCL**，再選擇 tcb-rse（IBM-1371）連線。記下回傳的 job ID，從 JOBS 檢視找到這一項作業。
 
 先確認 owner 是自己，再看作業是否已完成。整體 RC 4 不代表每一步都失敗：這版 CKP02 有已核對的編譯警告，仍須打開清單確認內容。
 
@@ -38,7 +38,7 @@
 
 這次分析的是 JES、編譯與測試紀錄。CKP02 沒有 IMS 呼叫，這些檔案不是 IMS transaction log。
 
-從 tcb-jobs 開啟 JESMSGLG、JESYSMSG、CHECK1/SYSOUT、CHECK2/SYSOUT；從 tcb-rse 開啟同一項作業的 CCKP/SYSPRINT。各分頁另存新檔後加入 Bob 對話，不使用未傳入 encoding 的整批下載入口：
+從 tcb-rse 開啟 JESMSGLG、JESYSMSG、CHECK1/SYSOUT、CHECK2/SYSOUT；從 tcb-rse 開啟同一項作業的 CCKP/SYSPRINT。各分頁另存新檔後加入 Bob 對話，不使用未傳入 encoding 的整批下載入口：
 
 ```text
 這是我剛執行 CKP02 的作業紀錄。請幫我確認哪些步驟真的有執行、RC 4 來自哪裡，以及兩次資料比對和空檔測試是否成功。每個結論請指出對應的步驟與訊息；目前沒有的紀錄就先列為待確認。
