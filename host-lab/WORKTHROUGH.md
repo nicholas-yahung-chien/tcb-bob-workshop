@@ -38,7 +38,7 @@
 
 這次分析的是 JES、編譯與測試紀錄。CKP02 沒有 IMS 呼叫，這些檔案不是 IMS transaction log。
 
-從 tcb-jobs 開啟 JESMSGLG、JESYSMSG；從 tcb-rse 開啟同一項作業的 CCKP/SYSPRINT、CHECK1/SYSOUT、CHECK2/SYSOUT。各分頁另存新檔後加入 Bob 對話，不使用未傳入 encoding 的整批下載入口：
+從 tcb-jobs 開啟 JESMSGLG、JESYSMSG、CHECK1/SYSOUT、CHECK2/SYSOUT；從 tcb-rse 開啟同一項作業的 CCKP/SYSPRINT。各分頁另存新檔後加入 Bob 對話，不使用未傳入 encoding 的整批下載入口：
 
 ```text
 這是我剛執行 CKP02 的作業紀錄。請幫我確認哪些步驟真的有執行、RC 4 來自哪裡，以及兩次資料比對和空檔測試是否成功。每個結論請指出對應的步驟與訊息；目前沒有的紀錄就先列為待確認。

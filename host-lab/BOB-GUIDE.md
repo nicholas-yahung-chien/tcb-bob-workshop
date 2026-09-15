@@ -25,13 +25,13 @@
 
 讀取實際 run.jcl、z-tests/fixtures.json 與 host-lab/logs/<job ID>/ 的 JESMSGLG、JESYSMSG、CCKP/SYSPRINT、CHECK1/SYSOUT、CHECK2/SYSOUT。同名 DD 依 step 分開存放。缺檔時請學員下載，不能借用其他作業結果。
 
-JES 系統紀錄以 tcb-jobs（IBM-1047）開啟；CCKP/SYSPRINT、CHECK1/SYSOUT、CHECK2/SYSOUT 以 tcb-rse（IBM-937）開啟，再由編輯器另存新檔。整批下載入口可能未傳入 encoding；若中文或中括號失真，重新依此方式取得，不把失真內容當作程式事實。RSE 可能在 LF 前附帶 U+0085 NEL；分析時忽略該行末控制字元，保留原始檔案與欄位中的空白。若整理閱讀版，另存副本；不要為消除 NEL 而改用 IBM-1047，導致中文或中括號解碼錯誤。
+JES 系統紀錄以 tcb-jobs（IBM-1047）開啟；CHECK1/SYSOUT、CHECK2/SYSOUT 也以 tcb-jobs 開啟；CCKP/SYSPRINT 以 tcb-rse（IBM-937）開啟，再由編輯器另存新檔。整批下載入口可能未傳入 encoding；若中文失真，重新依此方式取得，不把失真內容當作程式事實。RSE 可能在 LF 前附帶 U+0085 NEL；分析時忽略該行末控制字元，保留原始檔案與欄位中的空白。若整理閱讀版，另存副本；不要為消除 NEL 而改用 IBM-1047，導致中文解碼錯誤。
 
 - 記錄 owner、job 名稱、job ID 與紀錄時間。
 - 核對 ALLOC、CGEN、LGENCKP、CCKP、LCKP02、CCHK、LCHKCKP、GENERATE、RUNONCE、CHECK1、RUNTWICE、CHECK2、RUNEMPTY 共 13 步是否實際執行。跳過的步驟不能算通過。
 - 從 CCKP/SYSPRINT 確認 CODEPAGE(937)、DBCS，以及 SYSIN 對應自己 TCBLAB.COBOL(CKP02) 的來源。中文註解若顯示異常，先檢查該 DD 的解碼設定；不改整個作業連線，也不翻譯來源。
 - CCKP 的 RC 4 須核對 IGYLI0090-W、IGYSC0205-W、IGYCB7310-W 及來源；不同訊息另列分析。其他 12 步應為 RC 0。
-- CHECK1、CHECK2 各需七個不重複 CASE（0001–0007），每筆 PASS ALL 400 BYTES，結尾 CHECKED=0007 ERRORS=0000。ACTUAL-ID、EXPECT-ID 分別對照 once、twice，保留值中的空白。
+- CHECK1、CHECK2 各需七個不重複 CASE（0001–0007），每筆 PASS ALL 400 BYTES，結尾 CHECKED=0007 ERRORS=0000。ACTUAL-ID、EXPECT-ID 分別對照 once、twice，識別值以雙引號包住，保留引號內全部十個字元及尾端空白。
 - RUNEMPTY 需有實際執行且 RC 0 的證據。空檔與資料中的 EOF 標記分別核對。
 - 保存 host-lab/test-report.md，逐項列出預期、實際 step/DD/訊息與通過、失敗或待確認。失敗時先指出證據與最小修正；保留原始 log，重跑使用新 job ID。
 

@@ -12,7 +12,7 @@
 "user": "YOUR_USER_ID"
 ```
 
-本次程式來源使用 `tcb-rse`（IBM-937）；JCL、作業提交與 JES 系統紀錄使用 `tcb-jobs`（IBM-1047）。兩者均透過 IBM RSE API（8195），由 `tcb-base` 共用帳號與認證。含中文的編譯清單及 CHECK1、CHECK2 程式輸出仍使用 tcb-rse。`encoding` 控制讀取字碼，`jobEncoding` 控制 JCL 提交字碼；教材已設定完成。不要變更 profile 名稱、defaults、host 或 port。
+本次程式來源使用 `tcb-rse`（IBM-937）；JCL、作業提交與 JES 系統紀錄使用 `tcb-jobs`（IBM-1047）。兩者均透過 IBM RSE API（8195），由 `tcb-base` 共用帳號與認證。CHECK1、CHECK2 程式輸出使用 tcb-jobs；含中文的編譯清單使用 tcb-rse。`encoding` 控制讀取字碼，`jobEncoding` 控制 JCL 提交字碼；教材已設定完成。不要變更 profile 名稱、defaults、host 或 port。
 
 ## 在 Zowe Explorer 登入
 
@@ -43,7 +43,8 @@ Bob 建立文件時，依序完成以下事項：
 - 帳號：[自己的帳號]
 - 來源連線：tcb-rse（IBM-937）
 - 作業連線：tcb-jobs（encoding 與 jobEncoding 均為 IBM-1047）
-- 編譯清單與比對輸出：tcb-rse（IBM-937）
+- 中文編譯清單：tcb-rse（IBM-937）
+- CHECK1、CHECK2 比對輸出：tcb-jobs（IBM-1047）
 - 本機來源：z-lab/CKP02.cbl（UTF-8、LF）
 - 來源資料集：[自己的帳號].TCBLAB.COBOL(CKP02)（PDSE、FB、LRECL=80）
 - 測試輔助程式：同一 COBOL 資料集的 GENCKP、CHKCKP 成員
@@ -66,6 +67,6 @@ CKP02 不呼叫 IMS，JES、編譯清單與比較結果不是 IMS transaction lo
 
 ## 遠端程式擠成一行時
 
-關閉先前以 tcb-zosmf 開啟的遠端分頁，不儲存異常內容。按 Ctrl+Shift+P 執行 Developer: Reload Window，再從資料集的 tcb-rse 開啟自己的 TCBLAB.COBOL(CKP02)。應能分行顯示並看到中文註解。JCL(RUN) 與 JES 系統紀錄從 tcb-jobs 開啟；含中文的編譯清單及比對輸出從 tcb-rse 開啟。
+關閉先前以 tcb-zosmf 開啟的遠端分頁，不儲存異常內容。按 Ctrl+Shift+P 執行 Developer: Reload Window，再從資料集的 tcb-rse 開啟自己的 TCBLAB.COBOL(CKP02)。應能分行顯示並看到中文註解。JCL(RUN) 與 JES 系統紀錄從 tcb-jobs 開啟；比對輸出從 tcb-jobs 開啟，含中文的編譯清單從 tcb-rse 開啟。
 
 教材已將來源連線改為 RSE，避開本環境 z/OSMF 將 IBM-937 的記錄分隔符轉為 NEL 的問題。這不需要更改主機成員、刪除中文或安裝自訂擴充套件。若未出現 tcb-rse，先確認 IBM Z Open Editor 已啟用，再重新載入視窗。

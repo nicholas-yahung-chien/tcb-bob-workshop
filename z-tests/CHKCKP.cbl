@@ -35,8 +35,8 @@
                        ADD 1 TO ERRORS
                        DISPLAY "CASE " CASE-N " FAIL"
                    END-IF
-                   DISPLAY "ACTUAL-ID=[" REC-A(1:10) "]"
-                   DISPLAY "EXPECT-ID=[" REC-E(1:10) "]"
+                   DISPLAY 'ACTUAL-ID="' REC-A(1:10) '"'
+                   DISPLAY 'EXPECT-ID="' REC-E(1:10) '"'
                  WHEN FS-A = "10" AND FS-E = "10"
                    CONTINUE
                  WHEN OTHER
