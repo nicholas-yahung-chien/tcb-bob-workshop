@@ -7,11 +7,11 @@
     "scenario": "一般格式模擬",
     "fields": {
       "R-ID-2": "",
-      "R-NAME": "FORMOSA DEMO TRADING CO LTD",
+      "R-NAME": "星河模擬股份有限公司",
       "R-PID-1": "",
       "R-PID-2": "",
-      "R-PNAME": "CHEN DEMO CONTACT",
-      "R-ADR": "NO 10, DEMO RD, ZHONGZHENG DIST, TAIPEI",
+      "R-PNAME": "陳怡君",
+      "R-ADR": "臺北市中正區模擬路10號",
       "R-BK1": "",
       "R-BK2": "",
       "R-BK3": "",
@@ -20,7 +20,7 @@
       "R-AC3": "000000000",
       "R-RJD": "20260915",
       "R-RJN": "",
-      "R-NOTE": "SYNTHETIC WORKSHOP DATA - NOT A REAL CUSTOMER",
+      "R-NOTE": "課程虛構資料,非真實客戶",
       "FILLER": ""
     }
   },
@@ -32,11 +32,11 @@
     "scenario": "一般格式模擬",
     "fields": {
       "R-ID-2": "",
-      "R-NAME": "LIN DEMO CUSTOMER",
+      "R-NAME": "林小明",
       "R-PID-1": "",
       "R-PID-2": "",
-      "R-PNAME": "CHEN DEMO CONTACT",
-      "R-ADR": "NO 11, DEMO RD, ZHONGZHENG DIST, TAIPEI",
+      "R-PNAME": "林小明",
+      "R-ADR": "臺北市中正區模擬路11號",
       "R-BK1": "",
       "R-BK2": "",
       "R-BK3": "",
@@ -45,7 +45,7 @@
       "R-AC3": "000000000",
       "R-RJD": "20260915",
       "R-RJN": "",
-      "R-NOTE": "SYNTHETIC WORKSHOP DATA - NOT A REAL CUSTOMER",
+      "R-NOTE": "課程虛構資料,非真實客戶",
       "FILLER": ""
     }
   },
@@ -70,7 +70,7 @@
       "R-AC3": "000000000",
       "R-RJD": "00000000",
       "R-RJN": "",
-      "R-NOTE": "SYNTHETIC EOF CONTROL RECORD",
+      "R-NOTE": "課程模擬尾筆標記",
       "FILLER": ""
     }
   },
@@ -82,11 +82,11 @@
     "scenario": "邊界或異常資料回歸測試",
     "fields": {
       "R-ID-2": "",
-      "R-NAME": "TAIPEI DEMO INDUSTRIAL CO LTD",
+      "R-NAME": "青山模擬實業有限公司",
       "R-PID-1": "",
       "R-PID-2": "",
-      "R-PNAME": "CHEN DEMO CONTACT",
-      "R-ADR": "NO 13, DEMO RD, ZHONGZHENG DIST, TAIPEI",
+      "R-PNAME": "王志宏",
+      "R-ADR": "臺北市中正區模擬路13號",
       "R-BK1": "",
       "R-BK2": "",
       "R-BK3": "",
@@ -95,7 +95,7 @@
       "R-AC3": "000000000",
       "R-RJD": "20260915",
       "R-RJN": "",
-      "R-NOTE": "SYNTHETIC WORKSHOP DATA - NOT A REAL CUSTOMER",
+      "R-NOTE": "課程虛構資料,非真實客戶",
       "FILLER": ""
     }
   },
@@ -107,11 +107,11 @@
     "scenario": "邊界或異常資料回歸測試",
     "fields": {
       "R-ID-2": "",
-      "R-NAME": "EOF DEMO TRADING CO LTD",
+      "R-NAME": "EOF 模擬公司",
       "R-PID-1": "",
       "R-PID-2": "",
-      "R-PNAME": "CHEN DEMO CONTACT",
-      "R-ADR": "NO 14, DEMO RD, ZHONGZHENG DIST, TAIPEI",
+      "R-PNAME": "張雅雯",
+      "R-ADR": "臺北市中正區模擬路14號",
       "R-BK1": "",
       "R-BK2": "",
       "R-BK3": "",
@@ -120,7 +120,7 @@
       "R-AC3": "000000000",
       "R-RJD": "20260915",
       "R-RJN": "",
-      "R-NOTE": "SYNTHETIC WORKSHOP DATA - NOT A REAL CUSTOMER",
+      "R-NOTE": "課程虛構資料,非真實客戶",
       "FILLER": ""
     }
   },
@@ -132,11 +132,11 @@
     "scenario": "邊界或異常資料回歸測試",
     "fields": {
       "R-ID-2": "",
-      "R-NAME": "INVALID ID TEST COMPANY",
+      "R-NAME": "非數字識別值測試公司",
       "R-PID-1": "",
       "R-PID-2": "",
-      "R-PNAME": "CHEN DEMO CONTACT",
-      "R-ADR": "NO 15, DEMO RD, ZHONGZHENG DIST, TAIPEI",
+      "R-PNAME": "李文華",
+      "R-ADR": "臺北市中正區模擬路15號",
       "R-BK1": "",
       "R-BK2": "",
       "R-BK3": "",
@@ -145,7 +145,7 @@
       "R-AC3": "000000000",
       "R-RJD": "20260915",
       "R-RJN": "",
-      "R-NOTE": "SYNTHETIC WORKSHOP DATA - NOT A REAL CUSTOMER",
+      "R-NOTE": "課程虛構資料,非真實客戶",
       "FILLER": ""
     }
   },
@@ -157,11 +157,11 @@
     "scenario": "邊界或異常資料回歸測試",
     "fields": {
       "R-ID-2": "",
-      "R-NAME": "MISSING ID TEST COMPANY",
+      "R-NAME": "空白識別值測試公司",
       "R-PID-1": "",
       "R-PID-2": "",
-      "R-PNAME": "CHEN DEMO CONTACT",
-      "R-ADR": "NO 16, DEMO RD, ZHONGZHENG DIST, TAIPEI",
+      "R-PNAME": "黃美玲",
+      "R-ADR": "臺北市中正區模擬路16號",
       "R-BK1": "",
       "R-BK2": "",
       "R-BK3": "",
@@ -170,7 +170,7 @@
       "R-AC3": "000000000",
       "R-RJD": "20260915",
       "R-RJN": "",
-      "R-NOTE": "SYNTHETIC WORKSHOP DATA - NOT A REAL CUSTOMER",
+      "R-NOTE": "課程虛構資料,非真實客戶",
       "FILLER": ""
     }
   }

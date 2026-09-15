@@ -70,3 +70,23 @@ CKP02 不呼叫 IMS，JES、編譯清單與比較結果不是 IMS transaction lo
 關閉先前以 tcb-zosmf 開啟的遠端分頁，不儲存異常內容。按 Ctrl+Shift+P 執行 Developer: Reload Window，再從資料集的 tcb-rse 開啟自己的 TCBLAB.COBOL(CKP02)。應能分行顯示並看到中文註解。JCL(RUN) 與 JES 系統紀錄從 tcb-jobs 開啟；比對輸出從 tcb-jobs 開啟，含中文的編譯清單從 tcb-rse 開啟。
 
 教材已將來源連線改為 RSE，避開本環境 z/OSMF 將 IBM-937 的記錄分隔符轉為 NEL 的問題。這不需要更改主機成員、刪除中文或安裝自訂擴充套件。若未出現 tcb-rse，先確認 IBM Z Open Editor 已啟用，再重新載入視窗。
+
+## 讀取中文作業輸出
+
+課前需備妥 Zowe CLI 與 IBM 官方 RSE CLI 外掛；Z Open Editor 的 RSE 支援不等於已安裝 CLI 外掛。本次驗證的外掛版本為 6.7.1，請依官方相容性要求準備 Zowe CLI。
+
+```powershell
+zowe plugins install @ibm/rse-api-for-zowe-cli@6.7.1
+```
+
+在教材根目錄開啟終端機。每項新作業先從 Zowe Explorer 找到自己的 job ID，以及 GENERATE／PRINTDD 後括號中的 spool 編號。以下 JOB12345 與 108 都是示意，必須換成本次的值；不同 DD 要使用各自的編號：
+
+```powershell
+zowe rse view spool-file-by-id JOB12345 108 --rse-profile tcb-rse --encoding IBM-937
+```
+
+接著關閉原先的分頁，從「工作 → tcb-rse」開啟該作業的 GENERATE／PRINTDD。需要閱讀中文 CGEN／SYSPRINT 或 CCKP／SYSPRINT 時，同樣先用該 DD 的編號執行一次命令。確認中文正常，再從編輯器另存檔案到 host-lab/logs/<job ID>/<step>/。畫面自動折行可用 Alt+Z 切換；不要刪除引號內的尾端空白。若要求密碼，只在認證提示輸入。
+
+這是已驗證的 RSE 串流編碼替代流程，不代表串流介面的問題已修復。每項新作業都要對所需中文 DD 執行，不能沿用另一項作業的編號。英文 JES、GENERATE／SYSOUT、CHECK1／SYSOUT、CHECK2／SYSOUT 維持使用 tcb-jobs，不需此中文步驟。
+
+若 CLI 不存在或顯示 Unknown group: rse，請講師協助完成課前安裝；若中文仍失真，先保留紀錄並請講師確認，不用 IBM-1047 解讀中文。官方說明：https://www.ibm.com/docs/en/developer-for-zos/17.0.x?topic=reference-rse-api-plug-in-zowe-cli-commands

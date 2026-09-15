@@ -23,9 +23,9 @@
 
 ## 三、分析實際測試
 
-讀取實際 run.jcl、z-tests/fixtures.json 與 host-lab/logs/<job ID>/ 的 JESMSGLG、JESYSMSG、CCKP/SYSPRINT、GENERATE/SYSOUT、GENERATE/PRINTDD、CHECK1/SYSOUT、CHECK2/SYSOUT。同名 DD 依 step 分開存放。缺檔時請學員下載，不能借用其他作業結果。
+讀取實際 run.jcl、z-tests/fixtures.json 與 host-lab/logs/<job ID>/ 的 JESMSGLG、JESYSMSG、CGEN/SYSPRINT、CCKP/SYSPRINT、GENERATE/SYSOUT、GENERATE/PRINTDD、CHECK1/SYSOUT、CHECK2/SYSOUT。同名 DD 依 step 分開存放。缺檔時請學員下載，不能借用其他作業結果。
 
-JES 系統紀錄以 tcb-jobs（IBM-1047）開啟；GENERATE/SYSOUT、GENERATE/PRINTDD、CHECK1/SYSOUT、CHECK2/SYSOUT 也以 tcb-jobs 開啟；CCKP/SYSPRINT 以 tcb-rse（IBM-937）開啟，再由編輯器另存新檔。整批下載入口可能未傳入 encoding；若中文失真，重新依此方式取得，不把失真內容當作程式事實。RSE 可能在 LF 前附帶 U+0085 NEL；分析時忽略該行末控制字元，保留原始檔案與欄位中的空白。若整理閱讀版，另存副本；不要為消除 NEL 而改用 IBM-1047，導致中文解碼錯誤。
+JES 系統紀錄以 tcb-jobs（IBM-1047）開啟；GENERATE/SYSOUT、CHECK1/SYSOUT、CHECK2/SYSOUT 也以 tcb-jobs 開啟；中文 GENERATE/PRINTDD、CGEN/SYSPRINT、CCKP/SYSPRINT 先以官方 RSE CLI 指定 IBM-937 讀取，再以 tcb-rse（IBM-937）開啟，再由編輯器另存新檔。整批下載入口可能未傳入 encoding；若中文失真，重新依此方式取得，不把失真內容當作程式事實。RSE 可能在 LF 前附帶 U+0085 NEL；分析時忽略該行末控制字元，保留原始檔案與欄位中的空白。若整理閱讀版，另存副本；不要為消除 NEL 而改用 IBM-1047，導致中文解碼錯誤。
 
 - 記錄 owner、job 名稱、job ID 與紀錄時間。
 - 核對 ALLOC、CGEN、LGENCKP、CCKP、LCKP02、CCHK、LCHKCKP、GENERATE、SNAP1、RUNONCE、CHECK1、SNAP2、RUNTWICE、CHECK2、RUNEMPTY 共 15 步是否實際執行。跳過的步驟不能算通過。
@@ -38,4 +38,24 @@ JES 系統紀錄以 tcb-jobs（IBM-1047）開啟；GENERATE/SYSOUT、GENERATE/PR
 
 Bob 的靜態檢查不能取代編譯與執行。這些紀錄也不是 IMS transaction log。沒有主機證據就保留待執行，不生成模擬成功紀錄。
 
-GENERATE／PRINTDD 每筆以單一完整 400-byte 資料行印出，不切成多段；前後各加一個雙引號以保留 RSE 會省略的行尾空白，引號內恰好 400 bytes，引號不屬於資料。GENERATE／SYSOUT 另外顯示 CASE、ID 與 BYTES-014-016，分別用來辨認案例、第 1–10 位及第 14–16 位。若畫面自動折行，可關閉編輯器的自動換行並水平捲動。CASE 0003 的第 14–16 位為 EOF，因此不轉換；CASE 0005 的名稱以 EOF 開頭，EOF 位於第 12–14 位，第 14–16 位為 F、空白、D，仍符合轉換條件。測資採虛構公司名稱、聯絡人及地址，數字欄位填數字、保留欄位填空白；異常識別值與 EOF 列為邊界案例，不視為正常客戶資料。這是測資內容輸出，尚未實作需求中的預覽功能。
+GENERATE／PRINTDD 使用中文 IBM-937 測資，每筆以單一完整 400-byte 資料行印出；前後雙引號用來保留尾端空白，不屬於資料。中文包含雙位元字元與 SO／SI 控制碼，因此解碼後的字數、畫面欄號不等於主機 byte 位置。GENERATE／SYSOUT 另外顯示 CASE、ID 與 EOF-MARKER-AT-014=YES/NO，表示第 14–16 bytes 是否為 EOF；不直接印出可能切到半個中文字的三個 bytes。CASE 0003 為 YES，所以不轉換；CASE 0005 的 EOF 位於第 12–14 bytes，判斷為 NO，仍轉換。公司、姓名、地址及備註均為虛構中文；未知代碼留空，數字欄位保留數字。這是測資輸出，尚未實作需求中的預覽功能。
+
+## 讀取中文作業輸出
+
+課前需備妥 Zowe CLI 與 IBM 官方 RSE CLI 外掛；Z Open Editor 的 RSE 支援不等於已安裝 CLI 外掛。本次驗證的外掛版本為 6.7.1，請依官方相容性要求準備 Zowe CLI。
+
+```powershell
+zowe plugins install @ibm/rse-api-for-zowe-cli@6.7.1
+```
+
+在教材根目錄開啟終端機。每項新作業先從 Zowe Explorer 找到自己的 job ID，以及 GENERATE／PRINTDD 後括號中的 spool 編號。以下 JOB12345 與 108 都是示意，必須換成本次的值；不同 DD 要使用各自的編號：
+
+```powershell
+zowe rse view spool-file-by-id JOB12345 108 --rse-profile tcb-rse --encoding IBM-937
+```
+
+接著關閉原先的分頁，從「工作 → tcb-rse」開啟該作業的 GENERATE／PRINTDD。需要閱讀中文 CGEN／SYSPRINT 或 CCKP／SYSPRINT 時，同樣先用該 DD 的編號執行一次命令。確認中文正常，再從編輯器另存檔案到 host-lab/logs/<job ID>/<step>/。畫面自動折行可用 Alt+Z 切換；不要刪除引號內的尾端空白。若要求密碼，只在認證提示輸入。
+
+這是已驗證的 RSE 串流編碼替代流程，不代表串流介面的問題已修復。每項新作業都要對所需中文 DD 執行，不能沿用另一項作業的編號。英文 JES、GENERATE／SYSOUT、CHECK1／SYSOUT、CHECK2／SYSOUT 維持使用 tcb-jobs，不需此中文步驟。
+
+若 CLI 不存在或顯示 Unknown group: rse，請講師協助完成課前安裝；若中文仍失真，先保留紀錄並請講師確認，不用 IBM-1047 解讀中文。官方說明：https://www.ibm.com/docs/en/developer-for-zos/17.0.x?topic=reference-rse-api-plug-in-zowe-cli-commands
