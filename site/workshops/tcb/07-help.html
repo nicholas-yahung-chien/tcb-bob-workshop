@@ -5,8 +5,12 @@
 <p>Z Understand 是跨應用程式分析使用的額外連線。只有本機程式時，可以先閱讀本機檔案，將其他系統的關係留待確認。</p>
 <h2 id="workflow-language">工作流程產生的文件仍是英文</h2>
 <p>先在 <strong>Bob Settings → Skills</strong> 確認教材的 <code>cobol-explain-zh-tw</code> 與 <code>program-docs-zh-tw</code> 已啟用，來源為目前的 <strong>Workspace</strong>。若找不到，確認開啟的是包含 <code>.bob/skills/</code> 的教材根目錄，執行 <strong>Developer: Reload Window</strong> 後再查看。</p>
-<p><strong>Explain code：</strong>執行時應看到「已使用技能 cobol-explain-zh-tw」。若仍產生英文，不必反覆重跑；保留輸出文件，依<a href="02-documentation.html#document">整理成接手文件</a>的操作，在一般對話中加入該文件並呼叫 <code>/program-docs-zh-tw</code>，產生繁體中文副本。</p>
-<p><strong>Generate program documentation：</strong>與 Explain code 的語言處理方式不同，不需要等待同樣的技能使用訊息。完成後依課程呼叫 <code>/program-docs-zh-tw</code>，統一台灣繁體中文用語。若 <code>/</code> 清單沒有此項目，先確認技能已啟用；也可以直接加入 <code>.bob/skills/program-docs-zh-tw/SKILL.md</code> 與要整理的文件，請 Agent 依技能內容執行。</p>
+<p><strong>Explain code：</strong>執行時應看到「已使用技能 cobol-explain-zh-tw」。若仍產生英文，不必反覆重跑，保留輸出文件，再使用下方的備援方式。</p>
+<p><strong>Generate program documentation：</strong>課程環境已可直接產生中文正文，完成後直接閱讀即可。目錄或部分章節標題可能保留英文，不需要因此增加整份文件的翻譯步驟。</p>
+<details><summary>只有需要翻譯英文正文時才使用</summary><p>在一般 Bob 對話切換到 <strong>Agent</strong>，加入實際產生的 Markdown 文件，從 <code>/</code> 清單選取 <code>/program-docs-zh-tw</code>，再接上下方要求送出。技能會保留原檔並另存中文副本。若清單沒有該技能，確認已啟用；也可以加入 <code>.bob/skills/program-docs-zh-tw/SKILL.md</code> 與文件，請 Agent 依技能內容執行。</p>
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：</p><div class="prompt"><div class="prompt-head"><span>整理為台灣繁體中文</span><button type="button" data-copy="workflow-docs-zh-tw">複製 Prompt</button></div><pre id="workflow-docs-zh-tw">請依 program-docs-zh-tw 技能，檢查我加入的工作流程文件，將說明整理為台灣地區用語的繁體中文，保留原有技術細節及原檔，另存至 output/zh-TW/。完成後提供檔案路徑與需要確認的內容。
+</pre><div class="expected"><strong>預期回應</strong><p>output/zh-TW/ 中的繁體中文副本、原始文件保留情形，以及需要確認的內容。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+</details>
 <p>主要說明應使用繁體中文；程式名稱、指令及程式碼保留原文。翻譯完成後仍需對照原始碼，確認條件、數值、單位與推論是否正確。</p>
 <h2 id="plan">已經有計畫，卻沒有產生檔案</h2>
 <p>Plan 主要用來討論計畫。確認後，在同一個對話切換 Agent，再請 Bob 依計畫執行。如果換了新對話，把需求、規格和已有計畫一起加入，就能接著做。</p>

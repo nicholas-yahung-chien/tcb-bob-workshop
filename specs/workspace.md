@@ -12,4 +12,4 @@
 
 主機測試材料集中在 z-tests/：GENCKP.cbl、CHKCKP.cbl、fixtures.json、run.jcl 與 manifest.json。確認五份檔案齊全；個人配置、產生的 JCL、報告與紀錄仍放在 host-lab/。
 
-確認 `.bob/skills/cobol-explain-zh-tw/SKILL.md` 與 `.bob/skills/program-docs-zh-tw/SKILL.md` 齊全；保留 `.bob/rules/language.md`。請學員在 Bob Settings → Skills 核對兩個技能皆為 Workspace 且 Active 已開啟。Explain code 使用前者；Generate program documentation 完成後，依課程網頁在一般對話呼叫後者整理台灣繁體中文。檔案存在不等於已確認技能啟用，不要在準備階段自動執行工作流程。
+確認 `.bob/skills/cobol-explain-zh-tw/SKILL.md` 與 `.bob/skills/program-docs-zh-tw/SKILL.md` 齊全；保留 `.bob/rules/language.md`。Explain code 使用前者，請學員在 Bob Settings → Skills 核對它為 Workspace 且 Active 已開啟。Generate program documentation 已在課程環境確認能直接產生中文正文，直接使用產生的文件，不要求再呼叫翻譯技能。後者只在學員需要翻譯英文正文時作為備援。檔案存在不等於已確認技能啟用，不要在準備階段自動執行工作流程。
