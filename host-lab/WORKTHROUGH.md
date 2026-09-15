@@ -24,7 +24,7 @@
 
 依課程網頁，以 tcb-rse（IBM-937）開啟自己的 <帳號>.TCBLAB.COBOL(CKP02)，核對中文註解與本機 z-lab/CKP02.cbl 的內容。同一資料集也已備妥 GENCKP、CHKCKP，不需上傳或貼上。
 
-以 tcb-rse（IBM-937）開啟 <帳號>.TCBLAB.JCL(RUN)，另存本機 host-lab/run.jcl。將它與 environment.md、BOB-GUIDE.md 加入對話，使用課程網頁的「一起看這份主機作業」Prompt。
+先使用本機 host-lab/run.jcl；只有缺檔時，才以 tcb-rse（IBM-937）從 <帳號>.TCBLAB.JCL(RUN) 下載一次。將它與 environment.md、BOB-GUIDE.md 加入對話，使用課程網頁的「一起看這份主機作業」Prompt。
 
 三個編譯步驟分別從自己的 COBOL 資料集讀取同名成員，都使用 CODEPAGE(937),DBCS。RUN 已填入自己的帳號與 job 名稱。請 Bob 帶你核對編譯、執行與比對流程，再由你提交。七筆測資與空檔由 GENCKP 自動建立。
 
