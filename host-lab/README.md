@@ -10,7 +10,7 @@
 
 主機已為自己的帳號準備好 `<帳號>.TCBLAB.COBOL` 的 CKP02、GENCKP、CHKCKP，以及 `<帳號>.TCBLAB.JCL(RUN)`。成員名稱對應教材中的同名程式與 run.jcl。CKP02 保留 z-lab/CKP02.cbl 的完整內容與中文註解；GENCKP、CHKCKP 來自 z-tests。三支程式皆以 IBM-937 保存，編譯採 CODEPAGE(937),DBCS。
 
-請依 [BOB-GUIDE.md](BOB-GUIDE.md) 第二節核對已備妥的個人作業，依第三節分析實際紀錄。以 tcb-rse 開啟 COBOL 成員，JCL 直接使用本機 host-lab/run.jcl。僅在本機缺少檔案時，才依課程指引從自己的遠端 JCL(RUN) 下載一次。請 Bob 說明並核對後，再以 tcb-jobs（IBM-1047）提交。不需要上傳程式、貼上測資或執行本機 Python。七筆測資與空檔由每項作業自動重新建立。
+請依 [BOB-GUIDE.md](BOB-GUIDE.md) 第二節核對已備妥的個人作業，依第三節分析實際紀錄。以 tcb-rse 開啟 COBOL 成員，JCL 直接使用本機 host-lab/run.jcl。僅在本機缺少檔案時，才依課程指引從自己的遠端 JCL(RUN) 下載一次。請 Bob 說明並核對後，再以 tcb-rse（IBM-1371）提交。不需要上傳程式、貼上測資或執行本機 Python。七筆測資與空檔由每項作業自動重新建立。
 
 作業應依序完成配置、三支程式的編譯與連結、測資建立、第一次執行與比對、第二次執行與比對，以及空檔執行。編譯警告需要逐項核對，連結必須 RC 0；提交成功不等於作業成功。兩次比對各應顯示 `CHECKED=0007 ERRORS=0000`，且每筆完整 400 bytes 相同。
 
@@ -42,4 +42,4 @@ GENERATE／PRINTDD 使用中文 IBM-937 測資，每筆以單一完整 400-byte 
 
 CASE 0001、0002 為一般格式模擬；CASE 0003–0007 分別保留 EOF 排除、重跑、鄰近位置 EOF、非數字識別值與空白識別值的回歸測試。CASE 0003 放在中間是刻意確認既有程式略過轉換後仍繼續讀取，不代表正式尾筆檔案配置。識別值沿用教學案例，未宣稱通過統編或身分證檢核。缺少完整客戶資料字典時，以上只能確認符合 PIC 與明示的模擬假設，不能宣稱已符合全部正式業務規則。
 
-中文 PRINTDD 與中文編譯清單的 CLI 讀取步驟，請依 CONNECTION.md「讀取中文作業輸出」操作；其餘英文紀錄維持 tcb-jobs。
+中英文紀錄統一從 tcb-rse（IBM-1371）開啟。異常時依 CONNECTION.md「讀取中文作業輸出」排查。
