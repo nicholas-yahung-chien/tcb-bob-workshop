@@ -167,7 +167,7 @@
       "host-lab/hardening/CKP02H.cbl",
       "host-lab/hardening/before.txt"
     ],
-    "response": "實際執行 ZCodeScan 後更新 host-lab/hardening/review.md；有修改前紀錄時比較差異，缺少時記錄本次結果與比較限制。"
+    "response": "這次的掃描結果、和上次相比的變化，以及還要留意的問題，整理在 host-lab/hardening/review.md。"
   },
   "z-context": {
     "files": [
