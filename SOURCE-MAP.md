@@ -17,7 +17,7 @@ SYSOCP31 有少量無法以 CP950 解碼的 bytes，閱讀版以反斜線 x 序�
 | samples/cobol/TESTSHIFT.cbl | 從正常轉換與 EOF 案例開始補測試 |
 | samples/jcl/IDSHIFT.jcl | 認識測試作業的 JCL；執行前要填入環境設定 |
 | samples/python/normalizer.py | 依需求完成本機轉換範例 |
-| samples/python/customer_lookup.py | 練習找出及修正 SQL 注入 |
+| host-lab/CODE-QUALITY.md | ZCodeScan、Improve Code 與 CKP02H 錯誤處理改善 |
 | host-lab/IMS-EVENTS.md | 真實 IMS 事件練習：父子區段、回復、受控中止與分段計時 |
 | z-tests/IMSEVT.cbl、z-tests/imsevts.jcl | 已備妥於主機的獨立事件練習程式與 JCL |
 | host-lab/CONNECTION.md | 以個人帳號透過 IBM RSE API 連接主機，來源、JCL 與中英文作業紀錄統一透過 tcb-rse（IBM-1371）讀取 |
@@ -27,7 +27,6 @@ SYSOCP31 有少量無法以 CP950 解碼的 bytes，閱讀版以反斜線 x 序�
 | z-tests/IMSCKP.cbl | 遠端 TCBLAB.COBOL(IMSCKP) 的同一份來源，負責教學用 IMS 資料載入、查詢、更新、回復與提交 |
 | z-tests/ims-run.jcl | 與遠端已備妥的 TCBLAB.JCL(IMSRUN) 相同；CIMS 讀取 COBOL(IMSCKP)，DBD 與 PSB 定義仍內嵌，不是客戶既有 IMS 定義 |
 | z-tests/ | 主機測試用的 GENCKP、CHKCKP、七筆測資、JCL 範本與雜湊清單 |
-| samples/reports/sast.json | 對照查詢程式的練習弱點報告 |
 | requests/ | Word 需求申請單為主要輸入；EML 保留為同一需求的信件範例 |
 | DOC-SPEC.md | 整理架構與程式文件 |
 | specs/testing.md | 準備及執行測試 |
