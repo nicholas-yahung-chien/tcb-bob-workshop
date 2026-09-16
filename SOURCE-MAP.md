@@ -23,7 +23,8 @@ SYSOCP31 有少量無法以 CP950 解碼的 bytes，閱讀版以反斜線 x 序�
 | host-lab/BOB-GUIDE.md | 請 Bob 檢查教材、準備個人 JCL 並核對主機紀錄 |
 | host-lab/RC4-LAB.md | 選做：分析編譯警告，另存 CKP02R 修正版，再以新作業驗證 |
 | host-lab/IMS-LAB.md | 選做：以作業專用的 IMS DL/I 資料庫串接原版 CKP02，驗證更新、回復與提交 |
-| z-tests/ims-run.jcl | 與遠端已備妥的 TCBLAB.JCL(IMSRUN) 相同；內含教學用 DBD、PSB 與輔助程式，不是客戶既有 IMS 定義 |
+| z-tests/IMSCKP.cbl | 遠端 TCBLAB.COBOL(IMSCKP) 的同一份來源，負責教學用 IMS 資料載入、查詢、更新、回復與提交 |
+| z-tests/ims-run.jcl | 與遠端已備妥的 TCBLAB.JCL(IMSRUN) 相同；CIMS 讀取 COBOL(IMSCKP)，DBD 與 PSB 定義仍內嵌，不是客戶既有 IMS 定義 |
 | z-tests/ | 主機測試用的 GENCKP、CHKCKP、七筆測資、JCL 範本與雜湊清單 |
 | samples/reports/sast.json | 對照查詢程式的練習弱點報告 |
 | requests/ | Word 需求申請單為主要輸入；EML 保留為同一需求的信件範例 |

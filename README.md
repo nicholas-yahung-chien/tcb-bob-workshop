@@ -43,7 +43,7 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 |---|---|
 | z-lab | 已備妥的 45 份程式與相依檔案 |
 | host-lab | 個人主機連線與 Bob 操作指引；練習時保存自己的 JCL、報告與紀錄 |
-| z-tests | 主機已備妥的 GENCKP、CHKCKP 之本機來源、測試資料定義、基準 JCL 與 IMS 延伸練習範本 |
+| z-tests | 主機已備妥的 GENCKP、CHKCKP、IMSCKP 之本機來源、測試資料定義、基準 JCL 與 IMS 延伸練習範本 |
 | samples | 轉換程式、測試、JCL、事件及查詢練習 |
 | tests | 選做 Python 練習的測試案例 |
 | output | 自己完成的文件與程式 |
