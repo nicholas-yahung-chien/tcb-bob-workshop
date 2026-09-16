@@ -35,7 +35,7 @@
 <p>連線的 IBM-1371 是操作時的字碼設定；下方 <code>CODEPAGE(937),DBCS</code> 是既有來源的編譯設定，兩者用途不同，請保留範本的編譯選項。</p>
 <h3 id="chinese-spool">讀取中文原始資料</h3>
 <p>從<strong>工作 → tcb-rse（IBM-1371）→ 自己的作業 → GENERATE／PRINTDD</strong>開啟。應看到「星河模擬股份有限公司」、「陳怡君」及中文地址，且行尾沒有異常字符。CGEN、CCKP 的 SYSPRINT 也使用同一連線。確認後另存紀錄；Alt+Z 可關閉畫面自動折行。</p>
-<details><summary>中文或行尾仍顯示異常？</summary><p>先關閉舊分頁，執行 Developer: Reload Window，再從 tcb-rse 重新開啟。若仍異常，請講師依 host-lab/CONNECTION.md 的排查步驟確認；不需要每次先執行 CLI。整批下載後仍須核對中文與欄位空白。</p></details>
+<details><summary>中文或行尾仍顯示異常？</summary><p>先關閉舊分頁，執行 Developer: Reload Window，再從 tcb-rse 重新開啟。若仍異常，請講師依 host-lab/CONNECTION.md 的排查步驟確認；不需要每次先執行 CLI。本環境的「全部下載」已重現中文 PRINTDD 轉碼錯誤；中文檔案請單獨開啟並確認內容，載入所有分頁後以 UTF-8 另存，不以整批下載結果代替。</p></details>
 <p>GENERATE／PRINTDD 使用中文 IBM-937 測資，每筆以單一完整 400-byte 資料行印出；前後雙引號用來保留尾端空白，不屬於資料。中文包含雙位元字元與 SO／SI 控制碼，因此解碼後的字數、畫面欄號不等於主機 byte 位置。GENERATE／SYSOUT 另外顯示 CASE、ID 與 EOF-MARKER-AT-014=YES/NO，表示第 14–16 bytes 是否為 EOF；不直接印出可能切到半個中文字的三個 bytes。CASE 0003 為 YES，所以不轉換；CASE 0005 的 EOF 位於第 12–14 bytes，判斷為 NO，仍轉換。公司、姓名、地址及備註均為虛構中文；未知代碼留空，數字欄位保留數字。這是測資輸出，尚未實作需求中的預覽功能。</p>
 {{check:我已用自己的帳號提交 CKP02}}{{check:我已保存自己的 job ID 與主機紀錄}}
 <details id="implement"><summary>延伸練習：在本機試跑預覽與轉換規則（選做）</summary>

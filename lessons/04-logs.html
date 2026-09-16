@@ -1,5 +1,5 @@
 <h2 id="host">先看自己剛跑的 CKP02</h2>
-<p>將上一單元下載的 JES、編譯與比對紀錄加入 Bob 對話，連同 run.jcl 一起看。這些是自己帳號在主機產生的實際紀錄。</p>
+<p>將上一單元下載的 JES、編譯與比對紀錄資料夾加入 Bob 對話，連同 run.jcl 一起看。可直接加入工作區根目錄的 JOB 資料夾，不必搬到 host-lab/logs。中文檔案請使用單獨開啟後另存的 UTF-8 版本；「全部下載」在本環境可能造成中文亂碼。</p>
 {{host-logs|核對自己的執行結果|Ask}}
 <p>先從 CCKP 的 SYSPRINT 核對 <code>CODEPAGE(937)</code> 與 <code>DBCS</code>，確認編譯來源是自己的 <code>TCBLAB.COBOL(CKP02)</code>。JESMSGLG、JESJCL、JESYSMSG 從 tcb-rse（IBM-1371）開啟；CHECK1、CHECK2 比對紀錄也從 tcb-rse 開啟，識別值以雙引號包住，例如 <code>ACTUAL-ID="12345678  "</code>。CCKP 編譯清單從 tcb-rse（IBM-1371）開啟，以正確顯示中文註解。</p>
 <p>GENERATE／SYSOUT 使用 tcb-rse；中文 PRINTDD 同樣從 tcb-rse（IBM-1371）開啟。GENERATE／PRINTDD 使用中文 IBM-937 測資，每筆以單一完整 400-byte 資料行印出；前後雙引號用來保留尾端空白，不屬於資料。中文包含雙位元字元與 SO／SI 控制碼，因此解碼後的字數、畫面欄號不等於主機 byte 位置。GENERATE／SYSOUT 另外顯示 CASE、ID 與 EOF-MARKER-AT-014=YES/NO，表示第 14–16 bytes 是否為 EOF；不直接印出可能切到半個中文字的三個 bytes。CASE 0003 為 YES，所以不轉換；CASE 0005 的 EOF 位於第 12–14 bytes，判斷為 NO，仍轉換。公司、姓名、地址及備註均為虛構中文；未知代碼留空，數字欄位保留數字。這是測資輸出，尚未實作需求中的預覽功能。</p>
@@ -19,17 +19,51 @@ EXPECT-ID="123456    "</code></pre>
 {{check:我能指出主機結果所依據的 job 與 step}}
 <p>確認分析後，切換到 <strong>Agent</strong>，把同一項作業的核對結果保存成報告。</p>
 {{host-report|留下本次主機測試報告|Agent}}
+<p>打開 <code>host-lab/test-report.md</code>，對照完整編譯清單的開頭與結尾。每個警告都應有原因與證據位置；不能只看到前段的序號警告，就認定沒有其他訊息。</p>
+<details id="rc4"><summary>延伸練習：讓 RC 4 回到 RC 0（選做）</summary>
+<p>兩次資料比對通過，不代表編譯沒有警告。這段練習請 Bob 分析警告、討論修正，再自動產生修正版。保留原版 CKP02 與原始測試報告，方便比較；這不是需求單的預覽功能實作。</p>
+<h3>1. Ask：先看懂每個警告</h3>
+<p>加入自己的完整作業紀錄資料夾；若編譯清單有分頁，先載入全部再另存。</p>
+{{rc4-ask|這些警告是怎麼來的？|Ask}}
+<h3>2. Plan：討論怎麼改、怎麼驗證</h3>
+{{rc4-plan|怎麼修正又不改變結果？|Plan}}
+<p>看完建議，核對來源序號、主流程與關檔段落的關係，以及修正後如何避免直接落入下一個段落。測資與預期結果應保留，不能為了 RC 0 放寬檢查。</p>
+<h3>3. Agent：產生修正版</h3>
+{{rc4-agent|依確認的做法修改|Agent}}
+<p>成果是 <code>host-lab/rc4/CKP02R.cbl</code>、<code>run-rc0.jcl</code> 與 <code>review.md</code>。依 <code>host-lab/RC4-LAB.md</code> 審閱差異，再用 tcb-rse 將修正版上傳至自己 COBOL 資料集的新成員 CKP02R，原版 CKP02 與 RUN 不覆寫。從本機 run-rc0.jcl 提交並記下新 job ID。</p>
+<h3>4. 用新作業紀錄確認結果</h3>
+<p>加入新作業的完整紀錄資料夾與修正版檔案。確認實際執行 CKP02R、全部 15 步 RC 0、兩次七筆完整資料比對通過，以及空檔測試成功；沒有執行的項目保留待確認。</p>
+{{rc4-verify|確認警告消失、結果不變|Agent}}
+<p>修正版結果另存 <code>host-lab/rc4/test-report.md</code>，原版報告保留。若仍有警告，先核對新訊息與來源，不改成忽略所有警告。</p>
+</details>
 <details><summary>紀錄中出現額外的控制字元？</summary><p>JES 系統紀錄使用 tcb-rse（IBM-1371）可避免本次遇到的行尾 NEL。CHECK1、CHECK2 已改用雙引號，使用 tcb-rse 可正確顯示且沒有行尾 NEL。中文 PRINTDD 與編譯清單同樣使用 tcb-rse（IBM-1371）。若仍異常，關閉舊分頁並重新載入視窗，再依 CONNECTION.md 排查；保留原始紀錄。</p></details>
-<h2 id="story">延伸：IMS 交易到底完成了沒有？</h2>
+<details id="ims-host"><summary>延伸練習：把 CKP02 串接到真正的 IMS 資料庫（選做）</summary>
+<p>這份作業使用主機上的 IMS DL/I 資料庫批次環境。先建立本次作業專用的測試資料庫，將資料匯出給原版 CKP02 轉換，再由 IMS 輔助程式寫回。CKP02 本身仍讀寫循序檔；這不是把 CKP02 改成線上交易，也尚未實作需求單的預覽功能。</p>
+<p>資料庫、DBD、PSB 與載入程式庫均屬於這次作業，重新提交就會重新建立測資。沿用前面的七筆虛構中文資料，另外加上固定案例編號作為 IMS 鍵值，避免識別值轉換後改變資料庫鍵值。開始前請依 <code>host-lab/IMS-LAB.md</code> 核對環境與個人權限。</p>
+<h3>1. 先看懂資料如何進出 IMS</h3>
+{{ims-host-ask|帶我看這次 IMS 練習|Ask}}
+<h3>2. 準備自己的作業</h3>
+{{ims-host-prepare|幫我準備個人 IMS 作業|Agent}}
+<p>審閱 <code>host-lab/ims/run.jcl</code> 與核對結果，確認只讀取自己帳號下已備妥的 COBOL 成員。依 IMS-LAB.md 從本機 JCL 使用 tcb-rse 提交，記下新 job ID。這是另一項作業，不覆寫前面的 RUN。</p>
+<h3>3. 從實際紀錄確認更新與回復</h3>
+<p>單獨開啟完整 JES、編譯清單、各項資料比對與 IMS 執行紀錄，載入所有頁面後另存 UTF-8。把實際保存的資料夾加入 Bob 對話。中文紀錄不要依賴「全部下載」。</p>
+{{ims-host-logs|確認 IMS 真的做了什麼|Ask}}
+<p>回復練習主動呼叫 ROLB，確認尚未提交的更新已撤回；正式更新呼叫 CHKP，接著由另一個 IMS 執行步驟重新查詢並比對完整 400 bytes。這驗證的是本次批次作業的更新與回復，不代表已測過線上交易、非預期中斷或正式環境災難復原。</p>
+<p>程式印出的 <code>APPLICATION DIAGNOSTIC</code> 是應用程式診斷。IMS 的 DFS 訊息是系統診斷；另外由 DFSERA10 讀取實際 IEFRDER 日誌並列印的內容，才是本次 IMS 系統日誌證據。三者分開閱讀，不把應用程式的成功訊息當成全部證據。</p>
+{{ims-host-report|留下 IMS 練習報告|Agent}}
+<p>成果保存在 <code>host-lab/ims/test-report.md</code>，與原版及 RC 4 修正版報告分開。以自己的 job ID 為依據；講師測試成功不代表自己的帳號或這次作業已通過。</p>
+</details>
+<details id="story"><summary>延伸閱讀：從模擬事件練習判斷 IMS 交易結果（選做）</summary>
 <p>看到一行錯誤記錄，往往還不能知道整筆交易的結果。先把前後事件串起來，再決定要往哪裡查。</p>
-<p>這份 CSV 是練習用的 IMS 事件摘要，欄位定義在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/log-schema.md">log-schema.md</a>。它已經整理成可閱讀的事件，和主機原始 binary log 不同。</p>
-<h2 id="ask">1. 先問發生了什麼</h2>
+<p>這份 CSV 是虛構的 IMS 事件摘要，與前面真實執行的作業沒有對應關係。欄位定義在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/log-schema.md">log-schema.md</a>。它已經整理成可閱讀的事件，和主機原始 binary log 不同。</p>
+<h3 id="ask">1. 先問發生了什麼</h3>
 {{logs-ask|閱讀交易事件|Ask}}
 <p>留意 Bob 有沒有指出對應的事件編號。看到「可能原因」時，可以追問還需要什麼記錄來確認。</p>
-<h2 id="report">2. 留下分析結果</h2>
+<h3 id="report">2. 留下分析結果</h3>
 {{07-logs|整理成分析報告|Agent}}
 {{verify-logs|檢查結論有沒有根據|Agent}}
 <details><summary>比較三筆交易</summary><p>DEMO-A 有正常結束記錄；DEMO-B 有回復操作及失敗結束；DEMO-C 沒有結束記錄，還不能判斷最後結果。單一慢事件也不足以確認原因。</p></details>
-<h2 id="next">換成自己的記錄時</h2>
+<h3 id="next">換成自己的記錄時</h3>
 <p>先提供欄位定義、時間範圍和能串起同筆交易的識別值。如果只有部分記錄，也一併告訴 Bob，讓後續分析有適當的範圍。</p>
 {{check:每個結論都能找到對應的事件}}{{check:需要繼續追查的事情已列出}}
+</details>

@@ -4,7 +4,7 @@ import argparse, subprocess, zipfile, json, hashlib
 ROOT=Path(__file__).resolve().parents[1]
 DIRS=('samples/','specs/','tests/','requests/')
 FILES={'.bob/rules/language.md','.bob/skills/cobol-explain-zh-tw/SKILL.md','.bob/skills/program-docs-zh-tw/SKILL.md','AGENTS.md','README.md','SOURCE-MAP.md','DOC-SPEC.md','zowe.config.json','zowe.schema.json','.gitignore','.gitattributes',
-'host-lab/BOB-GUIDE.md','host-lab/CONNECTION.md','host-lab/README.md','z-tests/fixtures.json',
+'host-lab/BOB-GUIDE.md','host-lab/CONNECTION.md','host-lab/README.md','host-lab/RC4-LAB.md','host-lab/IMS-LAB.md','z-tests/ims-run.jcl','z-tests/fixtures.json',
 'z-tests/GENCKP.cbl','z-tests/CHKCKP.cbl','z-tests/run.jcl','z-tests/manifest.json'}
 def selected():
  names=subprocess.check_output(['git','ls-files'],cwd=ROOT,text=True).splitlines()

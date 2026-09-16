@@ -242,7 +242,6 @@
   "host-logs": {
     "files": [
       "host-lab/run.jcl",
-      "host-lab/logs/",
       "host-lab/README.md",
       "host-lab/BOB-GUIDE.md"
     ],
@@ -284,9 +283,58 @@
   },
   "host-report": {
     "files": [
-      "host-lab/BOB-GUIDE.md",
-      "host-lab/logs/"
+      "host-lab/BOB-GUIDE.md"
     ],
     "response": "host-lab/test-report.md，包含本次作業證據、各項結果與待確認事項。"
+  },
+  "ims-host-ask": {
+    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl", "z-lab/CKP02.cbl"],
+    "response": "IMS 資料流、CKP02 與輔助程式分工、更新與回復的驗證方式，以及環境前提。"
+  },
+  "ims-host-prepare": {
+    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl", "host-lab/environment.md"],
+    "response": "host-lab/ims/run.jcl 與 review.md；保留原始材料，未確認的權限另外列出。"
+  },
+  "ims-host-logs": {
+    "files": ["host-lab/IMS-LAB.md", "host-lab/ims/run.jcl"],
+    "response": "依你加入的真實紀錄核對載入、CKP02 轉換、回復、提交及再次查詢；區分應用程式診斷與 IMS 日誌。"
+  },
+  "ims-host-report": {
+    "files": ["host-lab/IMS-LAB.md", "host-lab/ims/run.jcl"],
+    "response": "host-lab/ims/test-report.md，附實際 job、step、訊息與待確認事項。"
+  },
+  "rc4-ask": {
+    "files": [
+      "z-lab/CKP02.cbl",
+      "host-lab/run.jcl",
+      "host-lab/RC4-LAB.md"
+    ],
+    "response": "完整警告清單、來源位置與原因；另外讀取你實際加入的作業紀錄資料夾。"
+  },
+  "rc4-plan": {
+    "files": [
+      "host-lab/RC4-LAB.md",
+      "z-lab/CKP02.cbl",
+      "host-lab/run.jcl"
+    ],
+    "response": "修正方案、修改範圍與驗證方法；尚不修改檔案。"
+  },
+  "rc4-agent": {
+    "files": [
+      "host-lab/RC4-LAB.md",
+      "host-lab/environment.md",
+      "z-lab/CKP02.cbl",
+      "host-lab/run.jcl"
+    ],
+    "response": "host-lab/rc4 中的 CKP02R.cbl、run-rc0.jcl 與 review.md；主機測試標記待執行。"
+  },
+  "rc4-verify": {
+    "files": [
+      "host-lab/RC4-LAB.md",
+      "host-lab/rc4/CKP02R.cbl",
+      "host-lab/rc4/run-rc0.jcl",
+      "host-lab/test-report.md"
+    ],
+    "response": "讀取你加入的新作業紀錄，保存 host-lab/rc4/test-report.md，區分原版與修正版結果。"
   }
 }

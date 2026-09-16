@@ -14,7 +14,7 @@ for item in json.loads((ROOT/'bank-source/manifest.json').read_text(encoding='ut
     exported.add((Path('z-lab')/rel.with_suffix(suffix)).as_posix())
 
 contexts = json.loads((ROOT/'lessons/prompt-context.json').read_text(encoding='utf-8'))
-generated = {'host-lab/run.jcl', 'host-lab/environment.md'}
+generated = {'host-lab/run.jcl', 'host-lab/environment.md', 'host-lab/test-report.md'}
 used = set()
 for page in (ROOT/'lessons').glob('*.html'):
     text = page.read_text(encoding='utf-8')
@@ -22,7 +22,7 @@ for page in (ROOT/'lessons').glob('*.html'):
         used.add(stem)
         assert (ROOT/'prompts'/f'{stem}.md').is_file(), (page, stem)
         for name in contexts[stem]['files']:
-            if name in generated or name.startswith(('output/', 'host-lab/logs/', 'reference/')):
+            if name in generated or name.startswith(('output/', 'host-lab/logs/', 'host-lab/rc4/', 'host-lab/ims/', 'reference/')):
                 continue
             assert name in exported or any(f.startswith(name.rstrip('/')+'/') for f in exported), (page, stem, name)
     for url in re.findall(r'href="([^"]+)"', text):
