@@ -102,18 +102,19 @@
   },
   "sast-ask": {
     "files": [
-      "samples/reports/sast.json",
-      "samples/python/customer_lookup.py"
+      "host-lab/CODE-QUALITY.md",
+      "host-lab/hardening/CKP02H.cbl"
     ],
-    "response": "從輸入到 SQL 執行的問題位置，以及修正建議。"
+    "response": "對照實際程式與工具結果，說明已確認事項和待驗證項目。"
   },
   "08-sast": {
     "files": [
-      "specs/sast-task.md",
-      "samples/reports/sast.json",
-      "samples/python/customer_lookup.py"
+      "host-lab/CODE-QUALITY.md",
+      "host-lab/hardening/CKP02H.cbl",
+      "host-lab/run.jcl",
+      "host-lab/environment.md"
     ],
-    "response": "修正後的程式、六個查詢測試結果，以及修補報告。"
+    "response": "CKP02H.cbl、run-quality.jcl 與 review.md；主機測試待執行。"
   },
   "09-repair": {
     "files": [
@@ -163,9 +164,11 @@
   },
   "verify-sast": {
     "files": [
-      "specs/sast-task.md"
+      "host-lab/CODE-QUALITY.md",
+      "host-lab/hardening/CKP02H.cbl",
+      "host-lab/hardening/run-quality.jcl"
     ],
-    "response": "查詢測試結果，以及更新後的修補報告。"
+    "response": "host-lab/hardening/test-report.md；另外加入本次掃描訊息及實際作業資料夾。"
   },
   "z-context": {
     "files": [
@@ -368,5 +371,28 @@
       "host-lab/logs/（自己保存的完整作業資料夾）"
     ],
     "response": "依實際紀錄安排資料回復、中止結果與分段耗時的核對方式。"
+  },
+  "quality-prepare": {
+    "files": [
+      "host-lab/CODE-QUALITY.md",
+      "z-lab/CKP02.cbl"
+    ],
+    "response": "host-lab/hardening/CKP02H.cbl 與 before.txt；業務邏輯保持原樣。"
+  },
+  "quality-plan": {
+    "files": [
+      "host-lab/CODE-QUALITY.md",
+      "host-lab/hardening/CKP02H.cbl",
+      "host-lab/hardening/before.txt"
+    ],
+    "response": "對照實際程式與工具結果，說明已確認事項和待驗證項目。"
+  },
+  "quality-ims": {
+    "files": [
+      "host-lab/CODE-QUALITY.md",
+      "z-lab/CIS14/CIS14.cbl",
+      "z-lab/CIS14/"
+    ],
+    "response": "對照實際程式與工具結果，說明已確認事項和待驗證項目。"
   }
 }

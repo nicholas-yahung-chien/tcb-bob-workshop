@@ -1,12 +1,28 @@
-<h2 id="story">拿到弱點報告，從哪裡開始？</h2>
-<p>先把報告和對應程式放在一起，理解問題怎麼發生，再請 Bob 協助修正。這份選做練習另需 Python 3.10 以上；若未安裝，可先閱讀與規劃修正，測試標記為未執行。練習使用 SQLite 查詢程式和一筆 SQL 注入報告。</p>
-<h2 id="ask">1. 先看懂問題</h2>
-{{sast-ask|對照報告與程式|Ask}}
-<p>回覆應帶你從輸入值看到 SQL 執行的位置。看懂原因後，再討論怎麼改，會比直接接受修改更容易掌握結果。</p>
-<h2 id="fix">2. 修正並保留正常功能</h2>
-<p><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/sast-task.md">sast-task.md</a> 列出要保留的介面、測試和報告內容。正常查詢也要測，例如姓名或識別值中本來就有單引號的情況。</p>
-{{08-sast|完成查詢修正|Agent}}
-{{verify-sast|再檢查一次結果|Agent}}
-<p>六個測試通過後，開啟 output/customer_lookup.py 和 output/sast-remediation.md 比較修改。若是正式掃描報告，修正後還需要由原掃描工具重新檢查。</p>
-<details><summary>修正時可以留意什麼？</summary><p>查詢值應透過參數傳入。直接刪掉引號，雖然可能擋住某些輸入，也會破壞像 O'NEIL 這樣的合法資料。</p></details>
-{{check:我能指出問題發生的位置}}{{check:已執行者確認六個測試通過；未執行者已標記}}{{check:修正內容與後續檢查已記錄}}
+<h2 id="story">程式跑得動，遇到讀寫失敗時呢？</h2>
+<p>前面已確認 CKP02 的轉換結果。這一節接著使用 ZCodeScan 與 Improve Code 檢查程式，再替檔案讀寫補上錯誤處理。本節使用 COBOL 與 JCL，不需要 Python；也不實作需求單中的預覽功能。</p>
+<p>有效 PP4Z 權益與本機語言服務正常時，ZCodeScan 可以檢查本機來源；編譯及執行測試仍使用課程主機。修改範圍與測試指引在教材 <code>host-lab/CODE-QUALITY.md</code>。</p>
+<h2 id="prepare">1. 先準備可修改的副本</h2>
+{{quality-prepare|準備這次的練習|Agent}}
+<p>確認 <code>host-lab/hardening/CKP02H.cbl</code> 已建立，PROGRAM-ID 為 CKP02H，其他業務邏輯與原版相同。這是新的改善練習程式，尚未上傳主機。<code>before.txt</code> 保存改善前的副本，之後可用 Select for Compare 比較修改。</p>
+<h2 id="scan">2. 用 ZCodeScan 看實際檢查結果</h2>
+<ol><li>開啟 CKP02H.cbl，等待 COBOL 語言服務完成載入。</li><li>開啟命令選擇區，執行 <strong>IBM Z Open Editor: Execute IBM ZCodeScan</strong>。</li><li>在 <strong>Problems</strong> 檢視查看結果，保留規則名稱或代碼、行號與完整訊息。語法診斷、編譯警告與 ZCodeScan 訊息分開記錄。</li><li>將實際訊息貼入 Bob，與目前程式一起分析；不要將候選改善項目當成工具已找到的問題。</li></ol>
+<p>先處理語言服務回報的語法錯誤。未設定 ZCodeScan 的 ZAPP profile 時會採用預設規則；若工作區已有自訂規則或 baseline，請記錄設定，避免把被隱藏的診斷當成已修正。</p>
+<p>若找不到命令或出現權益／語言服務錯誤，先確認 IBM Z Open Editor 已啟用、Bob 已登入及 PP4Z 權益。登入或切換團隊後可執行 Developer: Reload Window，重新檢查權益。仍無法執行時先做來源審閱，將掃描標為「未執行」。沒有診斷也要記下實際狀態；它不代表程式沒有任何風險。</p>
+{{sast-ask|一起看檢查結果|Ask}}
+<h2 id="improve">3. 試用 Improve Code，再決定修改範圍</h2>
+<p>在 CKP02H.cbl 選取包含 OPEN、READ、REWRITE 的處理段落，按右鍵選 <strong>IBM Bob → Improve Code</strong>。這是 Bob 的程式改善功能，會開啟新的 Agent 任務，可能依權限直接修改副本；它不等同 ZCodeScan，也不保證自動執行掃描。先看任務內容與檔案差異，再接受修改。</p>
+<p>新任務若未帶入本節背景，加入 <code>host-lab/CODE-QUALITY.md</code>，說明這次只改善檔案錯誤處理。比較 before.txt 與 CKP02H.cbl，確認轉換條件、欄位位置與重跑結果沒有改掉。接著切到 Plan，討論要採用哪些修改。</p>
+{{quality-plan|討論要怎麼改|Plan}}
+<h2 id="fix">4. 完成修改，準備主機測試</h2>
+{{08-sast|完成同意的修改|Agent}}
+<p>成果放在 <code>host-lab/hardening/</code>：CKP02H.cbl、run-quality.jcl 與 review.md。依 CODE-QUALITY.md 核對 JCL，再透過 tcb-rse 將程式上傳到自己 TCBLAB.COBOL 的新成員 <strong>CKP02H</strong>。重新開啟確認中文、換行與 PROGRAM-ID，從本機 run-quality.jcl 提交，記下新 job ID。原版 CKP02 與 RUN 保留。</p>
+<h2 id="verify">5. 重掃描，再看主機實際結果</h2>
+<p>對修正版再執行同一個 ZCodeScan 命令，使用相同規則設定，保存新訊息。將這次實際提交的 JCL、掃描結果與完整作業紀錄加入 Bob；請指定實際下載的資料夾。中文 PRINTDD 依第 03 單元的方式開啟並另存 UTF-8。</p>
+{{verify-sast|確認改善是否有效|Agent}}
+<p>CHECK1、CHECK2 各七筆 PASS、CHECKED=0007 ERRORS=0000，以及 RUNEMPTY RC 0，是正常流程的回歸證據。它們不會自動證明新增的錯誤分支正確；依 CODE-QUALITY.md 另外準備隔離的失敗案例。未執行的案例仍列為待驗證。若出現 RC 4，依第 04 單元的方法追到實際診斷，不直接歸因於此次修改。</p>
+<details><summary>延伸閱讀：CIS14 的 IMS 呼叫與錯誤處理</summary>
+<p>想將相同方法用在 IMS 程式時，搭配客戶範例 CIS14 與 Copybook 做來源審閱。課程 IMSCKP／IMSEVT 的教學資料庫不是 CIS14 的正式資料庫，不能直接拿來執行 CIS14。</p>
+{{quality-ims|看看 IMS 程式可以改善什麼|Ask}}
+<p>先核對呼叫使用哪個 PCB、如何判斷狀態，以及錯誤後會做什麼。缺少的程式、DBD／PSB 與執行設定先列出，再決定可驗證的修改範圍。識別資料能否輸出須依資料性質與客戶規範判斷，不能只憑 DISPLAY 就認定為弱點。</p></details>
+<details><summary>工具說明與適用範圍</summary><p><a href="https://ibm.github.io/zopeneditor-about/Docs/advanced_zcodescan.html">IBM ZCodeScan 操作說明</a>、<a href="https://ibm.github.io/zopeneditor-about/Docs/advanced_agent_mode.html">Bob 與進階功能權益</a>。請以自己 IDE 的實際訊息為準；靜態檢查、AI 審閱與主機測試各自提供不同證據。</p></details>
+{{check:我能區分掃描訊息與 AI 建議}}{{check:原版與測試預期值保留，修改差異已核對}}{{check:已記錄重掃描、主機回歸與錯誤案例的結果或待驗證事項}}

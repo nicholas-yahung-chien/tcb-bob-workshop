@@ -28,7 +28,7 @@ PAGES = [
     ("02-documentation.html","COBOL 文件化","把程式讀懂，也讓下一個人看得懂","用 pp4z 解讀程式，再整理成方便查閱的文件。", "COBOL 文件化"),
     ("03-testing.html","測試與修正","換一筆資料，結果還對嗎？","從現有測試出發，看看正常、例外和重跑時的結果。", "測試與修正"),
     ("04-logs.html","主機紀錄與 IMS 事件","從紀錄確認程式做了什麼","先看自己的主機執行結果，再練習分析 IMS 事件。", "主機紀錄"),
-    ("05-sast.html","查詢弱點修補","看懂問題，再動手修正","對照弱點報告與程式，修正查詢並檢查原本的功能。", "查詢弱點修補"),
+    ("05-sast.html","COBOL 程式碼檢查與改善","檢查問題，再驗證修改","使用 ZCodeScan 與 Improve Code，改善 CKP02 錯誤處理並驗證結果。", "程式碼檢查與改善"),
     ("06-reference.html","成果與解答","回頭看看，你完成了什麼","比較文件、程式和測試結果，整理下一步想做的事。", "成果與解答"),
     ("07-help.html","常見問題","遇到問題時，可以這樣試","找不到檔案、模式或執行結果時，從這裡繼續。", "常見問題"),
     ("08-source-map.html","認識練習程式","接下來，還可以看哪些程式？","認識 CKP02、CIS14 與其他練習檔案。", "認識練習程式")
@@ -40,7 +40,7 @@ def content(name):
     import re
     body=(ROOT/'lessons'/name).read_text(encoding='utf-8')
     body=re.sub(r"\{\{check:(.*?)\}\}",lambda m:check(m[1]),body)
-    links=''.join(f'<li>{escape(p.name)}</li>' for p in sorted((ROOT/'reference').glob('*')) if p.is_file() and p.name not in {'log-analysis.md','log-facts.json'})
+    links=''.join(f'<li>{escape(p.name)}</li>' for p in sorted((ROOT/'reference').glob('*')) if p.is_file() and p.name not in {'log-analysis.md','log-facts.json','customer_lookup.py','sast-remediation.md'})
     body=body.replace('{{references}}','<ul>'+links+'</ul>')
     return re.sub(r"\{\{([^|{}]+)\|([^|{}]+)\|([^{}]+)\}\}",lambda m:prompt(m[1],m[2],m[3]),body)
 

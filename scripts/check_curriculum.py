@@ -22,7 +22,7 @@ for page in (ROOT/'lessons').glob('*.html'):
         used.add(stem)
         assert (ROOT/'prompts'/f'{stem}.md').is_file(), (page, stem)
         for name in contexts[stem]['files']:
-            if name in generated or name.startswith(('output/', 'host-lab/logs/', 'host-lab/rc4/', 'host-lab/ims/', 'reference/')):
+            if name in generated or name.startswith(('output/', 'host-lab/logs/', 'host-lab/rc4/', 'host-lab/hardening/', 'host-lab/ims/', 'reference/')):
                 continue
             assert name in exported or any(f.startswith(name.rstrip('/')+'/') for f in exported), (page, stem, name)
     for url in re.findall(r'href="([^"]+)"', text):

@@ -6,11 +6,11 @@ DIRS=('samples/','specs/','tests/','requests/')
 FILES={'.bob/rules/language.md','.bob/skills/cobol-explain-zh-tw/SKILL.md','.bob/skills/program-docs-zh-tw/SKILL.md','AGENTS.md','README.md','SOURCE-MAP.md','DOC-SPEC.md','zowe.config.json','zowe.schema.json','.gitignore','.gitattributes',
 'host-lab/BOB-GUIDE.md','host-lab/CONNECTION.md','host-lab/README.md','host-lab/RC4-LAB.md','host-lab/IMS-LAB.md','z-tests/ims-run.jcl','z-tests/fixtures.json',
 'z-tests/GENCKP.cbl','z-tests/CHKCKP.cbl','z-tests/IMSCKP.cbl','z-tests/run.jcl','z-tests/manifest.json',
-'host-lab/IMS-EVENTS.md','z-tests/IMSEVT.cbl','z-tests/imsevts.jcl'}
+'host-lab/CODE-QUALITY.md','host-lab/IMS-EVENTS.md','z-tests/IMSEVT.cbl','z-tests/imsevts.jcl'}
 def selected():
  names=subprocess.check_output(['git','ls-files'],cwd=ROOT,text=True).splitlines()
  return [n for n in names if (n in FILES or n.startswith(DIRS))
-         and n != 'samples/logs/ims-events.csv']
+         and n not in {'samples/logs/ims-events.csv', 'samples/python/customer_lookup.py', 'samples/reports/sast.json', 'tests/test_lookup.py', 'specs/sast-task.md'}]
 def export(dest,archive):
  names=selected()
  assert all(n.split('/')[0] not in {'.github','site','web','lessons','docs','output'} for n in names)
@@ -42,7 +42,7 @@ def export(dest,archive):
    for n in names: z.write(dest/n,'tcb-workshop/'+n)
   with zipfile.ZipFile(archive.with_name('tcb-reference.zip'),'w',zipfile.ZIP_DEFLATED) as z:
    for p in sorted((ROOT/'reference').iterdir()):
-    if p.is_file() and p.name not in {'log-analysis.md','log-facts.json'}:
+    if p.is_file() and p.name not in {'log-analysis.md','log-facts.json','customer_lookup.py','sast-remediation.md'}:
      z.writestr('reference/'+p.name,p.read_bytes().replace(b'bank-source/reading/CKP02.TXT',b'z-lab/CKP02.cbl'))
  print('Exported',len(names),'learner files')
 if __name__=='__main__':
