@@ -20,7 +20,7 @@
 2. 選取 `tcb-rse`，使用 Zowe 的認證介面輸入分配的密碼。密碼只在認證欄位輸入，不寫進 JSON，也不貼到 Bob 對話。
 3. 在資料集的 tcb-rse 搜尋 `<自己的帳號>.TCBLAB.*`，應能找到已備妥的 `<自己的帳號>.TCBLAB.COBOL`（CKP02、GENCKP、CHKCKP 三個成員）與 `<自己的帳號>.TCBLAB.JCL`（RUN 成員）。COBOL 以 tcb-rse 開啟，JCL 以 tcb-rse 開啟。在 JOBS 選 tcb-rse，將 owner 篩選為自己的帳號；尚未提交作業時，作業清單可能為空。來源資料集找不到時先確認帳號與篩選條件，再請講師協助，不使用其他帳號的資料集。
 
-若只看到舊的 `zosmf` 或 `rse`，先確認開啟的是本次教材根目錄。不要修改父資料夾或全域 profile。本次驗證限工作坊資料；其他資料集需依其實際字碼選擇。無中文不代表字碼完全相容。不要把 IBM-937 套用到所有 USS 檔案、binary 資料或 load module。若出現 `profLoc` 等擴充套件錯誤，保留訊息及目前設定檔位置，先停止更新認證；不能只憑這個錯誤判定密碼錯誤或主機拒絕登入。
+若只看到舊的 `zosmf` 或 `rse`，先確認開啟的是本次教材根目錄。不要修改父資料夾或全域 profile。本次驗證限工作坊資料；其他資料集需依其實際字碼選擇。無中文不代表字碼完全相容。文字轉碼不適用於 binary 資料或 load module；其他 USS 檔案須依實際編碼處理。若出現 `profLoc` 等擴充套件錯誤，保留訊息及目前設定檔位置，先停止更新認證；不能只憑這個錯誤判定密碼錯誤或主機拒絕登入。
 
 本次個人 profile 使用 `rejectUnauthorized: false`，不需另外設定 CA 信任。HTTPS 仍加密，但不驗證伺服器憑證；這個設定僅供本次工作坊，不套用到正式系統。
 
@@ -67,9 +67,9 @@ CKP02 不呼叫 IMS，JES、編譯清單與比較結果不是 IMS transaction lo
 
 ## 遠端程式擠成一行時
 
-關閉先前以 tcb-zosmf 開啟的遠端分頁，不儲存異常內容。按 Ctrl+Shift+P 執行 Developer: Reload Window，再從資料集的 tcb-rse 開啟自己的 TCBLAB.COBOL(CKP02)。應能分行顯示並看到中文註解。JCL(RUN) 與 JES 系統紀錄從 tcb-rse 開啟；比對輸出從 tcb-rse 開啟，含中文的編譯清單從 tcb-rse 開啟。
+關閉先前以舊連線或舊編碼開啟的遠端分頁，不儲存異常內容。按 Ctrl+Shift+P 執行 Developer: Reload Window，再從資料集的 tcb-rse 開啟自己的 TCBLAB.COBOL(CKP02)。應能分行顯示並看到中文註解。JCL(RUN) 與 JES 系統紀錄從 tcb-rse 開啟；比對輸出從 tcb-rse 開啟，含中文的編譯清單從 tcb-rse 開啟。
 
-教材已將來源連線改為 RSE，避開本環境 z/OSMF 將 IBM-937 的記錄分隔符轉為 NEL 的問題。這不需要更改主機成員、刪除中文或安裝自訂擴充套件。若未出現 tcb-rse，先確認 IBM Z Open Editor 已啟用，再重新載入視窗。
+目前經驗證的操作配置是 tcb-rse（IBM-1371）。這不需要更改主機成員、刪除中文或安裝自訂擴充套件。若未出現 tcb-rse，先確認 IBM Z Open Editor 已啟用，再重新載入視窗。
 
 ## 讀取中文作業輸出
 

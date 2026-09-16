@@ -1,6 +1,6 @@
 # 練習檔案說明
 
-先從 `z-lab/CKP02.cbl` 看起，再搭配 samples 裡的 IDSHIFT 比較。CKP02 會讀取和回寫檔案，IDSHIFT 則處理傳入的記憶體記錄。
+先從 `z-lab/CKP02.cbl` 看起，需要延伸閱讀時，再搭配 samples 裡的 IDSHIFT 比較。CKP02 會讀取和回寫檔案，IDSHIFT 則處理傳入的記憶體記錄。
 
 ## 原始程式與閱讀版
 
