@@ -5,7 +5,7 @@
 <h3 id="roles">A. 理解程式各自的角色</h3>
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>z-lab</code></p><div class="prompt"><div class="prompt-head"><span>分清用途與相依關係</span><button type="button" data-copy="z-roles">複製 Prompt</button></div><pre id="z-roles">這是一個我完全陌生的專案，請幫我認識這個系統是做什麼的、這些程式各自負責什麼？主要業務功能與程式分組是什麼？請把看得到的用途與相依關係整理給我，指出程式依據；看不出有關聯的，就先分開說明。
 </pre><div class="expected"><strong>預期回應</strong><p>各程式的角色、有來源依據的相依關係與待確認事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p><strong>看回答時留意：</strong>Bob 應依程式中的 COPY、CALL 或 I/O 敘述說明關係，不能因為檔案放在一起就認定互相呼叫。CKP02 的檔案轉換、CIS14 的 IMS 相關處理，以及 IDSHIFT 的記憶體記錄轉換應分開理解；合成範例不是合庫正式系統的一部分。無法確認的業務用途先留下問題。</p>
+<p><strong>看回答時留意：</strong>Bob 應依程式中的 COPY、CALL 或 I/O 敘述說明關係，不能因為檔案放在一起就認定互相呼叫。CKP02 的檔案轉換、CIS14 的 IMS 相關處理與其他程式應分開理解；未選讀 samples 時，不要求分析其中的 IDSHIFT。無法確認的業務用途先留下問題。</p>
 <h3 id="trace">B. 跟著一筆資料走過 CKP02</h3>
 <p>接著聚焦 CKP02。想知道「程式在做什麼」，可以先問資料從哪裡進來、經過哪些判斷，最後寫到哪裡。</p>
 <details id="enhance"><summary>試試 Enhance prompt：把想法說清楚</summary><p>先用自己的話寫需求，或把下面這段貼進輸入框，暫時不要送出。</p>
@@ -39,7 +39,7 @@
 <h2 id="plan">3. 把需求整理成計畫</h2>
 <p>現在知道程式大致怎麼運作，就可以討論怎麼改。<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a> 約定文件的章節和檢查方式；提問時引用它，Bob 就有格式可以依循。</p>
 <p>規劃新需求時，現有功能和建議做法容易混在一起。因此這次多補一句，請 Bob 分開說明，方便你判斷哪些已經存在、哪些還要做。</p>
-<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code>、<code>DOC-SPEC.md</code></p><div class="prompt"><div class="prompt-head"><span>規劃預覽功能</span><button type="button" data-copy="02-plan">複製 Prompt</button></div><pre id="02-plan">我想在批次執行前，先知道會改到多少筆資料。請閱讀 requests/change-application.docx，對照現有程式分析影響，再依 DOC-SPEC.md 規劃架構文件和實作清單。
+<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code>、<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>host-lab/CONNECTION.md</code>、<code>z-tests/run.jcl</code></p><div class="prompt"><div class="prompt-head"><span>規劃預覽功能</span><button type="button" data-copy="02-plan">複製 Prompt</button></div><pre id="02-plan">我想在批次執行前，先知道會改到多少筆資料。請閱讀 requests/change-application.docx，對照現有程式分析影響，再依 DOC-SPEC.md 規劃架構文件和實作清單。
 
 請分開說明現有行為、建議的做法，以及還需要確認的資訊。主機程式和本機範例各自分析，先討論計畫，不修改程式。
 </pre><div class="expected"><strong>預期回應</strong><p>需要分析的範圍、文件內容，以及還需要確認的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
@@ -47,7 +47,7 @@
 <p>閱讀計畫時，想想兩件事：哪些建議有程式可以對照？哪些還需要業務或系統資料？有疑問的地方，直接在同一個對話追問。</p>
 <h2 id="deliver">4. 請 Bob 寫成文件</h2>
 <p>計畫確認後，在同一個對話切換到 <strong>Agent</strong>。前面已經說清楚的內容，這裡不用再重述一遍。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code>、<code>DOC-SPEC.md</code></p><div class="prompt"><div class="prompt-head"><span>依計畫完成文件</span><button type="button" data-copy="03-plan-deliver">複製 Prompt</button></div><pre id="03-plan-deliver">請依剛才確認的計畫和 requests/change-application.docx，完成架構文件與實作清單，存到 output，格式依 DOC-SPEC.md。
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code>、<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>host-lab/CONNECTION.md</code>、<code>z-tests/run.jcl</code></p><div class="prompt"><div class="prompt-head"><span>依計畫完成文件</span><button type="button" data-copy="03-plan-deliver">複製 Prompt</button></div><pre id="03-plan-deliver">請依剛才確認的計畫和 requests/change-application.docx，完成架構文件與實作清單，存到 output，格式依 DOC-SPEC.md。
 
 描述現況時，重新核對引用的原始碼；計畫中的建議保留為提案，需要環境資料才能確認的事項另外列出。完成後執行文件檢查並說明結果。
 </pre><div class="expected"><strong>預期回應</strong><p>output 裡的架構文件和實作清單，附上檢查結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>

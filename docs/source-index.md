@@ -4,48 +4,48 @@
 
 | 檔案 | 行數 | 群組／標籤摘要 | 缺少COPY |
 |---|---:|---|---|
-| CIS14/CICIASEG.TXT | 16 | CIASEG | 無文字層級缺件 |
-| CIS14/CICIRSEG.TXT | 160 | CIRSEG | 無文字層級缺件 |
-| CIS14/CICIXSEG.TXT | 1657 | CIXSEG | 無文字層級缺件 |
-| CIS14/CIS14.TXT | 1341 | IN-REC, BK-REC, OUT-REC, OUT2-REC, BK-DATA, OUT-DETAIL… | 無文字層級缺件 |
-| CIS14/DLIFUNCT.TXT | 17 | COUNT-3, COUNT-4, FUNCTION-GU, FUNCTION-GN, FUNCTION-GNP, FUNCTION-GHU… | 無文字層級缺件 |
-| CIS14/IMSDBCOD.TXT | 53 | IMS-DB-STATUS-CODE | 無文字層級缺件 |
-| CIS14/PCBABDB.TXT | 10 | ABPCB | 無文字層級缺件 |
-| CIS14/PCBATDB.TXT | 10 | ATPCB | 無文字層級缺件 |
-| CIS14/PCBBCDB.TXT | 10 | BCPCB | 無文字層級缺件 |
-| CIS14/PCBBMDB.TXT | 10 | BMPCB | 無文字層級缺件 |
-| CIS14/PCBBSDB.TXT | 10 | BSPCB | 無文字層級缺件 |
-| CIS14/PCBBTDB.TXT | 10 | BTPCB | 無文字層級缺件 |
-| CIS14/PCBCHDB.TXT | 10 | CHPCB | 無文字層級缺件 |
-| CIS14/PCBCIDB.TXT | 10 | CIPCB | 無文字層級缺件 |
-| CIS14/PCBCKDB.TXT | 10 | CKPCB | 無文字層級缺件 |
-| CIS14/PCBCLDB.TXT | 10 | CLPCB | 無文字層級缺件 |
-| CIS14/PCBCNDB.TXT | 10 | CNPCB | 無文字層級缺件 |
-| CIS14/PCBFDDB.TXT | 10 | FDPCB | 無文字層級缺件 |
-| CIS14/PCBFRDB.TXT | 10 | FRPCB | 無文字層級缺件 |
-| CIS14/PCBFTDB.TXT | 10 | FTPCB | 無文字層級缺件 |
-| CIS14/PCBGADB.TXT | 10 | GAPCB | 無文字層級缺件 |
-| CIS14/PCBIBDB.TXT | 10 | IBPCB | 無文字層級缺件 |
-| CIS14/PCBIPDB.TXT | 10 | IPPCB | 無文字層級缺件 |
-| CIS14/PCBIRDB.TXT | 10 | IRPCB | 無文字層級缺件 |
-| CIS14/PCBLADB.TXT | 10 | LAPCB | 無文字層級缺件 |
-| CIS14/PCBLCDB.TXT | 10 | LCPCB | 無文字層級缺件 |
-| CIS14/PCBMBDB.TXT | 10 | MBPCB | 無文字層級缺件 |
-| CIS14/PCBMSDB.TXT | 10 | MSPCB | 無文字層級缺件 |
-| CIS14/PCBPBDB.TXT | 10 | PBPCB | 無文字層級缺件 |
-| CIS14/PCBRTDB.TXT | 10 | RTPCB | 無文字層級缺件 |
-| CIS14/PCBTCDB.TXT | 10 | TCPCB | 無文字層級缺件 |
-| CIS14/PCBTDDB.TXT | 10 | TDPCB | 無文字層級缺件 |
-| CIS14/PCBTPDB.TXT | 10 | TPPCB | 無文字層級缺件 |
-| CIS14/PCBTRDB.TXT | 10 | TRPCB | 無文字層級缺件 |
-| CIS14/PCBTSDB.TXT | 10 | TSPCB | 無文字層級缺件 |
-| CIS14/PCBVADB.TXT | 10 | VAPCB | 無文字層級缺件 |
-| CIS14/PCBVDDB.TXT | 10 | VDPCB | 無文字層級缺件 |
-| CIS14/SSACIDB.TXT | 123 | UNQ-SSA-CICIR, UNQ-SSA-CICSD, UNQ-SSA-CIRAD, UNQ-SSA-CICTB, UNQ-SSA-CICIA, UNQ-SSA-CICIU… | 無文字層級缺件 |
-| CIS14/SUBCODES.TXT | 877 | DBCODES, LA-CHAR-INQUIRY-CODE, LA-INT-TYPE, LA-CHAR-CODE, LA-ADVANCE-CODE, I-CODE-TRANS… | 無文字層級缺件 |
-| CIS14/TAXCOMB.TXT | 94 | TAXCOMB | 無文字層級缺件 |
-| CIS14/TSYNCTSR.TXT | 572 | SYNC-CALLING | 無文字層級缺件 |
-| CIS14/VAVADSEG.TXT | 1276 | VADSEG | 無文字層級缺件 |
-| CKP02.TXT | 102 | IN-REF-REC, USER-ITEM | 無文字層級缺件 |
-| STANCVT.TXT | 73 | STANPRM, STANCVT, BEGIN | 無文字層級缺件 |
-| SYSOCP31.TXT | 938 | SYSOCP31, OCPMSG, PUTMSG, CLINTSET, SYNCGEN, CODECNV… | ASMMSP, CODELINK, FGSGEN1, IBBAR, IBCODES, IBDBPCB, IBDSECT, IBIOPCB, IBOUTLU, IBSSA, IBTPPCB, LCTXLSEG, LINK5740 |
+| z-lab/CIS14/CICIASEG.cpy | 16 | CIASEG | 無文字層級缺件 |
+| z-lab/CIS14/CICIRSEG.cpy | 160 | CIRSEG | 無文字層級缺件 |
+| z-lab/CIS14/CICIXSEG.cpy | 1657 | CIXSEG | 無文字層級缺件 |
+| z-lab/CIS14/CIS14.cbl | 1341 | IN-REC, BK-REC, OUT-REC, OUT2-REC, BK-DATA, OUT-DETAIL… | 無文字層級缺件 |
+| z-lab/CIS14/DLIFUNCT.cpy | 17 | COUNT-3, COUNT-4, FUNCTION-GU, FUNCTION-GN, FUNCTION-GNP, FUNCTION-GHU… | 無文字層級缺件 |
+| z-lab/CIS14/IMSDBCOD.cpy | 53 | IMS-DB-STATUS-CODE | 無文字層級缺件 |
+| z-lab/CIS14/PCBABDB.cpy | 10 | ABPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBATDB.cpy | 10 | ATPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBBCDB.cpy | 10 | BCPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBBMDB.cpy | 10 | BMPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBBSDB.cpy | 10 | BSPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBBTDB.cpy | 10 | BTPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBCHDB.cpy | 10 | CHPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBCIDB.cpy | 10 | CIPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBCKDB.cpy | 10 | CKPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBCLDB.cpy | 10 | CLPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBCNDB.cpy | 10 | CNPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBFDDB.cpy | 10 | FDPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBFRDB.cpy | 10 | FRPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBFTDB.cpy | 10 | FTPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBGADB.cpy | 10 | GAPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBIBDB.cpy | 10 | IBPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBIPDB.cpy | 10 | IPPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBIRDB.cpy | 10 | IRPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBLADB.cpy | 10 | LAPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBLCDB.cpy | 10 | LCPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBMBDB.cpy | 10 | MBPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBMSDB.cpy | 10 | MSPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBPBDB.cpy | 10 | PBPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBRTDB.cpy | 10 | RTPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBTCDB.cpy | 10 | TCPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBTDDB.cpy | 10 | TDPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBTPDB.cpy | 10 | TPPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBTRDB.cpy | 10 | TRPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBTSDB.cpy | 10 | TSPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBVADB.cpy | 10 | VAPCB | 無文字層級缺件 |
+| z-lab/CIS14/PCBVDDB.cpy | 10 | VDPCB | 無文字層級缺件 |
+| z-lab/CIS14/SSACIDB.cpy | 123 | UNQ-SSA-CICIR, UNQ-SSA-CICSD, UNQ-SSA-CIRAD, UNQ-SSA-CICTB, UNQ-SSA-CICIA, UNQ-SSA-CICIU… | 無文字層級缺件 |
+| z-lab/CIS14/SUBCODES.cpy | 877 | DBCODES, LA-CHAR-INQUIRY-CODE, LA-INT-TYPE, LA-CHAR-CODE, LA-ADVANCE-CODE, I-CODE-TRANS… | 無文字層級缺件 |
+| z-lab/CIS14/TAXCOMB.cpy | 94 | TAXCOMB | 無文字層級缺件 |
+| z-lab/CIS14/TSYNCTSR.cpy | 572 | SYNC-CALLING | 無文字層級缺件 |
+| z-lab/CIS14/VAVADSEG.cpy | 1276 | VADSEG | 無文字層級缺件 |
+| z-lab/CKP02.cbl | 102 | IN-REF-REC, USER-ITEM | 無文字層級缺件 |
+| z-lab/STANCVT.asm | 73 | STANPRM, STANCVT, BEGIN | 無文字層級缺件 |
+| z-lab/SYSOCP31.asm | 938 | SYSOCP31, OCPMSG, PUTMSG, CLINTSET, SYNCGEN, CODECNV… | ASMMSP, CODELINK, FGSGEN1, IBBAR, IBCODES, IBDBPCB, IBDSECT, IBIOPCB, IBOUTLU, IBSSA, IBTPPCB, LCTXLSEG, LINK5740 |

@@ -1,10 +1,10 @@
 # 程式閱讀筆記
 
-這份筆記整理 bank-source/reading 的程式內容。引用的是檔案實際行號；HLASM 右側的編號另有用途。需要找符號時，可以搭配 [程式索引](source-index.md)。
+這份筆記整理學員教材 z-lab 的程式內容。引用的是檔案實際行號；HLASM 右側的編號另有用途。需要找符號時，可以搭配 [程式索引](source-index.md)。主機操作與連線設定以 host-lab/CONNECTION.md 及課程網頁為準；本筆記著重來源行為。
 
 ## CKP02：欄位與批次轉換
 
-先看資料定義，再沿著開檔、處理和關檔的順序閱讀。FILE-CONTROL對應INPUT1，FD為400字元。R-ID是11位群組，其中R-ID-1十位、R-ID-2一位；REDEFINES不增加記錄長度。R-NAME在12–51，所以14–16的EOF檢查位於R-NAME內。
+先看資料定義，再沿著開檔、處理和關檔的順序閱讀。FILE-CONTROL對應INPUT1，記錄為400 bytes。R-ID是11-byte群組，其中R-ID-1十個bytes、R-ID-2一個byte；REDEFINES不增加記錄長度。R-NAME在第12–51 bytes，所以第14–16 bytes的EOF檢查位於R-NAME內。含中文時不能以畫面字數代替byte位置。
 
 主流程先讀，再迴圈處理，再關檔。IF只包住轉換PERFORM，句點結束後的REWRITE對每筆執行。首兩位00但marker為EOF時，內容保持、I/O仍執行。`00`只是條件名，不是完整統編檢核。
 

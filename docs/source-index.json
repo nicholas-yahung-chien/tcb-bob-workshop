@@ -1,6 +1,6 @@
 [
   {
-    "file": "CIS14/CICIASEG.TXT",
+    "file": "z-lab/CIS14/CICIASEG.cpy",
     "lines": 16,
     "language": "COBOL/copybook",
     "copy": [],
@@ -14,7 +14,7 @@
     ]
   },
   {
-    "file": "CIS14/CICIRSEG.TXT",
+    "file": "z-lab/CIS14/CICIRSEG.cpy",
     "lines": 160,
     "language": "COBOL/copybook",
     "copy": [],
@@ -28,7 +28,7 @@
     ]
   },
   {
-    "file": "CIS14/CICIXSEG.TXT",
+    "file": "z-lab/CIS14/CICIXSEG.cpy",
     "lines": 1657,
     "language": "COBOL/copybook",
     "copy": [],
@@ -42,7 +42,7 @@
     ]
   },
   {
-    "file": "CIS14/CIS14.TXT",
+    "file": "z-lab/CIS14/CIS14.cbl",
     "lines": 1341,
     "language": "COBOL/copybook",
     "copy": [
@@ -318,7 +318,7 @@
     ]
   },
   {
-    "file": "CIS14/DLIFUNCT.TXT",
+    "file": "z-lab/CIS14/DLIFUNCT.cpy",
     "lines": 17,
     "language": "COBOL/copybook",
     "copy": [],
@@ -392,7 +392,7 @@
     ]
   },
   {
-    "file": "CIS14/IMSDBCOD.TXT",
+    "file": "z-lab/CIS14/IMSDBCOD.cpy",
     "lines": 53,
     "language": "COBOL/copybook",
     "copy": [],
@@ -406,7 +406,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBABDB.TXT",
+    "file": "z-lab/CIS14/PCBABDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -420,7 +420,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBATDB.TXT",
+    "file": "z-lab/CIS14/PCBATDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -434,7 +434,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBBCDB.TXT",
+    "file": "z-lab/CIS14/PCBBCDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -448,7 +448,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBBMDB.TXT",
+    "file": "z-lab/CIS14/PCBBMDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -462,7 +462,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBBSDB.TXT",
+    "file": "z-lab/CIS14/PCBBSDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -476,7 +476,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBBTDB.TXT",
+    "file": "z-lab/CIS14/PCBBTDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -490,7 +490,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBCHDB.TXT",
+    "file": "z-lab/CIS14/PCBCHDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -504,7 +504,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBCIDB.TXT",
+    "file": "z-lab/CIS14/PCBCIDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -518,7 +518,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBCKDB.TXT",
+    "file": "z-lab/CIS14/PCBCKDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -532,7 +532,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBCLDB.TXT",
+    "file": "z-lab/CIS14/PCBCLDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -546,7 +546,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBCNDB.TXT",
+    "file": "z-lab/CIS14/PCBCNDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -560,7 +560,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBFDDB.TXT",
+    "file": "z-lab/CIS14/PCBFDDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -574,7 +574,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBFRDB.TXT",
+    "file": "z-lab/CIS14/PCBFRDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -588,7 +588,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBFTDB.TXT",
+    "file": "z-lab/CIS14/PCBFTDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -602,7 +602,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBGADB.TXT",
+    "file": "z-lab/CIS14/PCBGADB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -616,7 +616,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBIBDB.TXT",
+    "file": "z-lab/CIS14/PCBIBDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -630,7 +630,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBIPDB.TXT",
+    "file": "z-lab/CIS14/PCBIPDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -644,7 +644,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBIRDB.TXT",
+    "file": "z-lab/CIS14/PCBIRDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -658,7 +658,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBLADB.TXT",
+    "file": "z-lab/CIS14/PCBLADB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -672,7 +672,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBLCDB.TXT",
+    "file": "z-lab/CIS14/PCBLCDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -686,7 +686,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBMBDB.TXT",
+    "file": "z-lab/CIS14/PCBMBDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -700,7 +700,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBMSDB.TXT",
+    "file": "z-lab/CIS14/PCBMSDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -714,7 +714,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBPBDB.TXT",
+    "file": "z-lab/CIS14/PCBPBDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -728,7 +728,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBRTDB.TXT",
+    "file": "z-lab/CIS14/PCBRTDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -742,7 +742,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBTCDB.TXT",
+    "file": "z-lab/CIS14/PCBTCDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -756,7 +756,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBTDDB.TXT",
+    "file": "z-lab/CIS14/PCBTDDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -770,7 +770,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBTPDB.TXT",
+    "file": "z-lab/CIS14/PCBTPDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -784,7 +784,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBTRDB.TXT",
+    "file": "z-lab/CIS14/PCBTRDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -798,7 +798,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBTSDB.TXT",
+    "file": "z-lab/CIS14/PCBTSDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -812,7 +812,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBVADB.TXT",
+    "file": "z-lab/CIS14/PCBVADB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -826,7 +826,7 @@
     ]
   },
   {
-    "file": "CIS14/PCBVDDB.TXT",
+    "file": "z-lab/CIS14/PCBVDDB.cpy",
     "lines": 10,
     "language": "COBOL/copybook",
     "copy": [],
@@ -840,7 +840,7 @@
     ]
   },
   {
-    "file": "CIS14/SSACIDB.TXT",
+    "file": "z-lab/CIS14/SSACIDB.cpy",
     "lines": 123,
     "language": "COBOL/copybook",
     "copy": [],
@@ -934,7 +934,7 @@
     ]
   },
   {
-    "file": "CIS14/SUBCODES.TXT",
+    "file": "z-lab/CIS14/SUBCODES.cpy",
     "lines": 877,
     "language": "COBOL/copybook",
     "copy": [],
@@ -1032,7 +1032,7 @@
     ]
   },
   {
-    "file": "CIS14/TAXCOMB.TXT",
+    "file": "z-lab/CIS14/TAXCOMB.cpy",
     "lines": 94,
     "language": "COBOL/copybook",
     "copy": [],
@@ -1046,7 +1046,7 @@
     ]
   },
   {
-    "file": "CIS14/TSYNCTSR.TXT",
+    "file": "z-lab/CIS14/TSYNCTSR.cpy",
     "lines": 572,
     "language": "COBOL/copybook",
     "copy": [],
@@ -1060,7 +1060,7 @@
     ]
   },
   {
-    "file": "CIS14/VAVADSEG.TXT",
+    "file": "z-lab/CIS14/VAVADSEG.cpy",
     "lines": 1276,
     "language": "COBOL/copybook",
     "copy": [],
@@ -1074,7 +1074,7 @@
     ]
   },
   {
-    "file": "CKP02.TXT",
+    "file": "z-lab/CKP02.cbl",
     "lines": 102,
     "language": "COBOL/copybook",
     "copy": [],
@@ -1092,7 +1092,7 @@
     ]
   },
   {
-    "file": "STANCVT.TXT",
+    "file": "z-lab/STANCVT.asm",
     "lines": 73,
     "language": "HLASM",
     "copy": [],
@@ -1114,7 +1114,7 @@
     ]
   },
   {
-    "file": "SYSOCP31.TXT",
+    "file": "z-lab/SYSOCP31.asm",
     "lines": 938,
     "language": "HLASM",
     "copy": [

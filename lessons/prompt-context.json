@@ -37,14 +37,20 @@
   "02-plan": {
     "files": [
       "requests/change-application.docx",
-      "DOC-SPEC.md"
+      "DOC-SPEC.md",
+      "z-lab/CKP02.cbl",
+      "host-lab/CONNECTION.md",
+      "z-tests/run.jcl"
     ],
     "response": "需要分析的範圍、文件內容，以及還需要確認的資訊。"
   },
   "03-plan-deliver": {
     "files": [
       "requests/change-application.docx",
-      "DOC-SPEC.md"
+      "DOC-SPEC.md",
+      "z-lab/CKP02.cbl",
+      "host-lab/CONNECTION.md",
+      "z-tests/run.jcl"
     ],
     "response": "output 裡的架構文件和實作清單，附上檢查結果。"
   },
@@ -67,7 +73,9 @@
   "05-unit": {
     "files": [
       "requests/change-application.docx",
-      "specs/testing.md"
+      "specs/testing.md",
+      "samples/python/normalizer.py",
+      "tests/test_normalizer.py"
     ],
     "response": "完成的 Python 範例、三個新增測試和實際測試報告。"
   },
@@ -149,7 +157,9 @@
   "verify-logs": {
     "files": [
       "specs/log-schema.md",
-      "output/log-analysis.md"
+      "output/log-analysis.md",
+      "samples/logs/ims-events.csv",
+      "output/log-facts.json"
     ],
     "response": "分析檢查結果，以及需要繼續追查的事件。"
   },
@@ -199,7 +209,9 @@
   "z-tests": {
     "files": [
       "specs/testing.md",
-      "samples/cobol/TESTSHIFT.cbl"
+      "samples/cobol/TESTSHIFT.cbl",
+      "samples/cobol/IDSHIFT.cbl",
+      "samples/cobol/IDREC.cpy"
     ],
     "response": "COBOL 測試程式、案例說明及執行前提。"
   },
@@ -269,5 +281,12 @@
   "workflow-docs-zh-tw": {
     "files": [],
     "response": "output/zh-TW/ 中的繁體中文副本、原始文件保留情形，以及需要確認的內容。"
+  },
+  "host-report": {
+    "files": [
+      "host-lab/BOB-GUIDE.md",
+      "host-lab/logs/"
+    ],
+    "response": "host-lab/test-report.md，包含本次作業證據、各項結果與待確認事項。"
   }
 }

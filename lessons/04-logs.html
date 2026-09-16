@@ -17,6 +17,8 @@ EXPECT-ID="123456    "</code></pre>
 <p>CHECK1、CHECK2 應各有七筆 <code>PASS ALL 400 BYTES</code>，結尾為 <code>CHECKED=0007 ERRORS=0000</code>；RUNONCE、RUNTWICE、RUNEMPTY 均應 RC 0。CCKP 的 RC 4 必須與 README 列出的編譯警告核對，不能只看整體 return code。</p>
 <p>CKP02 沒有呼叫 IMS，因此這些紀錄不能用來判斷 IMS 交易是否完成。若缺少某個 step 的紀錄，先從相同 job ID 補下載，再請 Bob 接著確認。</p>
 {{check:我能指出主機結果所依據的 job 與 step}}
+<p>確認分析後，切換到 <strong>Agent</strong>，把同一項作業的核對結果保存成報告。</p>
+{{host-report|留下本次主機測試報告|Agent}}
 <details><summary>紀錄中出現額外的控制字元？</summary><p>JES 系統紀錄使用 tcb-rse（IBM-1371）可避免本次遇到的行尾 NEL。CHECK1、CHECK2 已改用雙引號，使用 tcb-rse 可正確顯示且沒有行尾 NEL。中文 PRINTDD 與編譯清單同樣使用 tcb-rse（IBM-1371）。若仍異常，關閉舊分頁並重新載入視窗，再依 CONNECTION.md 排查；保留原始紀錄。</p></details>
 <h2 id="story">延伸：IMS 交易到底完成了沒有？</h2>
 <p>看到一行錯誤記錄，往往還不能知道整筆交易的結果。先把前後事件串起來，再決定要往哪裡查。</p>

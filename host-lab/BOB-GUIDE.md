@@ -4,8 +4,8 @@
 
 ## 一、檢查已備妥的程式
 
-1. 閱讀 SOURCE-MAP.md 與 source-manifest.json，確認 z-lab 中的 45 份 .cbl、.cpy、.asm 檔案存在，並確認 z-tests/fixtures.json、z-tests/run.jcl、根目錄 Zowe 設定與 schema 齊全。檔案已隨教材提供，不複製、不轉檔，也不新增另一套程式。
-2. 使用系統既有雜湊工具（Windows 可用 Get-FileHash）核對 manifest 各 file 的 SHA-256。工具不可用時記錄「雜湊未驗證」，不能把閱讀內容當成完整性驗證。
+1. 閱讀 SOURCE-MAP.md 與 source-manifest.json，確認 z-lab 中的 45 份 .cbl、.cpy、.asm 檔案存在，並確認 z-tests 的 GENCKP.cbl、CHKCKP.cbl、fixtures.json、run.jcl、manifest.json，以及根目錄 Zowe 設定與 schema 齊全。檔案已隨教材提供，不複製、不轉檔，也不新增另一套程式。
+2. 使用系統既有雜湊工具（Windows 可用 Get-FileHash）依 source-manifest.json 核對 z-lab 各 file 的 SHA-256，並依 z-tests/manifest.json 的 sha256 核對兩支輔助程式及 JCL。工具不可用時記錄「雜湊未驗證」，不能把閱讀內容當成完整性驗證。
 3. 缺檔或雜湊不同時，列出路徑並請學員確認是否修改過；保留修改，不覆寫，也不自行補寫原始碼。需要還原時重新下載教材並解壓到另一個資料夾比較。
 4. 保存 output/workspace-check.md，列出實際檢查方法、結果與未確認事項。請學員開啟 z-lab/CKP02.cbl，確認 pp4z 功能。檔案檢查不代表已登入主機或啟用 pp4z。
 
@@ -13,9 +13,9 @@
 
 1. 先確認 host-lab/environment.md 存在；若不存在，請學員依 CONNECTION.md 的「建立個人作業配置」完成並核對後再繼續。核對帳號、來源連線 tcb-rse（IBM-1371）、作業連線 tcb-rse（IBM-1371）、來源成員、JCL 成員、job 名稱、volume 與 storage class，不得含待填文字。job 名稱是自己的帳號加 A；配置為 DEVVS1、SCNOSMS。有落差先指出，不猜替代值。
 2. 課程已在每個帳號的 <帳號>.TCBLAB.COBOL 準備 CKP02、GENCKP、CHKCKP，在 <帳號>.TCBLAB.JCL 準備 RUN，兩個資料集皆為 PDSE、FB、LRECL=80。CKP02 來自 z-lab/CKP02.cbl，兩支輔助程式來自 z-tests 中的同名 .cbl。三支來源均以 IBM-937 傳輸，包含原始中文註解；這是內容編碼，不是資料集 CCSID 標籤。請學員開啟並核對，不要求上傳、貼上或重建來源。缺少成員時請講師協助，不覆寫已有修改。
-3. 先使用現有的 host-lab/run.jcl，不要求重新下載。只有本機缺少這份檔案時，才請學員以 tcb-rse 開啟自己 TCBLAB.JCL(RUN)，依課程網頁的收合指引下載一次。已有個人修改時保留，以本次要提交的版本核對。以 z-tests/run.jcl 核對這份 JCL：預設 TCBP001 已替換為個人 job 名稱，YOURUSER 已替換為自己的帳號。不要重新產生已備妥的作業，也不要自動提交。
+3. 教材不含個人化的 host-lab/run.jcl；已有本機個人版本就沿用，不要求重新下載。只有本機缺少這份檔案時，才請學員以 tcb-rse 開啟自己 TCBLAB.JCL(RUN)，依課程網頁的收合指引下載一次。已有個人修改時保留，以本次要提交的版本核對。以 z-tests/run.jcl 核對這份 JCL：預設 TCBP001 已替換為個人 job 名稱，YOURUSER 已替換為自己的帳號。不要重新產生已備妥的作業，也不要自動提交。
 4. CGEN、CCKP、CCHK 的 SYSIN 必須分別讀取自己的 TCBLAB.COBOL(GENCKP)、TCBLAB.COBOL(CKP02)、TCBLAB.COBOL(CHKCKP)，全部保留 CODEPAGE(937),DBCS。JCL 不內嵌任何一支 COBOL；教材來源不修改，不另存另一份 CKP02。
-5. 確認 JCL 敘述不超過 72 欄，// 位置及 IF/ENDIF 配對正確。本次 JCL 使用英文註解，以 IBM-1047 提交；COBOL 原始中文註解仍保留。核對 IGY.V6R4M0.SIGYCOMP、CEE.SCEELKED、CEE.SCEERUN。保留每項作業獨立的 && 暫存資料集、FB 與 LRECL=400，不新增共用永久測資或 IMS 指令。GENCKP 會自動建立測資，不要求學員貼上測試資料。
+5. 確認 JCL 敘述不超過 72 欄，// 位置及 IF/ENDIF 配對正確。提交統一使用 tcb-rse（IBM-1371）；保留教材既有註解，不要求為了字碼刪除或翻譯中文。核對 IGY.V6R4M0.SIGYCOMP、CEE.SCEELKED、CEE.SCEERUN。保留每項作業獨立的 && 暫存資料集、資料測試檔為 FB、LRECL=400；PRINTDD 為 FB、LRECL=402（前後各一個雙引號），不新增共用永久測資或 IMS 指令。GENCKP 會自動建立測資，不要求學員貼上測試資料。
 6. 對照 z-tests/fixtures.json 的七筆 id、fields、once、twice，確認 GENCKP 建立測資、兩組預期與空檔；SNAP1 在 RUNONCE 前複製實際 &&WORK 至 &&BEFORE1，SNAP2 在 RUNTWICE 前複製當時的 &&WORK 至 &&BEFORE2；兩者都必須 RC 0 才進行該次轉換。CHECK1、CHECK2 的 BEFOREDD 分別讀取這兩份快照，不得使用原始測資或 EXPECTDD 代替。CHKCKP 同步讀取 before、actual、expected，檢查筆數與讀取狀態，並比對 actual 與 expected 的完整 400 bytes。不修改預期值來讓測試通過。
 7. 將檢查證據存入 host-lab/jcl-review.md。可使用系統文字工具量測行長；未量測的項目如實標記。帶學員看編譯、連結、測資與測試步驟。預先配置不代表學員自己的這次作業已執行。
 
@@ -23,7 +23,7 @@
 
 ## 三、分析實際測試
 
-讀取實際 run.jcl、z-tests/fixtures.json 與 host-lab/logs/<job ID>/ 的 JESMSGLG、JESYSMSG、CGEN/SYSPRINT、CCKP/SYSPRINT、GENERATE/SYSOUT、GENERATE/PRINTDD、CHECK1/SYSOUT、CHECK2/SYSOUT。同名 DD 依 step 分開存放。缺檔時請學員下載，不能借用其他作業結果。
+讀取實際 run.jcl、z-tests/fixtures.json 與 host-lab/logs/<job ID>/ 的 JESMSGLG、JESJCL、JESYSMSG、CGEN/SYSPRINT、CCKP/SYSPRINT、GENERATE/SYSOUT、GENERATE/PRINTDD、CHECK1/SYSOUT、CHECK2/SYSOUT。同名 DD 依 step 分開存放。缺檔時請學員下載，不能借用其他作業結果。
 
 所有 JES 紀錄、SYSOUT、中文 PRINTDD 與編譯清單均使用 tcb-rse（IBM-1371）開啟並另存。確認中文與換行正常，保留欄位空白；異常時依下方排查指引處理。
 

@@ -15,7 +15,7 @@ def code(text): return '<pre><code>'+escape(text)+'</code></pre>'
 def prompt(stem, title, mode):
     text=(ROOT/"prompts"/(stem+".md")).read_text(encoding="utf-8")
     context=json.loads((ROOT/"lessons/prompt-context.json").read_text(encoding="utf-8"))[stem]
-    files='、'.join('<code>'+escape(name)+'</code>' for name in context['files'])
+    files='、'.join('<code>'+escape(name)+'</code>' for name in context['files']) if context['files'] else '沿用目前對話；需要翻譯時加入實際產生的文件。' if stem=='workflow-docs-zh-tw' else '沿用目前對話，不需新增檔案。'
     return f'<p class="mode-guide"><strong>{escape(mode)} 模式</strong></p><p class="file-context">加入檔案：{files}</p><div class="prompt"><div class="prompt-head"><span>{escape(title)}</span><button type="button" data-copy="{stem}">複製 Prompt</button></div><pre id="{stem}">{escape(text)}</pre><div class="expected"><strong>預期回應</strong><p>{escape(context["response"])}</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>'
 
 

@@ -8,18 +8,18 @@
 <p><strong>Explain code：</strong>執行時應看到「已使用技能 cobol-explain-zh-tw」。若仍產生英文，不必反覆重跑，保留輸出文件，再使用下方的備援方式。</p>
 <p><strong>Generate program documentation：</strong>課程環境已可直接產生中文正文，完成後直接閱讀即可。目錄或部分章節標題可能保留英文，不需要因此增加整份文件的翻譯步驟。</p>
 <details><summary>只有需要翻譯英文正文時才使用</summary><p>在一般 Bob 對話切換到 <strong>Agent</strong>，加入實際產生的 Markdown 文件，從 <code>/</code> 清單選取 <code>/program-docs-zh-tw</code>，再接上下方要求送出。技能會保留原檔並另存中文副本。若清單沒有該技能，確認已啟用；也可以加入 <code>.bob/skills/program-docs-zh-tw/SKILL.md</code> 與文件，請 Agent 依技能內容執行。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：</p><div class="prompt"><div class="prompt-head"><span>整理為台灣繁體中文</span><button type="button" data-copy="workflow-docs-zh-tw">複製 Prompt</button></div><pre id="workflow-docs-zh-tw">請依 program-docs-zh-tw 技能，檢查我加入的工作流程文件，將說明整理為台灣地區用語的繁體中文，保留原有技術細節及原檔，另存至 output/zh-TW/。完成後提供檔案路徑與需要確認的內容。
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：沿用目前對話；需要翻譯時加入實際產生的文件。</p><div class="prompt"><div class="prompt-head"><span>整理為台灣繁體中文</span><button type="button" data-copy="workflow-docs-zh-tw">複製 Prompt</button></div><pre id="workflow-docs-zh-tw">請依 program-docs-zh-tw 技能，檢查我加入的工作流程文件，將說明整理為台灣地區用語的繁體中文，保留原有技術細節及原檔，另存至 output/zh-TW/。完成後提供檔案路徑與需要確認的內容。
 </pre><div class="expected"><strong>預期回應</strong><p>output/zh-TW/ 中的繁體中文副本、原始文件保留情形，以及需要確認的內容。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 </details>
 <p>主要說明應使用繁體中文；程式名稱、指令及程式碼保留原文。翻譯完成後仍需對照原始碼，確認條件、數值、單位與推論是否正確。</p>
 <h2 id="plan">已經有計畫，卻沒有產生檔案</h2>
 <p>Plan 主要用來討論計畫。確認後，在同一個對話切換 Agent，再請 Bob 依計畫執行。如果換了新對話，把需求、規格和已有計畫一起加入，就能接著做。</p>
 <h2 id="permissions">出現 Permissions 提示</h2>
-<p>這是在讓你確認 Bob 接下來的操作。看看檔案範圍和命令，符合這次練習就核准。自己的修改應放在 output；如果操作會改到原始資料或測試，可以先取消，再請 Bob 調整。</p>
+<p>這是在讓你確認 Bob 接下來的操作。看看檔案範圍和命令，符合這次練習就核准。一般練習成果放在 output，工作流程文件保留在 docs，主機配置與報告放在 host-lab；如果操作會改到原始資料或測試，可以先取消，再請 Bob 調整。</p>
 <h2 id="tests">Python 指令找不到，或測試失敗</h2>
 <p>主流程不需要 Python，請依 host-lab/BOB-GUIDE.md 準備與測試。只有選做 Python 範例時，才需確認本機有 Python 3.10 以上版本。Windows 若使用 py，可以請 Bob 改用 py -3 執行。測試失敗時保留完整訊息，讓 Bob 對照需求找原因。</p>
 <h2 id="waiting">回覆中斷了，怎麼繼續？</h2>
-<p>先看看 output 已經完成哪些檔案，再請 Bob 從未完成的部分繼續。也可以把問題縮小到一個檔案或一個失敗案例。需要比對時，reference 裡有參考解答。</p>
+<p>先看看 output 已經完成哪些檔案，再請 Bob 從未完成的部分繼續。也可以把問題縮小到一個檔案或一個失敗案例。需要比對時，依「成果與解答」下載獨立參考解答 ZIP；教材預設不含 reference。</p>
 <h2 id="host-timeout">主機連線或提交逾時</h2>
 <p>讀取資料或 log 逾時時，先確認個人 profile 與網路，再重新整理。提交逾時則先搜尋自己的 jobs，確認是否已有新的 job ID；不要直接重送。請保留錯誤與發生時間。</p>
 <p>CKP02 不需要 IMS region 操作權限。看到其他帳號的資料或操作被拒絕時，不要改用共用管理帳號繼續。</p>

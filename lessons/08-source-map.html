@@ -1,9 +1,9 @@
 <h2 id="files">先從哪支程式開始？</h2>
 <p>先看較短的 CKP02，熟悉欄位與轉換流程，再往 CIS14 的資料處理和 IMS 呼叫走。想多練習組合語言的閱讀，也可以看 STANCVT 和 SYSOCP31。</p>
-<table><tr><th>程式</th><th>可以練習什麼</th><th>閱讀時需要留意</th></tr><tr><td>CKP02</td><td>批次轉換、欄位位置與重跑行為</td><td>正式 JCL 和執行設定需要另外取得</td></tr><tr><td>CIS14 與 Copybook</td><td>資料加工、IMS 呼叫及程式相依</td><td>部分外部程式與 IMS 環境未包含在檔案中</td></tr><tr><td>STANCVT</td><td>七位序號遞增與邊界情況</td><td>呼叫方如何使用序號，需要另外了解</td></tr><tr><td>SYSOCP31</td><td>訊息輸出、編碼轉換與錯誤處理</td><td>部分巨集和外部程式需要補齊</td></tr></table>
+<table><tr><th>程式</th><th>可以練習什麼</th><th>閱讀時需要留意</th></tr><tr><td>CKP02</td><td>批次轉換、欄位位置與重跑行為</td><td>課程 JCL 與測試設定已備妥；生產配置另待提供</td></tr><tr><td>CIS14 與 Copybook</td><td>資料加工、IMS 呼叫及程式相依</td><td>部分外部程式與 IMS 環境未包含在檔案中</td></tr><tr><td>STANCVT</td><td>七位序號遞增與邊界情況</td><td>呼叫方如何使用序號，需要另外了解</td></tr><tr><td>SYSOCP31</td><td>訊息輸出、編碼轉換與錯誤處理</td><td>部分巨集和外部程式需要補齊</td></tr></table>
 <h2 id="folders">資料夾裡有哪些檔案？</h2>
 <p>教材已在 <code>z-lab</code> 備妥 45 份 .cbl、.cpy 和 .asm 檔案，可直接開啟閱讀。<code>source-manifest.json</code> 用來核對檔案完整性。</p>
 <p><code>samples</code> 裡的 IDSHIFT、JCL、Python、事件記錄和弱點報告是練習範例。它們各自說明一個問題，與原始程式分開比較。</p>
-<h2 id="more">想看得更細</h2>
-<ul><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/SOURCE-MAP.md">檔案用途說明</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/docs/source-analysis.md">程式閱讀筆記</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/docs/source-index.md">程式與符號索引</a></li></ul>
+<h2 id="more">想看得更細</h2><p>以下閱讀筆記與索引放在網站維護分支，供線上延伸查閱，不包含在學員教材 ZIP。</p>
+<ul><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/SOURCE-MAP.md">檔案用途說明</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/docs/source-analysis.md">程式閱讀筆記</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/docs/source-index.md">程式與符號索引</a></li></ul>
 <p>閱讀 SYSOCP31 時若遇到沒有提供的巨集，先記下呼叫位置和需要的檔案。找到線索後再補資料，比只憑名稱推測更容易釐清流程。</p>

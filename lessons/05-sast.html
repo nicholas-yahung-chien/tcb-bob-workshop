@@ -7,6 +7,6 @@
 <p><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/sast-task.md">sast-task.md</a> 列出要保留的介面、測試和報告內容。正常查詢也要測，例如姓名或識別值中本來就有單引號的情況。</p>
 {{08-sast|完成查詢修正|Agent}}
 {{verify-sast|再檢查一次結果|Agent}}
-<p>六個測試通過後，開啟 customer_lookup.py 和 sast-remediation.md 比較修改。若是正式掃描報告，修正後還需要由原掃描工具重新檢查。</p>
+<p>六個測試通過後，開啟 output/customer_lookup.py 和 output/sast-remediation.md 比較修改。若是正式掃描報告，修正後還需要由原掃描工具重新檢查。</p>
 <details><summary>修正時可以留意什麼？</summary><p>查詢值應透過參數傳入。直接刪掉引號，雖然可能擋住某些輸入，也會破壞像 O'NEIL 這樣的合法資料。</p></details>
-{{check:我能指出問題發生的位置}}{{check:六個查詢測試已通過}}{{check:修正內容與後續檢查已記錄}}
+{{check:我能指出問題發生的位置}}{{check:已執行者確認六個測試通過；未執行者已標記}}{{check:修正內容與後續檢查已記錄}}

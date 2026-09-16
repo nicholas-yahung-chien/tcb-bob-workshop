@@ -4,9 +4,9 @@
 
 | 素材 | 有證據的用途 | 缺件／限制 |
 |---|---|---|
-| CKP02 | COBOL 400字元檔案；首兩碼條件與資料內EOF排除；所有讀入記錄均經REWRITE | 缺正式JCL、測資、編譯選項與執行紀錄 |
+| CKP02 | COBOL 400-byte 記錄；首兩碼條件與資料內EOF排除；所有讀入記錄均經REWRITE | 課程已備妥 JCL、合成測資及編譯設定；本次執行需自己的 job 紀錄。生產 JCL 與資料另待提供 |
 | CIS14 + copybooks | COBOL/IMS資料加工；輸入300字元、分行表80、輸出917/1109；GU/GNP、姓名地址整理 | CBLTDLI runtime、XIDCHK、BRHIDCNV、PSB/DBD、實際資料未提供 |
-| STANCVT | HLASM七位十六進位序號遞增；FFFFFFF回0000001；改寫OLDSTAN後複製NEWSTAN | 呼叫端与並行控制未提供；未見完整非法輸入檢查 |
+| STANCVT | HLASM七位十六進位序號遞增；FFFFFFF回0000001；改寫OLDSTAN後複製NEWSTAN | 呼叫端與並行控制未提供；未見完整非法輸入檢查 |
 | SYSOCP31 | HLASM輸出訊息流程、編碼轉換、IMS呼叫與錯誤處理 | 尚需補齊多份 COPY 與外部程式，才能準備完整執行環境 |
 
 這些是獨立提供的素材。沒有證據證明 CKP02→CIS14→SYSOCP31→STANCVT 為同一呼叫鏈。
