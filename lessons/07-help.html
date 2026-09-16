@@ -4,7 +4,7 @@
 <p>確認已登入 Bob，且帳號已啟用 Premium Package for Z。重新開啟面板，再看模式選單和上方的 Start Workflow。點選後若先出現工作區選單，選擇顯示本機教材路徑的項目，再到 Bob workflows 找 Explain code 或 Generate program documentation。部分版本將 Z Architecture 顯示為 Z Architect。</p>
 <p>Z Understand 是跨應用程式分析使用的額外連線。只有本機程式時，可以先閱讀本機檔案，將其他系統的關係留待確認。</p>
 <h2 id="workflow-language">工作流程產生的文件仍是英文</h2>
-<p>先在 <strong>Bob Settings → Skills</strong> 確認教材的 <code>cobol-explain-zh-tw</code> 與 <code>program-docs-zh-tw</code> 已啟用，來源為目前的 <strong>Workspace</strong>。若找不到，確認開啟的是包含 <code>.bob/skills/</code> 的教材根目錄，執行 <strong>Developer: Reload Window</strong> 後再查看。</p>
+<p>Explain code 先在 <strong>Bob Settings → Skills</strong> 確認 <code>cobol-explain-zh-tw</code> 已啟用，來源為目前的 <strong>Workspace</strong>。若找不到，確認開啟的是包含 <code>.bob/skills/</code> 的教材根目錄，執行 <strong>Developer: Reload Window</strong> 後再查看。<code>.bob/rules/language.md</code> 單獨存在不保證工作流程會產生中文；<code>program-docs-zh-tw</code> 僅在需要翻譯英文正文時使用。</p>
 <p><strong>Explain code：</strong>執行時應看到「已使用技能 cobol-explain-zh-tw」。若仍產生英文，不必反覆重跑，保留輸出文件，再使用下方的備援方式。</p>
 <p><strong>Generate program documentation：</strong>課程環境已可直接產生中文正文，完成後直接閱讀即可。目錄或部分章節標題可能保留英文，不需要因此增加整份文件的翻譯步驟。</p>
 <details><summary>只有需要翻譯英文正文時才使用</summary><p>在一般 Bob 對話切換到 <strong>Agent</strong>，加入實際產生的 Markdown 文件，從 <code>/</code> 清單選取 <code>/program-docs-zh-tw</code>，再接上下方要求送出。技能會保留原檔並另存中文副本。若清單沒有該技能，確認已啟用；也可以加入 <code>.bob/skills/program-docs-zh-tw/SKILL.md</code> 與文件，請 Agent 依技能內容執行。</p>
@@ -13,6 +13,7 @@
 <p>主要說明應使用繁體中文；程式名稱、指令及程式碼保留原文。翻譯完成後仍需對照原始碼，確認條件、數值、單位與推論是否正確。</p>
 <h2 id="plan">已經有計畫，卻沒有產生檔案</h2>
 <p>Plan 主要用來討論計畫。確認後，在同一個對話切換 Agent，再請 Bob 依計畫執行。如果換了新對話，把需求、規格和已有計畫一起加入，就能接著做。</p>
+<details><summary>Bob 說要用 start_subtask，我需要輸入指令嗎？</summary><p>不需要。這是 Bob 內建的建立子任務工具，不用另裝 MCP。Bob 可能將計畫分成幾項，依序在各自的對話中執行。每項應讀取同一份計畫與課程指引，完成後讓你核對差異再繼續；項目數量不必和其他學員相同。第 05 單元的計畫只包含本機修改與重掃描，舊計畫若還有 JCL 或上傳工作，請先調整。</p></details>
 <h2 id="permissions">出現 Permissions 提示</h2>
 <p>這是在讓你確認 Bob 接下來的操作。看看檔案範圍和命令，符合這次練習就核准。一般練習成果放在 output，工作流程文件保留在 docs，主機配置與報告放在 host-lab；如果操作會改到原始資料或測試，可以先取消，再請 Bob 調整。</p>
 <h2 id="tests">Python 指令找不到，或測試失敗</h2>
@@ -25,4 +26,31 @@
 <p>讀取資料或 log 逾時時，先確認個人 profile 與網路，再重新整理。提交逾時則先搜尋自己的 jobs，確認是否已有新的 job ID；不要直接重送。請保留錯誤與發生時間。</p>
 <p>CKP02 不需要 IMS region 操作權限。看到其他帳號的資料或操作被拒絕時，不要改用共用管理帳號繼續。</p>
 <h2 id="scope">Python 測試通過，代表 COBOL 也通過了嗎？</h2>
-<p>Python 測試確認的是本機範例。COBOL 還需要在對應的編譯與執行環境測試，IMS 和 JCL 也有各自的設定。把這些結果分開記錄，之後就知道還有哪些要補做。</p>
+<p>Python 測試只確認選做的本機模型。第 03／04 單元的主機練習以各自的實際作業紀錄核對。第 05 單元則只修改本機 CKP02H 並重新掃描，編譯與執行驗證註明「本節未執行」，不用接著安排上傳或主機測試。</p>
+<h2 id="requirements">需求與程式文件的疑問</h2>
+<details><summary>Bob 一直問正式環境的問題，課程是不是無法繼續？</summary><p>先分清楚課程已知設定與正式部署資訊。連線、編譯選項與測試資料可從教材查到；正式 INPUT1、排程和資料保留期限不一定已提供，不必為了完成課程自行編造。</p><p>本次情境已回答：計數用 DISPLAY 即可、正式排程沒有防止重複機制、資料內 EOF 表示最後一筆、試跑與正式不一致時要找出哪幾筆。這不等於已決定防重方案或差異明細格式。可請 Bob：「已經回答的部分請沿用，其他先列為待確認，繼續整理目前能確定的內容。」詳見<a href="02-documentation.html">第 02 單元</a>的回覆參考。</p></details>
+<details><summary>完成 02 文件化，就代表預覽功能已經做完了嗎？</summary><p>還沒有。文件化用來理解原版與分析變更；預覽仍是開發提案。第 03 單元的 RUN 執行原版 CKP02，GENERATE 是建立測資與展示資料。第 05 的 CKP02H 則改善錯誤處理，這三件事不能當成同一項功能已完成。</p></details>
+<details><summary>IDSHIFT、fixtures.json 與 z-tests 分別是做什麼的？</summary><p>IDSHIFT 是選做的記憶體轉換對照範例，不是需求變更寫出的新程式。fixtures.json 定義七筆測資及第一次、第二次的預期結果，不是執行紀錄。z-tests 放主機測試輔助程式與 JCL 範本，不能修改預期值來讓自己的程式通過。</p></details>
+<details><summary>需求信件為什麼有 EML，課程卻主要讀 Word？</summary><p>requests/change-application.docx 是主要需求輸入；customer-email.eml 保留為同一需求的信件例子。課程不要求用 Puppeteer 讀取信件。若 Bob 無法讀 DOCX，可在 Word 開啟後貼入文字，繼續釐清需求。</p></details>
+<h2 id="encoding">主機檔案與中文顯示</h2>
+<details><summary>應該選 IBM-937、IBM-1047，還是 IBM-1371？</summary><p>目前課程透過 <strong>tcb-rse／IBM-1371</strong> 開啟來源、提交 JCL 與閱讀中英文作業紀錄。既有來源與中文測資以 IBM-937 準備，編譯仍保留 CODEPAGE(937),DBCS。連線轉碼與編譯設定用途不同，不必把每個數字都改成相同，也不需要更動 JES2 共用設定。</p></details>
+<details><summary>看到行尾異常字符、中文亂碼或換行不正常，怎麼辦？</summary><p>先確認使用新版教材的 tcb-rse 與 IBM-1371 設定。關閉舊分頁，執行 Developer: Reload Window，再從該連線重新開啟，排除舊快取。仍不正常時，保留 job ID、step、DD 與使用方式交給講師確認；不必為了顯示問題反覆提交作業或改寫原始碼。</p></details>
+<details><summary>「全部下載」後 PRINTDD 變亂碼，改本機編碼就可以嗎？</summary><p>本次環境曾出現全部下載時已用錯誤字碼轉換的情況，單純改本機開啟編碼無法還原。請在 tcb-rse 單獨開啟中文 PRINTDD 或編譯清單，確認中文與換行正常、載入所有頁面，再另存為 UTF-8。保留引號內的空白，詳細操作見<a href="03-testing.html">第 03 單元</a>。</p></details>
+<details><summary>本機已有 run.jcl，還要從遠端再下載一次嗎？</summary><p>已有個人版本就直接核對並沿用，不必重下載。z-tests/run.jcl 是共用範本，host-lab/run.jcl 是自己的配置；如果曾修改，請以本次實際提交的版本分析。只有本機缺少時才依課程下載。這是第 03 單元的既有作業，第 05 不需準備另一份 JCL。</p></details>
+<h2 id="job-results">怎麼判讀 CKP02 的執行結果？</h2>
+<details><summary>整項作業 RC 0004，是測試失敗嗎？</summary><p>不能只看最高 RC。先從 JESYSMSG 找出是哪個 step，再閱讀該步驟的完整清單。原版 CCKP 的編譯警告可能造成 RC 4，但仍須核對實際診斷；不能因為範例有同樣 RC 就認定原因相同。兩次比對、空檔及其餘步驟各自確認，缺少的紀錄列為待確認。第 04 單元另有分析與修正 RC 4 的選做練習。</p></details>
+<details><summary>在哪裡看每次轉換前後的差異？</summary><p>CHECK1／CHECK2 的 BEFORE-ID 是各次實際轉換前資料，ACTUAL-ID 是轉換後，EXPECT-ID 是測試預期。CHECK2 的 BEFORE-ID 應接續 CHECK1 的 ACTUAL-ID，不是最初測資。完整資料看 GENERATE／PRINTDD；實際比對則由 CHKCKP 檢查整筆 400 bytes。舊紀錄沒有 SNAP1／SNAP2 或 BEFORE-ID 時，不自行補成實測結果。</p></details>
+<details><summary>CASE 0003 為什麼不轉換？重跑時有些資料為什麼又變了？</summary><p>CASE 0003 的第 14–16 bytes 是 EOF，因此略過轉換；原程式仍回寫並讀下一筆。CASE 0004 第一次轉換後仍以 00 開頭，所以第二次還會轉換。這是原版行為，不是比對程式失敗。中文顯示字數不等於 byte 位置，判斷 EOF 時以程式位置與測資定義為準。</p></details>
+<h2 id="ims-results">IMS 延伸練習的疑問</h2>
+<details><summary>IMSRUN 和 IMSEVTS 是真實 IMS 嗎？可以重跑嗎？</summary><p>兩者使用真實 IMS DB 的 DL/I 批次環境，資料是隔離的教學測資，不是 IMS TM 線上交易。IMSRUN 由 IMSCKP 匯出循序檔交給原版 CKP02，再更新 IMS；IMSEVTS 是另一項父子區段事件練習，不執行 CKP02。</p><p>每次完整提交都會建立作業專用資料與資源，結束後清除，可重複練習。不需要手動清除共享資料庫，也不以中途 RESTART 取代完整重跑。已有的 IMSCKP／IMSEVT 來源成員會保留。詳見<a href="04-logs.html">第 04 單元</a>。</p></details>
+<details><summary>IMSEVTS 出現 U3001 或沒有 END，代表失敗嗎？</summary><p>CUT 刻意觸發 U3001，不會印出正常 END。仍要用同一 job 的 JES 確認實際終止碼，再核對 CHECKA 確實執行且 RC 0。完整預期是 17 步中 16 步 RC 0、CUT U3001；其他異常不能一律當成預期。只有 CUT 的 SYSOUT 時，先列出還缺的證據，補齊後更新結論。</p></details>
+<details><summary>DELAY 約兩秒，表示 IMS 查詢很慢嗎？SYSOUT 就是 IMS 系統日誌嗎？</summary><p>DELAY 的等待安排在 GU 之前；請分開看 WAIT-MS 與 GU-MS，不把等待當成查詢故障。計時刻度為 10 ms，數值 0 也不表示完全不耗時。APPLICATION DIAGNOSTIC 是應用程式輸出，JES／DFS 是系統訊息，DFSERA10 才是課程用來列印真實 IMS 二進位日誌的工具；三種證據分開引用。</p></details>
+<h2 id="zcodescan">ZCodeScan 與程式改善</h2>
+<details><summary>需要另一台主機掃描服務嗎？找不到 ZCodeScan 怎麼辦？</summary><p>有效 PP4Z 權益與本機 COBOL 語言服務正常時，可掃描本機來源。先確認 Bob 已登入、IBM Z Open Editor 啟用及權益狀態；登入或切換團隊後可 Reload Window。語法錯誤或缺少相依也可能影響分析。工具仍無法執行時記錄原因，不用來源審閱代替已完成掃描。</p></details>
+<details><summary>「問題」面板有結果，Bob 卻說沒收到，怎麼辦？</summary><p>只有加入 COBOL 檔案，不代表已將面板診斷帶進對話。切換 <strong>Z Code</strong>，使用第 05 單元明確要求「用 ZCodeScan 掃描」的提問，讓 Bob 取得實際結果。展開工具紀錄，再抽查訊息與行號。只說「這是掃描結果」而沒有附件或工具回應，Bob 可能會請你補資料。</p></details>
+<details><summary>修改後重掃描，找不到修改前結果，還能繼續嗎？</summary><p>可以先掃描目前的 CKP02H，整理本次結果並註明無法完整比較。不要用原始碼推測哪些警告已消失。before.txt 是來源備份，不是掃描報告，也不要直接把它交給只辨識 COBOL 檔案的掃描操作。課程不要求為此重建歷史結果；之後保留每次工具訊息即可。</p></details>
+<details><summary>我的警告比別人多，或改善後反而增加，是否做錯了？</summary><p>先比較規則、來源版本與具體訊息。新增錯誤處理可能增加觸發寫法規則的位置，不能只比較總數。命名、PERFORM、REDEFINES 等建議不必然是安全漏洞；請說明哪些採用、哪些保留及理由。第 05 單元不要求固定數量或零警告，也不為清掉警告而改變業務邏輯。</p></details>
+<details><summary>Improve Code 為什麼直接進入 Agent？改好後要上傳嗎？</summary><p>Improve Code 會開啟 Agent 任務，可能依權限修改選取程式，因此課程先建立 CKP02H 副本並保留 before.txt。完成後核對差異，再依同意的計畫修改。第 05 單元只在本機重新掃描並整理 review.md，不產生 JCL、不上傳、不執行主機作業；掃描完成不等於執行測試通過。</p></details>
+<h2 id="reference-answers">參考解答與版本</h2>
+<details><summary>參考 ZIP 有我的標準答案嗎？為什麼沒有固定 CKP02H？</summary><p>先讀 reference/README.md 的單元對照。參考文件示範分析與報告寫法，主機結果要填自己的證據；講師 JOB01118 節錄只能幫助理解判讀。CKP02H 允許不同改善方式，因此不提供統一修正版或警告數。Python 範例僅對應選做練習。請從<a href="06-reference.html">第 06 單元</a>下載目前版本，參考檔不預先放進學員工作區。</p></details>
+<details><summary>舊計畫還要求 verify.py、SQL 修補或上傳 CKP02H，怎麼辦？</summary><p>改用目前課程網頁與教材指引，請 Bob 更新既有計畫。新版主流程沒有 verify.py 驗收步驟，第 05 已改為 COBOL 改善與本機重掃描。更新教材時保留自己的連線設定、程式修改與紀錄，不直接覆蓋；舊成果可以保留，但不當成新版已完成的證據。</p></details>
