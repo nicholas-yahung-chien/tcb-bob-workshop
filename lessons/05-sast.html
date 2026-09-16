@@ -5,10 +5,11 @@
 {{quality-prepare|準備這次的練習|Agent}}
 <p>確認 <code>host-lab/hardening/CKP02H.cbl</code> 已建立，PROGRAM-ID 為 CKP02H，其他業務邏輯與原版相同。這是新的改善練習程式，尚未上傳主機。<code>before.txt</code> 保存改善前的副本，之後可用 Select for Compare 比較修改。</p>
 <h2 id="scan">2. 用 ZCodeScan 看實際檢查結果</h2>
-<ol><li>開啟 CKP02H.cbl，等待 COBOL 語言服務完成載入。</li><li>開啟命令選擇區，執行 <strong>IBM Z Open Editor: Execute IBM ZCodeScan</strong>。</li><li>在 <strong>Problems</strong> 檢視查看結果，保留規則名稱或代碼、行號與完整訊息。語法診斷、編譯警告與 ZCodeScan 訊息分開記錄。</li><li>將實際訊息貼入 Bob，與目前程式一起分析；不要將候選改善項目當成工具已找到的問題。</li></ol>
+<ol><li>儲存並保持開啟 CKP02H.cbl，等待 COBOL 語言服務完成載入。</li><li>開啟命令選擇區，執行 <strong>IBM Z Open Editor: Execute IBM ZCodeScan</strong>。</li><li>在 <strong>Problems</strong> 檢視查看結果，保留規則名稱或代碼、行號與完整訊息。語法診斷、編譯警告與 ZCodeScan 訊息分開記錄。</li><li>切換至 <strong>Z Code</strong>，加入下方檔案並送出提問，讓 Bob 使用 ZCodeScan 取得結果。這可能重新掃描目前儲存的版本，不是自動讀取先前面板的快照。</li></ol>
 <p>先處理語言服務回報的語法錯誤。未設定 ZCodeScan 的 ZAPP profile 時會採用預設規則；若工作區已有自訂規則或 baseline，請記錄設定，避免把被隱藏的診斷當成已修正。</p>
 <p>若找不到命令或出現權益／語言服務錯誤，先確認 IBM Z Open Editor 已啟用、Bob 已登入及 PP4Z 權益。登入或切換團隊後可執行 Developer: Reload Window，重新檢查權益。仍無法執行時先做來源審閱，將掃描標為「未執行」。沒有診斷也要記下實際狀態；它不代表程式沒有任何風險。</p>
-{{sast-ask|一起看檢查結果|Ask}}
+{{sast-ask|一起看檢查結果|Z Code}}
+<p>展開 Bob 的工具執行紀錄，確認有取得 ZCodeScan 診斷，再抽查訊息與行號是否和「問題」面板一致。不要只核對總數；不同版本、規則或篩選條件可能造成差異。命名與寫法建議也不等於安全弱點，不必全部照單修改。若工具無法取得結果，可將面板中的完整訊息複製貼入對話，再請 Bob 分析。</p>
 <h2 id="improve">3. 試用 Improve Code，再決定修改範圍</h2>
 <p>在 CKP02H.cbl 選取包含 OPEN、READ、REWRITE 的處理段落，按右鍵選 <strong>IBM Bob → Improve Code</strong>。這是 Bob 的程式改善功能，會開啟新的 Agent 任務，可能依權限直接修改副本；它不等同 ZCodeScan，也不保證自動執行掃描。先看任務內容與檔案差異，再接受修改。</p>
 <p>新任務若未帶入本節背景，加入 <code>host-lab/CODE-QUALITY.md</code>，說明這次只改善檔案錯誤處理。比較 before.txt 與 CKP02H.cbl，確認轉換條件、欄位位置與重跑結果沒有改掉。接著切到 Plan，討論要採用哪些修改。</p>
@@ -17,7 +18,7 @@
 {{08-sast|完成同意的修改|Agent}}
 <p>成果放在 <code>host-lab/hardening/</code>：CKP02H.cbl、run-quality.jcl 與 review.md。依 CODE-QUALITY.md 核對 JCL，再透過 tcb-rse 將程式上傳到自己 TCBLAB.COBOL 的新成員 <strong>CKP02H</strong>。重新開啟確認中文、換行與 PROGRAM-ID，從本機 run-quality.jcl 提交，記下新 job ID。原版 CKP02 與 RUN 保留。</p>
 <h2 id="verify">5. 重掃描，再看主機實際結果</h2>
-<p>對修正版再執行同一個 ZCodeScan 命令，使用相同規則設定，保存新訊息。將這次實際提交的 JCL、掃描結果與完整作業紀錄加入 Bob；請指定實際下載的資料夾。中文 PRINTDD 依第 03 單元的方式開啟並另存 UTF-8。</p>
+<p>儲存修正版後，使用相同規則設定，在 Z Code 模式再次送出第 2 步的提問，取得最新掃描結果。保留修改前後的工具訊息，再切換至 Agent 整理測試報告；若另開對話，請將實際掃描訊息一併帶入。將這次實際提交的 JCL 與完整作業紀錄加入 Bob；請指定實際下載的資料夾。中文 PRINTDD 依第 03 單元的方式開啟並另存 UTF-8。</p>
 {{verify-sast|確認改善是否有效|Agent}}
 <p>CHECK1、CHECK2 各七筆 PASS、CHECKED=0007 ERRORS=0000，以及 RUNEMPTY RC 0，是正常流程的回歸證據。它們不會自動證明新增的錯誤分支正確；依 CODE-QUALITY.md 另外準備隔離的失敗案例。未執行的案例仍列為待驗證。若出現 RC 4，依第 04 單元的方法追到實際診斷，不直接歸因於此次修改。</p>
 <details><summary>延伸閱讀：CIS14 的 IMS 呼叫與錯誤處理</summary>
