@@ -6,14 +6,14 @@
 
 唯讀查詢確認 VS01 的 IMS15CR1／STC00624 活動、IMSID IVP1，既有 DB 與 BMP 清單可取得；但沒有 workshop 專用線上資料庫／PSB。因此採獨立 DL/I DB batch，沒有更新 IVP1 的共享資料庫、ACB、RACF、RECON 或 region 設定。既有 library 路徑的 V15R1M0 字樣不當成精確執行版號證據。
 
-## 最終版本驗證
+## 初次版本驗證
 
 | 帳號 | 作業 | 結果 |
 | --- | --- | --- |
 | TCBINS1 | TCBIMSP／JOB01053 | 26 個步驟有實際 IEF142I；只有原 CKP02 的 CCKP 編譯 RC0004，其餘 25 個步驟 RC0000。 |
 | TCB2101 | TCBIMSP／JOB01054 | 同上；使用可攜版 JCL 的 `&SYSUID` 取個人程式庫，確認學生帳號可組譯／編譯、配置暫存庫、執行 IMS 與日誌列印。 |
 
-證據保存在維護工作區 `.work/ims-extension/JOB01053/` 與 `JOB01054/`，機器檢查摘要在 `.work/ims-extension/validation.json`，不納入學員 ZIP。可攜版 `z-tests/ims-run.jcl` 的 SHA-256 為 `20bcd3c007f4f3dbd5733c925949cf20b5ee762ec1ff9f3888e22b3461ad1a13`，JOB01054 實際提交此版本；JOB01053 僅將來源資料集的 `&SYSUID` 展開為 TCBINS1。其他學員帳號未逐一執行，不宣稱已完成全班並行驗證。
+證據保存在維護工作區 `.work/ims-extension/JOB01053/` 與 `JOB01054/`，機器檢查摘要在 `.work/ims-extension/validation.json`，不納入學員 ZIP。可攜版 `z-tests/ims-run.jcl` 的 SHA-256 為 `20bcd3c007f4f3dbd5733c925949cf20b5ee762ec1ff9f3888e22b3461ad1a13`，JOB01054 實際提交此版本；JOB01053 僅將來源資料集的 `&SYSUID` 展開為 TCBINS1。初次驗證僅涵蓋上述兩個帳號；後續遠端預備與逐帳號驗證見下節。
 
 兩次均確認：
 
@@ -35,3 +35,39 @@
 開發過程 JOB01039–01052 包含調試及中間版；最終驗收只採上列 JOB01053／01054。先前新增 fail-run 時曾遇到 PERFORM 不返回警告，已改成明確 GO TO fail-run；最終 CIMS RC0000。
 
 官方依據：[IBM 批次 ROLL／ROLB](https://www.ibm.com/docs/en/ims/15.5.0?topic=rdmdi-backing-out-database-updates-dynamically-roll-rolb-commands)、[DFSERA10](https://www.ibm.com/docs/en/ims/15.5.0?topic=reports-file-select-formatting-print-utility-dfsera10)。
+
+## 遠端預備與逐帳號驗證
+
+2026-09-16。22 個學員與 3 個講師帳號均已新增自己的 TCBLAB.JCL(IMSRUN)，遠端內容逐一讀回，與教材 z-tests/ims-run.jcl 相同。原本 RUN、COBOL 成員與共享 IMS 設定未更動。
+
+全部作業透過 tcb-rse／IBM-1371 直接從遠端 IMSRUN 提交。逐帳號確認 26 步、七筆完整資料比對、ROLB 回復、CHKP 提交、獨立查詢與 DFSERA10 日誌列印。證據保存在維護工作區 .work/ims-remote-ready/，result.json 記錄各帳號與 job ID；不納入學員教材。過程有連線建立及讀取逾時，補讀沿用已取得的 job ID，未重複提交已知作業。
+
+| 帳號 | Job ID | 結果 |
+|---|---|---|
+| TCB2101 | JOB01082 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2102 | JOB01083 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2103 | JOB01084 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2104 | JOB01085 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2105 | JOB01086 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2106 | JOB01087 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2107 | JOB01088 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2108 | JOB01089 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2109 | JOB01090 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2110 | JOB01091 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2401 | JOB01092 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2402 | JOB01093 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2403 | JOB01094 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2404 | JOB01095 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2405 | JOB01096 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2406 | JOB01097 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2407 | JOB01098 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2408 | JOB01099 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2409 | JOB01100 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2410 | JOB01101 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2411 | JOB01103 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCB2412 | JOB01104 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCBINS1 | JOB01105 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCBINS2 | JOB01106 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+| TCBINS3 | JOB01107 | 26 步完成；CCKP RC4，其餘25步 RC0 |
+
+本次為逐一執行，沒有宣稱全班同時執行的容量已驗證。IMS 資料庫、DBD／PSB 與載入程式庫由已備妥的遠端作業自動建立；沒有將暫存資料庫改成共享或永久資料庫。學員直接核對及提交即可，不需另外產生、上傳或初始化。

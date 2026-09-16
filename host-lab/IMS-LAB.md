@@ -5,14 +5,16 @@
 ## 準備與執行
 
 1. 保留 03 已準備的個人 `<帳號>.TCBLAB.COBOL`，其中須有 CKP02、GENCKP、CHKCKP。使用既有 tcb-rse／IBM-1371 連線。
-2. 把 `z-tests/ims-run.jcl` 複製為 `host-lab/ims/run.jcl`。JCL 使用 `&SYSUID` 指向提交者自己的 COBOL 資料集，不用下載或改寫原本 RUN。若要保存遠端 JCL，另存 `<帳號>.TCBLAB.JCL(IMSRUN)`。
-3. 先閱讀 JCL 或請 Bob 說明流程，把執行前核對結果保存在 `host-lab/ims/review.md`。不要更改共享 IMS 設定。
-4. 以自己的帳號提交本機 `host-lab/ims/run.jcl`，記下實際 job ID。作業名稱為 TCBIMSP，使用 owner 篩選自己的作業。
+2. 在 Zowe Explorer 的「資料集 → tcb-rse」搜尋自己的 `<帳號>.TCBLAB.JCL`，開啟已備妥的 `IMSRUN`。它與教材 `z-tests/ims-run.jcl` 內容相同，使用 `&SYSUID` 指向提交者自己的 COBOL 資料集。學員不需要產生、下載或上傳另一份 JCL。
+3. 將本機 `z-tests/ims-run.jcl` 與個人環境資料交給 Bob 說明流程，把執行前核對結果保存在 `host-lab/ims/review.md`。核對遠端 IMSRUN 與教材範本一致，不更改共享 IMS 設定。
+4. 在自己的遠端 `IMSRUN` 成員按右鍵，選取提交作業（Submit Job）。記下實際 job ID；作業名稱為 TCBIMSP，使用 owner 篩選自己的作業。原本的 RUN 成員不變。
 5. 完成後檢查下表的步驟及訊息。依實際下載的資料夾讀取紀錄，把分析保存在 `host-lab/ims/test-report.md`；缺少的證據列為待確認。
 
-JCL 內已包含本延伸練習新增的 IMSCKP COBOL 原始碼、DBD 及 PSB 定義，提交時組譯與編譯。這些新增內容只有這一份 JCL，不另提供重複的程式檔案。既有 CKP02 仍從個人 COBOL 資料集讀取，沒有改成另一套 IMS 轉換邏輯。
+遠端 IMSRUN 已包含本延伸練習新增的 IMSCKP COBOL 原始碼、DBD 及 PSB 定義；所需 IMS 執行庫與既有三支 COBOL 成員也已備妥。提交後由作業自動組譯、編譯、建立隔離資料庫及載入測資，不需學員額外部署或初始化。教材只保留同一份 JCL 的本機範本供閱讀，不另提供重複的程式檔案。既有 CKP02 仍從個人 COBOL 資料集讀取，沒有改成另一套 IMS 轉換邏輯。
 
-這份 JCL 對應目前課程主機：CLASS=A、MSGCLASS=H、UNIT=3390、VOL=DEVVS1、STORCLAS=SCNOSMS；IMS 執行庫為 `IMS.V15R1M0.SDFSRESL`，巨集庫為 `IMS.V15R1M0.SDFSMAC`，PROCLIB 為 `IMS.V15R1M0.PROCLIB`。COBOL 編譯庫為 `IGY.V6R4M0.SIGYCOMP`，Language Environment 使用 `CEE.SCEELKED`／`CEE.SCEERUN`，組譯及連結使用主機可取得的 ASMA90／IEWL。這些名稱是既有環境設定，不代表其他主機可以直接沿用。已驗證 TCBINS1 與 TCB2101 的讀取、提交及暫存配置權限；其餘帳號仍待實際執行確認，不需為本練習授予管理共享 IMS 的權限。
+只有想修改作業時，才另存個人 `host-lab/ims/run.jcl`，保留遠端已備妥的 IMSRUN。提交個人版本後，分析時須加入實際提交的 JCL，不能仍把共用範本當成本次版本。
+
+這份 JCL 對應目前課程主機：CLASS=A、MSGCLASS=H、UNIT=3390、VOL=DEVVS1、STORCLAS=SCNOSMS；IMS 執行庫為 `IMS.V15R1M0.SDFSRESL`，巨集庫為 `IMS.V15R1M0.SDFSMAC`，PROCLIB 為 `IMS.V15R1M0.PROCLIB`。COBOL 編譯庫為 `IGY.V6R4M0.SIGYCOMP`，Language Environment 使用 `CEE.SCEELKED`／`CEE.SCEERUN`，組譯及連結使用主機可取得的 ASMA90／IEWL。這些名稱是既有環境設定，不代表其他主機可以直接沿用。已為 22 個學員帳號與 3 個講師帳號備妥遠端 IMSRUN，逐帳號讀回核對並實際提交通過，確認讀取、提交及暫存配置權限。不需為本練習授予管理共享 IMS 的權限；這是逐一執行的驗證，不代表已完成全班同時執行的容量測試。
 
 ## 這次作業真的做了什麼
 
