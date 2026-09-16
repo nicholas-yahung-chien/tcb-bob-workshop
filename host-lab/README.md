@@ -46,4 +46,4 @@ CASE 0001、0002 為一般格式模擬；CASE 0003–0007 分別保留 EOF 排�
 
 第 04 單元另有 RC 4 修正延伸練習。依 RC4-LAB.md 在 Ask 分析、Plan 討論、Agent 產生獨立 CKP02R；原版基準與修正版目標分開保留。原版報告存 host-lab/test-report.md，修正版報告存 host-lab/rc4/test-report.md。完整清單的前段及尾段訊息都需核對，不能只依第一段警告摘要判斷。
 
-真實 IMS 延伸練習依 [IMS-LAB.md](IMS-LAB.md) 使用 z-tests/ims-run.jcl，成果另存 host-lab/ims。它建立作業專用的 IMS 資料庫，由輔助程式匯出資料給原版 CKP02，再驗證更新、回復與提交後的查詢。原版 CKP02 本身仍沒有 DL/I 呼叫；不要把 IMS 輔助程式的功能寫成 CKP02 既有功能，也不要用 samples/logs 的虛構事件代替這次的實際紀錄。
+真實 IMS 延伸練習依 [IMS-LAB.md](IMS-LAB.md) 核對並提交遠端已備妥的 `<帳號>.TCBLAB.JCL(IMSRUN)`，本機 z-tests/ims-run.jcl 為相同內容的閱讀範本，成果另存 host-lab/ims。不需學員產生或上傳檔案。作業自動建立專用的 IMS 資料庫，由輔助程式匯出資料給原版 CKP02，再驗證更新、回復與提交後的查詢。原版 CKP02 本身仍沒有 DL/I 呼叫；不要把 IMS 輔助程式的功能寫成 CKP02 既有功能，也不要用 samples/logs 的虛構事件代替這次的實際紀錄。
