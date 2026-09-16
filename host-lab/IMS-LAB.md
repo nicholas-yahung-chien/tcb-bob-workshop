@@ -14,7 +14,7 @@ IMSCKP 已拆成獨立原始碼：本機為 `z-tests/IMSCKP.cbl`，遠端為 `<�
 
 只有想修改作業時，才另存個人 `host-lab/ims/run.jcl`，保留遠端已備妥的 IMSRUN。提交個人版本後，分析時須加入實際提交的 JCL，不能仍把共用範本當成本次版本。
 
-這份 JCL 對應目前課程主機：CLASS=A、MSGCLASS=H、UNIT=3390、VOL=DEVVS1、STORCLAS=SCNOSMS；IMS 執行庫為 `IMS.V15R1M0.SDFSRESL`，巨集庫為 `IMS.V15R1M0.SDFSMAC`，PROCLIB 為 `IMS.V15R1M0.PROCLIB`。COBOL 編譯庫為 `IGY.V6R4M0.SIGYCOMP`，Language Environment 使用 `CEE.SCEELKED`／`CEE.SCEERUN`，組譯及連結使用主機可取得的 ASMA90／IEWL。這些名稱是既有環境設定，不代表其他主機可以直接沿用。已為 30 個學員帳號與 3 個講師帳號備妥遠端 IMSRUN 與獨立的 IMSCKP，逐帳號讀回核對。獨立來源版本另以講師與學員帳號實際提交通過。不需為本練習授予管理共享 IMS 的權限；尚未驗證全班同時執行的容量。
+這份 JCL 對應目前課程主機：CLASS=A、MSGCLASS=H、UNIT=3390、VOL=DEVVS1、STORCLAS=SCNOSMS；IMS 執行庫為 `IMS.V15R1M0.SDFSRESL`，巨集庫為 `IMS.V15R1M0.SDFSMAC`，PROCLIB 為 `IMS.V15R1M0.PROCLIB`。COBOL 編譯庫為 `IGY.V6R4M0.SIGYCOMP`，Language Environment 使用 `CEE.SCEELKED`／`CEE.SCEERUN`，組譯及連結使用主機可取得的 ASMA90／IEWL。這些設定適用於課程主機。每個帳號的 IMSRUN 與 IMSCKP 已準備好，可依上方步驟開啟。
 
 ## 這次作業真的做了什麼
 
@@ -37,19 +37,19 @@ IMSCKP 已拆成獨立原始碼：本機為 `z-tests/IMSCKP.cbl`，遠端為 `<�
 
 ## 資料模型、隔離與重置
 
-DBD 名稱 TCBCKDB，單一根區段 CKPROOT 為 404 bytes：前四個 bytes 是測試專用 CASEKEY，其後才是原本完整的 400-byte 資料。CASEKEY 不等於被 CKP02 修改的 ID；後者可能重複或空白，不能直接當本練習的 IMS 唯一索引鍵。這是教學模型，不宣稱是客戶資料庫結構。
+DBD 名稱 TCBCKDB，單一根區段 CKPROOT 為 404 bytes：前四個 bytes 是測試專用 CASEKEY，其後才是原本完整的 400-byte 資料。CASEKEY 不等於被 CKP02 修改的 ID；後者可能重複或空白，不能直接當本練習的 IMS 唯一索引鍵。這份教學模型以 CASEKEY 識別七筆測試資料。
 
 TCBCKPL 是載入 PSB；TCBCKPU 是更新／查詢 PSB。PSB 使用 CMPAT=YES，提供 I/O PCB 作為 CHKP／ROLB 呼叫的參數，DB PCB 則用於 GU／GHU／ISRT／REPL。
 
 每項作業有自己產生的暫存 DBD／PSB／程式庫、資料庫與日誌，不更新共享 IVP 資料庫或 ACBLIB。DBRC=NO、IRLM=NO 僅用於這個獨立暫存批次練習，不是正式環境建議。重新提交會從七筆原始測資重新建庫；作業結束時暫存資料集自動清除，不需要手動清除共享資料。
 
-這裡驗證的是程式主動以 ROLB 取消更新，以及 CHKP 後重新查詢的提交結果；尚未驗證強制終止、主機故障、XRST 或線上交易復原。不得把重新產生測資當成 IMS rollback。
+本練習以 ROLB 取消更新，再用 CHKP 提交並重新查詢。完整重跑則重新建立測資，與 ROLB 還原資料是不同的操作。強制終止與系統復原需另外安排測試。
 
 ## 三種紀錄要分開
 
 - **應用程式診斷：** 各步驟 SYSOUT 的 APPLICATION DIAGNOSTIC、呼叫狀態、前後 ID 與 400-byte 比對；由 IMSCKP 自己印出。
 - **JES 與 IMS 執行訊息：** JESYSMSG 的 IEF142I 證明哪些步驟執行及 RC；JESMSGLG 的 DFS035I 是 IMS 批次初始化，DFS681I 可佐證本次 CHKP。訊息中的預設 IMSID 不代表它是在共享控制區執行線上交易。
-- **IMS 系統日誌：** IEFRDER 的原始二進位日誌，由 IMS 執行期產生；PROLLBAC／PUPDATE 的 SYSPRINT 是 DFSERA10 對該日誌的真實十六進位列印，不是人工 CSV。此練習保留列印於 JES，原始暫存日誌隨作業清除；不是永久日誌保存或災難復原設計。
+- **IMS 系統日誌：** IEFRDER 的原始二進位日誌，由 IMS 執行期產生；PROLLBAC／PUPDATE 的 SYSPRINT 是 DFSERA10 對該日誌的真實十六進位列印，列印結果保留於 JES，原始暫存日誌會隨作業結束清除。
 
 DFSERA10 右側字元欄不一定能呈現雙位元中文字，核對紀錄時以十六進位資料為準。不要把十六進位的紀錄種類或筆數自行當成業務交易筆數。
 

@@ -1,21 +1,22 @@
 <h2 id="story">下次接手的人，會想問哪些問題？</h2>
 <p>知道程式「大概在做什麼」之後，還需要留下欄位、流程和注意事項。這個練習會用 PPZ 解讀 CKP02，再把說明整理成方便查閱的文件。</p>
 <h2 id="dictionary">1. 先建立並核對 Data Dictionary</h2>
-<p>已由課程驗證確認 Z Architect 可執行掃描與 Data Dictionary 工作流程；目前字典描述尚未穩定使用台灣繁體中文，依下方步驟核對語言。</p>
-<p>沿用前一單元掃描的 CKP02，先建立欄位的語意說明，再產生程式文件。Local Metadata 記錄程式結構；Data Dictionary 則記錄經你確認的欄位意義，兩者不能互相取代。</p>
-<p>先在 Bob Settings → Skills 確認 <code>data-dictionary-zh-tw</code> 為 Workspace 且 Active，再開始工作流程。這個新技能的流程內套用效果仍待驗證；完成後務必檢查實際描述。</p>
-<ol><li>先在 <strong>Z Architect</strong> 點 <strong>Start Workflow</strong>，選擇本機教材工作區，查看是否有 <strong>Generate data dictionary</strong>。若此模式沒有提供，切換到 <strong>Z Code</strong> 再開啟工作流程；IBM 公開文件目前以 Z Code 為入口，以安裝版本實際提供的選項為準。</li><li>選取 <code>z-lab/CKP02.cbl</code>，依流程建立字典；若要求先掃描程式，讓流程完成掃描。</li><li>核對產生的欄位說明，再依介面的確認操作保存。保留實際產生的 <code>DD.json</code> 路徑，不自行猜測或搬移工作流程檔案。</li></ol>
-<details><summary>字典描述仍是英文或用語不符時</summary><p>先保存工作流程成果，將實際 DD.json 加入對話，切換 Agent，使用下方提問。Bob 應先保留原檔備份，再更新原路徑的描述；JSON 鍵名、變數名稱、數值與結構保留。完成後回到 Ask 核對字典，不能只看對話回覆是中文。</p>
+
+<p>先替 CKP02 建立 Data Dictionary（資料字典），整理各欄位的用途，方便後續閱讀程式與撰寫文件。前一單元的 Local Metadata 提供程式結構，資料字典則補上欄位意思。</p>
+<p>在 <strong>Bob Settings → Skills</strong> 啟用 <code>data-dictionary-zh-tw</code>，確認來源為 <strong>Workspace</strong>，讓 Bob 依台灣用語撰寫欄位說明。完成後若仍有英文或用語需要調整，可使用下方的中文整理提問。</p>
+<ol><li>切換到 <strong>Z Architect</strong>，點 <strong>Start Workflow</strong>，選擇本機教材工作區，再啟動 <strong>Generate data dictionary</strong>。</li><li>選取 <code>z-lab/CKP02.cbl</code>，依畫面指示完成掃描與字典建立。</li><li>閱讀欄位說明，修正不清楚的內容並儲存，再從結果連結開啟 <code>DD.json</code>。</li></ol>
+<p>找不到工作流程時，請參考<a href="07-help.html#metadata-dd">常見問題</a>。</p>
+<details><summary>字典描述仍是英文或用語不符時</summary><p>將 DD.json 加入對話，切換 <strong>Agent</strong>，請 Bob 保留備份後整理中文說明。完成後開啟檔案，確認欄位描述、變數名稱與數值。</p>
 {{dictionary-localize|整理字典的中文說明|Agent}}
 </details>
-<p>將實際產生的 DD.json 加入對話，再核對內容：</p>
+<p>將 DD.json 加入對話，請 Bob 一起核對欄位意思：</p>
 {{dictionary-review|一起核對欄位意思|Ask}}
-<p>請特別核對 R-ID-1 的 10 bytes、重疊定義的欄位，以及 <code>IN-REF-REC(14:3)</code> 是 R-NAME 第 3–5 位。字典中的業務描述仍需人工確認；不能把公司統編註解解釋為程式已檢查統編有效性。工具與版本排查見 <code>host-lab/PPZ-ANALYSIS.md</code>。</p>
+<p>核對時可先看 R-ID-1 的 10 bytes、重疊定義的欄位，以及 <code>IN-REF-REC(14:3)</code> 對應 R-NAME 第 3–5 位的關係。不熟悉的業務縮寫先留下問題；例如註解提到公司統編，還需要回到程式確認有哪些檢查。</p>
 <h2 id="explain">2. 用 Explain code 閱讀程式</h2>
 <ol><li>開啟 <code>z-lab/CKP02.cbl</code>，選擇 <strong>Z Code</strong>。</li><li>點 <strong>Start Workflow</strong>，在工作區選單選擇本機教材資料夾的 <strong>Run Workflow in〈你開啟的教材資料夾名稱〉</strong>，並核對下方顯示的本機路徑。</li><li>在 <strong>Bob workflows</strong> 找到 <strong>Explain code</strong>，點右側的 <strong>Start</strong>。</li><li>依流程選取這個檔案及 Developer 視角，閱讀程式說明。</li></ol>
-<p>先確認工作流程使用已核對的 Data Dictionary；若看不到使用依據，將實際 DD.json 加入後續對話，請 Bob 核對文件與字典是否一致，不能只因檔案存在就認定已使用。</p>
-<p>目前 Explain code 的繁體中文操作沿用已驗證的 <code>cobol-explain-zh-tw</code> skill。團隊回饋後續更新將加強中文支援，但本教材不預設更新已發布；升級後應重新驗證。Generate program documentation 維持直接閱讀產出文件，不另加翻譯步驟。</p>
-<p>執行到 <strong>Generate explanation</strong> 時，確認出現「已使用技能 <code>cobol-explain-zh-tw</code>」。完成後開啟結果連結，確認主要說明、章節與表格使用繁體中文，程式識別字保留原文。若未看到技能或文件仍為英文，請依<a href="07-help.html#workflow-language">中文文件的排解步驟</a>處理。</p>
+<p>閱讀解說時，對照剛才的 Data Dictionary，看看欄位用途是否一致。有疑問時，把 DD.json 和解說文件一起加入對話，請 Bob 找出差異。</p>
+
+<p>Explain code 使用教材中的 <code>cobol-explain-zh-tw</code> skill。完成後從結果連結開啟文件，閱讀中文說明；程式名稱與識別字會保留原文。文件仍是英文時，請參考<a href="07-help.html#workflow-language">中文文件的排解步驟</a>。</p>
 <p>回覆談到轉換條件後，可以追問實際執行時會遇到的情況，例如同一份資料再跑一次。</p>
 {{z-explain|追問執行時的行為|Z Code}}
 <details id="copybook"><summary>延伸閱讀：用 IDSHIFT 認識 Copybook 與 JCL（選做）</summary>
@@ -29,16 +30,16 @@
 <p>這裡也加入需求申請單與前面釐清的內容：程式說明回答「現在怎麼運作」，影響分析則回答「為了新需求，接下來要改什麼」。兩份資料一起看，才能區分既有功能與新增工作。</p>
 {{document-plan|規劃文件內容|Plan}}
 <details id="plan-reply"><summary>回覆參考：Bob 提出確認問題時，可以怎麼回答？</summary>
-<p>先核對 Bob 的完整問題，再依自己的練習範圍調整回覆。每次對話的問題編號可能不同，請按問題內容回答；下面的範例不代表正式環境設定或業務決策已獲確認。</p>
+<p>以下提供課堂情境的回覆範例。先看清楚 Bob 問的是什麼，再挑選適合的回答；問題編號可能和範例不同。</p>
 <p>如果 Bob 只問「Q1–Q5 哪些可以回答」，卻沒有列出問題，先留在 <strong>Plan</strong> 模式，請它說明：</p>
 {{document-questions|請先列出完整問題|Plan}}
-<p>本次課堂已補充下列回答，使用範例前仍請核對 Bob 問的是同一件事。這些是本次需求情境的回答，不代表學員所在單位也採用相同做法；尚未提供的正式環境資料繼續標為待確認。</p>
+<p>本次練習採用下列情境設定。正式部署時，請再向業務與系統同事確認自己單位的做法。</p>
 <table><thead><tr><th>Bob 詢問的內容</th><th>本次文件可以怎麼處理</th></tr></thead><tbody>
 <tr><td>正式 INPUT1 資料集名稱、DSORG、RECFM、LRECL</td><td>課程測試配置與正式環境分開記錄，正式配置待確認。</td></tr>
-<tr><td>排程是否防止重複執行</td><td>本次情境已確認沒有防止重複執行的機制；如何防護仍是待討論的設計。</td></tr>
+<tr><td>排程是否防止重複執行</td><td>排程沒有防止重複執行的機制，防護方式留待設計。</td></tr>
 <tr><td>處理前後資料是否保留、保留多久</td><td>列為新需求的設計與保存政策待確認事項。</td></tr>
-<tr><td>計數結果放在 SYSOUT 或另外的資料集</td><td>本次已確認用 DISPLAY 將計數印在作業紀錄即可；不代表已決定差異明細的呈現格式。</td></tr>
-<tr><td>正式資料中的 EOF 標記是否存在、用途為何</td><td>本次情境已說明 EOF 表示最後一筆；原始程式仍會 REWRITE 並繼續 READ，不可把業務用途寫成程式直接停止。</td></tr>
+<tr><td>計數結果放在 SYSOUT 或另外的資料集</td><td>計數用 DISPLAY 印在作業紀錄即可；差異明細的格式留待討論。</td></tr>
+<tr><td>正式資料中的 EOF 標記是否存在、用途為何</td><td>業務以 EOF 表示最後一筆；程式遇到此標記會略過轉換，接著仍會 REWRITE 並繼續 READ。</td></tr>
 <tr><td>試跑與正式結果不一致</td><td>需要找出哪些筆資料不一致；比對方式、保存內容及保存時間仍待設計。</td></tr>
 </tbody></table>
 <p>確認文件計畫符合你的範圍後，切換到 <strong>Agent</strong>，可使用下方回覆接續產生文件。範例以未選做 IDSHIFT 為前提；若你有選做，請修改該句。已明確回答過的事項請沿用，不必重複確認。</p>

@@ -28,28 +28,28 @@
 <h2 id="metadata">2. 先建立本機程式資訊</h2>
 <p>切換到 <strong>Z Architect</strong>，加入 CKP02，請 Bob 先掃描程式。Local Metadata 記錄程式結構、變數使用與敘述位置，讓接下來的分析有可查詢的依據。這個 Scan Program 與第 05 單元的 ZCodeScan 程式碼檢查用途不同。</p>
 <p class="mode-guide"><strong>Z Architect 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>先掃描，再分析</span><button type="button" data-copy="scan-program">複製 Prompt</button></div><pre id="scan-program">請先掃描 CKP02，建立後續分析需要的本機程式資訊。完成後，告訴我掃描了哪些檔案，有沒有缺少的內容。
-</pre><div class="expected"><strong>預期回應</strong><p>實際掃描檔案、工具回傳位置與缺少的相依；未執行時明確記錄。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>展開工具執行紀錄，確認 <code>scan_program</code> 已完成，並記下掃描的檔案及回傳位置；只看到 Bob 說「已了解程式」不算完成掃描。若缺少 Copybook，先補齊來源再重試。工具無法使用時依 <code>host-lab/PPZ-ANALYSIS.md</code> 排查，暫以來源審閱繼續，將掃描標為未完成。修改來源後需重新掃描。</p>
-<p>本步先處理 CKP02；Local Metadata 不代表已取得整個系統的呼叫關係。CIS14 等其他程式需分別確認掃描結果，未提供的外部相依仍保留待確認。</p>
+</pre><div class="expected"><strong>預期回應</strong><p>掃描結果、檔案位置，以及需要補充的相依檔案。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>完成後展開工具紀錄，查看 <code>scan_program</code> 的掃描結果與檔案位置。缺少 Copybook 或工具無法使用時，依 <code>host-lab/PPZ-ANALYSIS.md</code> 排查；修改來源後再掃描一次。</p>
+<p>本步先掃描 CKP02。分析其他程式時，再加入對應來源與相依檔案；跨系統關係需要搭配更多資料才能確認。</p>
 <h2 id="impact">3. 看看需求會影響哪些地方</h2>
 <p>這次以業務填寫的 Word 需求申請單開始。開啟教材的 <code>requests/change-application.docx</code>，閱讀目前的困擾與希望改善的方式；單內還有需要向申請人問清楚的地方。</p>
 <p><a href="https://raw.githubusercontent.com/nicholas-yahung-chien/tcb-bob-workshop/refs/heads/workshop/tcb-2026/requests/change-application.docx">下載 Word 需求申請單</a>。教材另保留 <code>requests/customer-email.eml</code> 作為同一需求的信件範例，本步使用 Word 申請單即可。</p>
-<p>將 <code>requests/change-application.docx</code> 加入 Bob 對話，切換到 <strong>Ask</strong>。若目前版本無法讀取 DOCX，請用 Word 開啟，將申請單內文複製到同一個對話，再送出下方問題。本步不需要 Puppeteer 或另裝 MCP；若 Bob 提議透過這些工具讀檔，請改用貼上內文的方式。</p>
+<p>將 <code>requests/change-application.docx</code> 加入 Bob 對話，切換到 <strong>Ask</strong>。若 Bob 無法讀取 DOCX，用 Word 開啟並複製內文到同一個對話，即可繼續。</p>
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>先釐清業務想做什麼</span><button type="button" data-copy="request-clarify">複製 Prompt</button></div><pre id="request-clarify">這是業務提出的需求申請單。請先用白話整理他們遇到什麼問題、希望改善什麼，再列出開始評估前最需要問清楚的幾個問題。把申請單裡已經說明的事、你的推測和還要請對方確認的事分開，先不要替他們決定做法。
 </pre><div class="expected"><strong>預期回應</strong><p>業務期待、待確認問題，以及需要向申請人補問的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>看看 Bob 是否問到「預計改幾筆」的計算方式、試跑後誰來確認、正式處理時資料是否可能已改變，以及重跑的期待。由你扮演需求提出者補充回答；尚無答案就標為待確認，先在明確標示的假設下評估，不把 Bob 的建議當成業務已同意。</p>
+<p>看看 Bob 是否問到「預計改幾筆」的計算方式、試跑後誰來確認、正式處理時資料是否可能已改變，以及重跑的期待。由你扮演需求提出者補充回答；還沒有答案的事項先記下來，並請 Bob 說明它們會影響哪些設計。</p>
 <p>接著切換到 <strong>Z Architect</strong>，從輸入框的 <code>/</code> 清單選取 <code>/impact-analysis</code>，再接上下方問題送出。</p>
 <p class="mode-guide"><strong>Z Architect 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>找出變更影響</span><button type="button" data-copy="z-impact">複製 Prompt</button></div><pre id="z-impact">根據這份需求申請單與剛才釐清的內容，哪些程式、資料和批次作業可能受影響？請對照目前看得到的程式，說明修改位置與原因；尚未確認的需求和相依關係請分開列出，不要當成已定案。
 </pre><div class="expected"><strong>預期回應</strong><p>已確認的影響，以及需要補資料才能確認的關係。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>如果流程要求連線 Z Understand，請選擇包含這支程式的專案。手邊只有本機檔案時，先分析看得到的內容，跨系統的關係留待補齊資料後確認。</p>
 <h2 id="plan">4. 把需求整理成計畫</h2>
 <p>現在知道程式大致怎麼運作，就可以討論怎麼改。<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a> 約定文件的章節和檢查方式；提問時引用它，Bob 就有格式可以依循。</p>
-<p>規劃新需求時，現有功能和建議做法容易混在一起。因此這次多補一句，請 Bob 分開說明，方便你判斷哪些已經存在、哪些還要做。</p>
+<p>請 Bob 分開說明現有功能與建議新增的做法，方便確認這次的修改範圍。</p>
 <p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code>、<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>host-lab/CONNECTION.md</code>、<code>z-tests/run.jcl</code></p><div class="prompt"><div class="prompt-head"><span>規劃預覽功能</span><button type="button" data-copy="02-plan">複製 Prompt</button></div><pre id="02-plan">我想在批次執行前，先知道會改到多少筆資料。請閱讀 requests/change-application.docx，對照現有程式分析影響，再依 DOC-SPEC.md 規劃架構文件和實作清單。
 
 請分開說明現有行為、建議的做法，以及還需要確認的資訊。主機程式和本機範例各自分析，先討論計畫，不修改程式。
 </pre><div class="expected"><strong>預期回應</strong><p>需要分析的範圍、文件內容，以及還需要確認的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>若 Bob 一次問了多個問題，請用「Q1：…、Q2：…」分別回答；設計方案另外選擇。請核對它記錄的答案，不讓未回答的事項變成已確認決策。</p>
+<p>若 Bob 一次問了多個問題，可以用「Q1：…、Q2：…」逐項回答，再核對它整理的決策。尚未決定的事項先保留。</p>
 <p>閱讀計畫時，想想兩件事：哪些建議有程式可以對照？哪些還需要業務或系統資料？有疑問的地方，直接在同一個對話追問。</p>
 <h2 id="deliver">5. 請 Bob 寫成文件</h2>
 <p>計畫確認後，在同一個對話切換到 <strong>Agent</strong>。前面已經說清楚的內容，這裡不用再重述一遍。</p>
@@ -57,9 +57,7 @@
 
 描述現況時，重新核對引用的原始碼；計畫中的建議保留為提案，需要環境資料才能確認的事項另外列出。完成後執行文件檢查並說明結果。
 </pre><div class="expected"><strong>預期回應</strong><p>output 裡的架構文件和實作清單，附上檢查結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/architecture.md</code>、<code>output/checklist.md</code>、<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>一起檢查計畫</span><button type="button" data-copy="verify-plan">複製 Prompt</button></div><pre id="verify-plan">請對照原始碼、需求申請單和實際對話，依 DOC-SPEC.md 核對架構文件與實作清單。每個「已確認」決策是否都有對應的回答？設計能否達成需求，還有哪些矛盾或缺口？
-
-修正有證據可判斷的錯誤；回答有歧義的決策退回待確認，不替我選。請分開列出課程已知環境、業務待確認、設計提案，以及尚未取得的本次執行證據，說明哪些會影響後續實作。
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/architecture.md</code>、<code>output/checklist.md</code>、<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>一起檢查計畫</span><button type="button" data-copy="verify-plan">複製 Prompt</button></div><pre id="verify-plan">請對照原始碼、需求申請單和剛才的討論，幫我檢查架構文件與實作清單。這個做法能滿足需求嗎？還有哪些矛盾或缺少的資訊？請依 DOC-SPEC.md 修正文件，尚未決定的部分列出來，讓我們接著討論。
 </pre><div class="expected"><strong>預期回應</strong><p>文件檢查結果，以及仍需要補齊的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>出現待確認事項是正常的，但先核對它們屬於業務問題、設計選擇，還是尚未執行的測試。課程已提供來源編碼與測試配置，不需取得生產資料集才能繼續。第 03 單元會驗證原有 CKP02；本單元的新功能提案仍需完成決策與設計後，才能另行實作。</p>
 <details><summary>完成後可以看什麼？</summary><p>開啟 output/architecture.md 和 output/checklist.md。前者說明現況、提案及影響，後者列出要做的工作、前置條件與完成標準。七個分析面向與詳細格式都在 DOC-SPEC.md。</p></details>

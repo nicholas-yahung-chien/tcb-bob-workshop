@@ -33,13 +33,13 @@
 - 核對 ALLOC、CGEN、LGENCKP、CCKP、LCKP02、CCHK、LCHKCKP、GENERATE、SNAP1、RUNONCE、CHECK1、SNAP2、RUNTWICE、CHECK2、RUNEMPTY 共 15 步是否實際執行。跳過的步驟不能算通過。
 - 從 CCKP/SYSPRINT 確認 CODEPAGE(937)、DBCS，以及 SYSIN 對應自己 TCBLAB.COBOL(CKP02) 的來源。中文註解若顯示異常，先檢查該 DD 的解碼設定；不改整個作業連線，也不翻譯來源。
 - 讀完 CCKP 編譯清單的開頭、結尾與各階段訊息摘要，並搜尋全檔診斷代碼。工具若只顯示前段或輸出被截斷，分段讀到最後一行，再判斷訊息是否存在。第一段 Messages 統計不是整份編譯清單的總結。
-- 原版 CCKP 的 RC 4 須核對 IGYLI0090-W、IGYSC0205-W、IGYCB7310-W 及來源；不同訊息另列分析。逐項記錄訊息代碼、出現位置、對應程式行或編譯選項、根因與影響；IGYSC0205-W 是前段警告的摘要提醒，不另捏造根因。只有完整搜尋後才能寫「未出現」，檔案不完整則記「待確認」。其他 14 步應為 RC 0。
+- 原版 CCKP 的 RC 4 須核對 IGYLI0090-W、IGYSC0205-W、IGYCB7310-W 及來源；不同訊息另列分析。逐項記錄訊息代碼、出現位置、對應程式行或編譯選項、根因與影響；IGYSC0205-W 是前段警告的摘要提醒，請回頭核對前面的詳細警告。只有完整搜尋後才能寫「未出現」，檔案不完整則記「待確認」。其他 14 步應為 RC 0。
 - CHECK1、CHECK2 各需七個不重複 CASE（0001–0007），每筆 PASS ALL 400 BYTES，結尾 CHECKED=0007 ERRORS=0000。BEFORE-ID 是該次轉換前的實際輸入；CHECK1 對照初始 id，CHECK2 應等於 CHECK1 的 ACTUAL-ID。ACTUAL-ID、EXPECT-ID 依檢查次數分別對照 once、twice，識別值以雙引號包住，保留引號內全部十個字元及尾端空白。
-- 舊作業若沒有 SNAP1、SNAP2 或 BEFORE-ID，列為舊版紀錄，不能自行補出轉換前的實測值。
+- 若作業紀錄沒有 SNAP1、SNAP2 或 BEFORE-ID，先核對 JCL 版本，並在報告註明缺少轉換前的資料。
 - RUNEMPTY 需有實際執行且 RC 0 的證據。空檔與資料中的 EOF 標記分別核對。
 - 保存 host-lab/test-report.md，逐項列出預期、實際 step/DD/訊息與通過、失敗或待確認。失敗時先指出證據與最小修正；保留原始 log，重跑使用新 job ID。
 
-Bob 的靜態檢查不能取代編譯與執行。這些紀錄也不是 IMS transaction log。沒有主機證據就保留待執行，不生成模擬成功紀錄。
+Bob 的靜態檢查不能取代編譯與執行。這些紀錄也不是 IMS transaction log。尚未執行的部分，先記下預期結果，待主機執行後補上。
 
 GENERATE／PRINTDD 使用中文 IBM-937 測資，每筆以單一完整 400-byte 資料行印出；前後雙引號用來保留尾端空白，不屬於資料。中文包含雙位元字元與 SO／SI 控制碼，因此解碼後的字數、畫面欄號不等於主機 byte 位置。GENERATE／SYSOUT 另外顯示 CASE、ID 與 EOF-MARKER-AT-014=YES/NO，表示第 14–16 bytes 是否為 EOF；不直接印出可能切到半個中文字的三個 bytes。CASE 0003 為 YES，所以不轉換；CASE 0005 的 EOF 位於第 12–14 bytes，判斷為 NO，仍轉換。公司、姓名、地址及備註均為虛構中文；未知代碼留空，數字欄位保留數字。這是測資輸出，尚未實作需求中的預覽功能。
 
@@ -53,11 +53,11 @@ GENERATE／PRINTDD 使用中文 IBM-937 測資，每筆以單一完整 400-byte 
 zowe rse view spool-file-by-id JOB12345 108 --rse-profile tcb-rse --encoding IBM-1371
 ```
 
-這是排查用替代步驟，不是每項作業的必要前置操作。本環境已重現「全部下載」的 PRINTDD 以 IBM-1047 解碼後寫成 UTF-8，不能只改本機開啟編碼修復。中文 PRINTDD 與中文編譯清單以單獨開啟、確認內容、載入所有分頁後另存 UTF-8 為準；單檔讀取成功不代表整批下載也成功。連線字碼調整不代表重新編碼既有來源或測資；編譯仍依教材使用 CODEPAGE(937),DBCS。
+這是排查用替代步驟，不是每項作業的必要前置操作。「全部下載」可能造成中文 PRINTDD 轉碼錯誤，請改用單檔開啟後另存。中文 PRINTDD 與中文編譯清單以單獨開啟、確認內容、載入所有分頁後另存 UTF-8 為準。連線字碼調整不代表重新編碼既有來源或測資；編譯仍依教材使用 CODEPAGE(937),DBCS。
 
 若學員選做消除 RC 4 的練習，依 RC4-LAB.md 另存 CKP02R 與個人修正版 JCL；原版基準的 RC 預期與修正版目標分開記錄。
 
-若加入的是真實 IMS 延伸練習的作業，改依 IMS-LAB.md 核對，結果另存 host-lab/ims/test-report.md。IMS 作業有自己的步驟，不能套用上述基準作業的 15 步清單；也不能以 samples/logs 的虛構 CSV 補足缺少的主機證據。
+若加入的是真實 IMS 延伸練習的作業，改依 IMS-LAB.md 核對，結果另存 host-lab/ims/test-report.md。IMS 作業有自己的步驟，不能套用上述基準作業的 15 步清單。
 
 
 IMSEVTS 是獨立的 IMS 事件練習，請依 host-lab/IMS-EVENTS.md 與 specs/log-schema.md 核對，閱讀 z-tests/IMSEVT.cbl、z-tests/imsevts.jcl。不要套用 IMSRUN 的步驟清單：IMSEVTS 共 17 步，16 步 RC 0，只有 CUT 預期 U3001，且 CHECKA 必須執行。報告另存 host-lab/ims/events-report.md；只提供部分紀錄時保留待確認，補齊後更新結論。

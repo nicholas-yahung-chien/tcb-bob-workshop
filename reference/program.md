@@ -2,7 +2,7 @@
 
 ## 用途與入口
 
-PROGRAM-ID CKP02（第4行）；0000-MAIN-RTN（64）依序OPEN、迴圈PROCESS、CLOSE；來源皆為z-lab/CKP02.cbl。這份參考是來源解讀，未附學員本次主機執行證據；第 03 單元另以 RUN 驗證原版。
+PROGRAM-ID CKP02（第4行）；0000-MAIN-RTN（64）依序OPEN、迴圈PROCESS、CLOSE；來源皆為z-lab/CKP02.cbl。第 03 單元可搭配自己的 RUN 結果，對照這份程式說明。
 
 ## 欄位與條件
 

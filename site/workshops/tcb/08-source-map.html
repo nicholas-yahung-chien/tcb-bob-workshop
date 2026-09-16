@@ -8,9 +8,9 @@
 <tr><td>GENCKP</td><td>產生七筆中文合成測資、兩次預期結果與空檔；PRINTDD 展示完整資料</td><td>由 RUN 等教學作業呼叫，資料不是客戶正式資料，也不是需求中的預覽輸出</td></tr>
 <tr><td>CHKCKP</td><td>比對完整 400 bytes，印出各次 BEFORE-ID、ACTUAL-ID 與 EXPECT-ID</td><td>CHECK1／CHECK2 的 BEFOREDD 分別使用 SNAP1／SNAP2 保存的實際轉換前資料</td></tr>
 <tr><td>IMSCKP／IMSRUN</td><td>第 04 單元選做：IMS 載入、匯出、更新、回復與提交</td><td>已預先備妥；IMSCKP 匯出循序檔交給原版 CKP02，再將結果更新至作業專用 IMS 資料庫</td></tr>
-<tr><td>IMSEVT／IMSEVTS</td><td>第 04 單元選做：父子區段、GNP、重複新增、受控中止與耗時判讀</td><td>已預先備妥的獨立 IMS 批次練習，不執行 CKP02，也不使用舊版 CSV</td></tr></table>
+<tr><td>IMSEVT／IMSEVTS</td><td>第 04 單元選做：父子區段、GNP、重複新增、受控中止與耗時判讀</td><td>已預先備妥的獨立 IMS 批次練習，不執行 CKP02</td></tr></table>
 <p>IMS 兩項作業都使用真實 DL/I 呼叫與隔離測資，每次完整提交重新建立作業專用資源，結束後清除；不是 IMS TM 線上交易。來源成員保留，不需每次上傳。依<a href="04-logs.html">第 04 單元</a>及各自指引核對，不混用 RUN、IMSRUN 與 IMSEVTS 的步驟清單。</p>
-<p>第 04 單元另有管理者視角的共享 IMS 區域紀錄閱讀，依 <code>host-lab/IMS-ADMIN.md</code> 取得現有 STC 的 JES 紀錄。這項練習不執行 IMSCKP 或 IMSEVT，也不能把兩支程式的 DISPLAY 當成 control region 日誌。</p>
+<p>第 04 單元另有管理者視角的共享 IMS 區域紀錄閱讀，依 <code>host-lab/IMS-ADMIN.md</code> 取得現有 STC 的 JES 紀錄。這項練習閱讀共享區域的既有紀錄；前面的 IMSCKP 與 IMSEVT 則用來觀察個別批次作業。</p>
 <h2 id="variants">CKP02R、CKP02H 和 IDSHIFT 是同一件事嗎？</h2>
 <table><tr><th>程式</th><th>何時建立或使用</th><th>與原版的關係</th></tr>
 <tr><td>CKP02R</td><td>第 04 單元 RC 4 修正選做，由學員依警告分析產生</td><td>保存在 host-lab/rc4，依該練習另行驗證；不是預先提供的統一答案</td></tr>

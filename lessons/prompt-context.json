@@ -399,37 +399,37 @@
       "z-lab/CKP02.cbl",
       "host-lab/PPZ-ANALYSIS.md"
     ],
-    "response": "實際掃描檔案、工具回傳位置與缺少的相依；未執行時明確記錄。"
+    "response": "掃描結果、檔案位置，以及需要補充的相依檔案。"
   },
   "dictionary-review": {
     "files": [
       "z-lab/CKP02.cbl",
       "host-lab/PPZ-ANALYSIS.md"
     ],
-    "response": "欄位定義的來源依據、待確認的業務意義；另加入自己產生的 DD.json。"
+    "response": "欄位用途、程式中的依據，以及需要向業務確認的問題。"
   },
   "ims-admin-ask": {
     "files": [
       "host-lab/IMS-ADMIN.md"
     ],
-    "response": "以實際加入的 IMS 區域紀錄整理事件，區分觀測時點與尚缺的證據。"
+    "response": "IMS 事件時間線、值得留意的訊息與需要補充的紀錄。"
   },
   "ims-admin-plan": {
     "files": [
       "host-lab/IMS-ADMIN.md"
     ],
-    "response": "有依據的唯讀調查順序；不執行啟停、切換日誌或修改系統。"
+    "response": "後續查詢的建議順序與理由。"
   },
   "ims-admin-report": {
     "files": [
       "host-lab/IMS-ADMIN.md"
     ],
-    "response": "host-lab/ims/admin-report.md，保留 STC ID、DD、訊息、時間與待查事項。"
+    "response": "保存於 host-lab/ims/admin-report.md 的值班交接紀錄。"
   },
   "dictionary-localize": {
     "files": [
       "host-lab/PPZ-ANALYSIS.md"
     ],
-    "response": "加入實際 DD.json，保留原檔備份，僅整理描述並核對 JSON 結構與非描述資料；不假造工作流程成果。"
+    "response": "保留備份後整理 DD.json 的中文描述，並檢查檔案格式與內容。"
   }
 }

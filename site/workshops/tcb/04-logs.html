@@ -1,8 +1,8 @@
 <!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="先看自己的主機執行結果，再練習分析 IMS 事件。"><title>IBM Bob - 合庫 workshop · 賦能 Z 開發</title><link rel="icon" type="image/svg+xml" href="../../assets/bob-icon.svg"><link rel="alternate icon" href="../../assets/bob-favicon.ico"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/app.js" defer></script></head><body><a class="skip" href="#main">跳至主要內容</a><div class="utility">IBM Bob · 合作金庫 Workshop · 2026.09</div><header><a class="brand" href="../../index.html">IBM <span>Bob</span></a><nav aria-label="主要導覽"><a href="../../workshops/tcb/index.html">課程首頁</a><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop">GitHub ↗</a></nav></header><div class="layout with-side"><aside><p class="side-label">練習單元</p><nav aria-label="課程導覽"><a  href="00-setup.html">00　課前準備</a><a  href="01-planning.html">01　需求規劃</a><a  href="02-documentation.html">02　COBOL 文件化</a><a  href="03-testing.html">03　測試與修正</a><a aria-current=page href="04-logs.html">04　主機紀錄與 IMS 事件</a><a  href="05-sast.html">05　COBOL 程式碼檢查與改善</a><a  href="06-reference.html">06　成果與解答</a><a  href="07-help.html">07　常見問題</a><a  href="08-source-map.html">08　認識練習程式</a></nav><p class="progress" aria-live="polite"></p></aside><main id="main"><section class="hero"><p class="eyebrow">主機紀錄</p><h1>從紀錄確認程式做了什麼</h1><p class="lead">先看自己的主機執行結果，再練習分析 IMS 事件。</p></section><article><h2 id="host">先看自己剛跑的 CKP02</h2>
 <p>將上一單元下載的 JES、編譯與比對紀錄資料夾加入 Bob 對話，連同 run.jcl 一起看。可直接加入工作區根目錄的 JOB 資料夾，不必搬到 host-lab/logs。中文檔案請使用單獨開啟後另存的 UTF-8 版本；「全部下載」在本環境可能造成中文亂碼。</p>
-<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/run.jcl</code>、<code>host-lab/README.md</code>、<code>host-lab/BOB-GUIDE.md</code></p><div class="prompt"><div class="prompt-head"><span>核對自己的執行結果</span><button type="button" data-copy="host-logs">複製 Prompt</button></div><pre id="host-logs">這是我剛執行 CKP02 的主機紀錄，請直接讀取我加入的資料夾。請幫我確認哪些步驟真的有執行、RC 4 是哪一步造成的，以及兩次比對和空檔測試是否成功。
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/run.jcl</code>、<code>host-lab/README.md</code>、<code>host-lab/BOB-GUIDE.md</code></p><div class="prompt"><div class="prompt-head"><span>核對自己的執行結果</span><button type="button" data-copy="host-logs">複製 Prompt</button></div><pre id="host-logs">這是我剛執行 CKP02 的主機紀錄，請讀取我加入的資料夾。幫我確認哪些步驟有執行、RC 4 是哪一步造成的，以及兩次比對和空檔測試是否成功。
 
-編譯清單很長，請把開頭和結尾的訊息都看完，不要找到第一個警告就停下來。把每個警告對回程式或編譯設定，說明原因，並指出你看到的 job ID、step 和訊息位置。若紀錄不完整或有亂碼，先告訴我缺了什麼，不要直接當成沒有其他警告。核對方式請參考 host-lab/BOB-GUIDE.md。
+也請看完完整編譯清單，逐一說明警告原因，指出對應的 job ID、step、訊息及程式位置。若紀錄缺頁或有亂碼，請告訴我需要補什麼。核對方式請參考 host-lab/BOB-GUIDE.md。
 </pre><div class="expected"><strong>預期回應</strong><p>依實際 job、step 與訊息核對的執行結果，以及仍需補充的紀錄。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>先從 CCKP 的 SYSPRINT 核對 <code>CODEPAGE(937)</code> 與 <code>DBCS</code>，確認編譯來源是自己的 <code>TCBLAB.COBOL(CKP02)</code>。JESMSGLG、JESJCL、JESYSMSG 從 tcb-rse（IBM-1371）開啟；CHECK1、CHECK2 比對紀錄也從 tcb-rse 開啟，識別值以雙引號包住，例如 <code>ACTUAL-ID="12345678  "</code>。CCKP 編譯清單從 tcb-rse（IBM-1371）開啟，以正確顯示中文註解。</p>
 <p>GENERATE／SYSOUT 使用 tcb-rse；中文 PRINTDD 同樣從 tcb-rse（IBM-1371）開啟。GENERATE／PRINTDD 使用中文 IBM-937 測資，每筆以單一完整 400-byte 資料行印出；前後雙引號用來保留尾端空白，不屬於資料。中文包含雙位元字元與 SO／SI 控制碼，因此解碼後的字數、畫面欄號不等於主機 byte 位置。GENERATE／SYSOUT 另外顯示 CASE、ID 與 EOF-MARKER-AT-014=YES/NO，表示第 14–16 bytes 是否為 EOF；不直接印出可能切到半個中文字的三個 bytes。CASE 0003 為 YES，所以不轉換；CASE 0005 的 EOF 位於第 12–14 bytes，判斷為 NO，仍轉換。公司、姓名、地址及備註均為虛構中文；未知代碼留空，數字欄位保留數字。這是測資輸出，尚未實作需求中的預覽功能。</p>
@@ -21,7 +21,7 @@ EXPECT-ID="123456    "</code></pre>
 <p>CKP02 沒有呼叫 IMS，因此這些紀錄不能用來判斷 IMS 交易是否完成。若缺少某個 step 的紀錄，先從相同 job ID 補下載，再請 Bob 接著確認。</p>
 <label class="check"><input type="checkbox" data-check="我能指出主機結果所依據的 job 與 step"><span>我能指出主機結果所依據的 job 與 step</span></label>
 <p>確認分析後，切換到 <strong>Agent</strong>，把同一項作業的核對結果保存成報告。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/BOB-GUIDE.md</code></p><div class="prompt"><div class="prompt-head"><span>留下本次主機測試報告</span><button type="button" data-copy="host-report">複製 Prompt</button></div><pre id="host-report">請把剛才核對的結果存成 host-lab/test-report.md，記下 job ID、實際執行的步驟、每個警告的原因，以及兩次比對和空檔測試的結果，附上對應訊息。存檔前再檢查一次完整編譯清單，尤其是最後的訊息摘要，看看有沒有漏掉警告。缺少的紀錄保留為待確認，不要用其他作業的結果補上；已有報告時，請指出這次修正了哪些判斷。
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/BOB-GUIDE.md</code></p><div class="prompt"><div class="prompt-head"><span>留下本次主機測試報告</span><button type="button" data-copy="host-report">複製 Prompt</button></div><pre id="host-report">請把剛才的結果存成 host-lab/test-report.md，記下 job ID、各步驟結果、編譯警告的原因，以及兩次比對和空檔測試的結果，附上對應訊息。存檔前再看一次編譯清單的訊息摘要，確認沒有漏掉警告。還缺的紀錄先列出來。
 </pre><div class="expected"><strong>預期回應</strong><p>host-lab/test-report.md，包含本次作業證據、各項結果與待確認事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>打開 <code>host-lab/test-report.md</code>，對照完整編譯清單的開頭與結尾。每個警告都應有原因與證據位置；不能只看到前段的序號警告，就認定沒有其他訊息。</p>
 <details id="rc4"><summary>延伸練習：讓 RC 4 回到 RC 0（選做）</summary>
@@ -62,13 +62,13 @@ EXPECT-ID="123456    "</code></pre>
 <p>單獨開啟完整 JES、編譯清單、各項資料比對與 IMS 執行紀錄，載入所有頁面後另存 UTF-8。把實際保存的資料夾加入 Bob 對話。中文紀錄不要依賴「全部下載」。</p>
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/IMS-LAB.md</code>、<code>z-tests/ims-run.jcl</code>、<code>z-tests/IMSCKP.cbl</code></p><div class="prompt"><div class="prompt-head"><span>確認 IMS 真的做了什麼</span><button type="button" data-copy="ims-host-logs">複製 Prompt</button></div><pre id="ims-host-logs">這是我剛跑完的 IMS 練習紀錄，請讀取我加入的資料夾。資料有成功載入嗎？CKP02 轉換後，先回復再正式更新的結果是否正確？請用實際的 job、step 和訊息說明，並確認後面的查詢真的讀到了提交後的資料。
 
-也請幫我分清楚：哪些是程式自己印出的 DL/I 診斷，哪些是 IMS 系統訊息，哪些才是從真正的 IMS 日誌讀出的內容。只看得到部分紀錄的地方請先保留待確認，不要用練習用的 CSV 補上。
+也請幫我分清楚：哪些是程式自己印出的 DL/I 診斷，哪些是 IMS 系統訊息，哪些才是從真正的 IMS 日誌讀出的內容。紀錄不完整的地方，也請告訴我還需要補什麼。
 </pre><div class="expected"><strong>預期回應</strong><p>依你加入的真實紀錄核對載入、CKP02 轉換、回復、提交及再次查詢；區分應用程式診斷與 IMS 日誌。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>回復練習主動呼叫 ROLB，確認尚未提交的更新已撤回；正式更新呼叫 CHKP，接著由另一個 IMS 執行步驟重新查詢並比對完整 400 bytes。這驗證的是本次批次作業的更新與回復，不代表已測過線上交易、非預期中斷或正式環境災難復原。</p>
-<p>程式印出的 <code>APPLICATION DIAGNOSTIC</code> 是應用程式診斷。IMS 的 DFS 訊息是系統診斷；另外由 DFSERA10 讀取實際 IEFRDER 日誌並列印的內容，才是本次 IMS 系統日誌證據。三者分開閱讀，不把應用程式的成功訊息當成全部證據。</p>
+<p>回復練習主動呼叫 ROLB，確認尚未提交的更新已撤回；正式更新呼叫 CHKP，接著由另一個 IMS 執行步驟重新查詢並比對完整 400 bytes。本練習觀察批次作業主動更新、取消與提交的結果。</p>
+<p>程式印出的 <code>APPLICATION DIAGNOSTIC</code> 是應用程式診斷。IMS 的 DFS 訊息是系統診斷；另外由 DFSERA10 讀取實際 IEFRDER 日誌並列印的內容，才是本次 IMS 系統日誌證據。將三種紀錄放在一起核對，了解程式與 IMS 各自回報了什麼。</p>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/IMS-LAB.md</code>、<code>z-tests/ims-run.jcl</code>、<code>z-tests/IMSCKP.cbl</code></p><div class="prompt"><div class="prompt-head"><span>留下 IMS 練習報告</span><button type="button" data-copy="ims-host-report">複製 Prompt</button></div><pre id="ims-host-report">請把剛才確認的 IMS 執行結果整理到 host-lab/ims/test-report.md，讓沒參與操作的人也看得懂資料怎麼流動、哪裡有更新或回復，以及你用哪些紀錄確認結果。請保留 job ID、step 和訊息位置；沒實際測到的情況另外列出，不要和前面的 CKP02 基準測試混在一起。
 </pre><div class="expected"><strong>預期回應</strong><p>host-lab/ims/test-report.md，附實際 job、step、訊息與待確認事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>成果保存在 <code>host-lab/ims/test-report.md</code>，與原版及 RC 4 修正版報告分開。以自己的 job ID 為依據；講師測試成功不代表自己的帳號或這次作業已通過。</p>
+<p>成果保存在 <code>host-lab/ims/test-report.md</code>，與原版及 RC 4 修正版報告分開。報告記下自己的 job ID，方便回頭查閱。</p>
 </details>
 <details id="story"><summary>延伸練習：從真實 IMS 紀錄判斷操作結果（選做）</summary>
 <p>這次直接使用主機上的 IMS DB 批次作業，觀察父子區段查詢、重複新增後回復、受控中止與等待。這是獨立的 IMSEVT 練習程式，不修改 CKP02，也不使用預製 CSV。即使沒有先跑 IMSRUN，也可以執行本練習。</p>
@@ -93,7 +93,7 @@ EXPECT-ID="123456    "</code></pre>
 </pre><div class="expected"><strong>預期回應</strong><p>host-lab/ims/events-report.md；區分業務結果、測試結果與證據不足。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/ims/events-report.md</code>、<code>host-lab/logs/（自己保存的完整作業資料夾）</code></p><div class="prompt"><div class="prompt-head"><span>檢查結論有沒有根據</span><button type="button" data-copy="verify-logs">複製 Prompt</button></div><pre id="verify-logs">請再對照這次作業的完整紀錄，檢查報告有沒有把預期結果當成實際結果，或把程式印出的訊息當成 IMS 系統日誌。新增沒成功但回復通過，和程式本身執行失敗，也請分清楚。
 </pre><div class="expected"><strong>預期回應</strong><p>逐項核對本次 job、step、DD 與訊息，更新已補齊證據的結論。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>報告存於 <code>host-lab/ims/events-report.md</code>。應用程式診斷、JES／DFS 訊息與 PDUP 的 IMS 日誌列印分開引用。完整證據補齊後，請更新先前的待確認事項；不要使用講師的作業或舊 CSV 代替自己的結果。</p>
+<p>報告存於 <code>host-lab/ims/events-report.md</code>。應用程式診斷、JES／DFS 訊息與 PDUP 的 IMS 日誌列印分開引用。補齊紀錄後，請更新先前尚未確定的判斷。</p>
 <label class="check"><input type="checkbox" data-check="我能分清楚業務結果、測試結果與實際終止碼"><span>我能分清楚業務結果、測試結果與實際終止碼</span></label><label class="check"><input type="checkbox" data-check="我能指出等待發生在哪一段，並附上紀錄"><span>我能指出等待發生在哪一段，並附上紀錄</span></label>
 </details>
 
@@ -101,19 +101,19 @@ EXPECT-ID="123456    "</code></pre>
 <p>這次觀察共享 IMS 子系統的運作紀錄。它與前面 IMSRUN、IMSEVTS 的獨立批次作業不同，不需執行新程式，也不練習 IMS TM 訊息收送。</p>
 <h3>1. 從遠端取得真實紀錄</h3>
 <p>依 <code>host-lab/IMS-ADMIN.md</code>，在 Zowe Explorer 的「工作 → tcb-rse」將 Owner 篩選改為 <code>IBMUSER</code>、Prefix 改為 <code>IMS15*</code>，清除只顯示 OUTPUT 的狀態條件，重新整理並找到目前 ACTIVE 的 control region、DL/I 及 DBRC 工作。完成後將篩選改回自己的帳號。</p>
-<p>2026-09-17 已確認 IMS15CR1／STC00624、IMS15DL1／STC00625、IMS15RC1／STC00626 活動，33 個帳號均可讀取 control region 的 JESMSGLG。這些 ID 是本次盤點結果；重啟後應重新核對，不固定套用。</p>
-<p>逐一開啟三個區域的 JESMSGLG、JESYSMSG 與 JESJCL，載入完整內容並另存 UTF-8。建議存於 <code>host-lab/logs/ims-admin/</code>，檔名保留 STC ID 與 DD 名稱，另記錄擷取時間。請將實際保存的紀錄資料夾加入 Bob；只有加入指引並不等於提供紀錄。</p>
+<p>本練習閱讀 <code>IMS15CR1</code>、<code>IMS15DL1</code> 與 <code>IMS15RC1</code>。從工作清單確認各自的 STC ID；區域重啟後，ID 會改變。</p>
+<p>逐一開啟三個區域的 JESMSGLG、JESYSMSG 與 JESJCL，載入完整內容並另存 UTF-8。建議存於 <code>host-lab/logs/ims-admin/</code>，檔名保留 STC ID 與 DD 名稱，另記錄擷取時間。將保存的紀錄資料夾一起加入 Bob 對話。</p>
 <h3>2. Ask：先讀懂發生什麼事</h3>
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/IMS-ADMIN.md</code></p><div class="prompt"><div class="prompt-head"><span>帶我看 IMS 子系統紀錄</span><button type="button" data-copy="ims-admin-ask">複製 Prompt</button></div><pre id="ims-admin-ask">這是剛從主機取得的 IMS 系統紀錄。請幫我看這段時間發生了什麼，有哪些訊息值得留意。請指出時間、訊息代碼和來源檔案；如果還不能判斷原因，告訴我需要再查哪些紀錄。
-</pre><div class="expected"><strong>預期回應</strong><p>以實際加入的 IMS 區域紀錄整理事件，區分觀測時點與尚缺的證據。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+</pre><div class="expected"><strong>預期回應</strong><p>IMS 事件時間線、值得留意的訊息與需要補充的紀錄。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>從 IMS READY、region 啟停和日誌狀態回應開始找線索。ACTIVE 工作沒有最終 RC 是正常現象；舊的 IMS READY 也不能單獨證明現在正常。活動紀錄會持續增加，記下本次取得的範圍，不能把缺少結束訊息直接判定為異常。</p>
 <h3>3. Plan：安排後續查證</h3>
 <p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/IMS-ADMIN.md</code></p><div class="prompt"><div class="prompt-head"><span>接下來先查什麼？</span><button type="button" data-copy="ims-admin-plan">複製 Prompt</button></div><pre id="ims-admin-plan">如果我是值班的系統管理者，接下來應該先查什麼？請依剛才的紀錄說明理由，先以不影響系統運作的查詢為主。
-</pre><div class="expected"><strong>預期回應</strong><p>有依據的唯讀調查順序；不執行啟停、切換日誌或修改系統。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>遇到 DFS 訊息時，依主機版本查 IBM 官方訊息文件。必要時請講師提供同一時段的 SYSLOG 節錄與唯讀查詢回應。現有學員 spool 存取不代表有操作主控台的權限；本練習不發出 START、STOP 或切換 OLDS 指令。</p>
+</pre><div class="expected"><strong>預期回應</strong><p>後續查詢的建議順序與理由。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>遇到不熟悉的 DFS 訊息時，請 Bob 搭配相應版本的 IBM 官方文件說明。需要更多資料時，請講師提供同一時段的 SYSLOG 節錄或唯讀查詢結果。本練習閱讀紀錄即可，保持共享 IMS 區域持續運作。</p>
 <h3>4. Agent：整理值班交接</h3>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/IMS-ADMIN.md</code></p><div class="prompt"><div class="prompt-head"><span>留下值班交接紀錄</span><button type="button" data-copy="ims-admin-report">複製 Prompt</button></div><pre id="ims-admin-report">請把剛才確認的事件、判斷依據和待查事項整理成值班交接紀錄，存到 host-lab/ims/admin-report.md。保留各份紀錄的來源和取得時間。
-</pre><div class="expected"><strong>預期回應</strong><p>host-lab/ims/admin-report.md，保留 STC ID、DD、訊息、時間與待查事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>若要深入閱讀二進位 IMS 日誌，需先由管理者確認可用的封存 SLDS，再用 DFSERA10 篩選並列印。本次尚未驗證可用 SLDS，不將這一層列為已備妥的操作。JES 的 DFS 訊息、應用程式 DISPLAY 與 DFSERA10 日誌列印須分開標示。</p>
+</pre><div class="expected"><strong>預期回應</strong><p>保存於 host-lab/ims/admin-report.md 的值班交接紀錄。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>想進一步閱讀二進位 IMS 日誌，可請管理者準備對應時段的封存 SLDS，並以 DFSERA10 選取及列印。本練習先完成 JES 區域紀錄的閱讀，更多說明見 <code>host-lab/IMS-ADMIN.md</code>。</p>
 </details>
 </article><nav class="next" aria-label="前後單元"><a href="03-testing.html">← 測試與修正</a><a href="05-sast.html">COBOL 程式碼檢查與改善 →</a></nav></main></div><footer><p>合作金庫 IBM Bob Workshop</p><p>2026.09.21 / 09.24</p></footer></body></html>
