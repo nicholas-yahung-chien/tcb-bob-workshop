@@ -10,6 +10,6 @@
 | SYSOCP31 | HLASM輸出訊息流程、編碼轉換、IMS呼叫與錯誤處理 | 尚需補齊多份 COPY 與外部程式，才能準備完整執行環境 |
 
 這些是獨立提供的素材。沒有證據證明 CKP02→CIS14→SYSOCP31→STANCVT 為同一呼叫鏈。
-目前沒有 Java 原始碼、SQL schema、API規格、正式JCL、真實IMS log或Fortify/Checkmarx報告。
+客戶提供的來源中沒有 Java 原始碼、SQL schema、API 規格、正式 JCL、正式環境的 IMS log 或 Fortify/Checkmarx 報告。第 04 單元可另外執行教學用 IMS 資料庫作業並取得真實日誌，但它不代表客戶正式環境的資料庫結構或執行結果。
 
 深讀 CIS14 時，要特別區分 PROCESS-OK 與 PGM-OK；某筆查無客戶不必然代表不輸出。日期程式的年月日範圍檢查也不等於完整曆法驗證。可以先把這些情況列為測試案例，再根據結果討論是否需要修改。

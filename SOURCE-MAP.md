@@ -21,6 +21,9 @@ SYSOCP31 有少量無法以 CP950 解碼的 bytes，閱讀版以反斜線 x 序�
 | samples/logs/ims-events.csv | 閱讀合成的 IMS 事件摘要 |
 | host-lab/CONNECTION.md | 以個人帳號透過 IBM RSE API 連接主機，來源、JCL 與中英文作業紀錄統一透過 tcb-rse（IBM-1371）讀取 |
 | host-lab/BOB-GUIDE.md | 請 Bob 檢查教材、準備個人 JCL 並核對主機紀錄 |
+| host-lab/RC4-LAB.md | 選做：分析編譯警告，另存 CKP02R 修正版，再以新作業驗證 |
+| host-lab/IMS-LAB.md | 選做：以作業專用的 IMS DL/I 資料庫串接原版 CKP02，驗證更新、回復與提交 |
+| z-tests/ims-run.jcl | 真實 IMS 延伸練習範本；內含教學用 DBD、PSB 與輔助程式，不是客戶既有 IMS 定義 |
 | z-tests/ | 主機測試用的 GENCKP、CHKCKP、七筆測資、JCL 範本與雜湊清單 |
 | samples/reports/sast.json | 對照查詢程式的練習弱點報告 |
 | requests/ | Word 需求申請單為主要輸入；EML 保留為同一需求的信件範例 |

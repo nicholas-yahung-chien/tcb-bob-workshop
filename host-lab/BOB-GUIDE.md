@@ -23,14 +23,17 @@
 
 ## 三、分析實際測試
 
-讀取實際 run.jcl、z-tests/fixtures.json 與 host-lab/logs/<job ID>/ 的 JESMSGLG、JESJCL、JESYSMSG、CGEN/SYSPRINT、CCKP/SYSPRINT、GENERATE/SYSOUT、GENERATE/PRINTDD、CHECK1/SYSOUT、CHECK2/SYSOUT。同名 DD 依 step 分開存放。缺檔時請學員下載，不能借用其他作業結果。
+優先列出並讀取學員實際加入的紀錄資料夾，確認工作區相對路徑、job ID 與內部檔名。host-lab/logs/<job ID>/ 只是建議保存位置；例如工作區根目錄的 JOB01024/ 也可直接分析，不要求搬移或重新下載。附件無法解析時先查工作區根目錄及使用者明示的位置；未找到才請學員提供位置，不能只查預設目錄就宣稱附件不存在。
+
+搭配實際 run.jcl、z-tests/fixtures.json，讀取同一作業的 JESMSGLG、JESJCL、JESYSMSG、CGEN/SYSPRINT、CCKP/SYSPRINT、GENERATE/SYSOUT、GENERATE/PRINTDD、CHECK1/SYSOUT、CHECK2/SYSOUT。同名 DD 依 step 分開辨識；已修正轉碼的副本須註明來源，保留原下載檔。確認實際缺檔後再請學員補充，不能借用其他作業結果。
 
 所有 JES 紀錄、SYSOUT、中文 PRINTDD 與編譯清單均使用 tcb-rse（IBM-1371）開啟並另存。確認中文與換行正常，保留欄位空白；異常時依下方排查指引處理。
 
 - 記錄 owner、job 名稱、job ID 與紀錄時間。
 - 核對 ALLOC、CGEN、LGENCKP、CCKP、LCKP02、CCHK、LCHKCKP、GENERATE、SNAP1、RUNONCE、CHECK1、SNAP2、RUNTWICE、CHECK2、RUNEMPTY 共 15 步是否實際執行。跳過的步驟不能算通過。
 - 從 CCKP/SYSPRINT 確認 CODEPAGE(937)、DBCS，以及 SYSIN 對應自己 TCBLAB.COBOL(CKP02) 的來源。中文註解若顯示異常，先檢查該 DD 的解碼設定；不改整個作業連線，也不翻譯來源。
-- CCKP 的 RC 4 須核對 IGYLI0090-W、IGYSC0205-W、IGYCB7310-W 及來源；不同訊息另列分析。其他 14 步應為 RC 0。
+- 讀完 CCKP 編譯清單的開頭、結尾與各階段訊息摘要，並搜尋全檔診斷代碼。工具若只顯示前段或輸出被截斷，分段讀到最後一行，再判斷訊息是否存在。第一段 Messages 統計不是整份編譯清單的總結。
+- 原版 CCKP 的 RC 4 須核對 IGYLI0090-W、IGYSC0205-W、IGYCB7310-W 及來源；不同訊息另列分析。逐項記錄訊息代碼、出現位置、對應程式行或編譯選項、根因與影響；IGYSC0205-W 是前段警告的摘要提醒，不另捏造根因。只有完整搜尋後才能寫「未出現」，檔案不完整則記「待確認」。其他 14 步應為 RC 0。
 - CHECK1、CHECK2 各需七個不重複 CASE（0001–0007），每筆 PASS ALL 400 BYTES，結尾 CHECKED=0007 ERRORS=0000。BEFORE-ID 是該次轉換前的實際輸入；CHECK1 對照初始 id，CHECK2 應等於 CHECK1 的 ACTUAL-ID。ACTUAL-ID、EXPECT-ID 依檢查次數分別對照 once、twice，識別值以雙引號包住，保留引號內全部十個字元及尾端空白。
 - 舊作業若沒有 SNAP1、SNAP2 或 BEFORE-ID，列為舊版紀錄，不能自行補出轉換前的實測值。
 - RUNEMPTY 需有實際執行且 RC 0 的證據。空檔與資料中的 EOF 標記分別核對。
@@ -50,4 +53,8 @@ GENERATE／PRINTDD 使用中文 IBM-937 測資，每筆以單一完整 400-byte 
 zowe rse view spool-file-by-id JOB12345 108 --rse-profile tcb-rse --encoding IBM-1371
 ```
 
-這是排查用替代步驟，不是每項作業的必要前置操作。完整批次下載仍須核對中文與空白，不把失真內容當成程式事實。連線字碼調整不代表重新編碼既有來源或測資；編譯仍依教材使用 CODEPAGE(937),DBCS。
+這是排查用替代步驟，不是每項作業的必要前置操作。本環境已重現「全部下載」的 PRINTDD 以 IBM-1047 解碼後寫成 UTF-8，不能只改本機開啟編碼修復。中文 PRINTDD 與中文編譯清單以單獨開啟、確認內容、載入所有分頁後另存 UTF-8 為準；單檔讀取成功不代表整批下載也成功。連線字碼調整不代表重新編碼既有來源或測資；編譯仍依教材使用 CODEPAGE(937),DBCS。
+
+若學員選做消除 RC 4 的練習，依 RC4-LAB.md 另存 CKP02R 與個人修正版 JCL；原版基準的 RC 預期與修正版目標分開記錄。
+
+若加入的是真實 IMS 延伸練習的作業，改依 IMS-LAB.md 核對，結果另存 host-lab/ims/test-report.md。IMS 作業有自己的步驟，不能套用上述基準作業的 15 步清單；也不能以 samples/logs 的虛構 CSV 補足缺少的主機證據。

@@ -24,7 +24,7 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 
 ## 怎麼使用這些練習
 
-主機實作從 [個人連線](host-lab/CONNECTION.md) 開始，再依 [CKP02 實作步驟](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/03-testing.html#host) 分析程式、提交 JCL，並下載自己帳號的 JES 紀錄交給 Bob 核對。IMS 事件 CSV 與 SQLite 弱點修補是另外的延伸練習。
+主機實作從 [個人連線](host-lab/CONNECTION.md) 開始，再依 [CKP02 實作步驟](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/03-testing.html#host) 分析程式、提交 JCL，並下載自己帳號的 JES 紀錄交給 Bob 核對。第 04 單元另有 RC 4 修正與真實 IMS 資料庫串接的選做練習，分別依 [RC4-LAB.md](host-lab/RC4-LAB.md) 與 [IMS-LAB.md](host-lab/IMS-LAB.md) 操作。IMS 事件 CSV 是獨立的虛構事件閱讀練習，不能當成主機執行證據。
 
 每個單元先介紹一個情境，再提供可以直接問 Bob 的問題。將頁面列出的檔案用 @ 加入對話，選擇對應模式，就可以開始。看完回覆，再依自己的疑問追問。
 
@@ -43,7 +43,7 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 |---|---|
 | z-lab | 已備妥的 45 份程式與相依檔案 |
 | host-lab | 個人主機連線與 Bob 操作指引；練習時保存自己的 JCL、報告與紀錄 |
-| z-tests | 主機已備妥的 GENCKP、CHKCKP 之本機來源、測試資料定義與 JCL 範本 |
+| z-tests | 主機已備妥的 GENCKP、CHKCKP 之本機來源、測試資料定義、基準 JCL 與 IMS 延伸練習範本 |
 | samples | 轉換程式、測試、JCL、事件及查詢練習 |
 | tests | 選做 Python 練習的測試案例 |
 | output | 自己完成的文件與程式 |
