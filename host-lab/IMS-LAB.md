@@ -14,7 +14,7 @@ IMSCKP 已拆成獨立原始碼：本機為 `z-tests/IMSCKP.cbl`，遠端為 `<�
 
 只有想修改作業時，才另存個人 `host-lab/ims/run.jcl`，保留遠端已備妥的 IMSRUN。提交個人版本後，分析時須加入實際提交的 JCL，不能仍把共用範本當成本次版本。
 
-這份 JCL 對應目前課程主機：CLASS=A、MSGCLASS=H、UNIT=3390、VOL=DEVVS1、STORCLAS=SCNOSMS；IMS 執行庫為 `IMS.V15R1M0.SDFSRESL`，巨集庫為 `IMS.V15R1M0.SDFSMAC`，PROCLIB 為 `IMS.V15R1M0.PROCLIB`。COBOL 編譯庫為 `IGY.V6R4M0.SIGYCOMP`，Language Environment 使用 `CEE.SCEELKED`／`CEE.SCEERUN`，組譯及連結使用主機可取得的 ASMA90／IEWL。這些名稱是既有環境設定，不代表其他主機可以直接沿用。已為 22 個學員帳號與 3 個講師帳號備妥遠端 IMSRUN 與獨立的 IMSCKP，逐帳號讀回核對。獨立來源版本另以講師與學員帳號實際提交通過。不需為本練習授予管理共享 IMS 的權限；尚未驗證全班同時執行的容量。
+這份 JCL 對應目前課程主機：CLASS=A、MSGCLASS=H、UNIT=3390、VOL=DEVVS1、STORCLAS=SCNOSMS；IMS 執行庫為 `IMS.V15R1M0.SDFSRESL`，巨集庫為 `IMS.V15R1M0.SDFSMAC`，PROCLIB 為 `IMS.V15R1M0.PROCLIB`。COBOL 編譯庫為 `IGY.V6R4M0.SIGYCOMP`，Language Environment 使用 `CEE.SCEELKED`／`CEE.SCEERUN`，組譯及連結使用主機可取得的 ASMA90／IEWL。這些名稱是既有環境設定，不代表其他主機可以直接沿用。已為 30 個學員帳號與 3 個講師帳號備妥遠端 IMSRUN 與獨立的 IMSCKP，逐帳號讀回核對。獨立來源版本另以講師與學員帳號實際提交通過。不需為本練習授予管理共享 IMS 的權限；尚未驗證全班同時執行的容量。
 
 ## 這次作業真的做了什麼
 

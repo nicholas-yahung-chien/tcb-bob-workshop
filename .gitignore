@@ -10,6 +10,7 @@ __pycache__/
 .bob/skills/*
 !.bob/skills/cobol-explain-zh-tw/
 !.bob/skills/program-docs-zh-tw/
+!.bob/skills/data-dictionary-zh-tw/
 .env*
 !/.env.example
 .DS_Store
