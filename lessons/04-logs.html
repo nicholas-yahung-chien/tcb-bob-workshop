@@ -56,17 +56,24 @@ EXPECT-ID="123456    "</code></pre>
 {{ims-host-report|留下 IMS 練習報告|Agent}}
 <p>成果保存在 <code>host-lab/ims/test-report.md</code>，與原版及 RC 4 修正版報告分開。以自己的 job ID 為依據；講師測試成功不代表自己的帳號或這次作業已通過。</p>
 </details>
-<details id="story"><summary>延伸閱讀：從模擬事件練習判斷 IMS 交易結果（選做）</summary>
-<p>看到一行錯誤記錄，往往還不能知道整筆交易的結果。先把前後事件串起來，再決定要往哪裡查。</p>
-<p>這份 CSV 是虛構的 IMS 事件摘要，與前面真實執行的作業沒有對應關係。欄位定義在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/log-schema.md">log-schema.md</a>。它已經整理成可閱讀的事件，和主機原始 binary log 不同。</p>
-<h3 id="ask">1. 先問發生了什麼</h3>
-{{logs-ask|閱讀交易事件|Ask}}
-<p>留意 Bob 有沒有指出對應的事件編號。看到「可能原因」時，可以追問還需要什麼記錄來確認。</p>
-<h3 id="report">2. 留下分析結果</h3>
-{{07-logs|整理成分析報告|Agent}}
+<details id="story"><summary>延伸練習：從真實 IMS 紀錄判斷操作結果（選做）</summary>
+<p>這次直接使用主機上的 IMS DB 批次作業，觀察父子區段查詢、重複新增後回復、受控中止與等待。這是獨立的 IMSEVT 練習程式，不修改 CKP02，也不使用預製 CSV。即使沒有先跑 IMSRUN，也可以執行本練習。</p>
+<h3>1. 先看懂情境，再提交已備妥的作業</h3>
+<p>本機的 <code>z-tests/IMSEVT.cbl</code> 與 <code>z-tests/imsevts.jcl</code>，已分別備妥於自己的 <code>TCBLAB.COBOL(IMSEVT)</code> 與 <code>TCBLAB.JCL(IMSEVTS)</code>。不需要另外產生或上傳檔案。作業會建立一筆虛構父資料與一筆明細，每次完整重跑都重新建立自己的暫存資料庫。</p>
+{{ims-events-prepare|帶我看這些情境|Ask}}
+<p>依 <code>host-lab/IMS-EVENTS.md</code> 核對後，在 Zowe Explorer 的資料集 → tcb-rse（IBM-1371）開啟自己的 IMSEVTS，右鍵 Submit Job，記下 job ID。</p>
+<p><strong>CUT 刻意觸發 U3001，所以整項作業可能顯示 ABEND／U3001。</strong> 只有指定步驟與指定終止碼是本次預期；其他異常不能一概忽略。後續 CHECKA 應仍有執行，確認資料不變。</p>
+<h3>2. Ask：先看中止步驟的紀錄</h3>
+<p>先單獨開啟 CUT／SYSOUT，載入全部內容並另存 UTF-8，將這個實際檔案加入 Bob 對話。此時先不要加入整個作業資料夾，練習判斷目前證據的界線。</p>
+{{logs-ask|它有正常結束嗎？|Ask}}
+<p>程式印出準備觸發異常，不等於已取得實際終止碼。接著把同一 job ID 的 JESMSGLG、JESYSMSG、JESJCL，以及 NORMAL、DUP、CHECKB、DELAY、CUT、CHECKA 的 SYSOUT 和 PDUP／SYSPRINT 都加入對話。直接使用自己保存的實際資料夾，不必搬到指定路徑。</p>
+<h3>3. Plan：討論如何核對資料與耗時</h3>
+{{ims-events-plan|接下來要怎麼查？|Plan}}
+<p>NORMAL 先取得子區段，再由 GNP 得到 GE。DUP 則真的先更新資料，再重複新增取得 II，呼叫 ROLB，並由 CHECKB 獨立查詢。DELAY 在 GU 前安排等待，分開印出 WAIT-MS、PRE-GU-MS、GU-MS 與 CASE-TO-GU-END-MS；不要把整段等待說成 IMS 查詢變慢。</p>
+<details><summary>看到 U3001 或 GU-MS=0 時，怎麼理解？</summary><p>以 JES 的 IEF472I 確認 CUT 的 USER=3001，再看 CHECKA 是否 RC 0 且完整資料比對通過。CUT 不更新資料，因此不能拿它證明更新後的異常回復。GU 計時刻度為 10 ms，0 表示低於本次量測刻度，不代表完全不耗時；等待實測值也不必恰好兩秒。程式時間帶有時區位移，引用 JES 時間時也要保留其時間基準。</p></details>
+<h3>4. Agent：留下有依據的報告</h3>
+{{07-logs|整理這次的結果|Agent}}
 {{verify-logs|檢查結論有沒有根據|Agent}}
-<details><summary>比較三筆交易</summary><p>DEMO-A 有正常結束記錄；DEMO-B 有回復操作及失敗結束；DEMO-C 沒有結束記錄，還不能判斷最後結果。單一慢事件也不足以確認原因。</p></details>
-<h3 id="next">換成自己的記錄時</h3>
-<p>先提供欄位定義、時間範圍和能串起同筆交易的識別值。如果只有部分記錄，也一併告訴 Bob，讓後續分析有適當的範圍。</p>
-{{check:每個結論都能找到對應的事件}}{{check:需要繼續追查的事情已列出}}
+<p>報告存於 <code>host-lab/ims/events-report.md</code>。應用程式診斷、JES／DFS 訊息與 PDUP 的 IMS 日誌列印分開引用。完整證據補齊後，請更新先前的待確認事項；不要使用講師的作業或舊 CSV 代替自己的結果。</p>
+{{check:我能分清楚業務結果、測試結果與實際終止碼}}{{check:我能指出等待發生在哪一段，並附上紀錄}}
 </details>

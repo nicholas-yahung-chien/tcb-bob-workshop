@@ -70,23 +70,30 @@ EXPECT-ID="123456    "</code></pre>
 </pre><div class="expected"><strong>預期回應</strong><p>host-lab/ims/test-report.md，附實際 job、step、訊息與待確認事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>成果保存在 <code>host-lab/ims/test-report.md</code>，與原版及 RC 4 修正版報告分開。以自己的 job ID 為依據；講師測試成功不代表自己的帳號或這次作業已通過。</p>
 </details>
-<details id="story"><summary>延伸閱讀：從模擬事件練習判斷 IMS 交易結果（選做）</summary>
-<p>看到一行錯誤記錄，往往還不能知道整筆交易的結果。先把前後事件串起來，再決定要往哪裡查。</p>
-<p>這份 CSV 是虛構的 IMS 事件摘要，與前面真實執行的作業沒有對應關係。欄位定義在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/log-schema.md">log-schema.md</a>。它已經整理成可閱讀的事件，和主機原始 binary log 不同。</p>
-<h3 id="ask">1. 先問發生了什麼</h3>
-<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>samples/logs/ims-events.csv</code>、<code>specs/log-schema.md</code></p><div class="prompt"><div class="prompt-head"><span>閱讀交易事件</span><button type="button" data-copy="logs-ask">複製 Prompt</button></div><pre id="logs-ask">這份交易事件記錄裡，有哪些交易已完成，哪些還需要追查？請依 specs/log-schema.md 的欄位說明，整理發生的順序，並告訴我你是從哪些記錄判斷的。
-</pre><div class="expected"><strong>預期回應</strong><p>依交易整理的時間線，每個判斷都能找到對應事件。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>留意 Bob 有沒有指出對應的事件編號。看到「可能原因」時，可以追問還需要什麼記錄來確認。</p>
-<h3 id="report">2. 留下分析結果</h3>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>samples/logs/ims-events.csv</code>、<code>specs/log-schema.md</code></p><div class="prompt"><div class="prompt-head"><span>整理成分析報告</span><button type="button" data-copy="07-logs">複製 Prompt</button></div><pre id="07-logs">請依 specs/log-schema.md，把這份交易事件記錄整理成分析報告，存到 output。每筆交易依時間列出經過與結果，判斷附上事件編號。
-
-將記錄中看得到的結果、可能原因及還需要追查的資訊分開寫。完成後執行分析檢查。
-</pre><div class="expected"><strong>預期回應</strong><p>log-analysis.md 和 log-facts.json，分開記錄結果與待查事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>specs/log-schema.md</code>、<code>output/log-analysis.md</code>、<code>samples/logs/ims-events.csv</code>、<code>output/log-facts.json</code></p><div class="prompt"><div class="prompt-head"><span>檢查結論有沒有根據</span><button type="button" data-copy="verify-logs">複製 Prompt</button></div><pre id="verify-logs">請重新對照事件記錄與 specs/log-schema.md，檢查每筆交易的結論是否有對應事件。有沒有把缺少的記錄當成已知結果，或把可能原因當成定論？修正分析後逐項列出核對的事件與結果，列出還需要追查的資訊。
-</pre><div class="expected"><strong>預期回應</strong><p>分析檢查結果，以及需要繼續追查的事件。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<details><summary>比較三筆交易</summary><p>DEMO-A 有正常結束記錄；DEMO-B 有回復操作及失敗結束；DEMO-C 沒有結束記錄，還不能判斷最後結果。單一慢事件也不足以確認原因。</p></details>
-<h3 id="next">換成自己的記錄時</h3>
-<p>先提供欄位定義、時間範圍和能串起同筆交易的識別值。如果只有部分記錄，也一併告訴 Bob，讓後續分析有適當的範圍。</p>
-<label class="check"><input type="checkbox" data-check="每個結論都能找到對應的事件"><span>每個結論都能找到對應的事件</span></label><label class="check"><input type="checkbox" data-check="需要繼續追查的事情已列出"><span>需要繼續追查的事情已列出</span></label>
+<details id="story"><summary>延伸練習：從真實 IMS 紀錄判斷操作結果（選做）</summary>
+<p>這次直接使用主機上的 IMS DB 批次作業，觀察父子區段查詢、重複新增後回復、受控中止與等待。這是獨立的 IMSEVT 練習程式，不修改 CKP02，也不使用預製 CSV。即使沒有先跑 IMSRUN，也可以執行本練習。</p>
+<h3>1. 先看懂情境，再提交已備妥的作業</h3>
+<p>本機的 <code>z-tests/IMSEVT.cbl</code> 與 <code>z-tests/imsevts.jcl</code>，已分別備妥於自己的 <code>TCBLAB.COBOL(IMSEVT)</code> 與 <code>TCBLAB.JCL(IMSEVTS)</code>。不需要另外產生或上傳檔案。作業會建立一筆虛構父資料與一筆明細，每次完整重跑都重新建立自己的暫存資料庫。</p>
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/IMS-EVENTS.md</code>、<code>z-tests/IMSEVT.cbl</code>、<code>z-tests/imsevts.jcl</code></p><div class="prompt"><div class="prompt-head"><span>帶我看這些情境</span><button type="button" data-copy="ims-events-prepare">複製 Prompt</button></div><pre id="ims-events-prepare">請帶我看這份 IMS 練習會做什麼。父資料和明細是怎麼連在一起的？哪些地方是刻意安排的例外，執行後應該看哪些紀錄？先幫我核對已準備好的程式與 JCL，不用改程式。
+</pre><div class="expected"><strong>預期回應</strong><p>父子區段、預期例外與需要核對的紀錄；不修改程式。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>依 <code>host-lab/IMS-EVENTS.md</code> 核對後，在 Zowe Explorer 的資料集 → tcb-rse（IBM-1371）開啟自己的 IMSEVTS，右鍵 Submit Job，記下 job ID。</p>
+<p><strong>CUT 刻意觸發 U3001，所以整項作業可能顯示 ABEND／U3001。</strong> 只有指定步驟與指定終止碼是本次預期；其他異常不能一概忽略。後續 CHECKA 應仍有執行，確認資料不變。</p>
+<h3>2. Ask：先看中止步驟的紀錄</h3>
+<p>先單獨開啟 CUT／SYSOUT，載入全部內容並另存 UTF-8，將這個實際檔案加入 Bob 對話。此時先不要加入整個作業資料夾，練習判斷目前證據的界線。</p>
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/logs/（自己保存的 CUT／SYSOUT 檔案）</code></p><div class="prompt"><div class="prompt-head"><span>它有正常結束嗎？</span><button type="button" data-copy="logs-ask">複製 Prompt</button></div><pre id="logs-ask">這是我剛跑的作業中，CUT 這一步的紀錄。請幫我看它做到哪裡，有沒有正常結束；只靠這份紀錄還不能確定的事，也請告訴我要再找哪些紀錄。
+</pre><div class="expected"><strong>預期回應</strong><p>目前看得到的操作、缺少的結束證據，以及需要補查的紀錄。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>程式印出準備觸發異常，不等於已取得實際終止碼。接著把同一 job ID 的 JESMSGLG、JESYSMSG、JESJCL，以及 NORMAL、DUP、CHECKB、DELAY、CUT、CHECKA 的 SYSOUT 和 PDUP／SYSPRINT 都加入對話。直接使用自己保存的實際資料夾，不必搬到指定路徑。</p>
+<h3>3. Plan：討論如何核對資料與耗時</h3>
+<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/IMS-EVENTS.md</code>、<code>specs/log-schema.md</code>、<code>host-lab/logs/（自己保存的完整作業資料夾）</code></p><div class="prompt"><div class="prompt-head"><span>接下來要怎麼查？</span><button type="button" data-copy="ims-events-plan">複製 Prompt</button></div><pre id="ims-events-plan">我把同一項作業的其他紀錄也加進來了。請幫我整理接下來怎麼核對：新增失敗後資料有沒有還原？中止之後資料還對嗎？那兩秒是花在查詢，還是在查詢之前？請先說明你會看哪些地方，以及現在能確認什麼。
+</pre><div class="expected"><strong>預期回應</strong><p>依實際紀錄安排資料回復、中止結果與分段耗時的核對方式。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>NORMAL 先取得子區段，再由 GNP 得到 GE。DUP 則真的先更新資料，再重複新增取得 II，呼叫 ROLB，並由 CHECKB 獨立查詢。DELAY 在 GU 前安排等待，分開印出 WAIT-MS、PRE-GU-MS、GU-MS 與 CASE-TO-GU-END-MS；不要把整段等待說成 IMS 查詢變慢。</p>
+<details><summary>看到 U3001 或 GU-MS=0 時，怎麼理解？</summary><p>以 JES 的 IEF472I 確認 CUT 的 USER=3001，再看 CHECKA 是否 RC 0 且完整資料比對通過。CUT 不更新資料，因此不能拿它證明更新後的異常回復。GU 計時刻度為 10 ms，0 表示低於本次量測刻度，不代表完全不耗時；等待實測值也不必恰好兩秒。程式時間帶有時區位移，引用 JES 時間時也要保留其時間基準。</p></details>
+<h3>4. Agent：留下有依據的報告</h3>
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/IMS-EVENTS.md</code>、<code>specs/log-schema.md</code>、<code>host-lab/logs/（自己保存的完整作業資料夾）</code></p><div class="prompt"><div class="prompt-head"><span>整理這次的結果</span><button type="button" data-copy="07-logs">複製 Prompt</button></div><pre id="07-logs">請依剛才討論的方式核對這次 IMS 作業，把結果存成 host-lab/ims/events-report.md。用白話說明每個情境發生了什麼、資料最後有沒有改變，以及時間花在哪裡，並附上作業編號、步驟和對應紀錄。還缺證據的地方先列出來；已經找到答案的，就更新先前的判斷。
+</pre><div class="expected"><strong>預期回應</strong><p>host-lab/ims/events-report.md；區分業務結果、測試結果與證據不足。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/ims/events-report.md</code>、<code>host-lab/logs/（自己保存的完整作業資料夾）</code></p><div class="prompt"><div class="prompt-head"><span>檢查結論有沒有根據</span><button type="button" data-copy="verify-logs">複製 Prompt</button></div><pre id="verify-logs">請再對照這次作業的完整紀錄，檢查報告有沒有把預期結果當成實際結果，或把程式印出的訊息當成 IMS 系統日誌。新增沒成功但回復通過，和程式本身執行失敗，也請分清楚。
+</pre><div class="expected"><strong>預期回應</strong><p>逐項核對本次 job、step、DD 與訊息，更新已補齊證據的結論。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>報告存於 <code>host-lab/ims/events-report.md</code>。應用程式診斷、JES／DFS 訊息與 PDUP 的 IMS 日誌列印分開引用。完整證據補齊後，請更新先前的待確認事項；不要使用講師的作業或舊 CSV 代替自己的結果。</p>
+<label class="check"><input type="checkbox" data-check="我能分清楚業務結果、測試結果與實際終止碼"><span>我能分清楚業務結果、測試結果與實際終止碼</span></label><label class="check"><input type="checkbox" data-check="我能指出等待發生在哪一段，並附上紀錄"><span>我能指出等待發生在哪一段，並附上紀錄</span></label>
 </details>
 </article><nav class="next" aria-label="前後單元"><a href="03-testing.html">← 測試與修正</a><a href="05-sast.html">查詢弱點修補 →</a></nav></main></div><footer><p>合作金庫 IBM Bob Workshop</p><p>2026.09.21 / 09.24</p></footer></body></html>

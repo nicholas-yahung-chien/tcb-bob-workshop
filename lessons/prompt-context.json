@@ -88,17 +88,17 @@
   },
   "logs-ask": {
     "files": [
-      "samples/logs/ims-events.csv",
-      "specs/log-schema.md"
+      "host-lab/logs/（自己保存的 CUT／SYSOUT 檔案）"
     ],
-    "response": "依交易整理的時間線，每個判斷都能找到對應事件。"
+    "response": "目前看得到的操作、缺少的結束證據，以及需要補查的紀錄。"
   },
   "07-logs": {
     "files": [
-      "samples/logs/ims-events.csv",
-      "specs/log-schema.md"
+      "host-lab/IMS-EVENTS.md",
+      "specs/log-schema.md",
+      "host-lab/logs/（自己保存的完整作業資料夾）"
     ],
-    "response": "log-analysis.md 和 log-facts.json，分開記錄結果與待查事項。"
+    "response": "host-lab/ims/events-report.md；區分業務結果、測試結果與證據不足。"
   },
   "sast-ask": {
     "files": [
@@ -156,12 +156,10 @@
   },
   "verify-logs": {
     "files": [
-      "specs/log-schema.md",
-      "output/log-analysis.md",
-      "samples/logs/ims-events.csv",
-      "output/log-facts.json"
+      "host-lab/ims/events-report.md",
+      "host-lab/logs/（自己保存的完整作業資料夾）"
     ],
-    "response": "分析檢查結果，以及需要繼續追查的事件。"
+    "response": "逐項核對本次 job、step、DD 與訊息，更新已補齊證據的結論。"
   },
   "verify-sast": {
     "files": [
@@ -288,19 +286,37 @@
     "response": "host-lab/test-report.md，包含本次作業證據、各項結果與待確認事項。"
   },
   "ims-host-ask": {
-    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl", "z-tests/IMSCKP.cbl", "z-lab/CKP02.cbl"],
+    "files": [
+      "host-lab/IMS-LAB.md",
+      "z-tests/ims-run.jcl",
+      "z-tests/IMSCKP.cbl",
+      "z-lab/CKP02.cbl"
+    ],
     "response": "IMS 資料流、CKP02 與輔助程式分工、更新與回復的驗證方式，以及環境前提。"
   },
   "ims-host-prepare": {
-    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl", "z-tests/IMSCKP.cbl", "host-lab/environment.md"],
+    "files": [
+      "host-lab/IMS-LAB.md",
+      "z-tests/ims-run.jcl",
+      "z-tests/IMSCKP.cbl",
+      "host-lab/environment.md"
+    ],
     "response": "host-lab/ims/review.md"
   },
   "ims-host-logs": {
-    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl", "z-tests/IMSCKP.cbl"],
+    "files": [
+      "host-lab/IMS-LAB.md",
+      "z-tests/ims-run.jcl",
+      "z-tests/IMSCKP.cbl"
+    ],
     "response": "依你加入的真實紀錄核對載入、CKP02 轉換、回復、提交及再次查詢；區分應用程式診斷與 IMS 日誌。"
   },
   "ims-host-report": {
-    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl", "z-tests/IMSCKP.cbl"],
+    "files": [
+      "host-lab/IMS-LAB.md",
+      "z-tests/ims-run.jcl",
+      "z-tests/IMSCKP.cbl"
+    ],
     "response": "host-lab/ims/test-report.md，附實際 job、step、訊息與待確認事項。"
   },
   "rc4-ask": {
@@ -336,5 +352,21 @@
       "host-lab/test-report.md"
     ],
     "response": "讀取你加入的新作業紀錄，保存 host-lab/rc4/test-report.md，區分原版與修正版結果。"
+  },
+  "ims-events-prepare": {
+    "files": [
+      "host-lab/IMS-EVENTS.md",
+      "z-tests/IMSEVT.cbl",
+      "z-tests/imsevts.jcl"
+    ],
+    "response": "父子區段、預期例外與需要核對的紀錄；不修改程式。"
+  },
+  "ims-events-plan": {
+    "files": [
+      "host-lab/IMS-EVENTS.md",
+      "specs/log-schema.md",
+      "host-lab/logs/（自己保存的完整作業資料夾）"
+    ],
+    "response": "依實際紀錄安排資料回復、中止結果與分段耗時的核對方式。"
   }
 }

@@ -40,9 +40,22 @@
     "GENCKP.cbl": "9b34b8022e74a5d403faccbd3e2e22c4e975d5d8b1586923cb9f6b35f838a16b",
     "run.jcl": "a6e780684ddebf49a54bf5b3f75f1c820a79485d56701baae9c14326de932042",
     "IMSCKP.cbl": "edc8d9a47826916f796e3af5906c1df9ba08e623bc43cbe88cf7b85b2c7bb9bd",
-    "ims-run.jcl": "e9288ae9ba7532f330f51144a0958549488788b601903a3b8dc7aba710b9abf6"
+    "ims-run.jcl": "e9288ae9ba7532f330f51144a0958549488788b601903a3b8dc7aba710b9abf6",
+    "IMSEVT.cbl": "0bb2a3c060ccaeadbe3ca1402a750647c00dbaf72aa354b560b3baf841016406",
+    "imsevts.jcl": "7354786f1c4b7e54765c601e642beaf244485ccf620d219d9d46b8dbdc4a37e3"
   },
   "initial_jcl_transfer_encoding": "IBM-1047",
   "connection_profile": "tcb-rse",
-  "connection_encoding": "IBM-1371"
+  "connection_encoding": "IBM-1371",
+  "ims_events": {
+    "program_member": "YOURUSER.TCBLAB.COBOL(IMSEVT)",
+    "job_member": "YOURUSER.TCBLAB.JCL(IMSEVTS)",
+    "expected_abend": {
+      "step": "CUT",
+      "code": "U3001"
+    },
+    "following_verification": "CHECKA",
+    "timing_resolution_ms": 10,
+    "isolated_temporary_database": true
+  }
 }

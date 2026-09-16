@@ -60,3 +60,6 @@ DFSERA10 右側字元欄不一定能呈現雙位元中文字，核對紀錄時�
 - [批次程式的 ROLL／ROLB](https://www.ibm.com/docs/en/ims/15.5.0?topic=rdmdi-backing-out-database-updates-dynamically-roll-rolb-commands)：本練習使用 DASD 日誌及 BKO=Y。
 - [DFSERA10 系統日誌列印](https://www.ibm.com/docs/en/ims/15.5.0?topic=reports-file-select-formatting-print-utility-dfsera10)。
 - [IMS ISRT 呼叫](https://www.ibm.com/docs/en/ims/15.4.0?topic=management-isrt-call)。
+
+
+IMSEVTS 是獨立的 IMS 事件練習，請依 host-lab/IMS-EVENTS.md 與 specs/log-schema.md 核對，閱讀 z-tests/IMSEVT.cbl、z-tests/imsevts.jcl。不要套用 IMSRUN 的步驟清單：IMSEVTS 共 17 步，16 步 RC 0，只有 CUT 預期 U3001，且 CHECKA 必須執行。報告另存 host-lab/ims/events-report.md；只提供部分紀錄時保留待確認，補齊後更新結論。

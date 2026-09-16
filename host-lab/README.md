@@ -1,5 +1,7 @@
 # CKP02 主機練習
 
+第 04 單元的獨立事件練習請另見 [IMS-EVENTS.md](IMS-EVENTS.md)：主機已備妥 IMSEVT／IMSEVTS，使用父子區段驗證 GNP、回復、受控中止與分段耗時。該作業的 CUT 刻意產生 U3001，不能套用本頁基準作業的成功條件。
+
 這個練習在 z/OS 編譯並執行 CKP02，使用七筆合成資料比較第一次與第二次執行的結果，再確認空檔能正常結束。每項作業使用獨立暫存資料集。
 
 開始前，先確認自己的主機連線可用，並備妥本場提供的作業名稱與配置值。操作步驟與對話範例請看 [課程網頁](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/03-testing.html#host)。

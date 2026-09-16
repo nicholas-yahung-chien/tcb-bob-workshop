@@ -58,3 +58,6 @@ zowe rse view spool-file-by-id JOB12345 108 --rse-profile tcb-rse --encoding IBM
 若學員選做消除 RC 4 的練習，依 RC4-LAB.md 另存 CKP02R 與個人修正版 JCL；原版基準的 RC 預期與修正版目標分開記錄。
 
 若加入的是真實 IMS 延伸練習的作業，改依 IMS-LAB.md 核對，結果另存 host-lab/ims/test-report.md。IMS 作業有自己的步驟，不能套用上述基準作業的 15 步清單；也不能以 samples/logs 的虛構 CSV 補足缺少的主機證據。
+
+
+IMSEVTS 是獨立的 IMS 事件練習，請依 host-lab/IMS-EVENTS.md 與 specs/log-schema.md 核對，閱讀 z-tests/IMSEVT.cbl、z-tests/imsevts.jcl。不要套用 IMSRUN 的步驟清單：IMSEVTS 共 17 步，16 步 RC 0，只有 CUT 預期 U3001，且 CHECKA 必須執行。報告另存 host-lab/ims/events-report.md；只提供部分紀錄時保留待確認，補齊後更新結論。
