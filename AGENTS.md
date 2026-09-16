@@ -24,3 +24,6 @@ Write documents for learners: task, source evidence, findings and next actions. 
 For requirements exercises, use requests/change-application.docx as the primary business input. Do not invoke Puppeteer, browser automation, external conversion services, or install/create an MCP server to read request documents. If DOCX cannot be read with available local file capabilities, ask the learner to open it in Word and paste its text. Keep requests/customer-email.eml as an optional email example; do not parse it automatically.
 
 For planning, follow DOC-SPEC.md decision tracing and environment classification. Never expand ambiguous user answers into multiple confirmed decisions. Keep course baseline execution separate from proposed changes and production deployment. Correct incomplete designs before claiming implementation readiness.
+
+
+IMSEVTS 是獨立的 IMS 事件練習，請依 host-lab/IMS-EVENTS.md 與 specs/log-schema.md 核對，閱讀 z-tests/IMSEVT.cbl、z-tests/imsevts.jcl。不要套用 IMSRUN 的步驟清單：IMSEVTS 共 17 步，16 步 RC 0，只有 CUT 預期 U3001，且 CHECKA 必須執行。報告另存 host-lab/ims/events-report.md；只提供部分紀錄時保留待確認，補齊後更新結論。舊版 samples/logs/ims-events.csv 已退出教材，不要尋找或重建該檔作為練習輸入。
