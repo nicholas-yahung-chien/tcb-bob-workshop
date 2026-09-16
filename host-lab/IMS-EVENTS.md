@@ -1,6 +1,6 @@
 # 真實 IMS 事件練習
 
-本練習使用 IMS DB 的 DL/I 批次環境，練習父子區段查詢、重複新增後回復、受控中止與耗時判讀。不是 IMS TM 線上交易，也不是 CKP02 預覽功能。所有事件都由實際執行產生，沒有預製 CSV 作為執行證據。
+本練習使用 IMS DB 的 DL/I 批次環境，練習父子區段查詢、重複新增後回復、受控中止與耗時判讀。不是 IMS TM 線上交易，也不是 CKP02 預覽功能。請從這次作業的輸出觀察各個情境。
 
 ## 已備妥的材料
 
@@ -41,7 +41,7 @@ JCL 內定義 `TCBEVDB`、`TCBEVPL` 與 `TCBEVPU`，每次作業建立自己的 
 
 先只開啟 CUT 的 SYSOUT，載入完整內容後另存 UTF-8。讓 Bob 說明讀取有無成功、是否看得到正常結束，以及還要查什麼。程式印出的「準備觸發 U3001」只表達執行意圖，仍須用 JES 確認實際終止碼。
 
-接著提供同一 job ID 的 JESMSGLG、JESYSMSG、JESJCL、CHECKA／SYSOUT，以及其他情境的紀錄。由 IEF472I 的 USER=3001 確認實際中止，再由 CHECKA 確認資料狀態。完整證據已提供時，應更新原本的「待確認」，不是繼續宣稱結果未知。
+接著提供同一 job ID 的 JESMSGLG、JESYSMSG、JESJCL、CHECKA／SYSOUT，以及其他情境的紀錄。由 IEF472I 的 USER=3001 確認實際中止，再由 CHECKA 確認資料狀態。補齊紀錄後，再更新報告中原先尚未確定的判斷。
 
 ## 耗時與證據範圍
 
@@ -51,4 +51,4 @@ WAIT-MS 是實際等待服務前後的時間，PRE-GU-MS 還包含 GU 前的程�
 
 APPLICATION DIAGNOSTIC、OP、BUSINESS、HARNESS 與計時欄位都是應用程式輸出；PCB-STATUS 是從實際 DL/I 呼叫取得。JES／DFS 訊息和 PDUP 的 IMS 日誌列印需分開標示。OP 只在單一步驟內遞增，必須連同 job ID、step、DD 與行號引用，不能當成 IMS 原生交易 ID。
 
-分析保存為 `host-lab/ims/events-report.md`。不要以舊版合成事件 CSV 或講師的 job ID 代替自己的執行證據。此練習沒有驗證帶更新的異常終止自動回復、外部系統補償或線上交易復原。
+分析保存為 `host-lab/ims/events-report.md`。記下自己的 job ID 與對應訊息，方便查閱。此練習沒有驗證帶更新的異常終止自動回復、外部系統補償或線上交易復原。
