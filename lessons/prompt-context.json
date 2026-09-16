@@ -288,19 +288,19 @@
     "response": "host-lab/test-report.md，包含本次作業證據、各項結果與待確認事項。"
   },
   "ims-host-ask": {
-    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl", "z-lab/CKP02.cbl"],
+    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl", "z-tests/IMSCKP.cbl", "z-lab/CKP02.cbl"],
     "response": "IMS 資料流、CKP02 與輔助程式分工、更新與回復的驗證方式，以及環境前提。"
   },
   "ims-host-prepare": {
-    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl", "host-lab/environment.md"],
+    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl", "z-tests/IMSCKP.cbl", "host-lab/environment.md"],
     "response": "host-lab/ims/review.md"
   },
   "ims-host-logs": {
-    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl"],
+    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl", "z-tests/IMSCKP.cbl"],
     "response": "依你加入的真實紀錄核對載入、CKP02 轉換、回復、提交及再次查詢；區分應用程式診斷與 IMS 日誌。"
   },
   "ims-host-report": {
-    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl"],
+    "files": ["host-lab/IMS-LAB.md", "z-tests/ims-run.jcl", "z-tests/IMSCKP.cbl"],
     "response": "host-lab/ims/test-report.md，附實際 job、step、訊息與待確認事項。"
   },
   "rc4-ask": {

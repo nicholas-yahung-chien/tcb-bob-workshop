@@ -38,7 +38,9 @@
   "sha256": {
     "CHKCKP.cbl": "dcf292c882aafc259f07693ab4653d51c6f47c89b1140e10c6c7501226628e19",
     "GENCKP.cbl": "9b34b8022e74a5d403faccbd3e2e22c4e975d5d8b1586923cb9f6b35f838a16b",
-    "run.jcl": "a6e780684ddebf49a54bf5b3f75f1c820a79485d56701baae9c14326de932042"
+    "run.jcl": "a6e780684ddebf49a54bf5b3f75f1c820a79485d56701baae9c14326de932042",
+    "IMSCKP.cbl": "edc8d9a47826916f796e3af5906c1df9ba08e623bc43cbe88cf7b85b2c7bb9bd",
+    "ims-run.jcl": "e9288ae9ba7532f330f51144a0958549488788b601903a3b8dc7aba710b9abf6"
   },
   "initial_jcl_transfer_encoding": "IBM-1047",
   "connection_profile": "tcb-rse",

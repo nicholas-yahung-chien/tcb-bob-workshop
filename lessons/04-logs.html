@@ -41,9 +41,10 @@ EXPECT-ID="123456    "</code></pre>
 <p>這份作業使用主機上的 IMS DL/I 資料庫批次環境。先建立本次作業專用的測試資料庫，將資料匯出給原版 CKP02 轉換，再由 IMS 輔助程式寫回。CKP02 本身仍讀寫循序檔；這不是把 CKP02 改成線上交易，也尚未實作需求單的預覽功能。</p>
 <p>資料庫、DBD、PSB 與載入程式庫均屬於這次作業，重新提交就會重新建立測資。沿用前面的七筆虛構中文資料，另外加上固定案例編號作為 IMS 鍵值，避免識別值轉換後改變資料庫鍵值。開始前請依 <code>host-lab/IMS-LAB.md</code> 核對環境與個人權限。</p>
 <h3>1. 先看懂資料如何進出 IMS</h3>
+<p>先開啟 <code>z-tests/IMSCKP.cbl</code>。它是本練習的 IMS 輔助程式，與 CKP02 分工：IMSCKP 負責資料庫操作，CKP02 負責原有的檔案轉換。遠端也已備妥同一份 <code>&lt;自己的帳號&gt;.TCBLAB.COBOL(IMSCKP)</code>，可直接開啟閱讀。</p>
 {{ims-host-ask|帶我看這次 IMS 練習|Ask}}
 <h3>2. 核對並提交已備妥的 IMS 作業</h3>
-<p>遠端已為學員及講師準備好 <code>&lt;自己的帳號&gt;.TCBLAB.JCL(IMSRUN)</code>。所需 IMS 程式庫、既有 COBOL 成員，以及新增的輔助程式、DBD、PSB 定義都已備妥；資料庫與測資由作業自動建立，不需要另外產生或上傳檔案。</p>
+<p>遠端已為學員及講師準備好 <code>&lt;自己的帳號&gt;.TCBLAB.JCL(IMSRUN)</code> 與獨立的 <code>COBOL(IMSCKP)</code>。CIMS 從這個成員編譯，LIMS 連結至暫存程式庫；DBD、PSB 定義仍在 JCL 中。資料庫與測資由作業自動建立，不需要另外產生或上傳檔案。</p>
 {{ims-host-prepare|帶我核對已備妥的 IMS 作業|Agent}}
 <p>在 Zowe Explorer 的「資料集 → tcb-rse」開啟自己的 <code>TCBLAB.JCL(IMSRUN)</code>，核對內容與本機 <code>z-tests/ims-run.jcl</code> 相同。確認 Bob 保存的 <code>host-lab/ims/review.md</code> 後，在遠端 IMSRUN 成員按右鍵提交作業（Submit Job），記下新 job ID。原本的 RUN 保留。</p>
 <p>若只是閱讀與執行，直接使用已備妥的作業即可。只有想修改時，才另存個人 <code>host-lab/ims/run.jcl</code>；後續分析請加入自己實際提交的版本。</p>

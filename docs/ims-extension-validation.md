@@ -2,6 +2,8 @@
 
 日期：2026-09-16。這是維護證據，不預設提供學員作為答案。
 
+本文件記錄 v1.9.12／v1.9.13 的內嵌來源版本。v1.9.14 已改為獨立的 COBOL(IMSCKP)，最新部署及驗證見 [IMSCKP 獨立來源驗證](ims-source-split-validation.md)。
+
 ## 環境確認
 
 唯讀查詢確認 VS01 的 IMS15CR1／STC00624 活動、IMSID IVP1，既有 DB 與 BMP 清單可取得；但沒有 workshop 專用線上資料庫／PSB。因此採獨立 DL/I DB batch，沒有更新 IVP1 的共享資料庫、ACB、RACF、RECON 或 region 設定。既有 library 路徑的 V15R1M0 字樣不當成精確執行版號證據。

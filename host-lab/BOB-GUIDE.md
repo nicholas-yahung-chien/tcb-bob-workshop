@@ -5,7 +5,7 @@
 ## 一、檢查已備妥的程式
 
 1. 閱讀 SOURCE-MAP.md 與 source-manifest.json，確認 z-lab 中的 45 份 .cbl、.cpy、.asm 檔案存在，並確認 z-tests 的 GENCKP.cbl、CHKCKP.cbl、fixtures.json、run.jcl、manifest.json，以及根目錄 Zowe 設定與 schema 齊全。檔案已隨教材提供，不複製、不轉檔，也不新增另一套程式。
-2. 使用系統既有雜湊工具（Windows 可用 Get-FileHash）依 source-manifest.json 核對 z-lab 各 file 的 SHA-256，並依 z-tests/manifest.json 的 sha256 核對兩支輔助程式及 JCL。工具不可用時記錄「雜湊未驗證」，不能把閱讀內容當成完整性驗證。
+2. 使用系統既有雜湊工具（Windows 可用 Get-FileHash）依 source-manifest.json 核對 z-lab 各 file 的 SHA-256，並依 z-tests/manifest.json 的 sha256 核對清單中的輔助程式與 JCL，包含 IMSCKP 及 IMS 作業範本。工具不可用時記錄「雜湊未驗證」，不能把閱讀內容當成完整性驗證。
 3. 缺檔或雜湊不同時，列出路徑並請學員確認是否修改過；保留修改，不覆寫，也不自行補寫原始碼。需要還原時重新下載教材並解壓到另一個資料夾比較。
 4. 保存 output/workspace-check.md，列出實際檢查方法、結果與未確認事項。請學員開啟 z-lab/CKP02.cbl，確認 pp4z 功能。檔案檢查不代表已登入主機或啟用 pp4z。
 
