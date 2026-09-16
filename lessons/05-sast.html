@@ -14,7 +14,13 @@
 <p>在 CKP02H.cbl 選取包含 OPEN、READ、REWRITE 的處理段落，按右鍵選 <strong>IBM Bob → Improve Code</strong>。這是 Bob 的程式改善功能，會開啟新的 Agent 任務，可能依權限直接修改副本；它不等同 ZCodeScan，也不保證自動執行掃描。先看任務內容與檔案差異，再接受修改。</p>
 <p>新任務若未帶入本節背景，加入 <code>host-lab/CODE-QUALITY.md</code>，說明這次只改善檔案錯誤處理。比較 before.txt 與 CKP02H.cbl，確認轉換條件、欄位位置與重跑結果沒有改掉。接著切到 Plan，討論要採用哪些修改。</p>
 {{quality-plan|討論要怎麼改|Plan}}
+<details><summary>Bob 建議用 start_subtask 執行，該怎麼繼續？</summary>
+<p><code>start_subtask</code> 是 Bob 內建的「建立子任務」工具，由 Bob 呼叫，不需要在終端機輸入或另外安裝 MCP。子任務有自己的對話與進度，你可以查看修改並繼續互動。詳見 <a href="https://bob.ibm.com/docs/ide/core-concepts/tools">IBM 工具說明</a>。</p>
+<p>Plan 可能將工作拆成新增欄位、診斷段落、OPEN／READ／REWRITE／CLOSE 處理及 JCL 等項目，再建議切換 Agent 依序執行。項目與數量依實際計畫而定；不需要照抄固定的六項。確認計畫後，切換 Agent，使用下方回覆即可。若 Bob 沒有拆成子任務，也可直接依同一份計畫完成。</p>
+<p>每個子任務應閱讀同一份計畫與 CODE-QUALITY.md，完成後更新進度並讓你核對差異，再進行下一項。若另開對話，加入實際計畫檔，避免遺漏先前同意的限制。任務完成不代表測試通過；控制流程、回傳碼及錯誤處理仍須由編譯與實際測試確認。</p>
+</details>
 <h2 id="fix">4. 完成修改，準備主機測試</h2>
+<p>確認計畫符合本次範圍後，切換至 <strong>Agent</strong>。沿用剛才的計畫；若 Bob 已產生計畫檔，將該檔一併加入對話。</p>
 {{08-sast|完成同意的修改|Agent}}
 <p>成果放在 <code>host-lab/hardening/</code>：CKP02H.cbl、run-quality.jcl 與 review.md。依 CODE-QUALITY.md 核對 JCL，再透過 tcb-rse 將程式上傳到自己 TCBLAB.COBOL 的新成員 <strong>CKP02H</strong>。重新開啟確認中文、換行與 PROGRAM-ID，從本機 run-quality.jcl 提交，記下新 job ID。原版 CKP02 與 RUN 保留。</p>
 <h2 id="verify">5. 重掃描，再看主機實際結果</h2>
