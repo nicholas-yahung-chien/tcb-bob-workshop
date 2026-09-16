@@ -40,3 +40,9 @@ for file,page in pages.items():
         assert target.exists(), (file,link)
         if url.fragment and target in pages: assert unquote(url.fragment) in pages[target].ids,(file,link)
 print(f'PASS: {len(pages)} HTML pages; local links, fragments, headings and copy targets.')
+
+# Catch outdated product abbreviations in generated copy, including hero metadata.
+for page in (ROOT / "site").rglob("*.html"):
+    content = page.read_text(encoding="utf-8")
+    content = content.replace('id="pp4z"', 'id="legacy-anchor"').replace("#pp4z", "#legacy-anchor")
+    assert "pp4z" not in content.lower(), (page, "Use PPZ in published text")

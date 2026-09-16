@@ -1,4 +1,4 @@
-"""Create editable language-extension copies for local pp4z workflows."""
+"""Create editable language-extension copies for local PPZ workflows."""
 from pathlib import Path
 import hashlib
 import json
@@ -24,4 +24,4 @@ for source,target,data in mapping:
     if not target.exists(): target.write_bytes(data)
 manifest=[{'source':s.relative_to(root).as_posix(),'copy':t.relative_to(root).as_posix(),'sha256':hashlib.sha256(d).hexdigest()} for s,t,d in mapping]
 (dest/'source-map.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
-print('PASS: 45 local pp4z copies ready in z-lab; source bytes and line numbers preserved.')
+print('PASS: 45 local PPZ copies ready in z-lab; source bytes and line numbers preserved.')

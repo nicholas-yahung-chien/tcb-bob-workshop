@@ -25,7 +25,7 @@ def check(label): return f'<label class="check"><input type="checkbox" data-chec
 PAGES = [
     ("00-setup.html","課前準備","開啟你的練習工作區","下載程式，和 Bob 一起準備開始。", "開始之前"),
     ("01-planning.html","需求規劃","這項需求會影響哪些程式？","從一個批次需求開始，練習看程式、問問題，再整理計畫。", "需求規劃"),
-    ("02-documentation.html","COBOL 文件化","把程式讀懂，也讓下一個人看得懂","用 pp4z 解讀程式，再整理成方便查閱的文件。", "COBOL 文件化"),
+    ("02-documentation.html","COBOL 文件化","把程式讀懂，也讓下一個人看得懂","用 PPZ 解讀程式，再整理成方便查閱的文件。", "COBOL 文件化"),
     ("03-testing.html","測試與修正","換一筆資料，結果還對嗎？","從現有測試出發，看看正常、例外和重跑時的結果。", "測試與修正"),
     ("04-logs.html","主機紀錄與 IMS 事件","從紀錄確認程式做了什麼","先看自己的主機執行結果，再練習分析 IMS 事件。", "主機紀錄"),
     ("05-sast.html","COBOL 程式碼檢查與改善","檢查問題，再驗證修改","使用 ZCodeScan 與 Improve Code，改善 CKP02 錯誤處理並驗證結果。", "程式碼檢查與改善"),
@@ -64,7 +64,7 @@ def build():
     intro='''<p>接手一支不熟悉的程式、收到一項新需求，或拿到一份錯誤記錄時，你會從哪裡開始？這裡準備了幾個練習，帶你用自己的問題和 Bob 展開對話，再一步步完成文件與程式。</p><h2>下載練習程式</h2>'''
     intro+=f'<p><a class="cta" href="00-setup.html">下載程式並開始練習 →</a>　<a href="{BASE}/releases/latest">下載 ZIP ↗</a></p>'
     intro+='<h2>選擇練習單元</h2><div class="card-grid">'+cards+'</div>'
-    (target/'index.html').write_text(render_page('合作金庫 IBM Bob 工作坊',intro,'../../',description='需求規劃、COBOL 文件、測試與問題排查',eyebrow='IBM Bob + pp4z · 2026.09.21 / 09.24'),encoding='utf-8',newline='\n')
+    (target/'index.html').write_text(render_page('合作金庫 IBM Bob 工作坊',intro,'../../',description='需求規劃、COBOL 文件、測試與問題排查',eyebrow='IBM Bob + PPZ · 2026.09.21 / 09.24'),encoding='utf-8',newline='\n')
     hub='<p>從熟悉的工作情境開始，練習用 Bob 閱讀程式、討論需求和檢查結果。</p><div class="card-grid"><a class="card" href="workshops/tcb/index.html"><span class="eyebrow">2026.09.21 / 09.24</span><h2>合作金庫工作坊</h2><p>從批次需求開始，再試試 COBOL 文件、測試與事件分析。</p><span class="cta">開始練習 →</span></a></div>'
     (SITE/'index.html').write_text(render_page('IBM Bob Workshop',hub,'',description='操作練習與範例程式'),encoding='utf-8',newline='\n')
     (SITE/'.nojekyll').write_text('',encoding='utf-8',newline='\n')
