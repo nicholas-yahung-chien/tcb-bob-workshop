@@ -425,5 +425,11 @@
       "host-lab/IMS-ADMIN.md"
     ],
     "response": "host-lab/ims/admin-report.md，保留 STC ID、DD、訊息、時間與待查事項。"
+  },
+  "dictionary-localize": {
+    "files": [
+      "host-lab/PPZ-ANALYSIS.md"
+    ],
+    "response": "加入實際 DD.json，保留原檔備份，僅整理描述並核對 JSON 結構與非描述資料；不假造工作流程成果。"
   }
 }
