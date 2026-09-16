@@ -32,8 +32,8 @@
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>先釐清業務想做什麼</span><button type="button" data-copy="request-clarify">複製 Prompt</button></div><pre id="request-clarify">這是業務提出的需求申請單。請先用白話整理他們遇到什麼問題、希望改善什麼，再列出開始評估前最需要問清楚的幾個問題。把申請單裡已經說明的事、你的推測和還要請對方確認的事分開，先不要替他們決定做法。
 </pre><div class="expected"><strong>預期回應</strong><p>業務期待、待確認問題，以及需要向申請人補問的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>看看 Bob 是否問到「預計改幾筆」的計算方式、試跑後誰來確認、正式處理時資料是否可能已改變，以及重跑的期待。由你扮演需求提出者補充回答；尚無答案就標為待確認，先在明確標示的假設下評估，不把 Bob 的建議當成業務已同意。</p>
-<p>接著切換到 <strong>Z Architecture</strong>，從輸入框的 <code>/</code> 清單選取 <code>/impact-analysis</code>，再接上下方問題送出。</p>
-<p class="mode-guide"><strong>Z Architecture 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>找出變更影響</span><button type="button" data-copy="z-impact">複製 Prompt</button></div><pre id="z-impact">根據這份需求申請單與剛才釐清的內容，哪些程式、資料和批次作業可能受影響？請對照目前看得到的程式，說明修改位置與原因；尚未確認的需求和相依關係請分開列出，不要當成已定案。
+<p>接著切換到 <strong>Z Architect</strong>，從輸入框的 <code>/</code> 清單選取 <code>/impact-analysis</code>，再接上下方問題送出。</p>
+<p class="mode-guide"><strong>Z Architect 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>找出變更影響</span><button type="button" data-copy="z-impact">複製 Prompt</button></div><pre id="z-impact">根據這份需求申請單與剛才釐清的內容，哪些程式、資料和批次作業可能受影響？請對照目前看得到的程式，說明修改位置與原因；尚未確認的需求和相依關係請分開列出，不要當成已定案。
 </pre><div class="expected"><strong>預期回應</strong><p>已確認的影響，以及需要補資料才能確認的關係。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>如果流程要求連線 Z Understand，請選擇包含這支程式的專案。手邊只有本機檔案時，先分析看得到的內容，跨系統的關係留待補齊資料後確認。</p>
 <h2 id="plan">3. 把需求整理成計畫</h2>
