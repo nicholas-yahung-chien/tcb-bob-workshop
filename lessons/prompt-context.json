@@ -167,7 +167,7 @@
       "host-lab/hardening/CKP02H.cbl",
       "host-lab/hardening/before.txt"
     ],
-    "response": "host-lab/hardening/review.md；沿用或加入兩次實際掃描訊息，記錄改善、保留及新增項目。"
+    "response": "實際執行 ZCodeScan 後更新 host-lab/hardening/review.md；有修改前紀錄時比較差異，缺少時記錄本次結果與比較限制。"
   },
   "z-context": {
     "files": [

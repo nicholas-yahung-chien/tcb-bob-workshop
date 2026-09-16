@@ -28,9 +28,10 @@
 </pre><div class="expected"><strong>預期回應</strong><p>本機 CKP02H.cbl 的修改差異與原因；不產生 JCL 或進行主機操作。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>成果保存在 <code>host-lab/hardening/</code>：CKP02H.cbl、before.txt 與 review.md。各學員的修改可能不同，請保留自己的差異與理由；本節不產生執行用 JCL，也不將修正版上傳主機。</p>
 <h2 id="verify">5. 重新掃描，比較改善前後的結果</h2>
-<p>儲存修正版後，使用相同規則設定，在 <strong>Z Code</strong> 模式再次送出第 2 步的提問，取得最新掃描結果。保留修改前後的工具訊息，再切換至 Agent 整理紀錄；若另開對話，請將兩次實際掃描訊息一併帶入。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/CODE-QUALITY.md</code>、<code>host-lab/hardening/CKP02H.cbl</code>、<code>host-lab/hardening/before.txt</code></p><div class="prompt"><div class="prompt-head"><span>整理重新掃描的結果</span><button type="button" data-copy="verify-sast">複製 Prompt</button></div><pre id="verify-sast">這是修改前後的 ZCodeScan 結果，請幫我比較哪些問題已改善、哪些仍存在，以及有沒有新增問題，對照程式說明原因。保留的項目也請說明理由，不用為了清掉所有警告而改變原本邏輯。請依 CODE-QUALITY.md 把修改和掃描結果整理在 review.md；這次沒有編譯或上主機執行，請不要寫成執行測試已通過。
-</pre><div class="expected"><strong>預期回應</strong><p>host-lab/hardening/review.md；沿用或加入兩次實際掃描訊息，記錄改善、保留及新增項目。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>儲存並保持開啟 CKP02H.cbl，切換至 <strong>Z Code</strong>，直接送出下方提問，讓 Bob 使用相同規則重新執行 ZCodeScan 並整理結果。不需要先手動掃描或貼上最新訊息。若另開對話，可加入先前保存的修改前掃描紀錄；找不到時先記錄本次結果與比較限制。</p>
+<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/CODE-QUALITY.md</code>、<code>host-lab/hardening/CKP02H.cbl</code>、<code>host-lab/hardening/before.txt</code></p><div class="prompt"><div class="prompt-head"><span>重新掃描並整理結果</span><button type="button" data-copy="verify-sast">複製 Prompt</button></div><pre id="verify-sast">請用 ZCodeScan 重新檢查目前修改好的 CKP02H，先不要再修改程式。請列出實際取得的訊息和行號，和先前取得的修改前掃描結果比較，說明哪些問題已改善、哪些仍存在，以及有沒有新增問題。保留的項目也請說明理由，不用為了清掉所有警告而改變原本邏輯。如果找不到修改前的掃描紀錄，就先整理這次結果，註明無法完整比較，不要把原始碼推測當成掃描結果。若工具無法執行，請記下原因。最後依 CODE-QUALITY.md 將結果整理到 host-lab/hardening/review.md；這次只做靜態掃描，不編譯、不上傳，也不執行主機作業。
+</pre><div class="expected"><strong>預期回應</strong><p>實際執行 ZCodeScan 後更新 host-lab/hardening/review.md；有修改前紀錄時比較差異，缺少時記錄本次結果與比較限制。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>展開工具執行紀錄，確認這次真的執行 ZCodeScan 並取得修正版的訊息；不能只使用編輯過程中的一般 IDE 診斷代替。修改前紀錄缺少時，不宣稱哪些問題已消失或新增，也不把它當成無法執行本次掃描的理由。</p>
 <p>逐項比較哪些訊息已消失、哪些仍存在，以及是否新增問題。修改後行號可能改變，請搭配規則與程式位置核對，不只比較總數。各學員不必得到相同數量，也不以「零警告」作為完成條件；保留的項目應說明理由。</p>
 <p>本節完成標準是保留修改差異、取得重新掃描的實際結果，並整理 review.md。ZCodeScan 結果不能代表主機編譯、轉換結果或錯誤分支已通過測試；這些項目註明「本節未執行」，不列為學員下一個必做步驟。</p>
 <details><summary>延伸閱讀：CIS14 的 IMS 呼叫與錯誤處理</summary>
