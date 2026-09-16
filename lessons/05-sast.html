@@ -1,9 +1,9 @@
 <h2 id="story">程式跑得動，遇到讀寫失敗時呢？</h2>
 <p>前面已確認 CKP02 的轉換結果。這一節接著使用 ZCodeScan 與 Improve Code 檢查程式，再替檔案讀寫補上錯誤處理。本節使用 COBOL 與 JCL，不需要 Python；也不實作需求單中的預覽功能。</p>
-<p>有效 PP4Z 權益與本機語言服務正常時，ZCodeScan 可以檢查本機來源；編譯及執行測試仍使用課程主機。修改範圍與測試指引在教材 <code>host-lab/CODE-QUALITY.md</code>。</p>
+<p>有效 PP4Z 權益與本機語言服務正常時，ZCodeScan 可以檢查本機來源；本節修改後僅重新掃描，不安排修正版的主機編譯或執行，也不準備或上傳遠端教材。修改範圍與測試指引在教材 <code>host-lab/CODE-QUALITY.md</code>。</p>
 <h2 id="prepare">1. 先準備可修改的副本</h2>
 {{quality-prepare|準備這次的練習|Agent}}
-<p>確認 <code>host-lab/hardening/CKP02H.cbl</code> 已建立，PROGRAM-ID 為 CKP02H，其他業務邏輯與原版相同。這是新的改善練習程式，尚未上傳主機。<code>before.txt</code> 保存改善前的副本，之後可用 Select for Compare 比較修改。</p>
+<p>確認 <code>host-lab/hardening/CKP02H.cbl</code> 已建立，PROGRAM-ID 為 CKP02H，其他業務邏輯與原版相同。這是保留在本機的改善練習程式。<code>before.txt</code> 保存改善前的副本，之後可用 Select for Compare 比較修改。</p>
 <h2 id="scan">2. 用 ZCodeScan 看實際檢查結果</h2>
 <ol><li>儲存並保持開啟 CKP02H.cbl，等待 COBOL 語言服務完成載入。</li><li>開啟命令選擇區，執行 <strong>IBM Z Open Editor: Execute IBM ZCodeScan</strong>。</li><li>在 <strong>Problems</strong> 檢視查看結果，保留規則名稱或代碼、行號與完整訊息。語法診斷、編譯警告與 ZCodeScan 訊息分開記錄。</li><li>切換至 <strong>Z Code</strong>，加入下方檔案並送出提問，讓 Bob 使用 ZCodeScan 取得結果。這可能重新掃描目前儲存的版本，不是自動讀取先前面板的快照。</li></ol>
 <p>先處理語言服務回報的語法錯誤。未設定 ZCodeScan 的 ZAPP profile 時會採用預設規則；若工作區已有自訂規則或 baseline，請記錄設定，避免把被隱藏的診斷當成已修正。</p>
@@ -16,20 +16,21 @@
 {{quality-plan|討論要怎麼改|Plan}}
 <details><summary>Bob 建議用 start_subtask 執行，該怎麼繼續？</summary>
 <p><code>start_subtask</code> 是 Bob 內建的「建立子任務」工具，由 Bob 呼叫，不需要在終端機輸入或另外安裝 MCP。子任務有自己的對話與進度，你可以查看修改並繼續互動。詳見 <a href="https://bob.ibm.com/docs/ide/core-concepts/tools">IBM 工具說明</a>。</p>
-<p>Plan 可能將工作拆成新增欄位、診斷段落、OPEN／READ／REWRITE／CLOSE 處理及 JCL 等項目，再建議切換 Agent 依序執行。項目與數量依實際計畫而定；不需要照抄固定的六項。確認計畫後，切換 Agent，使用下方回覆即可。若 Bob 沒有拆成子任務，也可直接依同一份計畫完成。</p>
-<p>每個子任務應閱讀同一份計畫與 CODE-QUALITY.md，完成後更新進度並讓你核對差異，再進行下一項。若另開對話，加入實際計畫檔，避免遺漏先前同意的限制。任務完成不代表測試通過；控制流程、回傳碼及錯誤處理仍須由編譯與實際測試確認。</p>
+<p>Plan 可能將工作拆成新增欄位、診斷段落、OPEN／READ／REWRITE／CLOSE 處理等項目，再建議切換 Agent 依序執行。項目與數量依實際計畫而定；不需要照抄固定的六項。確認計畫後，切換 Agent，使用下方回覆即可。若 Bob 沒有拆成子任務，也可直接依同一份計畫完成。</p>
+<p>每個子任務應閱讀同一份計畫與 CODE-QUALITY.md，完成後更新進度並讓你核對差異，再進行下一項。若另開對話，加入實際計畫檔，避免遺漏先前同意的限制。完成子任務後，回到第 5 步重掃描並比較結果。本節不做執行測試，報告只記錄來源審閱與實際掃描的結論。</p>
 </details>
-<h2 id="fix">4. 完成修改，準備主機測試</h2>
-<p>確認計畫符合本次範圍後，切換至 <strong>Agent</strong>。沿用剛才的計畫；若 Bob 已產生計畫檔，將該檔一併加入對話。</p>
+<h2 id="fix">4. 完成同意的程式修改</h2>
+<p>確認計畫符合本次範圍後，切換至 <strong>Agent</strong>。沿用剛才的計畫；若 Bob 已產生計畫檔，將該檔一併加入對話。若舊計畫仍包含 JCL、上傳或主機測試，請先調整為本機修改與重新掃描。</p>
 {{08-sast|完成同意的修改|Agent}}
-<p>成果放在 <code>host-lab/hardening/</code>：CKP02H.cbl、run-quality.jcl 與 review.md。依 CODE-QUALITY.md 核對 JCL，再透過 tcb-rse 將程式上傳到自己 TCBLAB.COBOL 的新成員 <strong>CKP02H</strong>。重新開啟確認中文、換行與 PROGRAM-ID，從本機 run-quality.jcl 提交，記下新 job ID。原版 CKP02 與 RUN 保留。</p>
-<h2 id="verify">5. 重掃描，再看主機實際結果</h2>
-<p>儲存修正版後，使用相同規則設定，在 Z Code 模式再次送出第 2 步的提問，取得最新掃描結果。保留修改前後的工具訊息，再切換至 Agent 整理測試報告；若另開對話，請將實際掃描訊息一併帶入。將這次實際提交的 JCL 與完整作業紀錄加入 Bob；請指定實際下載的資料夾。中文 PRINTDD 依第 03 單元的方式開啟並另存 UTF-8。</p>
-{{verify-sast|確認改善是否有效|Agent}}
-<p>CHECK1、CHECK2 各七筆 PASS、CHECKED=0007 ERRORS=0000，以及 RUNEMPTY RC 0，是正常流程的回歸證據。它們不會自動證明新增的錯誤分支正確；依 CODE-QUALITY.md 另外準備隔離的失敗案例。未執行的案例仍列為待驗證。若出現 RC 4，依第 04 單元的方法追到實際診斷，不直接歸因於此次修改。</p>
+<p>成果保存在 <code>host-lab/hardening/</code>：CKP02H.cbl、before.txt 與 review.md。各學員的修改可能不同，請保留自己的差異與理由；本節不產生執行用 JCL，也不將修正版上傳主機。</p>
+<h2 id="verify">5. 重新掃描，比較改善前後的結果</h2>
+<p>儲存修正版後，使用相同規則設定，在 <strong>Z Code</strong> 模式再次送出第 2 步的提問，取得最新掃描結果。保留修改前後的工具訊息，再切換至 Agent 整理紀錄；若另開對話，請將兩次實際掃描訊息一併帶入。</p>
+{{verify-sast|整理重新掃描的結果|Agent}}
+<p>逐項比較哪些訊息已消失、哪些仍存在，以及是否新增問題。修改後行號可能改變，請搭配規則與程式位置核對，不只比較總數。各學員不必得到相同數量，也不以「零警告」作為完成條件；保留的項目應說明理由。</p>
+<p>本節完成標準是保留修改差異、取得重新掃描的實際結果，並整理 review.md。ZCodeScan 結果不能代表主機編譯、轉換結果或錯誤分支已通過測試；這些項目註明「本節未執行」，不列為學員下一個必做步驟。</p>
 <details><summary>延伸閱讀：CIS14 的 IMS 呼叫與錯誤處理</summary>
 <p>想將相同方法用在 IMS 程式時，搭配客戶範例 CIS14 與 Copybook 做來源審閱。課程 IMSCKP／IMSEVT 的教學資料庫不是 CIS14 的正式資料庫，不能直接拿來執行 CIS14。</p>
 {{quality-ims|看看 IMS 程式可以改善什麼|Ask}}
 <p>先核對呼叫使用哪個 PCB、如何判斷狀態，以及錯誤後會做什麼。缺少的程式、DBD／PSB 與執行設定先列出，再決定可驗證的修改範圍。識別資料能否輸出須依資料性質與客戶規範判斷，不能只憑 DISPLAY 就認定為弱點。</p></details>
 <details><summary>工具說明與適用範圍</summary><p><a href="https://ibm.github.io/zopeneditor-about/Docs/advanced_zcodescan.html">IBM ZCodeScan 操作說明</a>、<a href="https://ibm.github.io/zopeneditor-about/Docs/advanced_agent_mode.html">Bob 與進階功能權益</a>。請以自己 IDE 的實際訊息為準；靜態檢查、AI 審閱與主機測試各自提供不同證據。</p></details>
-{{check:我能區分掃描訊息與 AI 建議}}{{check:原版與測試預期值保留，修改差異已核對}}{{check:已記錄重掃描、主機回歸與錯誤案例的結果或待驗證事項}}
+{{check:我能區分掃描訊息與 AI 建議}}{{check:原版與測試預期值保留，修改差異已核對}}{{check:已比較兩次實際掃描結果，並記錄保留項目的理由}}

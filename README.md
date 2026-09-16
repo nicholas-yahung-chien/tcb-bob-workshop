@@ -26,7 +26,7 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 
 主機實作從 [個人連線](host-lab/CONNECTION.md) 開始，再依 [CKP02 實作步驟](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/03-testing.html#host) 分析程式、提交 JCL，並下載自己帳號的 JES 紀錄交給 Bob 核對。第 04 單元另有 RC 4 修正與真實 IMS 資料庫串接的選做練習，分別依 [RC4-LAB.md](host-lab/RC4-LAB.md) 與 [IMS-LAB.md](host-lab/IMS-LAB.md) 操作。另依 [IMS-EVENTS.md](host-lab/IMS-EVENTS.md) 執行已備妥的 IMSEVTS，觀察真實 GNP、回復、受控中止與分段耗時；CUT 的 U3001 是指定情境，仍須核對其他步驟。
 
-第 05 單元以 CKP02 練習 ZCodeScan、Improve Code 與檔案錯誤處理，依 [CODE-QUALITY.md](host-lab/CODE-QUALITY.md) 建立獨立 CKP02H，再進行主機回歸；CIS14 為延伸審閱。
+第 05 單元以 CKP02 練習 ZCodeScan、Improve Code 與檔案錯誤處理，依 [CODE-QUALITY.md](host-lab/CODE-QUALITY.md) 建立獨立 CKP02H，修改後僅重新執行 ZCodeScan，不準備 JCL 或上傳主機；CIS14 為延伸審閱。
 
 每個單元先介紹一個情境，再提供可以直接問 Bob 的問題。將頁面列出的檔案用 @ 加入對話，選擇對應模式，就可以開始。看完回覆，再依自己的疑問追問。
 

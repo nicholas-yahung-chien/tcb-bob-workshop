@@ -111,10 +111,9 @@
     "files": [
       "host-lab/CODE-QUALITY.md",
       "host-lab/hardening/CKP02H.cbl",
-      "host-lab/run.jcl",
-      "host-lab/environment.md"
+      "host-lab/hardening/before.txt"
     ],
-    "response": "CKP02H.cbl、run-quality.jcl 與 review.md；主機測試待執行。"
+    "response": "本機 CKP02H.cbl 的修改差異與原因；不產生 JCL 或進行主機操作。"
   },
   "09-repair": {
     "files": [
@@ -166,9 +165,9 @@
     "files": [
       "host-lab/CODE-QUALITY.md",
       "host-lab/hardening/CKP02H.cbl",
-      "host-lab/hardening/run-quality.jcl"
+      "host-lab/hardening/before.txt"
     ],
-    "response": "host-lab/hardening/test-report.md；另外加入本次掃描訊息及實際作業資料夾。"
+    "response": "host-lab/hardening/review.md；沿用或加入兩次實際掃描訊息，記錄改善、保留及新增項目。"
   },
   "z-context": {
     "files": [
@@ -385,7 +384,7 @@
       "host-lab/hardening/CKP02H.cbl",
       "host-lab/hardening/before.txt"
     ],
-    "response": "對照實際程式與工具結果，說明已確認事項和待驗證項目。"
+    "response": "本機修改方案與重新掃描的比較重點；尚不修改程式，不安排主機作業。"
   },
   "quality-ims": {
     "files": [
