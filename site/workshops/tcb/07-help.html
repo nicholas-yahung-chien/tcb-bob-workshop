@@ -47,7 +47,7 @@
 <details><summary>IMSEVTS 出現 U3001 或沒有 END，代表失敗嗎？</summary><p>CUT 刻意觸發 U3001，不會印出正常 END。仍要用同一 job 的 JES 確認實際終止碼，再核對 CHECKA 確實執行且 RC 0。完整預期是 17 步中 16 步 RC 0、CUT U3001；其他異常不能一律當成預期。只有 CUT 的 SYSOUT 時，先列出還缺的證據，補齊後更新結論。</p></details>
 <details><summary>DELAY 約兩秒，表示 IMS 查詢很慢嗎？SYSOUT 就是 IMS 系統日誌嗎？</summary><p>DELAY 的等待安排在 GU 之前；請分開看 WAIT-MS 與 GU-MS，不把等待當成查詢故障。計時刻度為 10 ms，數值 0 也不表示完全不耗時。APPLICATION DIAGNOSTIC 是應用程式輸出，JES／DFS 是系統訊息，DFSERA10 才是課程用來列印真實 IMS 二進位日誌的工具；三種證據分開引用。</p></details>
 <h2 id="zcodescan">ZCodeScan 與程式改善</h2>
-<details><summary>需要另一台主機掃描服務嗎？找不到 ZCodeScan 怎麼辦？</summary><p>有效 PP4Z 權益與本機 COBOL 語言服務正常時，可掃描本機來源。先確認 Bob 已登入、IBM Z Open Editor 啟用及權益狀態；登入或切換團隊後可 Reload Window。語法錯誤或缺少相依也可能影響分析。工具仍無法執行時記錄原因，不用來源審閱代替已完成掃描。</p></details>
+<details><summary>需要另一台主機掃描服務嗎？找不到 ZCodeScan 怎麼辦？</summary><p>有效 PPZ 權益與本機 COBOL 語言服務正常時，可掃描本機來源。先確認 Bob 已登入、IBM Z Open Editor 啟用及權益狀態；登入或切換團隊後可 Reload Window。語法錯誤或缺少相依也可能影響分析。工具仍無法執行時記錄原因，不用來源審閱代替已完成掃描。</p></details>
 <details><summary>「問題」面板有結果，Bob 卻說沒收到，怎麼辦？</summary><p>只有加入 COBOL 檔案，不代表已將面板診斷帶進對話。切換 <strong>Z Code</strong>，使用第 05 單元明確要求「用 ZCodeScan 掃描」的提問，讓 Bob 取得實際結果。展開工具紀錄，再抽查訊息與行號。只說「這是掃描結果」而沒有附件或工具回應，Bob 可能會請你補資料。</p></details>
 <details><summary>修改後重掃描，找不到修改前結果，還能繼續嗎？</summary><p>可以先掃描目前的 CKP02H，整理本次結果並註明無法完整比較。不要用原始碼推測哪些警告已消失。before.txt 是來源備份，不是掃描報告，也不要直接把它交給只辨識 COBOL 檔案的掃描操作。課程不要求為此重建歷史結果；之後保留每次工具訊息即可。</p></details>
 <details><summary>我的警告比別人多，或改善後反而增加，是否做錯了？</summary><p>先比較規則、來源版本與具體訊息。新增錯誤處理可能增加觸發寫法規則的位置，不能只比較總數。命名、PERFORM、REDEFINES 等建議不必然是安全漏洞；請說明哪些採用、哪些保留及理由。第 05 單元不要求固定數量或零警告，也不為清掉警告而改變業務邏輯。</p></details>
@@ -55,4 +55,9 @@
 <h2 id="reference-answers">參考解答與版本</h2>
 <details><summary>參考 ZIP 有我的標準答案嗎？為什麼沒有固定 CKP02H？</summary><p>先讀 reference/README.md 的單元對照。參考文件示範分析與報告寫法，主機結果要填自己的證據；講師 JOB01118 節錄只能幫助理解判讀。CKP02H 允許不同改善方式，因此不提供統一修正版或警告數。Python 範例僅對應選做練習。請從<a href="06-reference.html">第 06 單元</a>下載目前版本，參考檔不預先放進學員工作區。</p></details>
 <details><summary>舊計畫還要求 verify.py、SQL 修補或上傳 CKP02H，怎麼辦？</summary><p>改用目前課程網頁與教材指引，請 Bob 更新既有計畫。新版主流程沒有 verify.py 驗收步驟，第 05 已改為 COBOL 改善與本機重掃描。更新教材時保留自己的連線設定、程式修改與紀錄，不直接覆蓋；舊成果可以保留，但不當成新版已完成的證據。</p></details>
+
+<h2 id="metadata-dd">Scan Program、Data Dictionary 與 ZCodeScan 有什麼不同？</h2>
+<p>Scan Program 建立本機程式結構資訊，Data Dictionary 保存經確認的欄位語意，ZCodeScan 檢查程式碼規則。第 01 單元先掃描，第 02 單元先核對字典再文件化，第 05 單元才比較程式碼檢查結果。字典工作流程的模式入口隨版本核對；Z Architect 沒有該選項時，改由官方文件記載的 Z Code 入口檢查。</p>
+<h2 id="ims-admin-access">找不到 IMS 的 STC，或看到 ACTIVE 沒有 RC？</h2>
+<p>先依 IMS-ADMIN.md 核對 Owner、Prefix、狀態篩選及目前 STC ID。沒有權限時請講師提供指定紀錄，不能改用自己的 IMSRUN 當作共享 control region 的證據。ACTIVE 代表工作尚在執行，不能套用已結束批次作業的 RC 判斷。</p>
 </article><nav class="next" aria-label="前後單元"><a href="06-reference.html">← 成果與解答</a><a href="08-source-map.html">認識練習程式 →</a></nav></main></div><footer><p>合作金庫 IBM Bob Workshop</p><p>2026.09.21 / 09.24</p></footer></body></html>

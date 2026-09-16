@@ -393,5 +393,37 @@
       "z-lab/CIS14/"
     ],
     "response": "對照實際程式與工具結果，說明已確認事項和待驗證項目。"
+  },
+  "scan-program": {
+    "files": [
+      "z-lab/CKP02.cbl",
+      "host-lab/PPZ-ANALYSIS.md"
+    ],
+    "response": "實際掃描檔案、工具回傳位置與缺少的相依；未執行時明確記錄。"
+  },
+  "dictionary-review": {
+    "files": [
+      "z-lab/CKP02.cbl",
+      "host-lab/PPZ-ANALYSIS.md"
+    ],
+    "response": "欄位定義的來源依據、待確認的業務意義；另加入自己產生的 DD.json。"
+  },
+  "ims-admin-ask": {
+    "files": [
+      "host-lab/IMS-ADMIN.md"
+    ],
+    "response": "以實際加入的 IMS 區域紀錄整理事件，區分觀測時點與尚缺的證據。"
+  },
+  "ims-admin-plan": {
+    "files": [
+      "host-lab/IMS-ADMIN.md"
+    ],
+    "response": "有依據的唯讀調查順序；不執行啟停、切換日誌或修改系統。"
+  },
+  "ims-admin-report": {
+    "files": [
+      "host-lab/IMS-ADMIN.md"
+    ],
+    "response": "host-lab/ims/admin-report.md，保留 STC ID、DD、訊息、時間與待查事項。"
   }
 }

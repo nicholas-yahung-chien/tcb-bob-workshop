@@ -18,7 +18,7 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 
 開啟下載的資料夾，即可開始。課程步驟請閱讀上方「開始練習」連結。
 
-確認 IBM Bob 已登入並啟用 pp4z，主機連線需 Zowe Explorer。Git 只在 Git: Clone 下載時需要；[直接下載教材 ZIP](https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest/download/tcb-workshop.zip) 可略過 Git。兩種下載方式都包含根目錄的 Zowe 設定檔與 schema。
+確認 IBM Bob 已登入並啟用 PPZ，主機連線需 Zowe Explorer。Git 只在 Git: Clone 下載時需要；[直接下載教材 ZIP](https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest/download/tcb-workshop.zip) 可略過 Git。兩種下載方式都包含根目錄的 Zowe 設定檔與 schema。
 
 主流程不需要本機 Python。請將 host-lab/BOB-GUIDE.md 交給 Bob，完成教材檢查、個人 JCL 與實際主機紀錄分析。Git 僅在 Clone 下載時需要；Python 範例保留為另需執行環境的選做練習。
 
@@ -55,3 +55,5 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 參考解答不包含在教材中。完成練習後，可從課程網頁「成果與解答」下載獨立 ZIP，先讀 reference/README.md 的單元對照，再比較自己的成果。新版包含 COBOL 需求與文件、主機及 IMS 報告寫法、講師真實紀錄節錄，以及第 05 單元的本機掃描紀錄範例；Python 僅為選做，參考紀錄不代表自己的作業已通過。
 
 原始碼權利歸原權利人，本 repo 不另行授予原始程式授權。
+
+分析前依 host-lab/PPZ-ANALYSIS.md 建立 Local Metadata；文件化前先核對 Data Dictionary。第 04 單元另可依 host-lab/IMS-ADMIN.md 從共享 IMS 子系統的真實 STC 紀錄練習管理者視角的判讀。

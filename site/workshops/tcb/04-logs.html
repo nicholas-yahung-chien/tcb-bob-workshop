@@ -96,4 +96,24 @@ EXPECT-ID="123456    "</code></pre>
 <p>報告存於 <code>host-lab/ims/events-report.md</code>。應用程式診斷、JES／DFS 訊息與 PDUP 的 IMS 日誌列印分開引用。完整證據補齊後，請更新先前的待確認事項；不要使用講師的作業或舊 CSV 代替自己的結果。</p>
 <label class="check"><input type="checkbox" data-check="我能分清楚業務結果、測試結果與實際終止碼"><span>我能分清楚業務結果、測試結果與實際終止碼</span></label><label class="check"><input type="checkbox" data-check="我能指出等待發生在哪一段，並附上紀錄"><span>我能指出等待發生在哪一段，並附上紀錄</span></label>
 </details>
+
+<details id="ims-admin"><summary>延伸練習：從系統管理者角度閱讀目前 IMS 子系統紀錄（選做）</summary>
+<p>這次觀察共享 IMS 子系統的運作紀錄。它與前面 IMSRUN、IMSEVTS 的獨立批次作業不同，不需執行新程式，也不練習 IMS TM 訊息收送。</p>
+<h3>1. 從遠端取得真實紀錄</h3>
+<p>依 <code>host-lab/IMS-ADMIN.md</code>，在 Zowe Explorer 的「工作 → tcb-rse」將 Owner 篩選改為 <code>IBMUSER</code>、Prefix 改為 <code>IMS15*</code>，清除只顯示 OUTPUT 的狀態條件，重新整理並找到目前 ACTIVE 的 control region、DL/I 及 DBRC 工作。完成後將篩選改回自己的帳號。</p>
+<p>2026-09-17 已確認 IMS15CR1／STC00624、IMS15DL1／STC00625、IMS15RC1／STC00626 活動，33 個帳號均可讀取 control region 的 JESMSGLG。這些 ID 是本次盤點結果；重啟後應重新核對，不固定套用。</p>
+<p>逐一開啟三個區域的 JESMSGLG、JESYSMSG 與 JESJCL，載入完整內容並另存 UTF-8。建議存於 <code>host-lab/logs/ims-admin/</code>，檔名保留 STC ID 與 DD 名稱，另記錄擷取時間。請將實際保存的紀錄資料夾加入 Bob；只有加入指引並不等於提供紀錄。</p>
+<h3>2. Ask：先讀懂發生什麼事</h3>
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/IMS-ADMIN.md</code></p><div class="prompt"><div class="prompt-head"><span>帶我看 IMS 子系統紀錄</span><button type="button" data-copy="ims-admin-ask">複製 Prompt</button></div><pre id="ims-admin-ask">這是剛從主機取得的 IMS 系統紀錄。請幫我看這段時間發生了什麼，有哪些訊息值得留意。請指出時間、訊息代碼和來源檔案；如果還不能判斷原因，告訴我需要再查哪些紀錄。
+</pre><div class="expected"><strong>預期回應</strong><p>以實際加入的 IMS 區域紀錄整理事件，區分觀測時點與尚缺的證據。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>從 IMS READY、region 啟停和日誌狀態回應開始找線索。ACTIVE 工作沒有最終 RC 是正常現象；舊的 IMS READY 也不能單獨證明現在正常。活動紀錄會持續增加，記下本次取得的範圍，不能把缺少結束訊息直接判定為異常。</p>
+<h3>3. Plan：安排後續查證</h3>
+<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/IMS-ADMIN.md</code></p><div class="prompt"><div class="prompt-head"><span>接下來先查什麼？</span><button type="button" data-copy="ims-admin-plan">複製 Prompt</button></div><pre id="ims-admin-plan">如果我是值班的系統管理者，接下來應該先查什麼？請依剛才的紀錄說明理由，先以不影響系統運作的查詢為主。
+</pre><div class="expected"><strong>預期回應</strong><p>有依據的唯讀調查順序；不執行啟停、切換日誌或修改系統。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>遇到 DFS 訊息時，依主機版本查 IBM 官方訊息文件。必要時請講師提供同一時段的 SYSLOG 節錄與唯讀查詢回應。現有學員 spool 存取不代表有操作主控台的權限；本練習不發出 START、STOP 或切換 OLDS 指令。</p>
+<h3>4. Agent：整理值班交接</h3>
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/IMS-ADMIN.md</code></p><div class="prompt"><div class="prompt-head"><span>留下值班交接紀錄</span><button type="button" data-copy="ims-admin-report">複製 Prompt</button></div><pre id="ims-admin-report">請把剛才確認的事件、判斷依據和待查事項整理成值班交接紀錄，存到 host-lab/ims/admin-report.md。保留各份紀錄的來源和取得時間。
+</pre><div class="expected"><strong>預期回應</strong><p>host-lab/ims/admin-report.md，保留 STC ID、DD、訊息、時間與待查事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>若要深入閱讀二進位 IMS 日誌，需先由管理者確認可用的封存 SLDS，再用 DFSERA10 篩選並列印。本次尚未驗證可用 SLDS，不將這一層列為已備妥的操作。JES 的 DFS 訊息、應用程式 DISPLAY 與 DFSERA10 日誌列印須分開標示。</p>
+</details>
 </article><nav class="next" aria-label="前後單元"><a href="03-testing.html">← 測試與修正</a><a href="05-sast.html">COBOL 程式碼檢查與改善 →</a></nav></main></div><footer><p>合作金庫 IBM Bob Workshop</p><p>2026.09.21 / 09.24</p></footer></body></html>

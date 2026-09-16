@@ -4,7 +4,7 @@
 
 ## 先準備好自己的工作區
 
-在 Bob 開啟教材資料夾，確認 pp4z 與 Zowe Explorer 可用，並使用分配給你的個人主機連線。先在 JOBS 檢視確認自己的帳號；連線認證不需要貼到 Bob 對話中。
+在 Bob 開啟教材資料夾，確認 PPZ 與 Zowe Explorer 可用，並使用分配給你的個人主機連線。先在 JOBS 檢視確認自己的帳號；連線認證不需要貼到 Bob 對話中。
 
 連線步驟見 [CONNECTION.md](CONNECTION.md)。把自己的帳號、job 名稱、volume 與 storage class 寫入 host-lab/environment.md，後面的提問可以直接引用這份資料。
 

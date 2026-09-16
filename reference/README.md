@@ -21,3 +21,5 @@
 第 05 單元只修改本機 CKP02H 並重新掃描，不提供統一修正版、不產生或上傳 JCL、不執行主機作業。掃描有不同結果是正常的，需說明修改與保留項目的理由。
 
 本 ZIP 不含舊 SQL 注入或合成 IMS CSV 解答，也不需要 scripts/verify.py。比較時依課程網頁選擇相應文件；工作流程產出的 docs/ 文件保留原位。第 03 單元原版 RUN 與第 04 單元已選做的主機練習仍按各自指引進行。
+
+新增參考：metadata-dd-review.md 提供 Local Metadata 與 Data Dictionary 核對方式；ims-admin-report.md 提供共享 IMS 子系統值班報告架構。兩者都不是預先執行好的學員成果。

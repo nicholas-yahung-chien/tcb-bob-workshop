@@ -1,13 +1,13 @@
 <h2 id="story">程式跑得動，遇到讀寫失敗時呢？</h2>
 <p>前面已確認 CKP02 的轉換結果。這一節接著使用 ZCodeScan 與 Improve Code 檢查程式，再替檔案讀寫補上錯誤處理。本節使用 COBOL 與 JCL，不需要 Python；也不實作需求單中的預覽功能。</p>
-<p>有效 PP4Z 權益與本機語言服務正常時，ZCodeScan 可以檢查本機來源；本節修改後僅重新掃描，不安排修正版的主機編譯或執行，也不準備或上傳遠端教材。修改範圍與測試指引在教材 <code>host-lab/CODE-QUALITY.md</code>。</p>
+<p>有效 PPZ 權益與本機語言服務正常時，ZCodeScan 可以檢查本機來源；本節修改後僅重新掃描，不安排修正版的主機編譯或執行，也不準備或上傳遠端教材。修改範圍與測試指引在教材 <code>host-lab/CODE-QUALITY.md</code>。</p>
 <h2 id="prepare">1. 先準備可修改的副本</h2>
 {{quality-prepare|準備這次的練習|Agent}}
 <p>確認 <code>host-lab/hardening/CKP02H.cbl</code> 已建立，PROGRAM-ID 為 CKP02H，其他業務邏輯與原版相同。這是保留在本機的改善練習程式。<code>before.txt</code> 保存改善前的副本，之後可用 Select for Compare 比較修改。</p>
 <h2 id="scan">2. 用 ZCodeScan 看實際檢查結果</h2>
 <ol><li>儲存並保持開啟 CKP02H.cbl，等待 COBOL 語言服務完成載入。</li><li>開啟命令選擇區，執行 <strong>IBM Z Open Editor: Execute IBM ZCodeScan</strong>。</li><li>在 <strong>Problems</strong> 檢視查看結果，保留規則名稱或代碼、行號與完整訊息。語法診斷、編譯警告與 ZCodeScan 訊息分開記錄。</li><li>切換至 <strong>Z Code</strong>，加入下方檔案並送出提問，讓 Bob 使用 ZCodeScan 取得結果。這可能重新掃描目前儲存的版本，不是自動讀取先前面板的快照。</li></ol>
 <p>先處理語言服務回報的語法錯誤。未設定 ZCodeScan 的 ZAPP profile 時會採用預設規則；若工作區已有自訂規則或 baseline，請記錄設定，避免把被隱藏的診斷當成已修正。</p>
-<p>若找不到命令或出現權益／語言服務錯誤，先確認 IBM Z Open Editor 已啟用、Bob 已登入及 PP4Z 權益。登入或切換團隊後可執行 Developer: Reload Window，重新檢查權益。仍無法執行時先做來源審閱，將掃描標為「未執行」。沒有診斷也要記下實際狀態；它不代表程式沒有任何風險。</p>
+<p>若找不到命令或出現權益／語言服務錯誤，先確認 IBM Z Open Editor 已啟用、Bob 已登入及 PPZ 權益。登入或切換團隊後可執行 Developer: Reload Window，重新檢查權益。仍無法執行時先做來源審閱，將掃描標為「未執行」。沒有診斷也要記下實際狀態；它不代表程式沒有任何風險。</p>
 {{sast-ask|一起看檢查結果|Z Code}}
 <p>展開 Bob 的工具執行紀錄，確認有取得 ZCodeScan 診斷，再抽查訊息與行號是否和「問題」面板一致。不要只核對總數；不同版本、規則或篩選條件可能造成差異。命名與寫法建議也不等於安全弱點，不必全部照單修改。若工具無法取得結果，可將面板中的完整訊息複製貼入對話，再請 Bob 分析。</p>
 <h2 id="improve">3. 試用 Improve Code，再決定修改範圍</h2>

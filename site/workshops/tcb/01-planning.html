@@ -25,7 +25,13 @@
 <p><strong>看回答時留意：</strong>前兩碼為 <code>00</code> 且第 14–16 位不是 <code>EOF</code> 才進行轉換；轉換是將原識別欄位第 3–10 位移到前面，再補兩個空白。資料裡的 EOF 與 READ AT END 是兩回事。註解提到公司統編，但這不代表程式有檢查統編有效性；完整業務定義仍需確認。</p>
 <p>如果回答太抽象，可以接著問：「請用前後各十個字元舉例，並把空白標出來。」若 Bob 提到資料庫、API 或未提供的呼叫者，追問：「這個判斷是從哪個檔案看出來的？」</p>
 <p>完成後，試著自己說明：CKP02 讀寫什麼、何時轉換、EOF 代表什麼，以及還有哪些業務問題待確認。後續<a href="02-documentation.html#story">程式文件單元</a>會再用 Z Code 的 Explain code 工作流程深入解讀，並整理成交接文件。</p>
-<h2 id="impact">2. 看看需求會影響哪些地方</h2>
+<h2 id="metadata">2. 先建立本機程式資訊</h2>
+<p>切換到 <strong>Z Architect</strong>，加入 CKP02，請 Bob 先掃描程式。Local Metadata 記錄程式結構、變數使用與敘述位置，讓接下來的分析有可查詢的依據。這個 Scan Program 與第 05 單元的 ZCodeScan 程式碼檢查用途不同。</p>
+<p class="mode-guide"><strong>Z Architect 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>先掃描，再分析</span><button type="button" data-copy="scan-program">複製 Prompt</button></div><pre id="scan-program">請先掃描 CKP02，建立後續分析需要的本機程式資訊。完成後，告訴我掃描了哪些檔案，有沒有缺少的內容。
+</pre><div class="expected"><strong>預期回應</strong><p>實際掃描檔案、工具回傳位置與缺少的相依；未執行時明確記錄。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>展開工具執行紀錄，確認 <code>scan_program</code> 已完成，並記下掃描的檔案及回傳位置；只看到 Bob 說「已了解程式」不算完成掃描。若缺少 Copybook，先補齊來源再重試。工具無法使用時依 <code>host-lab/PPZ-ANALYSIS.md</code> 排查，暫以來源審閱繼續，將掃描標為未完成。修改來源後需重新掃描。</p>
+<p>本步先處理 CKP02；Local Metadata 不代表已取得整個系統的呼叫關係。CIS14 等其他程式需分別確認掃描結果，未提供的外部相依仍保留待確認。</p>
+<h2 id="impact">3. 看看需求會影響哪些地方</h2>
 <p>這次以業務填寫的 Word 需求申請單開始。開啟教材的 <code>requests/change-application.docx</code>，閱讀目前的困擾與希望改善的方式；單內還有需要向申請人問清楚的地方。</p>
 <p><a href="https://raw.githubusercontent.com/nicholas-yahung-chien/tcb-bob-workshop/refs/heads/workshop/tcb-2026/requests/change-application.docx">下載 Word 需求申請單</a>。教材另保留 <code>requests/customer-email.eml</code> 作為同一需求的信件範例，本步使用 Word 申請單即可。</p>
 <p>將 <code>requests/change-application.docx</code> 加入 Bob 對話，切換到 <strong>Ask</strong>。若目前版本無法讀取 DOCX，請用 Word 開啟，將申請單內文複製到同一個對話，再送出下方問題。本步不需要 Puppeteer 或另裝 MCP；若 Bob 提議透過這些工具讀檔，請改用貼上內文的方式。</p>
@@ -36,7 +42,7 @@
 <p class="mode-guide"><strong>Z Architect 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>找出變更影響</span><button type="button" data-copy="z-impact">複製 Prompt</button></div><pre id="z-impact">根據這份需求申請單與剛才釐清的內容，哪些程式、資料和批次作業可能受影響？請對照目前看得到的程式，說明修改位置與原因；尚未確認的需求和相依關係請分開列出，不要當成已定案。
 </pre><div class="expected"><strong>預期回應</strong><p>已確認的影響，以及需要補資料才能確認的關係。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>如果流程要求連線 Z Understand，請選擇包含這支程式的專案。手邊只有本機檔案時，先分析看得到的內容，跨系統的關係留待補齊資料後確認。</p>
-<h2 id="plan">3. 把需求整理成計畫</h2>
+<h2 id="plan">4. 把需求整理成計畫</h2>
 <p>現在知道程式大致怎麼運作，就可以討論怎麼改。<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a> 約定文件的章節和檢查方式；提問時引用它，Bob 就有格式可以依循。</p>
 <p>規劃新需求時，現有功能和建議做法容易混在一起。因此這次多補一句，請 Bob 分開說明，方便你判斷哪些已經存在、哪些還要做。</p>
 <p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code>、<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>host-lab/CONNECTION.md</code>、<code>z-tests/run.jcl</code></p><div class="prompt"><div class="prompt-head"><span>規劃預覽功能</span><button type="button" data-copy="02-plan">複製 Prompt</button></div><pre id="02-plan">我想在批次執行前，先知道會改到多少筆資料。請閱讀 requests/change-application.docx，對照現有程式分析影響，再依 DOC-SPEC.md 規劃架構文件和實作清單。
@@ -45,7 +51,7 @@
 </pre><div class="expected"><strong>預期回應</strong><p>需要分析的範圍、文件內容，以及還需要確認的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>若 Bob 一次問了多個問題，請用「Q1：…、Q2：…」分別回答；設計方案另外選擇。請核對它記錄的答案，不讓未回答的事項變成已確認決策。</p>
 <p>閱讀計畫時，想想兩件事：哪些建議有程式可以對照？哪些還需要業務或系統資料？有疑問的地方，直接在同一個對話追問。</p>
-<h2 id="deliver">4. 請 Bob 寫成文件</h2>
+<h2 id="deliver">5. 請 Bob 寫成文件</h2>
 <p>計畫確認後，在同一個對話切換到 <strong>Agent</strong>。前面已經說清楚的內容，這裡不用再重述一遍。</p>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code>、<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>host-lab/CONNECTION.md</code>、<code>z-tests/run.jcl</code></p><div class="prompt"><div class="prompt-head"><span>依計畫完成文件</span><button type="button" data-copy="03-plan-deliver">複製 Prompt</button></div><pre id="03-plan-deliver">請依剛才確認的計畫和 requests/change-application.docx，完成架構文件與實作清單，存到 output，格式依 DOC-SPEC.md。
 
