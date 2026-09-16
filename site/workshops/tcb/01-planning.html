@@ -1,6 +1,12 @@
 <!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="從一個批次需求開始，練習看程式、問問題，再整理計畫。"><title>IBM Bob - 合庫 workshop · 賦能 Z 開發</title><link rel="icon" type="image/svg+xml" href="../../assets/bob-icon.svg"><link rel="alternate icon" href="../../assets/bob-favicon.ico"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/app.js" defer></script></head><body><a class="skip" href="#main">跳至主要內容</a><div class="utility">IBM Bob · 合作金庫 Workshop · 2026.09</div><header><a class="brand" href="../../index.html">IBM <span>Bob</span></a><nav aria-label="主要導覽"><a href="../../workshops/tcb/index.html">課程首頁</a><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop">GitHub ↗</a></nav></header><div class="layout with-side"><aside><p class="side-label">練習單元</p><nav aria-label="課程導覽"><a  href="00-setup.html">00　課前準備</a><a aria-current=page href="01-planning.html">01　需求規劃</a><a  href="02-documentation.html">02　COBOL 文件化</a><a  href="03-testing.html">03　測試與修正</a><a  href="04-logs.html">04　主機紀錄與 IMS 事件</a><a  href="05-sast.html">05　COBOL 程式碼檢查與改善</a><a  href="06-reference.html">06　成果與解答</a><a  href="07-help.html">07　常見問題</a><a  href="08-source-map.html">08　認識練習程式</a></nav><p class="progress" aria-live="polite"></p></aside><main id="main"><section class="hero"><p class="eyebrow">需求規劃</p><h1>這項需求會影響哪些程式？</h1><p class="lead">從一個批次需求開始，練習看程式、問問題，再整理計畫。</p></section><article><h2 id="story">動手修改前，先確認影響範圍</h2>
 <p>假設你要替資料轉換程式新增預覽功能，動手前需要先弄清楚：要修改哪幾支程式、哪些行的邏輯，以及是否影響其他作業。我們從這項需求開始，請 Bob 理解現有程式、分析影響範圍，再整理實作計畫。預覽功能要呈現的是「預計轉換幾筆資料」，與「需要修改幾支程式」分開說明。</p>
-<h2 id="ask">1. 先認識這支程式</h2>
+<h2 id="metadata">1. 準備：掃描程式，建立 Local Metadata</h2>
+<p>先切換到 <strong>Z Architect</strong>，掃描接下來要閱讀的程式，建立 Local Metadata（本機程式資訊），讓 Bob 在分析相依關係時能查詢程式結構與變數使用位置。</p>
+<p class="mode-guide"><strong>Z Architect 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>z-lab/CIS14/CIS14.cbl</code>、<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>準備程式分析所需的資訊</span><button type="button" data-copy="scan-program">複製 Prompt</button></div><pre id="scan-program">請先掃描 z-lab 裡的 CKP02 和 CIS14，建立分析程式與相依關係需要的 Local Metadata。完成後告訴我掃描結果，以及還需要補哪些檔案。
+</pre><div class="expected"><strong>預期回應</strong><p>掃描結果、檔案位置，以及需要補充的相依檔案。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>完成後展開 <code>scan_program</code> 工具紀錄，確認掃描完成。若缺少 Copybook，加入對應檔案後再掃描；工具無法使用時，請參考 <code>host-lab/PPZ-ANALYSIS.md</code>。</p>
+<p>準備好後，切換到 <strong>Ask</strong>，開始認識程式。</p>
+<h2 id="ask">2. 認識程式與相依關係</h2>
 <p>先理解各支程式的角色，再跟著一筆資料看 CKP02 的處理與轉換規則。不必先讀懂所有 COBOL 語法；切換到 <strong>Ask</strong>，一次問一個問題，看完回答再追問。這一段先理解現況，不修改程式或提交作業。</p>
 <h3 id="roles">A. 理解程式各自的角色</h3>
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>z-lab</code></p><div class="prompt"><div class="prompt-head"><span>分清用途與相依關係</span><button type="button" data-copy="z-roles">複製 Prompt</button></div><pre id="z-roles">這是一個我完全陌生的專案，請幫我認識這個系統是做什麼的、這些程式各自負責什麼？主要業務功能與程式分組是什麼？請把看得到的用途與相依關係整理給我，指出程式依據；看不出有關聯的，就先分開說明。
@@ -25,12 +31,6 @@
 <p><strong>看回答時留意：</strong>前兩碼為 <code>00</code> 且第 14–16 位不是 <code>EOF</code> 才進行轉換；轉換是將原識別欄位第 3–10 位移到前面，再補兩個空白。資料裡的 EOF 與 READ AT END 是兩回事。註解提到公司統編，但這不代表程式有檢查統編有效性；完整業務定義仍需確認。</p>
 <p>如果回答太抽象，可以接著問：「請用前後各十個字元舉例，並把空白標出來。」若 Bob 提到資料庫、API 或未提供的呼叫者，追問：「這個判斷是從哪個檔案看出來的？」</p>
 <p>完成後，試著自己說明：CKP02 讀寫什麼、何時轉換、EOF 代表什麼，以及還有哪些業務問題待確認。後續<a href="02-documentation.html#story">程式文件單元</a>會再用 Z Code 的 Explain code 工作流程深入解讀，並整理成交接文件。</p>
-<h2 id="metadata">2. 先建立本機程式資訊</h2>
-<p>切換到 <strong>Z Architect</strong>，加入 CKP02，請 Bob 先掃描程式。Local Metadata 記錄程式結構、變數使用與敘述位置，讓接下來的分析有可查詢的依據。這個 Scan Program 與第 05 單元的 ZCodeScan 程式碼檢查用途不同。</p>
-<p class="mode-guide"><strong>Z Architect 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>先掃描，再分析</span><button type="button" data-copy="scan-program">複製 Prompt</button></div><pre id="scan-program">請先掃描 CKP02，建立後續分析需要的本機程式資訊。完成後，告訴我掃描了哪些檔案，有沒有缺少的內容。
-</pre><div class="expected"><strong>預期回應</strong><p>掃描結果、檔案位置，以及需要補充的相依檔案。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-<p>完成後展開工具紀錄，查看 <code>scan_program</code> 的掃描結果與檔案位置。缺少 Copybook 或工具無法使用時，依 <code>host-lab/PPZ-ANALYSIS.md</code> 排查；修改來源後再掃描一次。</p>
-<p>本步先掃描 CKP02。分析其他程式時，再加入對應來源與相依檔案；跨系統關係需要搭配更多資料才能確認。</p>
 <h2 id="impact">3. 看看需求會影響哪些地方</h2>
 <p>這次以業務填寫的 Word 需求申請單開始。開啟教材的 <code>requests/change-application.docx</code>，閱讀目前的困擾與希望改善的方式；單內還有需要向申請人問清楚的地方。</p>
 <p><a href="https://raw.githubusercontent.com/nicholas-yahung-chien/tcb-bob-workshop/refs/heads/workshop/tcb-2026/requests/change-application.docx">下載 Word 需求申請單</a>。教材另保留 <code>requests/customer-email.eml</code> 作為同一需求的信件範例，本步使用 Word 申請單即可。</p>

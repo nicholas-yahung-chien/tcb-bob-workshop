@@ -397,6 +397,7 @@
   "scan-program": {
     "files": [
       "z-lab/CKP02.cbl",
+      "z-lab/CIS14/CIS14.cbl",
       "host-lab/PPZ-ANALYSIS.md"
     ],
     "response": "掃描結果、檔案位置，以及需要補充的相依檔案。"
