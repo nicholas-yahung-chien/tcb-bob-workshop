@@ -2,7 +2,7 @@
 
 ## 用途與入口
 
-PROGRAM-ID CKP02（第4行）；0000-MAIN-RTN（64）依序OPEN、迴圈PROCESS、CLOSE；來源皆為bank-source/reading/CKP02.TXT。這是靜態解讀，未在主機執行。
+PROGRAM-ID CKP02（第4行）；0000-MAIN-RTN（64）依序OPEN、迴圈PROCESS、CLOSE；來源皆為z-lab/CKP02.cbl。這份參考是來源解讀，未附學員本次主機執行證據；第 03 單元另以 RUN 驗證原版。
 
 ## 欄位與條件
 
@@ -31,10 +31,12 @@ OPEN I-O（73）→READ（75）→EOF=1才結束迴圈（67）。每筆判斷前
 前十位 0012345678 → 12345678 加兩個空白；第 11–400 位不變。前十位 AB12345678 保持不變；含 EOF 標記時保留原內容，但仍執行 REWRITE。補入的兩個空白位於第 9–10 位。
 重跑例：0000123456 → 00123456加兩空白 → 123456加四空白。本規則不保證冪等。
 
-合成 IDREC.cpy 將前 10 位、suffix 一位與 payload 389 位分開，payload 內包含第 14–16 位。IDSHIFT 會修改傳入記錄的記憶體內容；Python 批次函式的預覽模式則回傳原資料副本，written 為 0。TESTSHIFT 提供正常與 EOF 兩個 COBOL 案例，編譯與執行結果需另行確認。範例 JCL 執行 TESTSHIFT，使用前需填入環境設定。
+IDSHIFT 與 Python 模型另見 idshift-notes.md 及選做檔案，不是 CKP02 預覽功能的既有實作。
 
 ## 限制與測試矩陣
 
 來源未見FILE STATUS或完整統編校驗，I/O 失敗後的處理還需要另外確認。日期修訂標記不足以判定西元年份或作者意圖。
-資料集物理組織、主機code page、編譯器選項、外部備份與鎖定設定均未提供；實際設定需取得環境資料後確認。
+課程設定依 BOB-GUIDE.md：來源／中文測資 IBM-937，編譯 CODEPAGE(937),DBCS，連線 IBM-1371；測試輸入 FB400。正式資料集、外部備份與鎖定仍需確認，不能將課程已知設定也列為未知。
 測試包括正常轉換、非00、精準EOF位置、近鄰EOF、尾端bytes保留、空批、錯誤長度、重複執行。Python只模擬欄位規則，不能驗證主機FD、編碼、REWRITE或IMS行為。
+
+資料中的 EOF 在課堂情境表示最後一筆，但程式不據此停止讀檔。中文記錄按 bytes 核對，解碼後字元數不等於欄位位置。GENCKP 的 PRINTDD 展示完整合成資料；只有同一 job 的 CHECK1、CHECK2 與 RUNEMPTY 等紀錄才能證明本次基準結果。

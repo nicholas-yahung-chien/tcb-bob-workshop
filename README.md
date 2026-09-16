@@ -52,6 +52,6 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 
 選做的 Python 轉換範例可以在本機執行。COBOL、IMS 和 JCL 則需要對應環境，測試結果分開記錄。
 
-參考解答不包含在教材中。完成練習後，可從課程網頁「成果與解答」下載獨立 ZIP，再依頁面指引比較自己的成果。
+參考解答不包含在教材中。完成練習後，可從課程網頁「成果與解答」下載獨立 ZIP，先讀 reference/README.md 的單元對照，再比較自己的成果。新版包含 COBOL 需求與文件、主機及 IMS 報告寫法、講師真實紀錄節錄，以及第 05 單元的本機掃描紀錄範例；Python 僅為選做，參考紀錄不代表自己的作業已通過。
 
 原始碼權利歸原權利人，本 repo 不另行授予原始程式授權。

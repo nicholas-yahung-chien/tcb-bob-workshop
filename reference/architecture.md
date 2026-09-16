@@ -1,33 +1,42 @@
-# CR-01 架構參考答案
+# 預覽需求的架構參考
 
-## As-is：來源事實
+## 現況與依據
 
-CKP02是400字元定長檔更新程式（bank-source/reading/CKP02.TXT:25）；OPEN I-O（73）、READ（75/88）、REWRITE（86）。第82–84行的IF句點先結束，REWRITE不在條件內。第14–16位資料為EOF時只略過轉換。第94–95行將舊第3–10位加兩空白移回前十位；R-ID群組為10+1=11，各欄位長度要一併計入。
+z-lab/CKP02.cbl 第 25 行宣告 400 CHARACTERS；PIC X 與 PIC 9 的本課程記錄按 400 bytes 核對。第 73 行 OPEN I-O，第 75、88 行 READ，第 86 行 REWRITE。第 84 行的句點結束 IF，所以不符合轉換條件的記錄也會回寫。第 94–95 行把原第 3–10 位搬到第 1–8 位，第 9–10 位補空白。R-ID 群組是 10+1=11 bytes。
 
-## To-be：預覽功能提案
+目前 CKP02 沒有預覽模式。第 03 單元 RUN 會實際編譯並執行原版 CKP02；GENERATE 建立合成測資與 PRINTDD，不是新需求的預覽實作。SNAP1／SNAP2 保存各次實際輸入，CHECK1／CHECK2 比較整筆資料。這些來源已提供，但學員本次是否成功仍需自己的紀錄。
 
-合成bytes → 全批驗證 → 純函式轉換 → 統計 → dry-run原資料副本／write模式回傳轉換副本。
-這是Python行為模型，不對來源檔REWRITE，不是已部署的主機架構。輸入400 bytes；回傳records/total/eligible/changed/unchanged/written/dry_run。eligible和changed概念不同，但本規則值相等；written為模型異動筆數，不能當CKP02實體寫入次數。
+## 業務回答與設計提案
 
-| 分析領域 | 已知／提案／缺件 | 負責確認角色 |
-|---|---|---|
-| COBOL | CKP02為已知來源；新增dry-run需分析OPEN與REWRITE路徑；本次不改原始程式 | 主機開發 |
-| Java | 未提供；若未來以Java啟動批次，才需確認bytes與錯誤介面 | 整合開發 |
-| Database | CKP02未見SQL/IMS呼叫；CIS14有IMS但未證明直接相連；Db2 schema 需另行取得 | DBA/IMS管理 |
-| Transaction | CKP02未見checkpoint；全批一致性與中斷回復待設計 | 主機平台 |
-| API | 未提供實際API；未來API化屬提案，須版本化與授權 | API負責人 |
-| Batch | 定長檔、EOF、排程重跑與並行需釐清；正式JCL未提供 | 批次維運 |
-| Test | 執行本機byte模型；主機編譯、code page、FD與REWRITE需另外驗證 | QA/主機開發 |
+需求來源為 requests/change-application.docx；來件是訪談起點。第 02 單元的課堂回答範例確認：計數以 DISPLAY 即可；正式排程沒有防止重複機制；資料中 EOF 表示最後一筆；試跑與正式不一致時需找出哪幾筆。這些是課程情境的回答，不能推廣為其他專案的客戶承諾。差異明細格式、保留期限及正式資料集仍待確認。
 
-## 風險與回復
+一個可討論的 COBOL 方案是新增只讀預覽程式（暫稱 CKP02S），用 OPEN INPUT 判斷每筆是否會轉換，輸出計數而不 REWRITE；正式 CKP02 另加處理時計數，並由作業保留前後資料供差異比較。程式名稱及實作尚未定案，教材與遠端未提供這項預覽程式。不能用正式跑完後再掃描的數字當成剛才的實際異動筆數。
 
-00開頭的key第一次轉換後仍可能以00開頭，重跑可能再次變更，因此需要測試連續執行的結果。正式部署需核對輸入版本、備份與hash、禁止同檔並行更新、定義失敗停止與回復到整批一致版本。編碼以實際主機code page為準，ASCII模型不覆蓋DBCS/EBCDIC。統計只記計數，不記完整客戶資料。
+預覽使用確定版本的輸入 → 輸出預估計數及批次識別 → 人工核對 → 正式作業使用同一版本 → 記錄實際計數與前後差異。若分兩項作業，不能用 && 暫存資料集跨 job 保存，需另定受控的永久副本、版本識別、權限及清理方式。JCL 的 RC 條件不能取代人工確認。
 
-## 還需要哪些資料
+## 各面向的影響
 
-正式JCL、編譯選項、真實測資、批次調度、寫檔權限、備份位置、PSB/DBD與整合介面均待相關角色確認。範例 JCL只呼叫合成TESTSHIFT，不是CKP02正式job。
+| 面向 | 現況、提案與待確認 |
+|---|---|
+| COBOL | 預覽及正式計數需保持 CKP02 同一套條件；共用規則或雙份維護的做法待選定。 |
+| Java | 未提供此需求的 Java 啟動程式，不假設需要新增。 |
+| Database | 原版 CKP02 不呼叫 IMS；IMSRUN 是教學用的循序檔橋接，不能當成客戶正式資料庫架構。 |
+| Transaction | 原地更新不具自動整批回復；中途失敗後可能已有部分資料改變。 |
+| API | 未提供 API 來源，暫不將 API 化納入實作。 |
+| Batch | 需決定人工確認、輸入版本、並行排除及重跑的程序。沒有既有防重機制不代表已決定如何補上。 |
+| Test | 新功能需獨立設計測試；原版基準成功不能證明預覽已完成。第 05 的 CKP02H 只做本機改善與掃描。 |
+
+## 已知課程環境與待補資訊
+
+依 host-lab/CONNECTION.md、BOB-GUIDE.md、z-tests/run.jcl：連線統一 tcb-rse／IBM-1371，來源與中文測資以 IBM-937 準備，編譯 CODEPAGE(937),DBCS。COBOL／JCL 資料集為 PDSE、FB80；基準輸入 &&WORK／&&EMPTY 為 FB400。這些不是未知項目；正式 INPUT1、排程、資料保留及下游相依則仍待環境負責人提供。
+
+## 風險與下一步
+
+第 14–16 bytes 的 EOF 只抑制本筆轉換，原程式仍 REWRITE 並繼續 READ，不能因業務說「最後一筆」就改寫成直接停止。重跑案例第一次仍以 00 開頭，因此會再次改變。備份與差異比對需保留完整 400 bytes，中文顯示字數不能代替 byte 位置。先確認資料版本與明細保存方式，再定案作業切分；以上提案未實作、未部署。
 
 ## 來源核對
+
+下列 false 表示這份參考未附學員本次執行證據，並非課程編碼未知。
 
 ```json
 {"id_group_bytes":11,"id_field_bytes":10,"marker_field":"R-NAME","rewrite_scope":"all-read-records","mainframe_encoding_confirmed":false,"repeat_input":"0000123456","repeat_once":"00123456  ","repeat_twice":"123456    "}
