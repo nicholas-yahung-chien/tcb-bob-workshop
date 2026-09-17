@@ -73,7 +73,7 @@ CKP02 不呼叫 IMS，JES、編譯清單與比較結果不是 IMS transaction lo
 
 ## 讀取中文作業輸出
 
-本次工作坊統一使用 tcb-rse（IBM-1371）開啟來源、JCL、JES 紀錄、中文 PRINTDD 與編譯清單。從「工作 → tcb-rse → 自己的作業」開啟所需 DD，確認中文與換行正常，再另存至 host-lab/logs/<job ID>/<step>/。保留雙引號內尾端空白；Alt+Z 可切換畫面自動折行。
+使用 tcb-rse（IBM-1371），在「工作」對自己的 JOB 按右鍵選「全部下載」，保存完整紀錄，例如 host-lab/logs/<job ID>/。保留下載產生的檔名與目錄結構，不選「以二進位全部下載」。開啟下載的 PRINTDD 與編譯清單，確認中文、換行及雙引號內的空白正常；若個別檔案有亂碼，再從 tcb-rse 開啟該 DD，載入全部內容並另存 UTF-8 副本。Alt+Z 可切換畫面自動折行。
 
 若仍顯示舊的異常內容，關閉舊分頁並執行 Developer: Reload Window，再從 tcb-rse 開啟。仍有問題時，可由講師使用已安裝的官方 RSE CLI 指定字碼重新讀取；JOB12345 與 108 必須替換為實際 job ID 與 DD 編號：
 

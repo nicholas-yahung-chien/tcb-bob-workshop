@@ -27,7 +27,7 @@ CCKP 的編譯選項只依已確認的方案調整。JCL 每行維持有效長�
 1. 審閱 Bob 產生的差異。透過 tcb-rse 在自己的 TCBLAB.COBOL 新增 CKP02R 成員，將 host-lab/rc4/CKP02R.cbl 上傳至該成員。若成員已存在，先比較，不直接覆寫不同版本。
 2. 重新從主機開啟 CKP02R，確認 PROGRAM-ID、修改位置、中文與換行。這一步僅上傳新成員，原版課程仍不需上傳 CKP02。
 3. 在本機 run-rc0.jcl 選 Submit as JCL，以 tcb-rse 提交。記下新 job ID。不要把新版另存到原本的遠端 RUN。
-4. 單獨開啟並以 UTF-8 另存完整的 JES 與編譯清單、GENERATE 及 CHECK1、CHECK2 紀錄。中文不要依賴「全部下載」；先確認內容可讀。若有分頁，載入所有頁面。
+4. 對 JOB 按右鍵選「全部下載」，取得完整 JES、編譯清單、GENERATE 及 CHECK1、CHECK2 紀錄。核對中文顯示；若有亂碼，再單獨開啟該 DD，載入全部頁面後另存 UTF-8 副本。
 5. 將新紀錄加入 Bob，使用網頁的修正版核對 Prompt。確認 CCKP 真正編譯 CKP02R，所有 15 步執行且 RC 0、原警告消失、CHECK1/CHECK2 各七筆 PASS、CHECKED=0007 ERRORS=0000、RUNEMPTY RC 0。其他新警告或缺件分開記錄。
 
 保存每次 job ID 與報告。靜態審閱、上傳成功或整體 RC 0，都不能單獨代表完整測試通過。

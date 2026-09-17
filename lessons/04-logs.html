@@ -1,5 +1,5 @@
 <h2 id="host">先看自己剛跑的 CKP02</h2>
-<p>將上一單元下載的 JES、編譯與比對紀錄資料夾加入 Bob 對話，連同 run.jcl 一起看。可直接加入工作區根目錄的 JOB 資料夾，不必搬到 host-lab/logs。中文檔案請使用單獨開啟後另存的 UTF-8 版本；「全部下載」在本環境可能造成中文亂碼。</p>
+<p>將上一單元下載的 JES、編譯與比對紀錄資料夾加入 Bob 對話，連同 run.jcl 一起看。可直接加入工作區根目錄的 JOB 資料夾，不必搬到 host-lab/logs。先對 JOB 按右鍵選「全部下載」，再核對中文檔案；有亂碼時，依第 03 單元的排解方式補存該 DD。</p>
 {{host-logs|核對自己的執行結果|Ask}}
 <p>先從 CCKP 的 SYSPRINT 核對 <code>CODEPAGE(937)</code> 與 <code>DBCS</code>，確認編譯來源是自己的 <code>TCBLAB.COBOL(CKP02)</code>。JESMSGLG、JESJCL、JESYSMSG 從 tcb-rse（IBM-1371）開啟；CHECK1、CHECK2 比對紀錄也從 tcb-rse 開啟，識別值以雙引號包住，例如 <code>ACTUAL-ID="12345678  "</code>。CCKP 編譯清單從 tcb-rse（IBM-1371）開啟，以正確顯示中文註解。</p>
 <p>GENERATE／SYSOUT 使用 tcb-rse；中文 PRINTDD 同樣從 tcb-rse（IBM-1371）開啟。GENERATE／PRINTDD 使用中文 IBM-937 測資，每筆以單一完整 400-byte 資料行印出；前後雙引號用來保留尾端空白，不屬於資料。中文包含雙位元字元與 SO／SI 控制碼，因此解碼後的字數、畫面欄號不等於主機 byte 位置。GENERATE／SYSOUT 另外顯示 CASE、ID 與 EOF-MARKER-AT-014=YES/NO，表示第 14–16 bytes 是否為 EOF；不直接印出可能切到半個中文字的三個 bytes。CASE 0003 為 YES，所以不轉換；CASE 0005 的 EOF 位於第 12–14 bytes，判斷為 NO，仍轉換。公司、姓名、地址及備註均為虛構中文；未知代碼留空，數字欄位保留數字。這是測資輸出，尚未實作需求中的預覽功能。</p>
@@ -23,7 +23,7 @@ EXPECT-ID="123456    "</code></pre>
 <details id="rc4"><summary>延伸練習：讓 RC 4 回到 RC 0（選做）</summary>
 <p>兩次資料比對通過，不代表編譯沒有警告。這段練習請 Bob 分析警告、討論修正，再自動產生修正版。保留原版 CKP02 與原始測試報告，方便比較；這不是需求單的預覽功能實作。</p>
 <h3>1. Ask：先看懂每個警告</h3>
-<p>加入自己的完整作業紀錄資料夾；若編譯清單有分頁，先載入全部再另存。</p>
+<p>對 JOB 按右鍵選「全部下載」，將完整作業紀錄資料夾加入對話。</p>
 {{rc4-ask|這些警告是怎麼來的？|Ask}}
 <h3>2. Plan：討論怎麼改、怎麼驗證</h3>
 {{rc4-plan|怎麼修正又不改變結果？|Plan}}
@@ -49,7 +49,7 @@ EXPECT-ID="123456    "</code></pre>
 <p>在 Zowe Explorer 的「資料集 → tcb-rse」開啟自己的 <code>TCBLAB.JCL(IMSRUN)</code>，核對內容與本機 <code>z-tests/ims-run.jcl</code> 相同。確認 Bob 保存的 <code>host-lab/ims/review.md</code> 後，在遠端 IMSRUN 成員按右鍵提交作業（Submit Job），記下新 job ID。原本的 RUN 保留。</p>
 <p>若只是閱讀與執行，直接使用已備妥的作業即可。只有想修改時，才另存個人 <code>host-lab/ims/run.jcl</code>；後續分析請加入自己實際提交的版本。</p>
 <h3>3. 從實際紀錄確認更新與回復</h3>
-<p>單獨開啟完整 JES、編譯清單、各項資料比對與 IMS 執行紀錄，載入所有頁面後另存 UTF-8。把實際保存的資料夾加入 Bob 對話。中文紀錄不要依賴「全部下載」。</p>
+<p>對 IMS 作業按右鍵選「全部下載」，取得 JES、編譯清單、資料比對與 IMS 執行紀錄。核對中文顯示後，把下載的資料夾加入 Bob 對話；若個別檔案有亂碼，依第 03 單元的方式補存。</p>
 {{ims-host-logs|確認 IMS 真的做了什麼|Ask}}
 <p>回復練習主動呼叫 ROLB，確認尚未提交的更新已撤回；正式更新呼叫 CHKP，接著由另一個 IMS 執行步驟重新查詢並比對完整 400 bytes。本練習觀察批次作業主動更新、取消與提交的結果。</p>
 <p>程式印出的 <code>APPLICATION DIAGNOSTIC</code> 是應用程式診斷。IMS 的 DFS 訊息是系統診斷；另外由 DFSERA10 讀取實際 IEFRDER 日誌並列印的內容，才是本次 IMS 系統日誌證據。將三種紀錄放在一起核對，了解程式與 IMS 各自回報了什麼。</p>
