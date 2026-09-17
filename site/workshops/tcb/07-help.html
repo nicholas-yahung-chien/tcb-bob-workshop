@@ -42,7 +42,7 @@
 <details><summary>整項作業 RC 0004，是測試失敗嗎？</summary><p>不能只看最高 RC。先從 JESYSMSG 找出是哪個 step，再閱讀該步驟的完整清單。原版 CCKP 的編譯警告可能造成 RC 4，但仍須核對實際診斷；不能因為範例有同樣 RC 就認定原因相同。兩次比對、空檔及其餘步驟各自確認，缺少的紀錄列為待確認。第 04 單元另有分析與修正 RC 4 的選做練習。</p></details>
 <details><summary>在哪裡看每次轉換前後的差異？</summary><p>CHECK1／CHECK2 的 BEFORE-ID 是各次實際轉換前資料，ACTUAL-ID 是轉換後，EXPECT-ID 是測試預期。CHECK2 的 BEFORE-ID 應接續 CHECK1 的 ACTUAL-ID，不是最初測資。完整資料看 GENERATE／PRINTDD；實際比對則由 CHKCKP 檢查整筆 400 bytes。若紀錄缺少 SNAP1／SNAP2 或 BEFORE-ID，請核對 JCL 版本及下載內容。</p></details>
 <details><summary>CASE 0003 為什麼不轉換？重跑時有些資料為什麼又變了？</summary><p>CASE 0003 的第 14–16 bytes 是 EOF，因此略過轉換；原程式仍回寫並讀下一筆。CASE 0004 第一次轉換後仍以 00 開頭，所以第二次還會轉換。這是原版行為，不是比對程式失敗。中文顯示字數不等於 byte 位置，判斷 EOF 時以程式位置與測資定義為準。</p></details>
-<h2 id="ims-results">IMS 延伸練習的疑問</h2>
+<h2 id="ims-results">IMS 練習的疑問</h2>
 <details><summary>IMSRUN 和 IMSEVTS 是真實 IMS 嗎？可以重跑嗎？</summary><p>兩者使用真實 IMS DB 的 DL/I 批次環境，資料是隔離的教學測資，不是 IMS TM 線上交易。IMSRUN 由 IMSCKP 匯出循序檔交給原版 CKP02，再更新 IMS；IMSEVTS 是另一項父子區段事件練習，不執行 CKP02。</p><p>每次完整提交都會建立作業專用資料與資源，結束後清除，可重複練習。不需要手動清除共享資料庫，也不以中途 RESTART 取代完整重跑。已有的 IMSCKP／IMSEVT 來源成員會保留。詳見<a href="04-logs.html">第 04 單元</a>。</p></details>
 <details><summary>IMSEVTS 出現 U3001 或沒有 END，代表失敗嗎？</summary><p>CUT 刻意觸發 U3001，不會印出正常 END。仍要用同一 job 的 JES 確認實際終止碼，再核對 CHECKA 確實執行且 RC 0。完整預期是 17 步中 16 步 RC 0、CUT U3001；其他異常不能一律當成預期。只有 CUT 的 SYSOUT 時，先列出還缺的證據，補齊後更新結論。</p></details>
 <details><summary>DELAY 約兩秒，表示 IMS 查詢很慢嗎？SYSOUT 就是 IMS 系統日誌嗎？</summary><p>DELAY 的等待安排在 GU 之前；請分開看 WAIT-MS 與 GU-MS，不把等待當成查詢故障。計時刻度為 10 ms，數值 0 也不表示完全不耗時。APPLICATION DIAGNOSTIC 是應用程式輸出，JES／DFS 是系統訊息，DFSERA10 才是課程用來列印真實 IMS 二進位日誌的工具；三種證據分開引用。</p></details>

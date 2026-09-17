@@ -12,6 +12,6 @@
 
 主機測試材料集中在 z-tests/：GENCKP.cbl、CHKCKP.cbl、fixtures.json、run.jcl 與 manifest.json。確認五份檔案齊全；個人配置、從主機另存的 JCL、報告與紀錄放在 host-lab/。environment.md 與個人 run.jcl 不包含在共用教材 ZIP：前者依第 00 單元建立，後者僅在本機缺檔時依第 03 單元下載一次。
 
-選做第 04 單元延伸練習時，另確認 host-lab/RC4-LAB.md、host-lab/IMS-LAB.md 、z-tests/ims-run.jcl 與 z-tests/IMSCKP.cbl。IMS 範本內含教學用 DBD 與 PSB，CIMS 讀取已備妥的遠端 COBOL(IMSCKP) 獨立來源，同一份作業已備妥於自己的 TCBLAB.JCL(IMSRUN)，不需學員重新產生或上傳。核對結果與報告放在 host-lab/ims；只有自行修改時才另存個人 JCL。它不取代基準 run.jcl，也不是客戶正式 IMS 環境的配置。
+第 04 單元需確認 host-lab/IMS-LAB.md、host-lab/IMS-EVENTS.md、z-tests/ims-run.jcl、z-tests/IMSCKP.cbl、z-tests/imsevts.jcl 與 z-tests/IMSEVT.cbl。RC 4 修正為選做，另依 host-lab/RC4-LAB.md 操作。IMS 範本內含教學用 DBD 與 PSB，CIMS 讀取已備妥的遠端 COBOL(IMSCKP) 獨立來源，同一份作業已備妥於自己的 TCBLAB.JCL(IMSRUN)，不需學員重新產生或上傳。核對結果與報告放在 host-lab/ims；只有自行修改時才另存個人 JCL。它不取代基準 run.jcl，也不是客戶正式 IMS 環境的配置。
 
 確認 `.bob/skills/cobol-explain-zh-tw/SKILL.md` 與 `.bob/skills/program-docs-zh-tw/SKILL.md` 齊全；保留 `.bob/rules/language.md`。Explain code 使用前者，請學員在 Bob Settings → Skills 核對它為 Workspace 且 Active 已開啟。Generate program documentation 已在課程環境確認能直接產生中文正文，直接使用產生的文件，不要求再呼叫翻譯技能。後者只在學員需要翻譯英文正文時作為備援。檔案存在不等於已確認技能啟用，不要在準備階段自動執行工作流程。

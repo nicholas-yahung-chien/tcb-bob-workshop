@@ -1,6 +1,6 @@
 # 參考文件怎麼使用
 
-這份參考包含：01 需求規劃、02 COBOL 文件化、03 CKP02 基準作業、04 主機紀錄與真實 IMS 延伸、05 本機程式改善與 ZCodeScan 重掃描。可用來比較文件寫法、推導與核對方式。請保留自己的成果，挑選有幫助的內容調整。
+這份參考包含：01 需求規劃、02 COBOL 文件化、03 CKP02 基準作業、04 主機紀錄與 IMS 練習、05 本機程式改善與 ZCodeScan 重掃描。可用來比較文件寫法、推導與核對方式。請保留自己的成果，挑選有幫助的內容調整。
 
 | 單元 | 參考檔案 | 學員成果位置與用途 |
 |---|---|---|
@@ -8,8 +8,8 @@
 | 02 | program.md、facts.json、impact-analysis.md、development-summary.md | output/；現有行為、變更影響及白話開發說明 |
 | 03 | jcl-review.md、host-test-report.md | host-lab/jcl-review.md、host-lab/test-report.md；既有 RUN 的核對範例 |
 | 04 RC 4 選做 | rc4-review.md | host-lab/rc4/；警告分析與修正版證據的寫法 |
-| 04 IMSRUN 選做 | ims-test-report.md | host-lab/ims/test-report.md；IMS 資料串接、回復與提交 |
-| 04 IMSEVTS 選做 | ims-events-report.md | host-lab/ims/events-report.md；父子區段、受控中止及耗時 |
+| 04 IMSRUN | ims-test-report.md | host-lab/ims/test-report.md；IMS 資料串接、回復與提交 |
+| 04 IMSEVTS | ims-events-report.md | host-lab/ims/events-report.md；父子區段、受控中止及耗時 |
 | 04 講師實例 | observed-ims-example.md | JOB01118 的原始訊息節錄與判讀，不是自己的執行證據 |
 | 05 | code-quality-review.md | host-lab/hardening/review.md；實際掃描及修改理由 |
 | 延伸閱讀 | customer-analysis.md、idshift-notes.md | CIS14 審閱及 IDSHIFT 比較，依選做項目閱讀 |

@@ -1,14 +1,14 @@
 <h2 id="files">先從哪支程式開始？</h2>
-<p>第 01／02 單元從 CKP02 認識欄位與轉換流程，第 03 單元執行同一支原版程式，第 04 單元分析主機紀錄與選做 IMS 練習，第 05 單元另建本機 CKP02H 改善副本。CIS14、STANCVT 與 SYSOCP31 則供延伸閱讀，不必依序全部執行。</p>
-<p>第 04 單元的<a href="04-logs.html#ims-host">真實 IMS 延伸練習</a>使用教學用資料庫與輔助程式串接 CKP02。它不代表 CIS14 的 IMS 環境或外部相依程式已經備妥；閱讀 CIS14 時仍需分別確認。</p>
+<p>第 01／02 單元從 CKP02 認識欄位與轉換流程，第 03 單元執行同一支原版程式，第 04 單元分析主機紀錄並執行 IMS 練習，第 05 單元另建本機 CKP02H 改善副本。CIS14、STANCVT 與 SYSOCP31 則供延伸閱讀，不必依序全部執行。</p>
+<p>第 04 單元的<a href="04-logs.html#ims-host">IMS 資料庫練習</a>使用教學用資料庫與輔助程式串接 CKP02。它不代表 CIS14 的 IMS 環境或外部相依程式已經備妥；閱讀 CIS14 時仍需分別確認。</p>
 <table><tr><th>程式</th><th>可以練習什麼</th><th>閱讀時需要留意</th></tr><tr><td>CKP02</td><td>批次轉換、欄位位置與重跑行為</td><td>課程 JCL 與測試設定已備妥；生產配置另待提供</td></tr><tr><td>CIS14 與 Copybook</td><td>資料加工、IMS 呼叫及程式相依</td><td>部分外部程式與 IMS 環境未包含在檔案中</td></tr><tr><td>STANCVT</td><td>七位序號遞增與邊界情況</td><td>呼叫方如何使用序號，需要另外了解</td></tr><tr><td>SYSOCP31</td><td>訊息輸出、編碼轉換與錯誤處理</td><td>部分巨集和外部程式需要補齊</td></tr></table>
 <h2 id="helpers">主機練習裡的程式各自做什麼？</h2>
 <table><tr><th>程式與作業</th><th>課程用途</th><th>執行範圍</th></tr>
 <tr><td>CKP02／RUN</td><td>第 03 單元的基準測試，實際讀取及回寫循序檔</td><td>原版 CKP02 已備妥於自己的主機成員，包含兩次轉換與空檔測試；尚無預覽功能</td></tr>
 <tr><td>GENCKP</td><td>產生七筆中文合成測資、兩次預期結果與空檔；PRINTDD 展示完整資料</td><td>由 RUN 等教學作業呼叫，資料不是客戶正式資料，也不是需求中的預覽輸出</td></tr>
 <tr><td>CHKCKP</td><td>比對完整 400 bytes，印出各次 BEFORE-ID、ACTUAL-ID 與 EXPECT-ID</td><td>CHECK1／CHECK2 的 BEFOREDD 分別使用 SNAP1／SNAP2 保存的實際轉換前資料</td></tr>
-<tr><td>IMSCKP／IMSRUN</td><td>第 04 單元選做：IMS 載入、匯出、更新、回復與提交</td><td>已預先備妥；IMSCKP 匯出循序檔交給原版 CKP02，再將結果更新至作業專用 IMS 資料庫</td></tr>
-<tr><td>IMSEVT／IMSEVTS</td><td>第 04 單元選做：父子區段、GNP、重複新增、受控中止與耗時判讀</td><td>已預先備妥的獨立 IMS 批次練習，不執行 CKP02</td></tr></table>
+<tr><td>IMSCKP／IMSRUN</td><td>第 04 單元：IMS 載入、匯出、更新、回復與提交</td><td>已預先備妥；IMSCKP 匯出循序檔交給原版 CKP02，再將結果更新至作業專用 IMS 資料庫</td></tr>
+<tr><td>IMSEVT／IMSEVTS</td><td>第 04 單元：父子區段、GNP、重複新增、受控中止與耗時判讀</td><td>已預先備妥的獨立 IMS 批次練習，不執行 CKP02</td></tr></table>
 <p>IMS 兩項作業都使用真實 DL/I 呼叫與隔離測資，每次完整提交重新建立作業專用資源，結束後清除；不是 IMS TM 線上交易。來源成員保留，不需每次上傳。依<a href="04-logs.html">第 04 單元</a>及各自指引核對，不混用 RUN、IMSRUN 與 IMSEVTS 的步驟清單。</p>
 <p>第 04 單元另有管理者視角的共享 IMS 區域紀錄閱讀，依 <code>host-lab/IMS-ADMIN.md</code> 取得現有 STC 的 JES 紀錄。這項練習閱讀共享區域的既有紀錄；前面的 IMSCKP 與 IMSEVT 則用來觀察個別批次作業。</p>
 <h2 id="variants">CKP02R、CKP02H 和 IDSHIFT 是同一件事嗎？</h2>

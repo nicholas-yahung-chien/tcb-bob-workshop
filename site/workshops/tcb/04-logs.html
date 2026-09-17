@@ -45,7 +45,7 @@ EXPECT-ID="123456    "</code></pre>
 <p>修正版結果另存 <code>host-lab/rc4/test-report.md</code>，原版報告保留。若仍有警告，先核對新訊息與來源，不改成忽略所有警告。</p>
 </details>
 <details><summary>紀錄中出現額外的控制字元？</summary><p>JES 系統紀錄使用 tcb-rse（IBM-1371）可避免本次遇到的行尾 NEL。CHECK1、CHECK2 已改用雙引號，使用 tcb-rse 可正確顯示且沒有行尾 NEL。中文 PRINTDD 與編譯清單同樣使用 tcb-rse（IBM-1371）。若仍異常，關閉舊分頁並重新載入視窗，再依 CONNECTION.md 排查；保留原始紀錄。</p></details>
-<details id="ims-host"><summary>延伸練習：把 CKP02 串接到真正的 IMS 資料庫（選做）</summary>
+<h2 id="ims-host">把 CKP02 串接到真正的 IMS 資料庫</h2>
 <p>這份作業使用主機上的 IMS DL/I 資料庫批次環境。先建立本次作業專用的測試資料庫，將資料匯出給原版 CKP02 轉換，再由 IMS 輔助程式寫回。CKP02 本身仍讀寫循序檔；這不是把 CKP02 改成線上交易，也尚未實作需求單的預覽功能。</p>
 <p>資料庫、DBD、PSB 與載入程式庫均屬於這次作業，重新提交就會重新建立測資。沿用前面的七筆虛構中文資料，另外加上固定案例編號作為 IMS 鍵值，避免識別值轉換後改變資料庫鍵值。開始前請依 <code>host-lab/IMS-LAB.md</code> 核對環境與個人權限。</p>
 <h3>1. 先看懂資料如何進出 IMS</h3>
@@ -69,9 +69,9 @@ EXPECT-ID="123456    "</code></pre>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/IMS-LAB.md</code>、<code>z-tests/ims-run.jcl</code>、<code>z-tests/IMSCKP.cbl</code></p><div class="prompt"><div class="prompt-head"><span>留下 IMS 練習報告</span><button type="button" data-copy="ims-host-report">複製 Prompt</button></div><pre id="ims-host-report">請把剛才確認的 IMS 執行結果整理到 host-lab/ims/test-report.md，讓沒參與操作的人也看得懂資料怎麼流動、哪裡有更新或回復，以及你用哪些紀錄確認結果。請保留 job ID、step 和訊息位置；沒實際測到的情況另外列出，不要和前面的 CKP02 基準測試混在一起。
 </pre><div class="expected"><strong>預期回應</strong><p>host-lab/ims/test-report.md，附實際 job、step、訊息與待確認事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>成果保存在 <code>host-lab/ims/test-report.md</code>，與原版及 RC 4 修正版報告分開。報告記下自己的 job ID，方便回頭查閱。</p>
-</details>
-<details id="story"><summary>延伸練習：從真實 IMS 紀錄判斷操作結果（選做）</summary>
-<p>這次直接使用主機上的 IMS DB 批次作業，觀察父子區段查詢、重複新增後回復、受控中止與等待。這是獨立的 IMSEVT 練習程式，不修改 CKP02，也不使用預製 CSV。即使沒有先跑 IMSRUN，也可以執行本練習。</p>
+
+<h2 id="story">從真實 IMS 紀錄判斷操作結果</h2>
+<p>這次直接使用主機上的 IMS DB 批次作業，觀察父子區段查詢、重複新增後回復、受控中止與等待。這是獨立的 IMSEVT 練習程式，不修改 CKP02，也不使用預製 CSV。IMSEVTS 會建立自己的測試資料庫，可獨立重跑。</p>
 <h3>1. 先看懂情境，再提交已備妥的作業</h3>
 <p>本機的 <code>z-tests/IMSEVT.cbl</code> 與 <code>z-tests/imsevts.jcl</code>，已分別備妥於自己的 <code>TCBLAB.COBOL(IMSEVT)</code> 與 <code>TCBLAB.JCL(IMSEVTS)</code>。不需要另外產生或上傳檔案。作業會建立一筆虛構父資料與一筆明細，每次完整重跑都重新建立自己的暫存資料庫。</p>
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/IMS-EVENTS.md</code>、<code>z-tests/IMSEVT.cbl</code>、<code>z-tests/imsevts.jcl</code></p><div class="prompt"><div class="prompt-head"><span>帶我看這些情境</span><button type="button" data-copy="ims-events-prepare">複製 Prompt</button></div><pre id="ims-events-prepare">請帶我看這份 IMS 練習會做什麼。父資料和明細是怎麼連在一起的？哪些地方是刻意安排的例外，執行後應該看哪些紀錄？先幫我核對已準備好的程式與 JCL，不用改程式。
@@ -95,7 +95,7 @@ EXPECT-ID="123456    "</code></pre>
 </pre><div class="expected"><strong>預期回應</strong><p>逐項核對本次 job、step、DD 與訊息，更新已補齊證據的結論。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>報告存於 <code>host-lab/ims/events-report.md</code>。應用程式診斷、JES／DFS 訊息與 PDUP 的 IMS 日誌列印分開引用。補齊紀錄後，請更新先前尚未確定的判斷。</p>
 <label class="check"><input type="checkbox" data-check="我能分清楚業務結果、測試結果與實際終止碼"><span>我能分清楚業務結果、測試結果與實際終止碼</span></label><label class="check"><input type="checkbox" data-check="我能指出等待發生在哪一段，並附上紀錄"><span>我能指出等待發生在哪一段，並附上紀錄</span></label>
-</details>
+
 
 <details id="ims-admin"><summary>延伸練習：從系統管理者角度閱讀目前 IMS 子系統紀錄（選做）</summary>
 <p>這次觀察共享 IMS 子系統的運作紀錄。它與前面 IMSRUN、IMSEVTS 的獨立批次作業不同，不需執行新程式，也不練習 IMS TM 訊息收送。</p>
