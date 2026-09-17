@@ -27,7 +27,7 @@
 
 搭配實際 run.jcl、z-tests/fixtures.json，讀取同一作業的 JESMSGLG、JESJCL、JESYSMSG、CGEN/SYSPRINT、CCKP/SYSPRINT、GENERATE/SYSOUT、GENERATE/PRINTDD、CHECK1/SYSOUT、CHECK2/SYSOUT。同名 DD 依 step 分開辨識；已修正轉碼的副本須註明來源，保留原下載檔。確認實際缺檔後再請學員補充，不能借用其他作業結果。
 
-所有 JES 紀錄、SYSOUT、中文 PRINTDD 與編譯清單均使用 tcb-rse（IBM-1371）開啟並另存。確認中文與換行正常，保留欄位空白；異常時依下方排查指引處理。
+使用 JOB 右鍵選單的「全部下載」取得 JES、SYSOUT、PRINTDD 與編譯清單。確認中文與換行正常，保留欄位空白；個別檔案異常時依下方排查指引補存。
 
 - 記錄 owner、job 名稱、job ID 與紀錄時間。
 - 核對 ALLOC、CGEN、LGENCKP、CCKP、LCKP02、CCHK、LCHKCKP、GENERATE、SNAP1、RUNONCE、CHECK1、SNAP2、RUNTWICE、CHECK2、RUNEMPTY 共 15 步是否實際執行。跳過的步驟不能算通過。
@@ -45,7 +45,7 @@ GENERATE／PRINTDD 使用中文 IBM-937 測資，每筆以單一完整 400-byte 
 
 ## 讀取中文作業輸出
 
-本次工作坊統一使用 tcb-rse（IBM-1371）開啟來源、JCL、JES 紀錄、中文 PRINTDD 與編譯清單。從「工作 → tcb-rse → 自己的作業」開啟所需 DD，確認中文與換行正常，再另存至 host-lab/logs/<job ID>/<step>/。保留雙引號內尾端空白；Alt+Z 可切換畫面自動折行。
+使用 tcb-rse（IBM-1371），在「工作」對自己的 JOB 按右鍵選「全部下載」，保存完整紀錄，例如 host-lab/logs/<job ID>/。保留下載產生的檔名與目錄結構，不選「以二進位全部下載」。開啟下載的 PRINTDD 與編譯清單，確認中文、換行及雙引號內的空白正常；若個別檔案有亂碼，再從 tcb-rse 開啟該 DD，載入全部內容並另存 UTF-8 副本。Alt+Z 可切換畫面自動折行。
 
 若仍顯示舊的異常內容，關閉舊分頁並執行 Developer: Reload Window，再從 tcb-rse 開啟。仍有問題時，可由講師使用已安裝的官方 RSE CLI 指定字碼重新讀取；JOB12345 與 108 必須替換為實際 job ID 與 DD 編號：
 
@@ -53,7 +53,7 @@ GENERATE／PRINTDD 使用中文 IBM-937 測資，每筆以單一完整 400-byte 
 zowe rse view spool-file-by-id JOB12345 108 --rse-profile tcb-rse --encoding IBM-1371
 ```
 
-這是排查用替代步驟，不是每項作業的必要前置操作。「全部下載」可能造成中文 PRINTDD 轉碼錯誤，請改用單檔開啟後另存。中文 PRINTDD 與中文編譯清單以單獨開啟、確認內容、載入所有分頁後另存 UTF-8 為準。連線字碼調整不代表重新編碼既有來源或測資；編譯仍依教材使用 CODEPAGE(937),DBCS。
+這是排查用替代步驟，不是每項作業的必要前置操作。若下載時已發生錯誤轉碼，單純更換本機開啟編碼無法還原中文；請從 tcb-rse 開啟受影響的 DD，確認文字正常並載入所有頁面後，另存 UTF-8 副本。正常的下載檔可直接使用。編譯仍依教材使用 CODEPAGE(937),DBCS。
 
 若學員選做消除 RC 4 的練習，依 RC4-LAB.md 另存 CKP02R 與個人修正版 JCL；原版基準的 RC 預期與修正版目標分開記錄。
 
