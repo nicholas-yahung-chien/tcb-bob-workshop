@@ -5,8 +5,23 @@
 <p class="mode-guide"><strong>Z Architect 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>z-lab/CIS14/CIS14.cbl</code>、<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>準備程式分析所需的資訊</span><button type="button" data-copy="scan-program">複製 Prompt</button></div><pre id="scan-program">請先掃描 z-lab 裡的 CKP02 和 CIS14，建立分析程式與相依關係需要的 Local Metadata。完成後告訴我掃描結果，以及還需要補哪些檔案。
 </pre><div class="expected"><strong>預期回應</strong><p>掃描結果、檔案位置，以及需要補充的相依檔案。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>完成後展開 <code>scan_program</code> 工具紀錄，確認掃描完成。若缺少 Copybook，加入對應檔案後再掃描；工具無法使用時，請參考 <code>host-lab/PPZ-ANALYSIS.md</code>。</p>
-<p>準備好後，切換到 <strong>Ask</strong>，開始認識程式。</p>
-<h2 id="ask">2. 認識程式與相依關係</h2>
+
+<h2 id="dictionary">2. 建立並核對 Data Dictionary</h2>
+
+<p>先替 CKP02 建立 Data Dictionary（資料字典），整理各欄位的用途，方便後續閱讀程式與撰寫文件。剛才建立的 Local Metadata 提供程式結構，資料字典則補上欄位意思。</p>
+<p>在 <strong>Bob Settings → Skills</strong> 啟用 <code>data-dictionary-zh-tw</code>，確認來源為 <strong>Workspace</strong>，讓 Bob 依台灣用語撰寫欄位說明。完成後若仍有英文或用語需要調整，可使用下方的中文整理提問。</p>
+<ol><li>切換到 <strong>Z Architect</strong>，點 <strong>Start Workflow</strong>，選擇本機教材工作區，再啟動 <strong>Generate data dictionary</strong>。</li><li>選取 <code>z-lab/CKP02.cbl</code>，依畫面指示完成掃描與字典建立。</li><li>閱讀欄位說明，修正不清楚的內容並儲存，再從結果連結開啟 <code>DD.json</code>。</li></ol>
+<p>找不到工作流程時，請參考<a href="07-help.html#metadata-dd">常見問題</a>。</p>
+<details><summary>字典描述仍是英文或用語不符時</summary><p>將 DD.json 加入對話，切換 <strong>Agent</strong>，請 Bob 保留備份後整理中文說明。完成後開啟檔案，確認欄位描述、變數名稱與數值。</p>
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>整理字典的中文說明</span><button type="button" data-copy="dictionary-localize">複製 Prompt</button></div><pre id="dictionary-localize">這份字典的說明還不是台灣常用的繁體中文，請幫我整理。先備份原檔，只改欄位的文字說明，保留變數名稱、數值和 JSON 格式，完成後確認檔案仍能正常讀取。
+</pre><div class="expected"><strong>預期回應</strong><p>保留備份後整理 DD.json 的中文描述，並檢查檔案格式與內容。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+</details>
+<p>將 DD.json 加入對話，請 Bob 一起核對欄位意思：</p>
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>一起核對欄位意思</span><button type="button" data-copy="dictionary-review">複製 Prompt</button></div><pre id="dictionary-review">請用台灣常用的繁體中文，帶我看這份 Data Dictionary。哪些欄位意思可以從 CKP02 確認，哪些還需要問業務同事？有不一致的地方，請指出程式中的依據。
+</pre><div class="expected"><strong>預期回應</strong><p>欄位用途、程式中的依據，以及需要向業務確認的問題。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>核對時可先看 R-ID-1 的 10 bytes、重疊定義的欄位，以及 <code>IN-REF-REC(14:3)</code> 對應 R-NAME 第 3–5 位的關係。不熟悉的業務縮寫先留下問題；例如註解提到公司統編，還需要回到程式確認有哪些檢查。</p>
+<p>完成字典核對後，切換到 <strong>Ask</strong>，開始認識程式與相依關係。</p>
+<h2 id="ask">3. 認識程式與相依關係</h2>
 <p>先理解各支程式的角色，再跟著一筆資料看 CKP02 的處理與轉換規則。不必先讀懂所有 COBOL 語法；切換到 <strong>Ask</strong>，一次問一個問題，看完回答再追問。這一段先理解現況，不修改程式或提交作業。</p>
 <h3 id="roles">A. 理解程式各自的角色</h3>
 <p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>z-lab</code></p><div class="prompt"><div class="prompt-head"><span>分清用途與相依關係</span><button type="button" data-copy="z-roles">複製 Prompt</button></div><pre id="z-roles">這是一個我完全陌生的專案，請幫我認識這個系統是做什麼的、這些程式各自負責什麼？主要業務功能與程式分組是什麼？請把看得到的用途與相依關係整理給我，指出程式依據；看不出有關聯的，就先分開說明。
@@ -31,7 +46,7 @@
 <p><strong>看回答時留意：</strong>前兩碼為 <code>00</code> 且第 14–16 位不是 <code>EOF</code> 才進行轉換；轉換是將原識別欄位第 3–10 位移到前面，再補兩個空白。資料裡的 EOF 與 READ AT END 是兩回事。註解提到公司統編，但這不代表程式有檢查統編有效性；完整業務定義仍需確認。</p>
 <p>如果回答太抽象，可以接著問：「請用前後各十個字元舉例，並把空白標出來。」若 Bob 提到資料庫、API 或未提供的呼叫者，追問：「這個判斷是從哪個檔案看出來的？」</p>
 <p>完成後，試著自己說明：CKP02 讀寫什麼、何時轉換、EOF 代表什麼，以及還有哪些業務問題待確認。後續<a href="02-documentation.html#story">程式文件單元</a>會再用 Z Code 的 Explain code 工作流程深入解讀，並整理成交接文件。</p>
-<h2 id="impact">3. 看看需求會影響哪些地方</h2>
+<h2 id="impact">4. 看看需求會影響哪些地方</h2>
 <p>這次以業務填寫的 Word 需求申請單開始。開啟教材的 <code>requests/change-application.docx</code>，閱讀目前的困擾與希望改善的方式；單內還有需要向申請人問清楚的地方。</p>
 <p><a href="https://raw.githubusercontent.com/nicholas-yahung-chien/tcb-bob-workshop/refs/heads/workshop/tcb-2026/requests/change-application.docx">下載 Word 需求申請單</a>。教材另保留 <code>requests/customer-email.eml</code> 作為同一需求的信件範例，本步使用 Word 申請單即可。</p>
 <p>將 <code>requests/change-application.docx</code> 加入 Bob 對話，切換到 <strong>Ask</strong>。若 Bob 無法讀取 DOCX，用 Word 開啟並複製內文到同一個對話，即可繼續。</p>
@@ -42,7 +57,7 @@
 <p class="mode-guide"><strong>Z Architect 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>找出變更影響</span><button type="button" data-copy="z-impact">複製 Prompt</button></div><pre id="z-impact">根據這份需求申請單與剛才釐清的內容，哪些程式、資料和批次作業可能受影響？請對照目前看得到的程式，說明修改位置與原因；尚未確認的需求和相依關係請分開列出，不要當成已定案。
 </pre><div class="expected"><strong>預期回應</strong><p>已確認的影響，以及需要補資料才能確認的關係。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>如果流程要求連線 Z Understand，請選擇包含這支程式的專案。手邊只有本機檔案時，先分析看得到的內容，跨系統的關係留待補齊資料後確認。</p>
-<h2 id="plan">4. 把需求整理成計畫</h2>
+<h2 id="plan">5. 把需求整理成計畫</h2>
 <p>現在知道程式大致怎麼運作，就可以討論怎麼改。<a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a> 約定文件的章節和檢查方式；提問時引用它，Bob 就有格式可以依循。</p>
 <p>請 Bob 分開說明現有功能與建議新增的做法，方便確認這次的修改範圍。</p>
 <p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code>、<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>host-lab/CONNECTION.md</code>、<code>z-tests/run.jcl</code></p><div class="prompt"><div class="prompt-head"><span>規劃預覽功能</span><button type="button" data-copy="02-plan">複製 Prompt</button></div><pre id="02-plan">我想在批次執行前，先知道會改到多少筆資料。請閱讀 requests/change-application.docx，對照現有程式分析影響，再依 DOC-SPEC.md 規劃架構文件和實作清單。
@@ -51,7 +66,7 @@
 </pre><div class="expected"><strong>預期回應</strong><p>需要分析的範圍、文件內容，以及還需要確認的資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>若 Bob 一次問了多個問題，可以用「Q1：…、Q2：…」逐項回答，再核對它整理的決策。尚未決定的事項先保留。</p>
 <p>閱讀計畫時，想想兩件事：哪些建議有程式可以對照？哪些還需要業務或系統資料？有疑問的地方，直接在同一個對話追問。</p>
-<h2 id="deliver">5. 請 Bob 寫成文件</h2>
+<h2 id="deliver">6. 請 Bob 寫成文件</h2>
 <p>計畫確認後，在同一個對話切換到 <strong>Agent</strong>。前面已經說清楚的內容，這裡不用再重述一遍。</p>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code>、<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>host-lab/CONNECTION.md</code>、<code>z-tests/run.jcl</code></p><div class="prompt"><div class="prompt-head"><span>依計畫完成文件</span><button type="button" data-copy="03-plan-deliver">複製 Prompt</button></div><pre id="03-plan-deliver">請依剛才確認的計畫和 requests/change-application.docx，完成架構文件與實作清單，存到 output，格式依 DOC-SPEC.md。
 
