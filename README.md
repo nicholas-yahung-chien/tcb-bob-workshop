@@ -60,10 +60,10 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 
 ## 授權與來源
 
-本 repo 同時包含課程自製內容、客戶提供或依客戶範例整理的程式，以及 IBM 產品與工具的操作說明，不能以同一份授權涵蓋全部內容。
+本 repo 採用 [IBM Public License 1.0](LICENSE)。課程自製的網站文字、指引、測試程式與封裝腳本，依該授權提供；以下原有權利與個別授權仍然保留：
 
-- 客戶提供的程式、Copybook、Assembler 與其閱讀版、衍生範例，權利仍歸原權利人；本 repo 不另行授予使用、修改或散布這些內容的權利。
+- 客戶提供的程式、Copybook、Assembler 與其閱讀版，權利仍歸原權利人；除非檔案另有明確說明，IBM Public License 1.0 不會授予本 repo 無權授予的權利。
 - IBM 產品、文件、商標與程式範例依各自隨附的 IBM 條款使用；收錄操作說明不表示 IBM 為本課程背書，也不改變原有授權。
-- 課程自製的網站文字、指引、測試程式與封裝腳本目前未另行採用開放原始碼授權。未取得權利人的明確同意前，不應為整個 repo 套用單一授權。
+- 個別檔案若附有其他授權或權利聲明，以該檔案的說明為準。
 
-[IBM Public License 1.0](https://public.dhe.ibm.com/systems/support/system_x_pdf/l_tstd_9ubsml_lenovo_notices.pdf) 的「Original Program」是由 IBM 發布的原始軟體，且條款要求保留指定的 IBM 著作權聲明，因此不適合直接套用到這個由多種來源組成的課程 repo。[IBM International Program License Agreement](https://www.ibm.com/support/pages/ibm-international-program-license-agreement-1) 與 [International License Agreement for Non-Warranted Programs](https://www.ibm.com/docs/en/i/7.4.0?topic=order-software-licensing-documents) 則用來授權特定 IBM 軟體產品，也不是一般 repository 可自行採用的開源授權。若日後要開放課程自製內容，應先將可授權的檔案與客戶、IBM 或其他第三方內容分開，再由權利人為該部分選定授權。
+完整條款請參閱 [LICENSE](LICENSE)。

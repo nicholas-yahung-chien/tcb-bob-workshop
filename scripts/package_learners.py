@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse, subprocess, zipfile, json, hashlib
 ROOT=Path(__file__).resolve().parents[1]
 DIRS=('samples/','specs/','tests/','requests/')
-FILES={'.bob/skills/data-dictionary-zh-tw/SKILL.md','.bob/rules/language.md','.bob/skills/cobol-explain-zh-tw/SKILL.md','.bob/skills/program-docs-zh-tw/SKILL.md','AGENTS.md','README.md','SOURCE-MAP.md','DOC-SPEC.md','zowe.config.json','zowe.schema.json','.gitignore','.gitattributes',
+FILES={'.bob/skills/data-dictionary-zh-tw/SKILL.md','.bob/rules/language.md','.bob/skills/cobol-explain-zh-tw/SKILL.md','.bob/skills/program-docs-zh-tw/SKILL.md','AGENTS.md','README.md','LICENSE','SOURCE-MAP.md','DOC-SPEC.md','zowe.config.json','zowe.schema.json','.gitignore','.gitattributes',
 'host-lab/BOB-GUIDE.md','host-lab/CONNECTION.md','host-lab/README.md','host-lab/RC4-LAB.md','host-lab/IMS-LAB.md','z-tests/ims-run.jcl','z-tests/fixtures.json',
 'z-tests/GENCKP.cbl','z-tests/CHKCKP.cbl','z-tests/IMSCKP.cbl','z-tests/run.jcl','z-tests/manifest.json',
 'host-lab/PPZ-ANALYSIS.md','host-lab/IMS-ADMIN.md','host-lab/CODE-QUALITY.md','host-lab/IMS-EVENTS.md','z-tests/IMSEVT.cbl','z-tests/imsevts.jcl'}
