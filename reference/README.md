@@ -4,7 +4,7 @@
 
 | 單元 | 參考檔案 | 學員成果位置與用途 |
 |---|---|---|
-| 01 | architecture.md、checklist.md | output/；COBOL 預覽提案及尚待完成的工作 |
+| 01 | CKP02-data-dictionary.md、architecture.md、checklist.md | output/；方便閱讀的資料字典、COBOL 預覽提案及尚待完成的工作 |
 | 02 | program.md、facts.json、impact-analysis.md、development-summary.md | output/；現有行為、變更影響及白話開發說明 |
 | 03 | jcl-review.md、host-test-report.md | host-lab/jcl-review.md、host-lab/test-report.md；既有 RUN 的核對範例 |
 | 03 COBOL 延伸（選做） | cobol-test-plan.md、TESTSHIFT-EXT.cbl | output/；IDSHIFT 的完整記錄、相鄰 EOF 與重跑測試；尚待 COBOL 環境執行 |
@@ -24,4 +24,4 @@
 
 比較時依課程網頁選擇相應文件；工作流程產出的 docs/ 文件保留原位。第 03 單元原版 RUN 與第 04 單元已選做的主機練習仍按各自指引進行。
 
-metadata-dd-review.md 提供 Local Metadata 與 Data Dictionary 核對方式。參考 ZIP 不附固定的 DD.json，因為內容會隨實際選取的程式與掃描結果而不同；請核對自己產生的檔案並整理欄位說明。ims-admin-report.md 提供共享 IMS 子系統值班報告架構，ims-admin-observed-report.md 則示範如何引用實際 STC 訊息。請依自己的掃描與紀錄填寫。
+metadata-dd-review.md 提供 Local Metadata、DD.json 與可閱讀資料字典的核對方式。參考 ZIP 不附固定的 DD.json，因為內容會隨實際選取的程式與掃描結果而不同；CKP02-data-dictionary.md 示範如何保留 DD.json，再另外整理成方便閱讀的繁體中文文件。ims-admin-report.md 提供共享 IMS 子系統值班報告架構，ims-admin-observed-report.md 則示範如何引用實際 STC 訊息。請依自己的掃描與紀錄填寫。

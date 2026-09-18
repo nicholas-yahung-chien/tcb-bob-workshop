@@ -6,21 +6,19 @@
 </pre><div class="expected"><strong>預期回應</strong><p>掃描結果、檔案位置，以及需要補充的相依檔案。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>完成後展開 <code>scan_program</code> 工具紀錄，確認掃描完成。若缺少 Copybook，加入對應檔案後再掃描；工具無法使用時，請參考 <code>host-lab/PPZ-ANALYSIS.md</code>。</p>
 
-<h2 id="dictionary">2. 建立並核對 Data Dictionary</h2>
+<h2 id="dictionary">2. 建立 DD.json 與可閱讀的資料字典</h2>
 
-<p>先替 CKP02 建立 Data Dictionary（資料字典），整理各欄位的用途，方便後續閱讀程式與撰寫文件。剛才建立的 Local Metadata 提供程式結構，資料字典則補上欄位意思。</p>
-<p>在 <strong>Bob Settings → Skills</strong> 啟用 <code>data-dictionary-zh-tw</code>，確認來源為 <strong>Workspace</strong>，讓 Bob 依台灣用語撰寫欄位說明。完成後若仍有英文或用語需要調整，可使用下方的中文整理提問。</p>
-<ol><li>切換到 <strong>Z Architect</strong>，點 <strong>Start Workflow</strong>，選擇本機教材工作區，再啟動 <strong>Generate data dictionary</strong>。</li><li>選取 <code>z-lab/CKP02.cbl</code>，依畫面指示完成掃描與字典建立。</li><li>閱讀欄位說明，修正不清楚的內容並儲存，再從結果連結開啟 <code>DD.json</code>。</li></ol>
+<p>先替 CKP02 執行 Generate data dictionary。工作流程產生的 <code>DD.json</code> 保留給工具與後續處理使用；學員閱讀的資料字典則另外整理成 Markdown 文件。</p>
+<ol><li>切換到 <strong>Z Architect</strong>，點 <strong>Start Workflow</strong>，選擇本機教材工作區，再啟動 <strong>Generate data dictionary</strong>。</li><li>選取 <code>z-lab/CKP02.cbl</code>，依畫面指示完成掃描與字典建立。</li><li>從結果連結開啟 <code>DD.json</code>，記下檔案位置並保留原檔，不需要修改或翻譯。</li></ol>
 <p>找不到工作流程時，請參考<a href="07-help.html#metadata-dd">常見問題</a>。</p>
-<details><summary>字典描述仍是英文或用語不符時</summary><p>將 DD.json 加入對話，切換 <strong>Agent</strong>，請 Bob 保留備份後整理中文說明。完成後開啟檔案，確認欄位描述、變數名稱與數值。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>整理字典的中文說明</span><button type="button" data-copy="dictionary-localize">複製 Prompt</button></div><pre id="dictionary-localize">這份字典的說明還不是台灣常用的繁體中文，請幫我整理。先備份原檔，只改欄位的文字說明，保留變數名稱、數值和 JSON 格式，完成後確認檔案仍能正常讀取。
-</pre><div class="expected"><strong>預期回應</strong><p>保留備份後整理 DD.json 的中文描述，並檢查檔案格式與內容。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
-</details>
-<p>將 DD.json 加入對話，請 Bob 一起核對欄位意思：</p>
-<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>一起核對欄位意思</span><button type="button" data-copy="dictionary-review">複製 Prompt</button></div><pre id="dictionary-review">請用台灣常用的繁體中文，帶我看這份 Data Dictionary。哪些欄位意思可以從 CKP02 確認，哪些還需要問業務同事？有不一致的地方，請指出程式中的依據。
+<p>接著在 <strong>Bob Settings → Skills</strong> 啟用 <code>data-dictionary-zh-tw</code>，確認來源為 <strong>Workspace</strong>。將實際產生的 DD.json 一併加入 Agent 對話，請 Bob 另外建立方便閱讀的繁體中文資料字典。</p>
+<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DD.json</code>、<code>z-lab/CKP02.cbl</code>、<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>產生方便閱讀的資料字典</span><button type="button" data-copy="dictionary-readable">複製 Prompt</button></div><pre id="dictionary-readable">請根據我加入的 DD.json 與 CKP02，另外建立 output/CKP02-data-dictionary.md，整理成方便閱讀的資料字典。請使用台灣地區用語的繁體中文，保留變數名稱與技術資訊，並標出程式依據及需要確認的欄位。DD.json 是來源資料，請保持原樣，不要修改或翻譯。
+</pre><div class="expected"><strong>預期回應</strong><p>保留 DD.json 原樣，另外產生 output/CKP02-data-dictionary.md，並列出程式依據與待確認事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>完成後開啟 <code>output/CKP02-data-dictionary.md</code>，確認欄位說明、程式依據與待確認事項。再將這份文件、DD.json 與 CKP02 加入對話，請 Bob 一起核對欄位意思：</p>
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>DD.json</code>、<code>z-lab/CKP02.cbl</code>、<code>output/CKP02-data-dictionary.md</code>、<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>一起核對欄位意思</span><button type="button" data-copy="dictionary-review">複製 Prompt</button></div><pre id="dictionary-review">請帶我核對這份可閱讀的資料字典。哪些欄位意思可以從 CKP02 與 DD.json 確認，哪些還需要問業務同事？有不一致的地方，請指出來源。先說明，不要修改檔案。
 </pre><div class="expected"><strong>預期回應</strong><p>欄位用途、程式中的依據，以及需要向業務確認的問題。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>核對時可先看 R-ID-1 的 10 bytes、重疊定義的欄位，以及 <code>IN-REF-REC(14:3)</code> 對應 R-NAME 第 3–5 位的關係。不熟悉的業務縮寫先留下問題；例如註解提到公司統編，還需要回到程式確認有哪些檢查。</p>
-<p>完成字典核對後，切換到 <strong>Ask</strong>，開始認識程式與相依關係。</p>
+<p>完成可閱讀資料字典的核對後，切換到 <strong>Ask</strong>，開始認識程式與相依關係。</p>
 <h2 id="ask">3. 認識程式與相依關係</h2>
 <p>先理解各支程式的角色，再跟著一筆資料看 CKP02 的處理與轉換規則。不必先讀懂所有 COBOL 語法；切換到 <strong>Ask</strong>，一次問一個問題，看完回答再追問。這一段先理解現況，不修改程式或提交作業。</p>
 <h3 id="roles">A. 理解程式各自的角色</h3>

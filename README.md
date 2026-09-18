@@ -56,4 +56,4 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 
 原始碼權利歸原權利人，本 repo 不另行授予原始程式授權。
 
-分析前依 host-lab/PPZ-ANALYSIS.md 建立 Local Metadata；文件化前先核對 Data Dictionary。第 04 單元另可依 host-lab/IMS-ADMIN.md 從共享 IMS 子系統的真實 STC 紀錄練習管理者視角的判讀。
+分析前依 host-lab/PPZ-ANALYSIS.md 建立 Local Metadata 與 DD.json，再另外整理成方便閱讀的繁體中文資料字典；DD.json 保留原樣。第 04 單元另可依 host-lab/IMS-ADMIN.md 從共享 IMS 子系統的真實 STC 紀錄練習管理者視角的判讀。

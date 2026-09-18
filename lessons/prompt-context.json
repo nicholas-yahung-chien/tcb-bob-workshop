@@ -404,7 +404,9 @@
   },
   "dictionary-review": {
     "files": [
+      "DD.json",
       "z-lab/CKP02.cbl",
+      "output/CKP02-data-dictionary.md",
       "host-lab/PPZ-ANALYSIS.md"
     ],
     "response": "欄位用途、程式中的依據，以及需要向業務確認的問題。"
@@ -427,10 +429,12 @@
     ],
     "response": "保存於 host-lab/ims/admin-report.md 的值班交接紀錄。"
   },
-  "dictionary-localize": {
+  "dictionary-readable": {
     "files": [
+      "DD.json",
+      "z-lab/CKP02.cbl",
       "host-lab/PPZ-ANALYSIS.md"
     ],
-    "response": "保留備份後整理 DD.json 的中文描述，並檢查檔案格式與內容。"
+    "response": "保留 DD.json 原樣，另外產生 output/CKP02-data-dictionary.md，並列出程式依據與待確認事項。"
   }
 }

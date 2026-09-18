@@ -16,6 +16,6 @@
 
 ## 尚待介面驗證的項目
 
-已依 IBM 官方文件核對 scan_program 與 Generate data dictionary 的用途及工作流程。團隊建議 Z Architect；公開文件以 Z Code 啟動字典。使用者已回報 Z Architect 會呼叫 scan_program，且可執行 Data Dictionary；目前描述不是台灣繁體中文。已新增專用 skill 與保留 schema 的 Agent 整理提示，效果待使用者驗證，未宣稱自動載入或中文直接產出已成功。Bob／PPZ 精確版本尚未回報。
+已依 IBM 官方文件核對 scan_program 與 Generate data dictionary 的用途及工作流程。團隊建議 Z Architect；公開文件以 Z Code 啟動字典。使用者已回報 Z Architect 會呼叫 scan_program，且可執行 Data Dictionary。2026-09-18 依團隊決議調整為保留工作流程產生的 DD.json，不直接翻譯或改寫；另由 Agent 根據 DD.json 與來源程式產生方便閱讀的繁體中文 Markdown 資料字典。新版操作效果仍待使用者驗證。Bob／PPZ 精確版本尚未回報。
 
 RSE API 讀取已實測；學員在 Zowe Explorer 的篩選與另存操作仍依教材逐步核對。SYSLOG 學員存取、共享 SLDS 的 DFSERA10 列印尚未驗證，均未列為已備妥操作。
