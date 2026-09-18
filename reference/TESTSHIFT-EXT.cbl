@@ -1,0 +1,88 @@
+      * SYNTHETIC EXTENDED DRIVER. REQUIRES A COBOL COMPILER.
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. TESTSHIFT-EXT.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 REC                         PIC X(400).
+       01 EXPECTED                    PIC X(400).
+       01 WS-ERRORS                   PIC 9(4) VALUE ZERO.
+       PROCEDURE DIVISION.
+      * NORMAL CONVERSION AND FULL-RECORD PRESERVATION.
+           MOVE ALL 'N' TO REC
+           MOVE '0012345678' TO REC(1:10)
+           MOVE REC TO EXPECTED
+           MOVE '12345678  ' TO EXPECTED(1:10)
+           CALL 'IDSHIFT' USING REC
+           IF REC NOT = EXPECTED
+               DISPLAY 'FAIL: NORMAL CONVERSION'
+               ADD 1 TO WS-ERRORS
+           END-IF
+
+      * EOF AT BYTES 14-16 SUPPRESSES CONVERSION.
+           MOVE ALL 'E' TO REC
+           MOVE '0012345678' TO REC(1:10)
+           MOVE 'EOF' TO REC(14:3)
+           MOVE REC TO EXPECTED
+           CALL 'IDSHIFT' USING REC
+           IF REC NOT = EXPECTED
+               DISPLAY 'FAIL: EOF MARKER'
+               ADD 1 TO WS-ERRORS
+           END-IF
+
+      * A PREFIX OTHER THAN 00 IS NOT ELIGIBLE.
+           MOVE ALL 'P' TO REC
+           MOVE 'AB12345678' TO REC(1:10)
+           MOVE REC TO EXPECTED
+           CALL 'IDSHIFT' USING REC
+           IF REC NOT = EXPECTED
+               DISPLAY 'FAIL: PREFIX MISMATCH'
+               ADD 1 TO WS-ERRORS
+           END-IF
+
+      * EOF AT BYTES 12-14 DOES NOT MATCH THE 14-16 CONDITION.
+           MOVE ALL 'A' TO REC
+           MOVE '0012345678' TO REC(1:10)
+           MOVE 'EOF' TO REC(12:3)
+           MOVE REC TO EXPECTED
+           MOVE '12345678  ' TO EXPECTED(1:10)
+           CALL 'IDSHIFT' USING REC
+           IF REC NOT = EXPECTED
+               DISPLAY 'FAIL: ADJACENT EOF MARKER'
+               ADD 1 TO WS-ERRORS
+           END-IF
+
+      * THE SECOND CALL USES THE RESULT OF THE FIRST CALL.
+           MOVE ALL 'R' TO REC
+           MOVE '0000123456' TO REC(1:10)
+           MOVE REC TO EXPECTED
+           MOVE '00123456  ' TO EXPECTED(1:10)
+           CALL 'IDSHIFT' USING REC
+           IF REC NOT = EXPECTED
+               DISPLAY 'FAIL: REPEAT FIRST CALL'
+               ADD 1 TO WS-ERRORS
+           END-IF
+           MOVE '123456    ' TO EXPECTED(1:10)
+           CALL 'IDSHIFT' USING REC
+           IF REC NOT = EXPECTED
+               DISPLAY 'FAIL: REPEAT SECOND CALL'
+               ADD 1 TO WS-ERRORS
+           END-IF
+
+      * A BLANK IDENTIFIER IS NOT ELIGIBLE.
+           MOVE ALL 'B' TO REC
+           MOVE SPACES TO REC(1:10)
+           MOVE REC TO EXPECTED
+           CALL 'IDSHIFT' USING REC
+           IF REC NOT = EXPECTED
+               DISPLAY 'FAIL: BLANK IDENTIFIER'
+               ADD 1 TO WS-ERRORS
+           END-IF
+
+           IF WS-ERRORS = ZERO
+               DISPLAY 'PASS: ALL EXTENDED CASES'
+               MOVE 0 TO RETURN-CODE
+           ELSE
+               DISPLAY 'FAILURES=' WS-ERRORS
+               MOVE 8 TO RETURN-CODE
+           END-IF
+           STOP RUN.
