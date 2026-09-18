@@ -25,6 +25,7 @@
 <tr><td><code>z-tests/run.jcl</code></td><td><code>&lt;帳號&gt;.TCBLAB.JCL(RUN)</code></td><td>已填入自己帳號的測試作業</td></tr>
 </tbody></table>
 <p>主機以資料集中的「成員」（member）保存檔案，所以 <code>CKP02.cbl</code> 對應成員 <code>CKP02</code>，<code>run.jcl</code> 對應成員 <code>RUN</code>。</p>
+<p>連線時，每個帳號的密碼都使用相同規則：將帳號的第一個字母保留大寫，其餘英文字母改成小寫，再接上 <code>TCBBob@2026</code>。例如帳號 <code>TCB2101</code> 的密碼是 <code>Tcb2101TCBBob@2026</code>。密碼只輸入 Zowe Explorer 的登入欄位，不要貼到 Bob 對話或存入教材檔案。</p>
 <ol><li>在 Zowe Explorer 的「資料集」展開 <code>tcb-rse</code>（IBM-1371），搜尋 <code>&lt;自己的帳號&gt;.TCBLAB.COBOL</code>。</li><li>展開資料集，開啟 <code>CKP02</code>。確認名稱開頭是自己的帳號，並核對 <code>PROGRAM-ID. CKP02.</code>、中文註解「公司統編時，轉換格式」及檔案最後一行。</li><li>確認同一個資料集也有 <code>GENCKP</code>、<code>CHKCKP</code>。這兩支是測試輔助程式。</li></ol>
 <p>若缺少成員或內容顯示異常，先核對帳號與連線，再請講師協助。保留現有內容，不直接覆寫。</p>
 <details><summary>更新教材後，程式仍擠成一行？</summary><p>關閉原先以舊連線或舊編碼開啟的遠端分頁，不儲存。按 Ctrl+Shift+P 執行 <strong>Developer: Reload Window</strong>，再從 <code>tcb-rse</code> 開啟 CKP02。確認程式正常分行，並保留中文註解。若未顯示 tcb-rse，確認 IBM Z Open Editor 與 Zowe Explorer 都已啟用。</p><p>來源、JCL 與中英文作業紀錄統一使用 tcb-rse（IBM-1371）。</p></details>
