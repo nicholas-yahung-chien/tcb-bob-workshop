@@ -6,7 +6,9 @@
 
 ## 開啟工作區
 
-主機連線設定已放在根目錄的 `zowe.config.json`，只需將 `YOUR_USER_ID` 換成自己的帳號。`zowe.schema.json` 請一併保留；密碼透過 Zowe 認證介面輸入。詳細步驟見 [主機連線](host-lab/CONNECTION.md)。
+課程備有 30 個學員帳號。上課前先到課程網頁的 [課前準備](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/00-setup.html#account-registration) 展開共用表格，選擇尚未登記的帳號並填入姓名。
+
+主機連線設定已放在根目錄的 `zowe.config.json`，只需將 `YOUR_USER_ID` 換成自己的帳號。`zowe.schema.json` 請一併保留。密碼為「帳號第一個字母大寫、其餘英文字母小寫，再接 `TCBBob@2026`」；例如 `TCB2101` 對應 `Tcb2101TCBBob@2026`。密碼只輸入 Zowe Explorer 的登入欄位，不要貼到 Bob 對話或教材檔案。詳細步驟見 [主機連線](host-lab/CONNECTION.md)。
 
 來源、JCL 提交與中英文作業紀錄均使用 `tcb-rse`（IBM-1371），透過 IBM RSE API 連線。IBM Z Open Editor 與 Zowe Explorer 需保持啟用。
 
@@ -18,7 +20,7 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 
 開啟下載的資料夾，即可開始。課程步驟請閱讀上方「開始練習」連結。
 
-確認 IBM Bob 已登入並啟用 PPZ，主機連線需 Zowe Explorer。Git 只在 Git: Clone 下載時需要；[直接下載教材 ZIP](https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest/download/tcb-workshop.zip) 可略過 Git。兩種下載方式都包含根目錄的 Zowe 設定檔與 schema。
+確認 IBM Bob 已登入並啟用 PPZ，主機連線需 Zowe Explorer。[直接下載教材 ZIP](https://github.com/nicholas-yahung-chien/tcb-bob-workshop/releases/latest/download/tcb-workshop.zip) 可略過 Git。兩種下載方式都包含根目錄的 Zowe 設定檔與 schema。
 
 主流程不需要本機 Python。請將 host-lab/BOB-GUIDE.md 交給 Bob，完成教材檢查、個人 JCL 與實際主機紀錄分析。Git 僅在 Clone 下載時需要；Python 範例保留為另需執行環境的選做練習。
 
@@ -54,6 +56,14 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 
 參考解答不包含在教材中。完成練習後，可從課程網頁「成果與解答」下載獨立 ZIP，先讀 reference/README.md 的單元對照，再比較自己的成果。內容包含 COBOL 需求與文件、主機及 IMS 報告寫法、講師真實紀錄節錄，以及第 05 單元的本機掃描紀錄範例；Python 為選做練習，執行結果請依自己的紀錄填寫。
 
-原始碼權利歸原權利人，本 repo 不另行授予原始程式授權。
-
 分析前依 host-lab/PPZ-ANALYSIS.md 建立 Local Metadata 與 DD.json，再另外整理成方便閱讀的繁體中文資料字典；DD.json 保留原樣。第 04 單元另可依 host-lab/IMS-ADMIN.md 從共享 IMS 子系統的真實 STC 紀錄練習管理者視角的判讀。
+
+## 授權與來源
+
+本 repo 同時包含課程自製內容、客戶提供或依客戶範例整理的程式，以及 IBM 產品與工具的操作說明，不能以同一份授權涵蓋全部內容。
+
+- 客戶提供的程式、Copybook、Assembler 與其閱讀版、衍生範例，權利仍歸原權利人；本 repo 不另行授予使用、修改或散布這些內容的權利。
+- IBM 產品、文件、商標與程式範例依各自隨附的 IBM 條款使用；收錄操作說明不表示 IBM 為本課程背書，也不改變原有授權。
+- 課程自製的網站文字、指引、測試程式與封裝腳本目前未另行採用開放原始碼授權。未取得權利人的明確同意前，不應為整個 repo 套用單一授權。
+
+[IBM Public License 1.0](https://public.dhe.ibm.com/systems/support/system_x_pdf/l_tstd_9ubsml_lenovo_notices.pdf) 的「Original Program」是由 IBM 發布的原始軟體，且條款要求保留指定的 IBM 著作權聲明，因此不適合直接套用到這個由多種來源組成的課程 repo。[IBM International Program License Agreement](https://www.ibm.com/support/pages/ibm-international-program-license-agreement-1) 與 [International License Agreement for Non-Warranted Programs](https://www.ibm.com/docs/en/i/7.4.0?topic=order-software-licensing-documents) 則用來授權特定 IBM 軟體產品，也不是一般 repository 可自行採用的開源授權。若日後要開放課程自製內容，應先將可授權的檔案與客戶、IBM 或其他第三方內容分開，再由權利人為該部分選定授權。
