@@ -22,7 +22,7 @@ Local Metadata 包含變數使用、敘述位置與程式結構。分析其他�
 2. 將實際產生的 DD.json、z-lab/CKP02.cbl 與本指引加入 Agent 對話。
 3. 輸入：
 
-> 請根據我加入的 DD.json 與 CKP02，另外建立 output/CKP02-data-dictionary.md，整理成方便閱讀的資料字典。請使用台灣地區用語的繁體中文，保留變數名稱與技術資訊，並標出程式依據及需要確認的欄位。DD.json 是來源資料，請保持原樣，不要修改或翻譯。
+> 我想把 DD.json 裡的內容整理成一份同事容易查閱的資料字典。請對照 CKP02，把結果寫到 output/CKP02-data-dictionary.md，並使用台灣常用的繁體中文。程式中的變數名稱和技術資訊請保留。看不出欄位用途，或兩份資料對不起來的地方，請列出來讓我確認。DD.json 請保留原樣。
 
 完成後開啟 `output/CKP02-data-dictionary.md`，核對欄位名稱、PIC、長度、REDEFINES、條件值與來源位置。確認 DD.json 的內容未被這個步驟修改。
 
