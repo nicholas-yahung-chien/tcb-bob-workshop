@@ -435,6 +435,6 @@
       "z-lab/CKP02.cbl",
       "host-lab/PPZ-ANALYSIS.md"
     ],
-    "response": "保留 DD.json 原樣，另外產生 output/CKP02-data-dictionary.md，並列出程式依據與待確認事項。"
+    "response": "建立 output/CKP02-data-dictionary.md，說明已整理的內容和需要再確認的地方，DD.json 維持原樣。"
   }
 }
