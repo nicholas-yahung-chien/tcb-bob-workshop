@@ -1,6 +1,6 @@
 # 掃描程式與建立資料字典
 
-第 01 單元開始時，先掃描 CKP02 與 CIS14，建立 Local Metadata，接著替 CKP02 建立並核對 Data Dictionary（資料字典）。完成這兩項準備後，再閱讀程式與分析相依關係；第 02 單元沿用字典進行文件化。
+第 01 單元開始時，先掃描 CKP02 與 CIS14，建立 Local Metadata，接著替 CKP02 產生 DD.json，並另外整理成方便閱讀的 Data Dictionary（資料字典）。完成這些準備後，再閱讀程式與分析相依關係；第 02 單元沿用可閱讀的資料字典進行文件化。
 
 ## 1. 分析前先掃描程式
 
@@ -10,30 +10,31 @@
 
 Local Metadata 包含變數使用、敘述位置與程式結構。分析其他程式時，也需要掃描對應來源；修改程式後再掃描一次，讓資訊保持一致。
 
-## 2. 建立資料字典
+## 2. 產生 DD.json
 
-1. 在 Bob Settings → Skills 啟用 data-dictionary-zh-tw，確認來源為 Workspace。這份技能提供台灣繁體中文的欄位描述指引。
-2. 在 Z Architect 點 Start Workflow，選擇本機教材工作區，再啟動 Generate data dictionary。
-3. 選取 CKP02，依畫面指示完成掃描、建立描述及核對。確認後選 I'm done editing 或對應的完成操作。
-4. 從結果連結開啟 DD.json，閱讀並保留在原來的位置。
+1. 在 Z Architect 點 Start Workflow，選擇本機教材工作區，再啟動 Generate data dictionary。
+2. 選取 CKP02，依畫面指示完成掃描、建立描述及核對。確認後選 I'm done editing 或對應的完成操作。
+3. 從結果連結開啟 DD.json，記下實際位置並保留原檔。DD.json 是後續整理與工具使用的來源，不需要改寫或翻譯。
 
-將 DD.json 和 CKP02 加入對話，可以這樣問：
+## 3. 產生方便閱讀的資料字典
 
-> 請用台灣常用的繁體中文，帶我看這份 Data Dictionary。哪些欄位意思可以從 CKP02 確認，哪些還需要問業務同事？有不一致的地方，請指出程式中的依據。
+1. 在 Bob Settings → Skills 啟用 data-dictionary-zh-tw，確認來源為 Workspace。
+2. 將實際產生的 DD.json、z-lab/CKP02.cbl 與本指引加入 Agent 對話。
+3. 輸入：
 
-核對時先看欄位名稱、PIC、長度、REDEFINES 及條件值。例如 IN-REF-REC(14:3) 是 R-NAME 的第 3–5 位；註解中的公司統編則是業務線索，需要回到程式確認有哪些檢查。不明確的縮寫可以先記下來，留待業務同事補充。
+> 請根據我加入的 DD.json 與 CKP02，另外建立 output/CKP02-data-dictionary.md，整理成方便閱讀的資料字典。請使用台灣地區用語的繁體中文，保留變數名稱與技術資訊，並標出程式依據及需要確認的欄位。DD.json 是來源資料，請保持原樣，不要修改或翻譯。
 
-## 3. 整理中文說明
+完成後開啟 `output/CKP02-data-dictionary.md`，核對欄位名稱、PIC、長度、REDEFINES、條件值與來源位置。確認 DD.json 的內容未被這個步驟修改。
 
-若字典描述仍是英文，或用語需要調整，將 DD.json 加入 Agent 對話：
+將 DD.json、CKP02 與可閱讀的資料字典加入 Ask 對話，可以這樣問：
 
-> 這份字典的說明還不是台灣常用的繁體中文，請幫我整理。先備份原檔，只改欄位的文字說明，保留變數名稱、數值和 JSON 格式，完成後確認檔案仍能正常讀取。
+> 請帶我核對這份可閱讀的資料字典。哪些欄位意思可以從 CKP02 與 DD.json 確認，哪些還需要問業務同事？有不一致的地方，請指出來源。
 
-完成後開啟檔案，查看中文描述與原意是否一致，並核對項目數、變數名稱及數值。原檔備份可用來比較修改內容。
+例如 IN-REF-REC(14:3) 是 R-NAME 的第 3–5 位；註解中的公司統編則是業務線索，需要回到程式確認有哪些檢查。不明確的縮寫先列為待確認。
 
 ## 4. 接著閱讀與產生文件
 
-依第 02 單元執行 Explain code 與 Generate program documentation，再把文件與資料字典放在一起看。若欄位用途說明不同，請 Bob 對照 CKP02 找出原因。
+依第 02 單元執行 Explain code 與 Generate program documentation，再把文件與 `output/CKP02-data-dictionary.md` 放在一起看。若欄位用途說明不同，請 Bob 對照 DD.json 與 CKP02 找出原因。
 
 Explain code 使用 cobol-explain-zh-tw 技能協助中文說明。文件仍是英文時，依課程常見問題處理。
 
@@ -44,7 +45,7 @@ Explain code 使用 cobol-explain-zh-tw 技能協助中文說明。文件仍是�
 - 缺少 Copybook 時，加入相依檔案再掃描。
 - 仍無法執行時，保留錯誤訊息請講師協助；可以先閱讀來源，待工具恢復後補做掃描。
 
-想保留操作筆記，可在 output/analysis-preparation.md 記下工具版本、掃描檔案、結果位置、字典修改與待確認問題。
+想保留操作筆記，可在 output/analysis-preparation.md 記下工具版本、掃描檔案、DD.json 位置、可閱讀資料字典的位置與待確認問題。
 
 ## 延伸閱讀
 
