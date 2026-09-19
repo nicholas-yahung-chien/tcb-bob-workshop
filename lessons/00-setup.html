@@ -20,6 +20,7 @@
 <p>完成後，開啟 <code>z-lab/CKP02.cbl</code>。程式已隨教材放在 z-lab，不需要轉檔；檢查報告會存到 output/workspace-check.md。</p>
 <h2 id="host-connection">準備自己的主機連線</h2>
 <p>接下來，用分配給你的帳號登入主機，查看自己的資料集與作業。教材已備妥連線設定，你只需要填入帳號，再於登入時輸入密碼。</p>
+<p>每個帳號的密碼都使用相同規則：將帳號的第一個字母保留大寫，其餘英文字母改成小寫，再接上 <code>TCBBob@2026</code>。例如帳號 <code>TCB2101</code> 的密碼是 <code>Tcb2101TCBBob@2026</code>。密碼只輸入 Zowe Explorer 的登入欄位，不要貼到 Bob 對話或存入教材檔案。</p>
 <details id="account-registration"><summary>選擇並登記學員帳號</summary><p>展開下方共用表格，找一個姓名欄仍空白的帳號，並在同一列填入自己的姓名。每個帳號只供一位學員使用；若已有人填寫，請改選其他空白帳號。</p><div class="shared-sheet"><iframe title="學員帳號登記表" src="https://docs.google.com/spreadsheets/d/1kUdHAuvS7JrsJCakrGVzeL72V7eFyJ1U-DJRmMP48xU/edit?rm=minimal&amp;gid=1686286919" loading="lazy"></iframe></div><p><a href="https://docs.google.com/spreadsheets/d/1kUdHAuvS7JrsJCakrGVzeL72V7eFyJ1U-DJRmMP48xU/edit?usp=sharing" target="_blank" rel="noopener">在新分頁開啟共用表格</a></p></details>
 <ol><li>開啟教材根目錄的 <code>zowe.config.json</code>，將 <code>YOUR_USER_ID</code> 換成自己的帳號，保留雙引號並儲存。其餘欄位維持原值。</li><li>開啟 <strong>Zowe Explorer</strong>，在「資料集」展開 <code>tcb-rse</code>。出現密碼欄位時，輸入分配給你的密碼並按 Enter；密碼只在此輸入，不貼到 Bob 對話或教材檔案。</li><li>點選連線旁的搜尋圖示，輸入 <code>&lt;自己的帳號&gt;.TCBLAB.*</code>。例如帳號是 TCB2101，就輸入 <code>TCB2101.TCBLAB.*</code>。</li><li>在「工作」（JOBS）選取 <code>tcb-rse</code> 連線，將 <strong>Owner</strong> 設為自己的帳號，查看自己的作業清單。</li></ol>
 <p>查詢完成且沒有認證或連線錯誤，就可以繼續。資料集清單應包含 <code>&lt;自己的帳號&gt;.TCBLAB.COBOL</code> 與 <code>&lt;自己的帳號&gt;.TCBLAB.JCL</code>，裡面已準備好練習程式與個人作業。作業清單可能是空的；稍後提交 CKP02 後，就能在這裡找到自己的作業。</p>
