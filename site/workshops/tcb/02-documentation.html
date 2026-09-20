@@ -9,7 +9,9 @@
 <p>回覆談到轉換條件後，可以追問實際執行時會遇到的情況，例如同一份資料再跑一次。</p>
 <p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>追問執行時的行為</span><button type="button" data-copy="z-explain">複製 Prompt</button></div><pre id="z-explain">如果資料符合或不符合轉換條件，接下來分別會執行哪些動作？何時會讀下一筆，何時結束？請沿著程式段落說明。
 
-再用 識別欄位 0000123456 的重跑案例（第 14–16 位不是 EOF），逐步推導連續執行兩次的結果。
+再用識別欄位 0000123456 的重跑案例（第 14–16 位不是 EOF），追蹤同一資料集中的同一筆記錄。這裡是兩次獨立的 CKP02 程式執行：第一次寫回的結果，作為第二次的輸入；不是一次處理迴圈讀取兩筆不同資料。請逐步列出每次輸入、是否符合轉換條件及寫回結果，保留尾端空白。
+
+若要說明 JCL 或排程是否會防止重複處理，請先讀取並引用實際 JCL 或設定。只有 COBOL 來源時，將這些外部控制保留待確認，不自行假設有防重機制。
 </pre><div class="expected"><strong>預期回應</strong><p>不符合條件和重跑時的處理過程，附上對應程式位置。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <details id="copybook"><summary>延伸閱讀：用 IDSHIFT 認識 Copybook 與 JCL（選做）</summary>
 <p>IDSHIFT 是獨立的教學範例，用來練習辨識 Copybook、子程式呼叫與 JCL 的關係。它處理記憶體中的單筆資料，並非 CKP02 的新版，也未實作需求單中的試跑與統計功能。你可以略過這段，直接進行下一步 CKP02 文件化。</p>
@@ -19,7 +21,7 @@
 <p>完成後回到 CKP02。這段比較可另外保留筆記，不是後續程式文件的必填內容。</p></details>
 <h2 id="document">2. 整理成接手文件</h2>
 <p>保持 <strong>Z Code</strong>，點 <strong>Start Workflow</strong>，先選擇本機教材工作區，再於 <strong>Bob workflows</strong> 找到 <strong>Generate program documentation</strong>，點右側的 <strong>Start</strong>。依流程選取 CKP02.cbl，完成後從結果連結開啟產生的文件。</p>
-<p>直接閱讀工作流程產生的文件，確認章節、表格與關鍵數值完整。把這份文件加入 Bob 對話，切換到 <strong>Plan</strong>，想想還有哪些內容需要補齊。</p>
+<p>直接開啟工作流程產生的文件，先目視確認段落與圖表沒有截斷、標題或章節沒有重複合併，再核對表格與關鍵數值。工作流程顯示完成，仍須進行內容驗收。原稿保留在 <code>docs/</code>；把這份文件加入 Bob 對話，切換到 <strong>Plan</strong>，列出需要補齊或更正的內容，後續對照原始碼將修正整理到 <code>output/</code> 的接手文件。</p>
 <p>這裡也加入需求申請單與前面釐清的內容：程式說明回答「現在怎麼運作」，影響分析則回答「為了新需求，接下來要改什麼」。兩份資料一起看，才能區分既有功能與新增工作。</p>
 <p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>規劃文件內容</span><button type="button" data-copy="document-plan">複製 Prompt</button></div><pre id="document-plan">我希望下次接手的人能從文件了解 CKP02。請對照原始碼與剛才的解讀，並閱讀 requests/change-application.docx，依 DOC-SPEC.md 規劃程式說明和變更影響分析。
 

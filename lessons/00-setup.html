@@ -19,12 +19,13 @@
 {{z-prepare|檢查工作區|Agent}}
 <p>完成後，開啟 <code>z-lab/CKP02.cbl</code>。程式已隨教材放在 z-lab，不需要轉檔；檢查報告會存到 output/workspace-check.md。</p>
 <h2 id="host-connection">準備自己的主機連線</h2>
+<p>第一次在新教材工作區開啟 Zowe Explorer 時，既有連線可能會顯示，但教材的 <code>tcb-rse</code> 尚未加入清單。先完成下方帳號設定；若「資料集」沒有 <code>tcb-rse</code>，點該區塊的 <strong>＋（Add profile）</strong>，選擇帶資料夾圖示、屬於目前教材工作區的 <strong>tcb-rse</strong>。出現是否適用所有目錄結構的詢問時，選擇<strong>是</strong>，再確認「資料集」與「工作」都有 <code>tcb-rse</code>。這是將教材已有的連線加入清單，不需要建立另一份設定檔。</p>
 <p>接下來，用分配給你的帳號登入主機，查看自己的資料集與作業。教材已備妥連線設定，你只需要填入帳號，再於登入時輸入密碼。</p>
 <p>每個帳號的密碼都使用相同規則：將帳號的第一個字母保留大寫，其餘英文字母改成小寫，再接上 <code>TCBBob@2026</code>。例如帳號 <code>TCB2101</code> 的密碼是 <code>Tcb2101TCBBob@2026</code>。密碼只輸入 Zowe Explorer 的登入欄位，不要貼到 Bob 對話或存入教材檔案。</p>
 <details id="account-registration"><summary>選擇並登記學員帳號</summary><p>展開下方共用表格，找一個姓名欄仍空白的帳號，並在同一列填入自己的姓名。每個帳號只供一位學員使用；若已有人填寫，請改選其他空白帳號。</p><div class="shared-sheet"><iframe title="學員帳號登記表" src="https://docs.google.com/spreadsheets/d/1kUdHAuvS7JrsJCakrGVzeL72V7eFyJ1U-DJRmMP48xU/edit?rm=minimal&amp;gid=1686286919" loading="lazy"></iframe></div><p><a href="https://docs.google.com/spreadsheets/d/1kUdHAuvS7JrsJCakrGVzeL72V7eFyJ1U-DJRmMP48xU/edit?usp=sharing" target="_blank" rel="noopener">在新分頁開啟共用表格</a></p></details>
 <ol><li>開啟教材根目錄的 <code>zowe.config.json</code>，將 <code>YOUR_USER_ID</code> 換成自己的帳號，保留雙引號並儲存。其餘欄位維持原值。</li><li>開啟 <strong>Zowe Explorer</strong>，在「資料集」展開 <code>tcb-rse</code>。出現密碼欄位時，輸入分配給你的密碼並按 Enter；密碼只在此輸入，不貼到 Bob 對話或教材檔案。</li><li>點選連線旁的搜尋圖示，輸入 <code>&lt;自己的帳號&gt;.TCBLAB.*</code>。例如帳號是 TCB2101，就輸入 <code>TCB2101.TCBLAB.*</code>。</li><li>在「工作」（JOBS）選取 <code>tcb-rse</code> 連線，將 <strong>Owner</strong> 設為自己的帳號，查看自己的作業清單。</li></ol>
 <p>查詢完成且沒有認證或連線錯誤，就可以繼續。資料集清單應包含 <code>&lt;自己的帳號&gt;.TCBLAB.COBOL</code> 與 <code>&lt;自己的帳號&gt;.TCBLAB.JCL</code>，裡面已準備好練習程式與個人作業。作業清單可能是空的；稍後提交 CKP02 後，就能在這裡找到自己的作業。</p>
-<details><summary>找不到連線，或登入時遇到問題？</summary><p>若沒有顯示 <code>tcb-rse</code>，先確認 <strong>IBM Z Open Editor</strong> 與 <strong>Zowe Explorer</strong> 已啟用，再按 Ctrl+Shift+P，執行 <strong>Developer: Reload Window</strong>，再開啟 Zowe Explorer。若仍有錯誤，保留完整訊息，依 <code>host-lab/CONNECTION.md</code> 的說明檢查。</p><p>本練習不需另外安裝 CA 憑證。教材的連線設定保留 HTTPS 加密，但略過伺服器憑證驗證，僅供本次練習使用。</p></details>
+<details><summary>找不到連線，或登入時遇到問題？</summary><p>若「資料集」或「工作」沒有顯示 <code>tcb-rse</code>，先點「資料集」的 <strong>＋（Add profile）</strong>，選擇帶資料夾圖示的教材工作區 <strong>tcb-rse</strong>，並在詢問時選擇適用所有目錄結構。如果連加入清單也找不到它，再確認開啟的是含 <code>zowe.config.json</code> 的教材根目錄，且 <strong>IBM Z Open Editor</strong> 與 <strong>Zowe Explorer</strong> 已啟用；按 Ctrl+Shift+P，執行 <strong>Developer: Reload Window</strong> 後重試。若仍有錯誤，保留完整訊息，依 <code>host-lab/CONNECTION.md</code> 的說明檢查。</p><p>本練習不需另外安裝 CA 憑證。教材的連線設定保留 HTTPS 加密，但略過伺服器憑證驗證，僅供本次練習使用。</p></details>
 <h3 id="host-environment-setup">建立個人作業配置</h3>
 <p>確認已能查詢自己的資料集與作業後，請 Bob 把帳號和作業配置記成一份文件。<code>host-lab/environment.md</code> 會在這一步建立，現在還看不到它是正常的。</p>
 {{host-environment|記下我的作業配置|Agent}}
@@ -34,7 +35,7 @@
 {{check:我的 environment.md 已建立並核對完成}}
 <h2 id="premium">找到 PPZ 的功能</h2>
 <ol><li>在 <strong>IBM BOB</strong> 面板選擇 <strong>Z Code</strong>，點上方的播放圖示 <strong>Start Workflow</strong>。</li><li>出現「選擇工作區以執行此工作流程」時，選擇 <strong>Run Workflow in〈你開啟的教材資料夾名稱〉</strong>，核對下方路徑是你解壓並開啟的本機教材資料夾。選項名稱會隨你開啟的資料夾而不同。本次閱讀本機程式，請選本機路徑。</li><li>進入 <strong>Bob workflows</strong> 清單後，找到 <strong>Explain code</strong> 與 <strong>Generate program documentation</strong>。</li></ol>
-<p>教材已附上 Explain code 使用的中文技能。開啟 <strong>Bob Settings → Skills</strong>，確認 <code>cobol-explain-zh-tw</code> 顯示為 <strong>Workspace</strong>，且 <strong>Active</strong> 已開啟。教材中的 <code>program-docs-zh-tw</code> 僅供需要翻譯英文正文時備用，主流程不需呼叫。</p>
+<p>教材已附上 Explain code 與可閱讀資料字典使用的中文技能。開啟 <strong>Bob Settings → Skills</strong>，確認 <code>cobol-explain-zh-tw</code> 與 <code>data-dictionary-zh-tw</code> 均顯示為 <strong>Workspace</strong>，且 <strong>Active</strong> 已開啟。檔案存在不代表技能已啟用，請以此畫面確認。教材中的 <code>program-docs-zh-tw</code> 僅供需要翻譯英文正文時備用，主流程不需呼叫。</p>
 <p>找到這兩個功能即可完成本步。進行程式文件單元時，再點對應項目右側的 <strong>Start</strong>。</p>
 <p>如果找不到，先看<a href="07-help.html#pp4z">常見問題</a>。</p>
 {{check:我已開啟練習資料夾}}{{check:CKP02.cbl 已準備好}}{{check:我找得到 PPZ 的功能入口}}

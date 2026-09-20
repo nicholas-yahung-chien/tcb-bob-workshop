@@ -9,13 +9,22 @@
 <h2 id="dictionary">2. 建立 DD.json 與可閱讀的資料字典</h2>
 
 <p>先替 CKP02 執行 Generate data dictionary。工作流程產生的 <code>DD.json</code> 保留給工具與後續處理使用；學員閱讀的資料字典則另外整理成 Markdown 文件。</p>
-<ol><li>切換到 <strong>Z Architect</strong>，點 <strong>Start Workflow</strong>，選擇本機教材工作區，再啟動 <strong>Generate data dictionary</strong>。</li><li>選取 <code>z-lab/CKP02.cbl</code>，依畫面指示完成掃描與字典建立。</li><li>從結果連結開啟 <code>DD.json</code>，記下檔案位置並保留原檔，不需要修改或翻譯。</li></ol>
+<ol><li>切換到 <strong>Z Architect</strong>，點 <strong>Start Workflow</strong>，選擇本機教材工作區，再啟動 <strong>Generate data dictionary</strong>。</li><li>選取 <code>z-lab/CKP02.cbl</code>，依畫面指示完成掃描與字典建立。在 <strong>Update data dictionary</strong> 開啟的差異畫面核對內容，確認後點 <strong>I'm done editing</strong> 或對應的完成操作，直到工作流程顯示完成；只看到變數數量或差異預覽，還不算完成保存。</li><li>從結果連結開啟實際保存的 <code>DD.json</code>，記下檔案位置。確認內容非空、CKP02 條目的 <code>programName</code> 為 <code>CKP02</code>，並回到 <code>z-lab/CKP02.cbl</code> 核對變數名稱，例如 <code>IN-REF-REC</code>、<code>R-ID-1</code>。保留工作流程產生的原檔，不需要修改或翻譯。</li></ol>
+<p>完成後的聊天摘要也需要核對。若摘要列出原始碼與 DD.json 都找不到的陌生欄位，不要沿用這些敘述；記下摘要與檔案的差異，將<strong>實際 DD.json 與 CKP02 原始碼</strong>交給下方的資料字典整理與核對步驟。摘要錯誤不等於保存檔案已損壞；若實際檔案為空、程式名稱不符或缺少內容，保留現況與錯誤訊息，請講師協助，不自行補造 DD.json。</p>
 <p>找不到工作流程時，請參考<a href="07-help.html#metadata-dd">常見問題</a>。</p>
 <p>接著在 <strong>Bob Settings → Skills</strong> 啟用 <code>data-dictionary-zh-tw</code>，確認來源為 <strong>Workspace</strong>。將實際產生的 DD.json 一併加入 Agent 對話，請 Bob 另外建立方便閱讀的繁體中文資料字典。</p>
 <p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DD.json</code>、<code>z-lab/CKP02.cbl</code>、<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>產生方便閱讀的資料字典</span><button type="button" data-copy="dictionary-readable">複製 Prompt</button></div><pre id="dictionary-readable">我想把方才資料字典裡的內容另外整理成一份同事容易查閱的格式。請對照 CKP02，並使用台灣常用的繁體中文。看不出欄位用途，或兩份資料對不起來的地方，請列出來讓我確認。
 </pre><div class="expected"><strong>預期回應</strong><p>建立 output/CKP02-data-dictionary.md，說明已整理的內容和需要再確認的地方，DD.json 維持原樣。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>完成後開啟 <code>output/CKP02-data-dictionary.md</code>，確認欄位說明、程式依據與待確認事項。再將這份文件、DD.json 與 CKP02 加入對話，請 Bob 一起核對欄位意思：</p>
-<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>DD.json</code>、<code>z-lab/CKP02.cbl</code>、<code>output/CKP02-data-dictionary.md</code>、<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>一起核對欄位意思</span><button type="button" data-copy="dictionary-review">複製 Prompt</button></div><pre id="dictionary-review">請幫我一起檢查這份資料字典。哪些欄位可以從 CKP02 和 DD.json 確認？哪些還需要問業務同事？如果內容對不上，也請告訴我是根據哪個檔案判斷的。先不要修改檔案。
+<p class="mode-guide"><strong>Ask 模式</strong></p><p class="file-context">加入檔案：<code>DD.json</code>、<code>z-lab/CKP02.cbl</code>、<code>output/CKP02-data-dictionary.md</code>、<code>host-lab/PPZ-ANALYSIS.md</code></p><div class="prompt"><div class="prompt-head"><span>一起核對欄位意思</span><button type="button" data-copy="dictionary-review">複製 Prompt</button></div><pre id="dictionary-review">請幫我對照 CKP02 和實際 DD.json，逐項檢查這份可閱讀資料字典：
+
+1. 變數是否依原始碼的 FILE SECTION、WORKING-STORAGE 與群組正確分類？
+2. 轉換條件是否同時包含 CH-RPD-KEY 與 NOT EOF？摘要、表格和詳細說明是否一致？
+3. 業務用途或英文縮寫展開有哪些來源支持？請連同摘要、標題及表格檢查；只有欄名、PIC 或 AI 描述支持的內容，保留為待確認。
+4. 標示 DD.json 已收錄或未收錄的項目，是否與實際檔案一致？
+5. Markdown 相對連結從 output/ 出發，是否能找到正確的來源檔案？
+
+每項列出文件位置、原始碼或 DD.json 依據，以及通過、需更正或待確認的判斷。有落差時說明建議修正，先不要修改檔案。
 </pre><div class="expected"><strong>預期回應</strong><p>欄位用途、程式中的依據，以及需要向業務確認的問題。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>核對時可先看 R-ID-1 的 10 bytes、重疊定義的欄位，以及 <code>IN-REF-REC(14:3)</code> 對應 R-NAME 第 3–5 位的關係。不熟悉的業務縮寫先留下問題；例如註解提到公司統編，還需要回到程式確認有哪些檢查。</p>
 <p>完成可閱讀資料字典的核對後，切換到 <strong>Ask</strong>，開始認識程式與相依關係。</p>
