@@ -16,7 +16,7 @@
 
 ## 在 Zowe Explorer 登入
 
-1. 確認 IBM Z Open Editor 與 Zowe Explorer 都已啟用；IBM Z Open Editor 提供 RSE 連線支援。儲存設定後若尚未看到 `tcb-rse`，執行 Developer: Reload Window，再查看資料集與工作區塊。
+1. 確認 IBM Z Open Editor 與 Zowe Explorer 都已啟用；IBM Z Open Editor 提供 RSE 連線支援。儲存設定後查看資料集與工作區塊。若尚未看到 `tcb-rse`，點「資料集」的 **＋（Add profile）**，選擇帶資料夾圖示、屬於目前教材工作區的 **tcb-rse**；出現是否適用所有目錄結構的詢問時選擇**是**，再確認資料集與工作都顯示此連線。這是加入教材已有的 profile，不建立另一份設定檔。若加入清單也沒有它，確認開啟的是含 `zowe.config.json` 的教材根目錄，再執行 Developer: Reload Window 後重試。
 2. 選取 `tcb-rse`，使用 Zowe 的認證介面輸入分配的密碼。密碼只在認證欄位輸入，不寫進 JSON，也不貼到 Bob 對話。
 3. 在資料集的 tcb-rse 搜尋 `<自己的帳號>.TCBLAB.*`，應能找到已備妥的 `<自己的帳號>.TCBLAB.COBOL`（CKP02、GENCKP、CHKCKP 三個成員）與 `<自己的帳號>.TCBLAB.JCL`（RUN 成員）。COBOL 以 tcb-rse 開啟，JCL 以 tcb-rse 開啟。在 JOBS 選 tcb-rse，將 owner 篩選為自己的帳號；尚未提交作業時，作業清單可能為空。來源資料集找不到時先確認帳號與篩選條件，再請講師協助，不使用其他帳號的資料集。
 

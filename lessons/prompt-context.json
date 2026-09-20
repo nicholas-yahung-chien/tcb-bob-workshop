@@ -20,7 +20,7 @@
       "z-lab/CKP02.cbl",
       "requests/change-application.docx"
     ],
-    "response": "CKP02 文件與 facts.json、來源核對結果，以及仍待確認的需求或正式環境資訊。"
+    "response": "output/program.md 與 output/facts.json、來源核對結果；需求回答留供稍後的影響分析使用。"
   },
   "01-ask": {
     "files": [
@@ -58,17 +58,18 @@
     "files": [
       "DOC-SPEC.md",
       "z-lab/CKP02.cbl",
-      "requests/change-application.docx"
+      "output/CKP02-data-dictionary.md"
     ],
-    "response": "程式說明與影響分析的章節，以及需要補充的內容。"
+    "response": "program.md 與 facts.json 的內容計畫、來源核對重點及待確認問題；尚不寫檔。"
   },
   "04-document": {
     "files": [
       "DOC-SPEC.md",
       "z-lab/CKP02.cbl",
-      "requests/change-application.docx"
+      "DD.json",
+      "output/CKP02-data-dictionary.md"
     ],
-    "response": "program.md、impact-analysis.md、facts.json，以及文件檢查結果。"
+    "response": "output/program.md、output/facts.json，以及來源與例子的檢查結果；其他檔案保持原樣。"
   },
   "05-unit": {
     "files": [
@@ -131,12 +132,10 @@
     "files": [
       "DOC-SPEC.md",
       "output/program.md",
-      "output/impact-analysis.md",
       "output/facts.json",
-      "z-lab/CKP02.cbl",
-      "requests/change-application.docx"
+      "z-lab/CKP02.cbl"
     ],
-    "response": "條件分支與欄位的核對、文件修正說明，以及檢查結果。"
+    "response": "program.md 與 facts.json 的條件分支、欄位及例子核對，以及這兩份文件的修正說明。"
   },
   "verify-plan": {
     "files": [
@@ -436,5 +435,17 @@
       "host-lab/PPZ-ANALYSIS.md"
     ],
     "response": "建立 output/CKP02-data-dictionary.md，說明已整理的內容和需要再確認的地方，DD.json 維持原樣。"
+  },
+  "document-impact": {
+    "files": [
+      "requests/change-application.docx",
+      "DOC-SPEC.md",
+      "z-lab/CKP02.cbl",
+      "output/architecture.md",
+      "output/checklist.md",
+      "output/program.md",
+      "output/facts.json"
+    ],
+    "response": "output/impact-analysis.md、需求與來源依據，以及跨文件矛盾或尚待確認的決策；其他檔案保持原樣。"
   }
 }
