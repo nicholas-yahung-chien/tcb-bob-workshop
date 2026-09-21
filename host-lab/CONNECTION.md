@@ -1,24 +1,30 @@
 # 使用自己的主機帳號
 
-教材已附上 `zowe.config.json` 與 `zowe.schema.json`，放在教材根目錄。主機位址、HTTPS port 與 profile 已填妥，只需要將帳號保留字換成自己的帳號，不必請 Bob 產生設定檔。
+教材根目錄已備妥 `zowe.config.json` 與 `zowe.schema.json`。先在課程網頁登記帳號，再用 Agent 模式請 Bob 設定：
 
-## 修改唯一的帳號欄位
+> 我選的帳號是〈填入帳號〉。請依 CONNECTION.md，幫我把帳號和密碼直接填進這個工作區的 zowe.config.json，讓我可以用 Zowe Explorer 登入。完成後告訴我怎麼查看自己的資料集和作業。
 
-1. 在 Bob 用 File → Open Folder 開啟下載的教材資料夾本身。
-2. 開啟根目錄的 `zowe.config.json`，找到唯一的 `YOUR_USER_ID`。
-3. 換成分配給你的帳號，例如 `TCBINS1`，保留前後雙引號，儲存檔案。
+## 填入本機登入資訊
 
-```json
-"user": "YOUR_USER_ID"
-```
+Bob 只修改目前教材工作區根目錄的 `zowe.config.json`，依下列步驟處理：
+
+1. 將學員提供的帳號轉成大寫，填入 `profiles.tcb-base.properties.user`。尚未提供帳號時先詢問，不自行挑選。
+2. 密碼使用帳號第一個字母大寫、其餘英文字母小寫，再接 `TCBBob@2026`，填入同一 profile 的 `properties.password`。這次練習明確使用本機明文設定，不查詢其他位置的密碼。
+3. 從這份設定中相關 profile 的 `secure` 清單移除 `user`、`password`，保留其他項目。確認 `tcb-rse` 沒有另外指定不同的帳號密碼；若有，只移除這份檔案內的重複認證欄位，讓它使用 `tcb-base`。保留 host、port、defaults、編碼及其餘設定。
+4. 確認 JSON 可正常解析，帳號與密碼規則一致；回覆只說明帳號及設定完成，不列印密碼或整份設定。
+5. 不修改父資料夾、全域 profile、憑證庫或 Zowe Explorer 儲存狀態。若另有專案使用者設定覆蓋這些欄位，說明衝突位置，先請學員確認，不直接刪除其他設定。
+
+明文密碼只放在自己的本機設定檔，不複製到 AGENTS.md、environment.md、報告或共用教材，也不要提交到 Git。
 
 本次工作坊的來源、JCL、作業提交與中英文作業紀錄，統一使用 `tcb-rse`（IBM-1371），透過 IBM RSE API（8195）連線。保留教材的 profile 名稱、defaults、host 與 port，其餘字碼設定也沿用範本即可。
 
 ## 在 Zowe Explorer 登入
 
 1. 確認 IBM Z Open Editor 與 Zowe Explorer 都已啟用；IBM Z Open Editor 提供 RSE 連線支援。儲存設定後查看資料集與工作區塊。若尚未看到 `tcb-rse`，點「資料集」的 **＋（Add profile）**，選擇帶資料夾圖示、屬於目前教材工作區的 **tcb-rse**；出現是否適用所有目錄結構的詢問時選擇**是**，再確認資料集與工作都顯示此連線。這是加入教材已有的 profile，不建立另一份設定檔。若加入清單也沒有它，確認開啟的是含 `zowe.config.json` 的教材根目錄，再執行 Developer: Reload Window 後重試。
-2. 選取 `tcb-rse`，使用 Zowe 的認證介面輸入分配的密碼。密碼只在認證欄位輸入，不寫進 JSON，也不貼到 Bob 對話。
-3. 在資料集的 tcb-rse 搜尋 `<自己的帳號>.TCBLAB.*`，應能找到已備妥的 `<自己的帳號>.TCBLAB.COBOL`（CKP02、GENCKP、CHKCKP 三個成員）與 `<自己的帳號>.TCBLAB.JCL`（RUN 成員）。COBOL 以 tcb-rse 開啟，JCL 以 tcb-rse 開啟。在 JOBS 選 tcb-rse，將 owner 篩選為自己的帳號；尚未提交作業時，作業清單可能為空。來源資料集找不到時先確認帳號與篩選條件，再請講師協助，不使用其他帳號的資料集。
+2. 選取目前教材工作區的 `tcb-rse`，使用剛才儲存的登入資訊。如果仍提示密碼或顯示舊帳號，先確認選到正確工作區的 profile，再執行 Developer: Reload Window。仍有問題時請講師協助檢查設定覆蓋或已保存的認證，不反覆嘗試登入。
+3. 在資料集的 tcb-rse 搜尋 `<自己的帳號>.TCBLAB.*`，應能找到已備妥的 `<自己的帳號>.TCBLAB.COBOL`（CKP02、GENCKP、CHKCKP 三個成員）與 `<自己的帳號>.TCBLAB.JCL`（RUN 成員）。COBOL 以 tcb-rse 開啟，JCL 以 tcb-rse 開啟。在 JOBS 選 tcb-rse，將 Owner 篩選為自己的帳號，Prefix 與 Status 設為 `*`；尚未提交作業時，作業清單可能為空。來源資料集找不到時先確認帳號與篩選條件，再請講師協助，不使用其他帳號的資料集。
+
+篩選器不會變更登入身分。請核對連線實際使用的帳號；若成員清單出現 `Abend`、`EXECIO`、`System` 等異常項目，保留訊息，先檢查登入帳號是否與資料集擁有者一致，不直接建立或覆寫成員。
 
 若只看到舊的 `zosmf` 或 `rse`，先確認開啟的是本次教材根目錄。不要修改父資料夾或全域 profile。課程資料沿用教材字碼設定；閱讀其他資料集時，請先確認其編碼。文字轉碼不適用於 binary 資料或 load module；其他 USS 檔案須依實際編碼處理。若出現 `profLoc` 等擴充套件錯誤，保留訊息及目前設定檔位置，先停止更新認證；不能只憑這個錯誤判定密碼錯誤或主機拒絕登入。
 
