@@ -1,3 +1,3 @@
-請根據附上的檔案，比較 CKP02 和 IDSHIFT 的資料定義與讀寫方式。IDREC.cpy 在哪裡被使用？JCL 的 EXEC 實際執行哪支程式？請指出依據，再列出執行前還需要的設定。
+請根據 CKP02.cbl、IDSHIFT.cbl、IDREC.cpy、TESTSHIFT.cbl 和 IDSHIFT.jcl，比較 CKP02.cbl 和 IDSHIFT.cbl 的資料定義與讀寫方式。IDREC.cpy 在哪裡被使用？JCL 的 EXEC 實際執行哪支程式？請指出依據，再列出執行前還需要的設定。
 
 這一步只分析與說明，不建立或修改檔案，也不提交主機作業。

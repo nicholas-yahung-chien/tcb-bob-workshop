@@ -1,0 +1,14 @@
+<h2>1. 掃描 CKP02 的練習副本</h2>
+<p>本單元約 25 分鐘。先建立 CKP02H，保留原版程式。</p>
+{{quality-prepare|準備練習副本|Agent}}
+{{sast-ask|掃描並看看問題|Z Code}}
+<p>核對「問題」面板中的 IBM ZCodeScan 訊息與行號，挑一個檔案讀寫失敗時的處理問題作為這次改善範圍。掃描未指出的問題，請 Bob 另外說明程式依據。</p>
+{{check:我已取得修改前的實際掃描結果}}
+<h2>2. 改善一個問題，再掃一次</h2>
+<p>對 <code>host-lab/hardening/CKP02H.cbl</code> 使用 <strong>Improve Code</strong>。它可能開啟新的 Agent 任務並直接修改檔案；先確認目標是練習副本，再查看差異。</p>
+{{quick-quality-plan|先確認這次要改什麼|Plan}}
+<p>確認方案後切換 Agent，接著輸入：</p>
+{{quick-quality-apply|依確認的範圍修改|Agent}}
+{{verify-sast|重新掃描並整理結果|Agent}}
+<p>開啟 <code>host-lab/hardening/review.md</code>，核對實際掃描的變化。本單元只在本機修改與掃描，不上傳、編譯或執行主機作業；掃描結果不代表已完成執行測試。</p>
+{{check:我已確認修改範圍，並完成重新掃描}}

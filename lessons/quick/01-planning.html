@@ -1,0 +1,13 @@
+<h2>1. 準備程式資訊與資料字典</h2>
+<p>先替 CKP02 建立 Local Metadata，再接著建立資料字典，讓後續閱讀與分析有程式資訊可用。本單元約 25 分鐘。</p>
+{{quick-scan|先掃描程式|Z Architect}}
+<p>展開工具紀錄，確認 <code>scan_program</code> 已完成，並查看產生的檔案位置。若缺少相依檔案，先依 <code>host-lab/PPZ-ANALYSIS.md</code> 核對。</p>
+<h3>接著建立 Data Dictionary</h3>
+<ol><li>在 <strong>Z Architect</strong> 點 <strong>Start Workflow</strong>，選擇目前教材工作區，再啟動 <strong>Generate data dictionary</strong>。</li><li>只選 <code>z-lab/CKP02.cbl</code>，依畫面指示完成流程。一次最多選 10 個支援的程式檔，不要選整個資料夾或 <code>.asm</code> 檔。</li><li>從結果連結開啟實際產生的 <code>DD.json</code>，保留原樣。它不一定放在工作區根目錄；後續請加入這份實際檔案。</li></ol>
+<p>想查閱中文欄位說明時，可以在課後依<a href="../01-planning.html">完整版的資料字典步驟</a>另外整理成文件。找不到工作流程時，參考<a href="07-help.html#pp4z">常見問題</a>。</p>
+{{check:我已完成 CKP02 掃描與資料字典}}
+<h2>2. 看看需求會影響哪裡</h2>
+<p>直接使用下方提問，請 Bob 對照申請單與 CKP02，先挑一個需要釐清的問題討論。</p>
+{{quick-impact|一起看需求|Z Architect}}
+<p>確認 Bob 說的是要修改哪些程式與條件，還是預計轉換多少筆資料；兩者要分開說明。這一步先保留討論結果，下一單元再閱讀程式文件。</p>
+{{check:我能說明一項需求影響與待確認問題}}

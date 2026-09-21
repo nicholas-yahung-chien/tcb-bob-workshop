@@ -447,5 +447,54 @@
       "output/facts.json"
     ],
     "response": "output/impact-analysis.md、需求與來源依據，以及跨文件矛盾或尚待確認的決策；其他檔案保持原樣。"
+  },
+  "host-login": {
+    "files": [
+      "host-lab/CONNECTION.md"
+    ],
+    "response": "完成本機工作區的帳號密碼設定，並說明手動查詢方式；回覆不顯示密碼。"
+  },
+  "quick-scan": {
+    "files": [
+      "z-lab/CKP02.cbl",
+      "host-lab/PPZ-ANALYSIS.md"
+    ],
+    "response": "實際掃描結果、產生檔案的位置與缺少的相依檔案。"
+  },
+  "quick-impact": {
+    "files": [
+      "requests/change-application.docx",
+      "z-lab/CKP02.cbl"
+    ],
+    "response": "需求影響的程式段落與待確認問題；先不修改程式。"
+  },
+  "quick-doc-check": {
+    "files": [
+      "z-lab/CKP02.cbl"
+    ],
+    "response": "兩種處理情況的程式依據，以及文件需要調整的地方。"
+  },
+  "quick-run-results": {
+    "files": [
+      "host-lab/run.jcl",
+      "host-lab/BOB-GUIDE.md"
+    ],
+    "response": "根據實際紀錄說明返回碼、兩次轉換及空檔結果，列出缺少的紀錄。"
+  },
+  "quick-quality-plan": {
+    "files": [
+      "host-lab/CODE-QUALITY.md",
+      "host-lab/hardening/CKP02H.cbl",
+      "host-lab/hardening/before.txt"
+    ],
+    "response": "一個檔案錯誤處理問題的修改方案與重新掃描重點。"
+  },
+  "quick-quality-apply": {
+    "files": [
+      "host-lab/CODE-QUALITY.md",
+      "host-lab/hardening/CKP02H.cbl",
+      "host-lab/hardening/before.txt"
+    ],
+    "response": "依已確認方案修改 CKP02H，說明差異。"
   }
 }

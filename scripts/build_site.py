@@ -16,7 +16,7 @@ def prompt(stem, title, mode):
     text=(ROOT/"prompts"/(stem+".md")).read_text(encoding="utf-8")
     context=json.loads((ROOT/"lessons/prompt-context.json").read_text(encoding="utf-8"))[stem]
     files='、'.join('<code>'+escape(name)+'</code>' for name in context['files']) if context['files'] else '沿用目前對話；需要翻譯時加入實際產生的文件。' if stem=='workflow-docs-zh-tw' else '沿用目前對話，不需新增檔案。'
-    return f'<p class="mode-guide"><strong>{escape(mode)} 模式</strong></p><p class="file-context">加入檔案：{files}</p><div class="prompt"><div class="prompt-head"><span>{escape(title)}</span><button type="button" data-copy="{stem}">複製 Prompt</button></div><pre id="{stem}">{escape(text)}</pre><div class="expected"><strong>預期回應</strong><p>{escape(context["response"])}</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>'
+    return f'<p class="mode-guide"><strong>{escape(mode)} 模式</strong></p><p class="file-context">檔案位置（供核對）：{files}</p><div class="prompt"><div class="prompt-head"><span>{escape(title)}</span><button type="button" data-copy="{stem}">複製 Prompt</button></div><pre id="{stem}">{escape(text)}</pre><div class="expected"><strong>預期回應</strong><p>{escape(context["response"])}</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>'
 
 
 def check(label): return f'<label class="check"><input type="checkbox" data-check="{escape(label,quote=True)}"><span>{label}</span></label>'
@@ -36,9 +36,12 @@ PAGES = [
 
 
 
-def content(name):
+def content(name, quick=False):
     import re
-    body=(ROOT/'lessons'/name).read_text(encoding='utf-8')
+    source=ROOT/'lessons'/name
+    if quick and (ROOT/'lessons/quick'/name).exists():
+        source=ROOT/'lessons/quick'/name
+    body=source.read_text(encoding='utf-8')
     body=re.sub(r"\{\{check:(.*?)\}\}",lambda m:check(m[1]),body)
     links=''.join(f'<li>{escape(p.name)}</li>' for p in sorted((ROOT/'reference').glob('*')) if p.is_file() and p.name not in {'log-analysis.md','log-facts.json','customer_lookup.py','sast-remediation.md'})
     body=body.replace('{{references}}','<ul>'+links+'</ul>')
@@ -58,17 +61,49 @@ def build():
     for i,(name,short,title,desc,eyebrow) in enumerate(PAGES):
         prev=f'<a href="{PAGES[i-1][0]}">← {PAGES[i-1][1]}</a>' if i else '<a href="index.html">← 課程首頁</a>'
         nxt=f'<a href="{PAGES[i+1][0]}">{PAGES[i+1][1]} →</a>' if i+1<len(PAGES) else '<a href="index.html">回課程首頁 →</a>'
-        page=render_page(title,content(name),'../../',name,eyebrow,desc,f'<nav class="next" aria-label="前後單元">{prev}{nxt}</nav>')
+        switch=f'<p class="course-version">完整版 · <a href="quick/{name}">切換至簡易版</a></p>'
+        page=render_page(title,switch+content(name),'../../',name,eyebrow,desc,f'<nav class="next" aria-label="前後單元">{prev}{nxt}</nav>')
         (target/name).write_text(page,encoding='utf-8',newline='\n')
     cards=''.join(f'<a class="card" href="{p[0]}"><span class="eyebrow">{i:02d}</span><h2>{p[1]}</h2><p>{p[3]}</p><span class="cta">開始學習 →</span></a>' for i,p in enumerate(PAGES))
     intro='''<p>接手一支不熟悉的程式、收到一項新需求，或拿到一份錯誤記錄時，你會從哪裡開始？這裡準備了幾個練習，帶你用自己的問題和 Bob 展開對話，再一步步完成文件與程式。</p><h2>下載練習程式</h2>'''
     intro+=f'<p><a class="cta" href="00-setup.html">下載程式並開始練習 →</a>　<a href="{BASE}/releases/latest">下載 ZIP ↗</a></p>'
-    intro+='<h2>選擇練習單元</h2><div class="card-grid">'+cards+'</div>'
+    intro+='<h2>選擇課程版本</h2><p><a class="cta" href="quick/index.html">簡易版：每單元兩項主要活動 →</a></p><p>下方為完整版，保留完整步驟與延伸練習。兩版使用同一份教材，可以依上課時間選擇。</p>'
+    intro+='<h2>完整版練習單元</h2><div class="card-grid">'+cards+'</div>'
     (target/'index.html').write_text(render_page('合作金庫 IBM Bob 工作坊',intro,'../../',description='需求規劃、COBOL 文件、測試與問題排查',eyebrow='IBM Bob + PPZ · 2026.09.21 / 09.24'),encoding='utf-8',newline='\n')
+    build_quick(target)
     hub='<p>從熟悉的工作情境開始，練習用 Bob 閱讀程式、討論需求和檢查結果。</p><div class="card-grid"><a class="card" href="workshops/tcb/index.html"><span class="eyebrow">2026.09.21 / 09.24</span><h2>合作金庫工作坊</h2><p>從批次需求開始，再試試 COBOL 文件、測試與事件分析。</p><span class="cta">開始練習 →</span></a></div>'
     (SITE/'index.html').write_text(render_page('IBM Bob Workshop',hub,'',description='操作練習與範例程式'),encoding='utf-8',newline='\n')
     (SITE/'.nojekyll').write_text('',encoding='utf-8',newline='\n')
-    print(f'Built {len(PAGES)+2} HTML pages')
+    print(f'Built {len(PAGES)*2+3} HTML pages')
+
+
+def build_quick(target):
+    target=target/'quick'
+    target.mkdir(exist_ok=True)
+    descriptions=[
+        '準備教材、設定主機帳號，最後執行 /init。',
+        '先建立 Local Metadata 與資料字典，再討論一項需求。',
+        '用工作流程解讀 CKP02，產生文件並對照程式。',
+        '核對自己的 RUN，提交作業並下載紀錄。',
+        '判讀自己的作業結果，再觀看講師展示 IMS 系統紀錄。',
+        '掃描 CKP02H，改善一個問題後重新掃描。',
+        '回顧這次完成的項目，與參考解答比較。',
+        '遇到操作問題時，查閱對應的排解方式。',
+        '認識這次用到的程式與課後可選讀的教材。',
+    ]
+    for i,(name,short,title,desc,eyebrow) in enumerate(PAGES):
+        prev=f'<a href="{PAGES[i-1][0]}">← {PAGES[i-1][1]}</a>' if i else '<a href="index.html">← 簡易版首頁</a>'
+        nxt=f'<a href="{PAGES[i+1][0]}">{PAGES[i+1][1]} →</a>' if i+1<len(PAGES) else '<a href="index.html">回簡易版首頁 →</a>'
+        switch=f'<p class="course-version">簡易版 · <a href="index.html">課程安排</a> · <a href="../{name}">查看完整版</a></p>'
+        page=render_page(title,switch+content(name,quick=True),'../../../',name,eyebrow+' · 簡易版',descriptions[i],f'<nav class="next" aria-label="前後單元">{prev}{nxt}</nav>')
+        page=page.replace('<body>','<body data-course-version="quick">').replace('href="../../../workshops/tcb/index.html">課程首頁','href="index.html">課程首頁')
+        (target/name).write_text(page,encoding='utf-8',newline='\n')
+    times=['20 分鐘','25 分鐘','20 分鐘','20 分鐘','30 分鐘','25 分鐘','10 分鐘','需要時查閱','課後查閱']
+    cards=''.join(f'<a class="card" href="{p[0]}"><span class="eyebrow">{i:02d} · {times[i]}</span><h2>{p[1]}</h2><p>{descriptions[i]}</p><span class="cta">開始學習 →</span></a>' for i,p in enumerate(PAGES))
+    intro='<p>每個主要單元保留兩項活動，從讀懂 CKP02、討論需求，到主機執行與程式碼改善。</p><p>01–05 約 120 分鐘，另留 15 分鐘討論與操作緩衝；課前準備約 20 分鐘，成果回顧約 10 分鐘。時間為安排參考，可依工具回應與現場進度調整。</p><p>兩版共用教材。第 04 單元的 IMS 系統紀錄由講師展示，其餘步驟跟著頁面操作即可。</p><p><a href="../index.html">查看完整版與延伸練習</a> · <a href="00-setup.html">下載教材並開始準備 →</a></p><div class="card-grid">'+cards+'</div>'
+    page=render_page('合作金庫 IBM Bob 工作坊 · 簡易版',intro,'../../../',description='每單元兩項活動，完成一次從閱讀到改善的練習。')
+    page=page.replace('<body>','<body data-course-version="quick">').replace('href="../../../workshops/tcb/index.html">課程首頁','href="index.html">課程首頁')
+    (target/'index.html').write_text(page,encoding='utf-8',newline='\n')
 
 
 if __name__=='__main__': build()

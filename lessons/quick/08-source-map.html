@@ -1,0 +1,33 @@
+<p>本次簡易版使用 CKP02、GENCKP、CHKCKP 與 RUN。下方列出教材中的其他程式，供課後查閱；不需在這次課程全部完成。</p>
+<h2 id="files">先從哪支程式開始？</h2>
+<p>第 01／02 單元從 CKP02 認識欄位與轉換流程，第 03 單元執行同一支原版程式，第 04 單元分析主機紀錄並執行 IMS 練習，第 05 單元另建本機 CKP02H 改善副本。CIS14、STANCVT 與 SYSOCP31 則供延伸閱讀，不必依序全部執行。</p>
+<p>第 04 單元的<a href="../04-logs.html#ims-host">IMS 資料庫練習</a>使用教學用資料庫與輔助程式串接 CKP02。它不代表 CIS14 的 IMS 環境或外部相依程式已經備妥；閱讀 CIS14 時仍需分別確認。</p>
+<table><tr><th>程式</th><th>可以練習什麼</th><th>閱讀時需要留意</th></tr><tr><td>CKP02</td><td>批次轉換、欄位位置與重跑行為</td><td>課程 JCL 與測試設定已備妥；生產配置另待提供</td></tr><tr><td>CIS14 與 Copybook</td><td>資料加工、IMS 呼叫及程式相依</td><td>部分外部程式與 IMS 環境未包含在檔案中</td></tr><tr><td>STANCVT</td><td>七位序號遞增與邊界情況</td><td>呼叫方如何使用序號，需要另外了解</td></tr><tr><td>SYSOCP31</td><td>訊息輸出、編碼轉換與錯誤處理</td><td>部分巨集和外部程式需要補齊</td></tr></table>
+<h2 id="helpers">主機練習裡的程式各自做什麼？</h2>
+<table><tr><th>程式與作業</th><th>課程用途</th><th>執行範圍</th></tr>
+<tr><td>CKP02／RUN</td><td>第 03 單元的基準測試，實際讀取及回寫循序檔</td><td>原版 CKP02 已備妥於自己的主機成員，包含兩次轉換與空檔測試；尚無預覽功能</td></tr>
+<tr><td>GENCKP</td><td>產生七筆中文合成測資、兩次預期結果與空檔；PRINTDD 展示完整資料</td><td>由 RUN 等教學作業呼叫，資料不是客戶正式資料，也不是需求中的預覽輸出</td></tr>
+<tr><td>CHKCKP</td><td>比對完整 400 bytes，印出各次 BEFORE-ID、ACTUAL-ID 與 EXPECT-ID</td><td>CHECK1／CHECK2 的 BEFOREDD 分別使用 SNAP1／SNAP2 保存的實際轉換前資料</td></tr>
+<tr><td>IMSCKP／IMSRUN</td><td>第 04 單元：IMS 載入、匯出、更新、回復與提交</td><td>已預先備妥；IMSCKP 匯出循序檔交給原版 CKP02，再將結果更新至作業專用 IMS 資料庫</td></tr>
+<tr><td>IMSEVT／IMSEVTS</td><td>第 04 單元：父子區段、GNP、重複新增、受控中止與耗時判讀</td><td>已預先備妥的獨立 IMS 批次練習，不執行 CKP02</td></tr></table>
+<p>IMS 兩項作業都使用真實 DL/I 呼叫與隔離測資，每次完整提交重新建立作業專用資源，結束後清除；不是 IMS TM 線上交易。來源成員保留，不需每次上傳。依<a href="../04-logs.html">第 04 單元</a>及各自指引核對，不混用 RUN、IMSRUN 與 IMSEVTS 的步驟清單。</p>
+<p>第 04 單元另有管理者視角的共享 IMS 區域紀錄閱讀，依 <code>host-lab/IMS-ADMIN.md</code> 取得現有 STC 的 JES 紀錄。這項練習閱讀共享區域的既有紀錄；前面的 IMSCKP 與 IMSEVT 則用來觀察個別批次作業。</p>
+<h2 id="variants">CKP02R、CKP02H 和 IDSHIFT 是同一件事嗎？</h2>
+<table><tr><th>程式</th><th>何時建立或使用</th><th>與原版的關係</th></tr>
+<tr><td>CKP02R</td><td>第 04 單元 RC 4 修正選做，由學員依警告分析產生</td><td>保存在 host-lab/rc4，依該練習另行驗證；不是預先提供的統一答案</td></tr>
+<tr><td>CKP02H</td><td>第 05 單元 Improve Code 與檔案錯誤處理改善</td><td>保存在 host-lab/hardening，只在本機修改與重做 ZCodeScan，不準備 JCL、不上傳或執行主機作業</td></tr>
+<tr><td>IDSHIFT／IDREC／TESTSHIFT</td><td>第 02／03 單元預設收合的延伸閱讀與測試</td><td>已提供的記憶體轉換子程式、Copybook 與測試程式；IDSHIFT.jcl 執行 TESTSHIFT，使用前需核對環境</td></tr></table>
+<p>以上都不是需求單中預覽功能的完成品。預覽仍是第 01／02 單元討論的開發提案；IDSHIFT 是對照範例，CKP02R 與 CKP02H 則保留原版並處理不同的改善目標。</p>
+<h2 id="folders">資料夾裡有哪些檔案？</h2>
+<p>教材已在 <code>z-lab</code> 備妥 45 份 .cbl、.cpy 和 .asm 檔案，可直接開啟閱讀。<code>source-manifest.json</code> 用來核對檔案完整性。</p>
+<table><tr><th>資料夾／檔案</th><th>目前教材內容</th></tr>
+<tr><td>z-tests</td><td>GENCKP、CHKCKP、IMSCKP、IMSEVT 的來源與作業範本；fixtures.json 定義測資及預期值，manifest.json 核對輔助檔案。它們不是本次執行紀錄。</td></tr>
+<tr><td>host-lab</td><td>連線與實作指引，以及學員產生的 JCL、計畫、程式副本和報告；logs 是建議的紀錄保存位置，根目錄的 JOB 資料夾也可分析。</td></tr>
+<tr><td>samples／tests</td><td>IDSHIFT 的 COBOL／Copybook／JCL 延伸範例，以及 Python normalizer 與選做測試。舊 SQL 注入程式、弱點報告及合成 IMS CSV 已不包含於學員教材。</td></tr>
+<tr><td>requests／specs</td><td>Word 需求申請單為主要輸入，EML 是信件例子；specs 保存選做測試與 IMS 事件欄位等說明。</td></tr>
+<tr><td>docs／output</td><td>練習後產生的文件：工作流程原始文件留在 docs，一般課程成果放在 output，主機及掃描報告依各節保存在 host-lab。</td></tr>
+<tr><td>reference</td><td>完成練習後從第 06 單元另外下載；不預先包含在教材 ZIP，先讀其中 README.md 對照各單元。</td></tr></table>
+<p>本機教材使用 UTF-8；課程來源與中文測資以 IBM-937 準備，COBOL 編譯保留 CODEPAGE(937),DBCS。Zowe 連線則統一使用 tcb-rse／IBM-1371。這些設定用途不同，不能把畫面的中文字數當成主機記錄的 byte 位置。</p>
+<h2 id="more">想看得更細</h2><p>SOURCE-MAP.md 已包含於學員教材；另外兩份閱讀筆記與索引位於網站維護分支，供線上查閱，不包含在學員 ZIP。它們說明來源行為，不表示相關程式的完整執行環境都已備妥。</p>
+<ul><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/SOURCE-MAP.md">檔案用途說明</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/docs/source-analysis.md">程式閱讀筆記</a></li><li><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/main/docs/source-index.md">程式與符號索引</a></li></ul>
+<p>閱讀 SYSOCP31 時若遇到沒有提供的巨集，先記下呼叫位置和需要的檔案。找到線索後再補資料，比只憑名稱推測更容易釐清流程。</p>

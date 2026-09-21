@@ -1,0 +1,10 @@
+<h2 id="host">1. 核對自己的程式與作業</h2>
+<p>本單元約 20 分鐘。先完成<a href="00-setup.html#host-connection">主機連線</a>。在 Zowe Explorer 的「資料集」選取目前教材工作區的 <code>tcb-rse</code>，搜尋 <code>&lt;自己的帳號&gt;.TCBLAB.*</code>。</p>
+<ol><li>展開 <code>TCBLAB.COBOL</code>，確認有 CKP02、GENCKP、CHKCKP，開啟 CKP02 核對中文註解與換行。</li><li>展開自己的 <code>TCBLAB.JCL</code>，在 <code>RUN</code> 按右鍵選 <strong>Download Member...</strong>，下載到 <code>host-lab/run.jcl</code>。下載選項取消 Generate Directory Structure 與 Use Uppercase Names，勾選 Override File Extension 並填入 <code>jcl</code>；取消 Overwrite。已有個人檔案時先核對，不覆寫。</li><li>使用下方提問，讓 Bob 讀取下載的 JCL 與 environment.md，核對帳號、作業名稱與步驟。</li></ol>
+{{host-build|一起看這份主機作業|Agent}}
+<p>Job 名稱應為自己的帳號加 A，使用 DEVVS1、SCNOSMS。CGEN、CCKP、CCHK 應讀取自己的 GENCKP、CKP02、CHKCKP。保留 <code>CODEPAGE(937),DBCS</code> 編譯選項。</p>
+{{check:我已核對自己的 RUN 作業}}
+<h2>2. 提交作業並下載紀錄</h2>
+<ol><li>在核對過的本機 JCL 編輯器按右鍵，選 <strong>Submit as JCL</strong>，使用 <code>tcb-rse</code>（IBM-1371）。</li><li>記下回傳的 job ID。在「工作」將 Owner 設為自己的帳號，Prefix 與 Status 設為 <code>*</code>，找到該作業並等待完成。提交逾時時先查詢，不立即重送。</li><li>對完成的 <strong>JOB 按右鍵 → 全部下載</strong>，存到工作區，例如 <code>host-lab/logs/&lt;job ID&gt;/</code>。保留下載的檔名與目錄結構，不選二進位下載。</li><li>開啟 GENERATE／PRINTDD 確認中文可讀。若有亂碼，從 tcb-rse 開啟該 DD，載入完整內容並另存 UTF-8 副本。</li></ol>
+<p>將完整作業資料夾帶到下一單元。作業顯示 CC 0004 時，先查看是哪個步驟回傳，再判斷結果。</p>
+{{check:我已保存 job ID 與完整作業紀錄}}

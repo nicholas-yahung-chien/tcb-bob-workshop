@@ -1,0 +1,11 @@
+<h2 id="host">1. 看懂自己的作業結果</h2>
+<p>本單元約 30 分鐘。先把上一單元下載的完整 JOB 資料夾加入對話，再使用下方提問。</p>
+{{quick-run-results|這次執行結果如何？|Ask}}
+<p>一起找到 RC 4 的來源、CHECK1 與 CHECK2 的七筆完整 400-byte 比對，以及 RUNEMPTY 的結果。訊息不完整時先補紀錄，不只看作業最上層的返回碼。</p>
+{{check:我能從訊息說明第一次轉換、重跑與空檔的結果}}
+<h2 id="ims-admin">2. 從系統管理者角度閱讀目前 IMS 子系統紀錄</h2>
+<p>由講師使用管理者帳號展示，學員一起觀察與討論。</p>
+<ol><li>依 <code>host-lab/IMS-ADMIN.md</code>，在講師工作區的「工作 → tcb-rse」將 Owner 設為 <code>IBMUSER</code>、Prefix 設為 <code>IMS15*</code>，清除只顯示 OUTPUT 的條件，重新整理。</li><li>找到目前 ACTIVE 的 <code>IMS15CR1</code>、<code>IMS15DL1</code> 與 <code>IMS15RC1</code>，確認各自的 STC ID，記下擷取時間。</li><li>取得三個區域的 JESMSGLG、JESYSMSG 與 JESJCL，保存完整且可讀的內容，例如 <code>host-lab/logs/ims-admin/</code>。檔名保留 STC ID 與 DD 名稱。</li><li>將實際保存的紀錄資料夾加入 Bob 對話，請它協助閱讀。</li></ol>
+{{ims-admin-ask|一起讀 IMS 系統紀錄|Ask}}
+<p>討論 Bob 如何根據訊息排列時間線，以及還需要哪些紀錄才能確認狀態。ACTIVE 的工作尚未結束，沒有最終 RC；這次只讀取紀錄，不變更 IMS 狀態。</p>
+{{check:我能指出一項 IMS 系統訊息及其判讀依據}}

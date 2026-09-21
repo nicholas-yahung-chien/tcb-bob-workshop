@@ -8,22 +8,24 @@
 <h2 id="chat">從 Bob 對話開始</h2>
 <p>主機練習會使用個人主機帳號，透過 Zowe Explorer 的 IBM RSE API 連線開啟程式、提交作業與查看紀錄。完成下方工作區準備後，再設定自己的主機連線。</p>
 <p>開啟 <strong>IBM BOB</strong> 面板，按「＋」建立新對話。輸入框下方可以選擇 Ask、Plan、Agent，以及 PPZ 的 Z Code、Z Architect。</p>
-<p>每個練習會列出要用的檔案。在輸入框輸入 <strong>@</strong>，從彈出的清單找到並點選檔案，再送出問題。清單支援搜尋時，可輸入檔名縮小範圍，確認路徑後選取。單純貼上 <code>@檔案路徑</code> 不代表已加入檔案。遇到 Permissions 提示時，看看 Bob 想讀取、修改或執行什麼，再核准操作。</p>
-<p>同一段對話已加入的檔案，不必每一步重複加入。若改開新對話，請把該步列出的需求、程式與已有成果一起補上。</p>
+<p>提示詞已寫入需要的檔名，選好模式後可以直接複製提問，讓 Bob 從目前工作區找檔案。若找到同名檔案，請確認它使用的是本次練習版本。</p>
+<p>工作流程產生的文件或下載的作業紀錄，檔名可能不同；請告訴 Bob 實際檔名或 job ID。若仍找不到，再輸入 <strong>@</strong>，從清單選取檔案或資料夾。同一段對話已確認的檔案，不必重複加入。遇到 Permissions 提示時，確認 Bob 要讀取或修改的內容，再核准操作。</p>
 <h2 id="questions">換成自己的問題，也可以這樣問</h2>
 <p>把工作交給 Bob 時，可以像向同事說明需求一樣，交代下面幾件事。不必每次都重新寫一遍；同一段對話已經說清楚的內容，可以接著使用。</p>
 <table><tr><th>想一想</th><th>可以怎麼說</th></tr><tr><td>背景：我正在做什麼？</td><td>我剛接手這支程式。</td></tr><tr><td>任務：我想弄清楚什麼？</td><td>想知道它如何處理一筆資料。</td></tr><tr><td>依據：請根據什麼回答？</td><td>請根據附上的程式，指出對應段落。</td></tr><tr><td>成果：我希望看到什麼？</td><td>依處理順序說明，另外列出需要補充的資料。</td></tr></table>
-<p>看完回答還不明白，就接著問：「可以用一筆資料舉例嗎？」需要留下文件時，再補上用途和格式。下一個單元也會用 Enhance prompt 試著補充提問，再比較哪些內容值得保留。</p>
+<p>看完回答還不明白，就接著問：「可以用一筆資料舉例嗎？」需要留下文件時，再補上用途和格式。想調整提問時，也可以用 Enhance prompt 看看哪些補充值得保留。</p>
 <h2 id="ready">請 Bob 幫忙檢查檔案</h2>
 <p><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/workspace.md">workspace.md</a> 寫好了環境與教材完整性檢查步驟。你可以像請同事照著作業說明操作一樣，把這份文件交給 Bob。</p>
 {{z-prepare|檢查工作區|Agent}}
 <p>完成後，開啟 <code>z-lab/CKP02.cbl</code>。程式已隨教材放在 z-lab，不需要轉檔；檢查報告會存到 output/workspace-check.md。</p>
 <h2 id="host-connection">準備自己的主機連線</h2>
 <p>第一次在新教材工作區開啟 Zowe Explorer 時，既有連線可能會顯示，但教材的 <code>tcb-rse</code> 尚未加入清單。先完成下方帳號設定；若「資料集」沒有 <code>tcb-rse</code>，點該區塊的 <strong>＋（Add profile）</strong>，選擇帶資料夾圖示、屬於目前教材工作區的 <strong>tcb-rse</strong>。出現是否適用所有目錄結構的詢問時，選擇<strong>是</strong>，再確認「資料集」與「工作」都有 <code>tcb-rse</code>。這是將教材已有的連線加入清單，不需要建立另一份設定檔。</p>
-<p>接下來，用分配給你的帳號登入主機，查看自己的資料集與作業。教材已備妥連線設定，你只需要填入帳號，再於登入時輸入密碼。</p>
-<p>每個帳號的密碼都使用相同規則：將帳號的第一個字母保留大寫，其餘英文字母改成小寫，再接上 <code>TCBBob@2026</code>。例如帳號 <code>TCB2101</code> 的密碼是 <code>Tcb2101TCBBob@2026</code>。密碼只輸入 Zowe Explorer 的登入欄位，不要貼到 Bob 對話或存入教材檔案。</p>
+<p>接下來，用分配給你的帳號登入主機，查看自己的資料集與作業。教材已備妥連線設定，選好帳號後，可以請 Bob 幫你填入登入資訊。</p>
+<p>每個帳號的密碼都使用相同規則：將帳號的第一個字母保留大寫，其餘英文字母改成小寫，再接上 <code>TCBBob@2026</code>。例如帳號 <code>TCB2101</code> 的密碼是 <code>Tcb2101TCBBob@2026</code>。下方步驟會將密碼以明文存入自己的本機設定檔；這份個人設定不要上傳或分享。</p>
 <details id="account-registration"><summary>選擇並登記學員帳號</summary><p>展開下方共用表格，找一個姓名欄仍空白的帳號，並在同一列填入自己的姓名。每個帳號只供一位學員使用；若已有人填寫，請改選其他空白帳號。</p><div class="shared-sheet"><iframe title="學員帳號登記表" src="https://docs.google.com/spreadsheets/d/1kUdHAuvS7JrsJCakrGVzeL72V7eFyJ1U-DJRmMP48xU/edit?rm=minimal&amp;gid=1686286919" loading="lazy"></iframe></div><p><a href="https://docs.google.com/spreadsheets/d/1kUdHAuvS7JrsJCakrGVzeL72V7eFyJ1U-DJRmMP48xU/edit?usp=sharing" target="_blank" rel="noopener">在新分頁開啟共用表格</a></p></details>
-<ol><li>開啟教材根目錄的 <code>zowe.config.json</code>，將 <code>YOUR_USER_ID</code> 換成自己的帳號，保留雙引號並儲存。其餘欄位維持原值。</li><li>開啟 <strong>Zowe Explorer</strong>，在「資料集」展開 <code>tcb-rse</code>。出現密碼欄位時，輸入分配給你的密碼並按 Enter；密碼只在此輸入，不貼到 Bob 對話或教材檔案。</li><li>點選連線旁的搜尋圖示，輸入 <code>&lt;自己的帳號&gt;.TCBLAB.*</code>。例如帳號是 TCB2101，就輸入 <code>TCB2101.TCBLAB.*</code>。</li><li>在「工作」（JOBS）選取 <code>tcb-rse</code> 連線，將 <strong>Owner</strong> 設為自己的帳號，查看自己的作業清單。</li></ol>
+<p>把下方的「〈填入帳號〉」換成剛才選定的帳號，再交給 Bob。密碼會依上方規則填入，不必另外輸入。</p>
+{{host-login|幫我設定主機帳號|Agent}}
+<ol><li>完成後，開啟 <strong>Zowe Explorer</strong>，選擇目前教材工作區的 <code>tcb-rse</code>。若仍要求輸入密碼或顯示舊帳號，依 <code>host-lab/CONNECTION.md</code> 檢查實際使用的設定。</li><li>在「資料集」點連線旁的搜尋圖示，輸入 <code>&lt;自己的帳號&gt;.TCBLAB.*</code>，例如 <code>TCB2101.TCBLAB.*</code>。</li><li>在「工作」（JOBS）選擇 <code>tcb-rse</code>，將 <strong>Owner</strong> 設為自己的帳號，<strong>Prefix</strong> 與 <strong>Status</strong> 設為 <code>*</code>。</li><li>核對目前連線使用的帳號與選定帳號一致。篩選器只決定查詢範圍，不會切換登入身分。</li></ol>
 <p>查詢完成且沒有認證或連線錯誤，就可以繼續。資料集清單應包含 <code>&lt;自己的帳號&gt;.TCBLAB.COBOL</code> 與 <code>&lt;自己的帳號&gt;.TCBLAB.JCL</code>，裡面已準備好練習程式與個人作業。作業清單可能是空的；稍後提交 CKP02 後，就能在這裡找到自己的作業。</p>
 <details><summary>找不到連線，或登入時遇到問題？</summary><p>若「資料集」或「工作」沒有顯示 <code>tcb-rse</code>，先點「資料集」的 <strong>＋（Add profile）</strong>，選擇帶資料夾圖示的教材工作區 <strong>tcb-rse</strong>，並在詢問時選擇適用所有目錄結構。如果連加入清單也找不到它，再確認開啟的是含 <code>zowe.config.json</code> 的教材根目錄，且 <strong>IBM Z Open Editor</strong> 與 <strong>Zowe Explorer</strong> 已啟用；按 Ctrl+Shift+P，執行 <strong>Developer: Reload Window</strong> 後重試。若仍有錯誤，保留完整訊息，依 <code>host-lab/CONNECTION.md</code> 的說明檢查。</p><p>本練習不需另外安裝 CA 憑證。教材的連線設定保留 HTTPS 加密，但略過伺服器憑證驗證，僅供本次練習使用。</p></details>
 <h3 id="host-environment-setup">建立個人作業配置</h3>
@@ -39,3 +41,9 @@
 <p>找到這兩個功能即可完成本步。進行程式文件單元時，再點對應項目右側的 <strong>Start</strong>。</p>
 <p>如果找不到，先看<a href="07-help.html#pp4z">常見問題</a>。</p>
 {{check:我已開啟練習資料夾}}{{check:CKP02.cbl 已準備好}}{{check:我找得到 PPZ 的功能入口}}
+
+<h2 id="init">最後，讓 Bob 認識這個工作區</h2>
+<p>切換到 <strong>Z Code</strong>，在對話中輸入 <code>/init</code>，讓 Bob 整理程式結構與工作區規則。教材已有 <code>AGENTS.md</code>，請保留原有練習規則，再補上這次掃描取得的資訊。</p>
+<div class="prompt"><div class="prompt-head"><span>初始化工作區</span><button type="button" data-copy="init-command">複製指令</button></div><pre id="init-command">/init</pre><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>完成後檢查 AGENTS.md 的變更，確認保留原始程式的要求仍在，且沒有寫入帳號密碼。若出現不符合教材的規則，請 Bob 修正後再繼續。操作說明可參考 <a href="https://www.ibm.com/docs/en/bobz/3.0.0?topic=z-generating-agentsmd-file">IBM 的 /init 指引</a>。</p>
+{{check:我已執行 /init 並核對工作區規則}}

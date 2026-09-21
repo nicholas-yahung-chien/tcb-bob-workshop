@@ -1,5 +1,5 @@
 (() => {
-  const key = 'tcb-bob-workshop-2026-v3';
+  const key = 'tcb-bob-workshop-2026-v3' + (document.body.dataset.courseVersion === 'quick' ? '-quick' : '');
   let saved = {};
   try { saved = JSON.parse(localStorage.getItem(key) || '{}'); } catch { saved = {}; }
   if (!saved || typeof saved !== 'object') saved = {};

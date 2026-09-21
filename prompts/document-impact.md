@@ -1,4 +1,4 @@
-請依 requests/change-application.docx、已確認的課堂回答、output/architecture.md、output/checklist.md，以及剛核對的 program.md 與 facts.json，依 DOC-SPEC.md 保存 output/impact-analysis.md。
+請依 change-application.docx、已確認的課堂回答、output/architecture.md、output/checklist.md，以及剛核對的 program.md 與 facts.json，依 DOC-SPEC.md 保存 output/impact-analysis.md。請一併參考 CKP02.cbl。
 
 分開列出現有功能、新需求要改的地方、設計提案與待確認事項。每項影響附需求或原始碼依據，不能把既有功能當成新增工作；未提供來源的外部相依保留待確認。
 

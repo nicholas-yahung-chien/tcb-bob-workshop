@@ -1,4 +1,4 @@
-請依剛才確認的計畫和 DOC-SPEC.md，完成 CKP02 的程式說明，只保存 output/program.md 與 output/facts.json。這兩份文件描述現有程式；新需求的影響分析稍後由 Z Architect 整理。
+請依剛才確認的計畫和 DOC-SPEC.md，完成 CKP02.cbl 的程式說明，只保存 output/program.md 與 output/facts.json。這兩份文件描述現有程式；新需求的影響分析稍後由 Z Architect 整理。請一併參考 CKP02-data-dictionary.md。
 
 先重新閱讀原始碼，確認各條件成立和不成立時會執行哪些動作，再整理成文件。欄位與例子附上對應段落，位置註明從哪裡起算。先前解讀若與程式不同，以程式為準；需要環境資料才能確定的內容另外列出。完成後執行文件檢查。
 

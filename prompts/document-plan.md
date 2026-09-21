@@ -1,3 +1,3 @@
-我希望下次接手的人能從文件了解 CKP02。請對照原始碼、剛才工作流程產生的解讀與可閱讀資料字典，依 DOC-SPEC.md 規劃 output/program.md 和 output/facts.json。
+我希望下次接手的人能從文件了解 CKP02.cbl。請對照原始碼、剛才工作流程產生的解讀與 CKP02.cbl-data-dictionary.md，依 DOC-SPEC.md 規劃 output/program.md 和 output/facts.json。請一併參考 CKP02-data-dictionary.md。
 
 先列出要說明的流程、欄位和例子，以及還需要補充的資料。不同程式與執行環境的內容分開整理。新需求的影響分析稍後在 Z Architect 整理；這一步只討論程式文件計畫，不建立或修改檔案。

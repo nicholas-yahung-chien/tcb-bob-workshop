@@ -5,7 +5,7 @@
 {{host-predict|先預測結果|Ask}}
 <details id="cobol"><summary>延伸練習：替 IDSHIFT 補上 COBOL 測試（選做）</summary>
 <p>如果你在上一單元選讀過 IDSHIFT，可以接著練習補測試。TESTSHIFT 是呼叫 IDSHIFT 的獨立測試程式，與本次 CKP02 主機測試分開；未選讀者可略過，直接繼續下方的主機實作。</p>
-<p>TESTSHIFT 已經有幾個簡單案例。把它和 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/testing.md">testing.md</a> 一起加入對話，讓 Bob 沿用現有寫法。</p>
+<p>TESTSHIFT 已經有幾個簡單案例。把它和 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/specs/testing.md">testing.md</a> 一起交給 Bob 閱讀；下方提問已包含檔名，讓它沿用現有寫法。</p>
 {{z-tests|補上 COBOL 測試|Z Code}}
 <p>完成後會有 cobol-test-plan.md 和 TESTSHIFT-EXT.cbl。編譯執行需要 COBOL 環境；還沒執行的案例，先保留為待執行。</p>
 {{check:選做者已保存 COBOL 測試程式與案例說明}}
@@ -29,7 +29,7 @@
 <p>先確認本機是否已有 <code>host-lab/run.jcl</code>。教材 ZIP 提供的是共用範本 <code>z-tests/run.jcl</code>，不含個人化的 run.jcl；首次練習且尚無本機個人版本時，依下方指引從自己的主機下載一次。已有個人版本就沿用，先核對帳號與 SNAP1、SNAP2、兩個 BEFOREDD 及 PRINTDD；有差異時保留自己的修改，請講師協助比較。</p>
 <p><code>z-tests/run.jcl</code> 是共用範本，仍含 <code>TCBP001</code> 與 <code>YOURUSER</code>；<code>host-lab/run.jcl</code> 和遠端 <code>&lt;自己的帳號&gt;.TCBLAB.JCL(RUN)</code> 則是填入個人帳號的版本。本機文字檔使用 UTF-8；開啟主機成員、提交 JCL 與讀取作業紀錄，統一選擇 <code>tcb-rse</code>（IBM-1371）。若曾自行修改，請核對本次準備提交的版本。</p>
 <details><summary>本機還沒有 host-lab/run.jcl 時，再下載一次</summary><ol><li>在「資料集」選取 <code>tcb-rse</code>（IBM-1371），搜尋 <code>&lt;自己的帳號&gt;.TCBLAB.JCL</code>，展開並開啟 <code>RUN</code>。</li><li>在 RUN 成員上按右鍵，選 <strong>Download Member...</strong>，下載到教材的 <code>host-lab</code> 資料夾，供 Bob 閱讀並保留本次執行版本。</li><li>下載選項取消 <strong>Generate Directory Structure</strong> 與 <strong>Use Uppercase Names</strong>，勾選 <strong>Override File Extension</strong> 並輸入 <code>jcl</code>，讓本機檔案命名為 <code>host-lab/run.jcl</code>。取消 <strong>Overwrite</strong>，避免覆寫既有成果。編碼沿用 tcb-rse 的 IBM-1371。</li></ol></details>
-<p>把這份 JCL 與自己的 environment.md 加入對話，請 Bob 帶你看編譯、執行與比對的步驟。每項作業都會重新建立獨立測資，執行兩次 CKP02，再測試空檔。SNAP1、SNAP2 會在各次執行前保存當時的實際輸入，供 CHECK1、CHECK2 印出 BEFORE-ID；不需要手動準備或貼上資料。</p>
+<p>使用下方提問，請 Bob 對照自己的 run.jcl 和 environment.md， 帶你看編譯、執行與比對的步驟。每項作業都會重新建立獨立測資，執行兩次 CKP02，再測試空檔。SNAP1、SNAP2 會在各次執行前保存當時的實際輸入，供 CHECK1、CHECK2 印出 BEFORE-ID；不需要手動準備或貼上資料。</p>
 {{host-build|一起看這份主機作業|Agent}}
 <ol><li>核對 <code>host-lab/run.jcl</code> 的 job 名稱是自己的帳號加 A，配置為 DEVVS1、SCNOSMS；CGEN、CCKP、CCHK 的 SYSIN 分別讀取自己 <code>TCBLAB.COBOL</code> 裡的 GENCKP、CKP02、CHKCKP，編譯選項包含 <code>CODEPAGE(937),DBCS</code>。</li><li>在本機 JCL 編輯器按右鍵選 <strong>Submit as JCL</strong>，選 <code>tcb-rse</code>（IBM-1371）連線。</li><li>記下回傳的 job ID，在 JOBS 的 <code>tcb-rse</code> 核對 owner，等待作業完成。</li><li>在「工作 → tcb-rse」對已完成的 <strong>JOB 按右鍵 → 全部下載</strong>，將完整作業紀錄保存到教材工作區，例如 <code>host-lab/logs/&lt;job ID&gt;/</code>。選擇「全部下載」，不要選「以二進位全部下載」。保留下載產生的檔名與目錄結構，開啟 GENERATE／PRINTDD 核對中文；若有亂碼，依下方排解方式補存該檔案。</li></ol>
 <p>連線的 IBM-1371 是操作時的字碼設定；下方 <code>CODEPAGE(937),DBCS</code> 是既有來源的編譯設定，兩者用途不同，請保留範本的編譯選項。</p>

@@ -16,7 +16,7 @@ for item in json.loads((ROOT/'bank-source/manifest.json').read_text(encoding='ut
 contexts = json.loads((ROOT/'lessons/prompt-context.json').read_text(encoding='utf-8'))
 generated = {'DD.json', 'host-lab/run.jcl', 'host-lab/environment.md', 'host-lab/test-report.md'}
 used = set()
-for page in (ROOT/'lessons').glob('*.html'):
+for page in (ROOT/'lessons').rglob('*.html'):
     text = page.read_text(encoding='utf-8')
     for stem in re.findall(r'\{\{([^|{}]+)\|[^{}]+\}\}', text):
         used.add(stem)
@@ -45,7 +45,7 @@ for name, digest in m['sha256'].items():
     assert hashlib.sha256((ROOT/'z-tests'/name).read_bytes()).hexdigest() == digest, name
 active = [ROOT/'DOC-SPEC.md', ROOT/'README.md', ROOT/'SOURCE-MAP.md',
           *(ROOT/'specs').glob('*.md'), *(ROOT/'host-lab').glob('*.md'),
-          *(ROOT/'lessons').glob('*.html'),
+          *(ROOT/'lessons').rglob('*.html'),
           *(ROOT/'prompts'/f'{name}.md' for name in used)]
 for file in active:
     text = file.read_text(encoding='utf-8')

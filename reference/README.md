@@ -25,3 +25,7 @@
 比較時依課程網頁選擇相應文件；工作流程產出的 docs/ 文件保留原位。第 03 單元原版 RUN 與第 04 單元已選做的主機練習仍按各自指引進行。
 
 metadata-dd-review.md 提供 Local Metadata、DD.json 與可閱讀資料字典的核對方式。參考 ZIP 不附固定的 DD.json，因為內容會隨實際選取的程式與掃描結果而不同；CKP02-data-dictionary.md 示範如何保留 DD.json，再另外整理成方便閱讀的繁體中文文件。ims-admin-report.md 提供共享 IMS 子系統值班報告架構，ims-admin-observed-report.md 則示範如何引用實際 STC 訊息。請依自己的掃描與紀錄填寫。
+
+## 簡易版如何對照
+
+簡易版只比較已完成的項目：01 的需求討論、02 的工作流程文件、03–04 的 RUN 作業紀錄與判讀，以及 05 的 CKP02H 和掃描 review。Local Metadata 與 DD.json 請使用自己實際產生的版本。IMS 管理者紀錄由講師展示，學員不需提交管理者報告。架構文件、Python、IMSRUN、IMSEVTS 與其他延伸成果留待完整版練習；不必為了對齊參考解答補做。

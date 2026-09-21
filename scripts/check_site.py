@@ -29,7 +29,7 @@ for file in SITE.rglob('*.html'):
     assert page.h1==1, file
     assert all(target in page.ids for target in page.copies), file
     pages[file.resolve()]=page
-assert len(pages)==11, f'Expected 11 pages, got {len(pages)}'
+assert len(pages)==21, f'Expected 21 pages, got {len(pages)}'
 for file,page in pages.items():
     for link in page.links:
         url=urlsplit(link)

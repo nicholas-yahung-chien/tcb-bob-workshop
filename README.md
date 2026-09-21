@@ -8,7 +8,7 @@
 
 課程備有 30 個學員帳號。上課前先到課程網頁的 [課前準備](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/00-setup.html#account-registration) 展開共用表格，選擇尚未登記的帳號並填入姓名。
 
-主機連線設定已放在根目錄的 `zowe.config.json`，只需將 `YOUR_USER_ID` 換成自己的帳號。`zowe.schema.json` 請一併保留。密碼為「帳號第一個字母大寫、其餘英文字母小寫，再接 `TCBBob@2026`」；例如 `TCB2101` 對應 `Tcb2101TCBBob@2026`。密碼只輸入 Zowe Explorer 的登入欄位，不要貼到 Bob 對話或教材檔案。詳細步驟見 [主機連線](host-lab/CONNECTION.md)。
+主機連線設定已放在根目錄的 `zowe.config.json`，可交給 Bob 填入自己的帳號與密碼。`zowe.schema.json` 請一併保留。密碼為「帳號第一個字母大寫、其餘英文字母小寫，再接 `TCBBob@2026`」；例如 `TCB2101` 對應 `Tcb2101TCBBob@2026`。可依課前準備的 Agent 提問，讓 Bob 將帳號與密碼填入本機設定檔。個人設定含明文密碼，不要上傳或分享。詳細步驟見 [主機連線](host-lab/CONNECTION.md)。
 
 來源、JCL 提交與中英文作業紀錄均使用 `tcb-rse`（IBM-1371），透過 IBM RSE API 連線。IBM Z Open Editor 與 Zowe Explorer 需保持啟用。
 
@@ -24,13 +24,22 @@ git clone --branch workshop/tcb-2026 --single-branch --depth 1 https://github.co
 
 主流程不需要本機 Python。請將 host-lab/BOB-GUIDE.md 交給 Bob，完成教材檢查、個人 JCL 與實際主機紀錄分析。Git 僅在 Clone 下載時需要；Python 範例保留為另需執行環境的選做練習。
 
-## 怎麼使用這些練習
+## 選擇課程版本
+
+- [簡易版](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/quick/)：01–05 每單元保留兩項主要活動，約 120 分鐘，另留 15 分鐘討論緩衝；課前準備約 20 分鐘，成果回顧約 10 分鐘。實際時間依工具回應與現場進度調整。
+- [完整版](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/)：保留完整步驟與延伸練習，適合課後繼續操作。
+
+兩版使用同一份教材。課前準備最後在 Z Code 執行 `/init`，檢查並保留教材已有的工作區規則。Zowe Explorer 的資料集與作業篩選器由學員手動設定。
+
+簡易版第 04 單元先判讀自己的 RUN 結果，再由講師展示目前 IMS 子系統的 STC 紀錄；不要求學員執行 IMSRUN、IMSEVTS 或撰寫管理者值班報告。第 05 單元只改善一個檔案錯誤處理問題，再重新執行 ZCodeScan。
+
+## 怎麼使用完整版練習
 
 主機實作從 [個人連線](host-lab/CONNECTION.md) 開始，再依 [CKP02 實作步驟](https://nicholas-yahung-chien.github.io/tcb-bob-workshop/workshops/tcb/03-testing.html#host) 分析程式、提交 JCL，並下載自己帳號的 JES 紀錄交給 Bob 核對。第 04 單元接著依 [IMS-LAB.md](host-lab/IMS-LAB.md) 完成 IMS 資料庫串接，再依 [IMS-EVENTS.md](host-lab/IMS-EVENTS.md) 執行已備妥的 IMSEVTS，觀察真實 GNP、回復、受控中止與分段耗時；CUT 的 U3001 是指定情境，仍須核對其他步驟。RC 4 修正仍為選做，操作見 [RC4-LAB.md](host-lab/RC4-LAB.md)。
 
 第 05 單元以 CKP02 練習 ZCodeScan、Improve Code 與檔案錯誤處理，依 [CODE-QUALITY.md](host-lab/CODE-QUALITY.md) 建立獨立 CKP02H，修改後僅重新執行 ZCodeScan，不準備 JCL 或上傳主機；CIS14 為延伸審閱。
 
-每個單元先介紹一個情境，再提供可以直接問 Bob 的問題。將頁面列出的檔案用 @ 加入對話，選擇對應模式，就可以開始。看完回覆，再依自己的疑問追問。
+每個單元先介紹一個情境，再提供可以直接問 Bob 的問題。提示詞已包含所需檔名，選擇對應模式後即可直接提問。遇到同名檔案、工作流程文件或下載紀錄時，確認實際版本；Bob 找不到時再用 @ 選取。看完回覆，再依自己的疑問追問。
 
 提問時可以先想背景、任務、依據和成果。需求規劃單元會用 Enhance prompt 比較改寫前後的差異；你可以保留合適的補充，也可以直接使用頁面的提問範例。文件完成後，再沿著程式分支核對流程與例子。
 

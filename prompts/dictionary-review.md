@@ -1,4 +1,4 @@
-請幫我對照 CKP02 和實際 DD.json，逐項檢查這份可閱讀資料字典：
+請幫我對照 CKP02.cbl 和實際 DD.json，逐項檢查CKP02-data-dictionary.md：請一併參考 PPZ-ANALYSIS.md。
 
 1. 變數是否依原始碼的 FILE SECTION、WORKING-STORAGE 與群組正確分類？
 2. 轉換條件是否同時包含 CH-RPD-KEY 與 NOT EOF？摘要、表格和詳細說明是否一致？
