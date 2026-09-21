@@ -1,6 +1,6 @@
 # 工作流程語言支援與驗證紀錄
 
-2026-09-15；本機 Bob 核心 2.1.0、PPZ 3.0.21。此紀錄供教材維護使用，不納入學員 ZIP。
+2026-09-20；本機 Bob 核心 2.1.0、PPZ 3.0.22。此紀錄供教材維護使用，不納入學員 ZIP。
 
 ## 課程盤點
 
@@ -9,7 +9,7 @@
 | 02 的 Explain code | `.bob/skills/cobol-explain-zh-tw/SKILL.md` 自動選取後注入專用提示 | 使用者完成 CKP02／Developer 真實流程，12/12 完成並直接產生繁體中文 |
 | 02 的 Generate program documentation | 原生介面 locale 翻譯，主流程直接使用輸出 | 使用者已完成 CKP02 真實流程並確認中文正文；截圖顯示 8/8 完成，目錄與部分標題仍為英文 |
 | 01 的 `/impact-analysis` | 既有內建 slash 指令及課程繁體中文提問、通用語言規則 | 非本課程透過 Start Workflow 啟動的另一本機文件流程，不宣稱可自動注入新技能 |
-| 01 的 Generate data dictionary | 工作流程保留原始 DD.json；另由 Agent 產生繁體中文 Markdown 資料字典 | 使用者已確認工作流程可產生 DD.json；可閱讀文件的新版流程待實際操作驗證 |
+| 01 的 Generate data dictionary | 工作流程保留原始 DD.json；另在 Z Code 根據 DD.json 與 CKP02 產生繁體中文 Markdown 資料字典 | 已完成 DD.json 保存、可閱讀資料字典產生及來源核對；摘要與實際檔案不一致時，以 DD.json 與原始碼為準 |
 
 課程要求執行 Generate data dictionary，但不翻譯或改寫 DD.json。Generate application documentation 與 Refactor 不在本課程流程中。
 

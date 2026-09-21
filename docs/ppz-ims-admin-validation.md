@@ -14,8 +14,8 @@
 
 未執行 START、STOP、切換日誌、封存、修改 RECON 或 trace 設定；未重新執行 CKP02／IMSRUN／IMSEVTS。本次不是 IMS 系統健康認證。
 
-## 尚待介面驗證的項目
+## 介面驗證結果與待確認事項
 
-已依 IBM 官方文件核對 scan_program 與 Generate data dictionary 的用途及工作流程。團隊建議 Z Architect；公開文件以 Z Code 啟動字典。使用者已回報 Z Architect 會呼叫 scan_program，且可執行 Data Dictionary。2026-09-18 依團隊決議調整為保留工作流程產生的 DD.json，不直接翻譯或改寫；另由 Agent 根據 DD.json 與來源程式產生方便閱讀的繁體中文 Markdown 資料字典。新版操作效果仍待使用者驗證。Bob／PPZ 精確版本尚未回報。
+已依 IBM 官方文件核對 scan_program 與 Generate data dictionary 的用途及工作流程。第 01 單元以 Z Architect 執行 scan_program、分析程式角色與相依關係，再切換 Z Code 產生 DD.json 及可閱讀資料字典；若安裝版本的 Z Code 未提供字典工作流程，可改從 Z Architect 啟動。2026-09-20 已以 Bob 2.1.0、PPZ 3.0.22 完成操作驗證：工作流程保存原始 DD.json，再由 Z Code 根據 DD.json 與來源程式產生方便閱讀的繁體中文 Markdown 資料字典。DD.json 不直接翻譯或改寫，聊天摘要與保存檔案不一致時，以實際 DD.json 與原始碼為準。
 
 RSE API 讀取已實測；學員在 Zowe Explorer 的篩選與另存操作仍依教材逐步核對。SYSLOG 學員存取、共享 SLDS 的 DFSERA10 列印尚未驗證，均未列為已備妥操作。
