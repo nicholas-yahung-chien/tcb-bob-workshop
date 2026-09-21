@@ -8,6 +8,7 @@
 2. 使用系統既有雜湊工具（Windows 可用 Get-FileHash）依 source-manifest.json 核對 z-lab 各 file 的 SHA-256，並依 z-tests/manifest.json 的 sha256 核對清單中的輔助程式與 JCL，包含 IMSCKP 及 IMS 作業範本。工具不可用時記錄「雜湊未驗證」，不能把閱讀內容當成完整性驗證。
 3. 缺檔或雜湊不同時，列出路徑並請學員確認是否修改過；保留修改，不覆寫，也不自行補寫原始碼。需要還原時重新下載教材並解壓到另一個資料夾比較。
 4. 保存 output/workspace-check.md，列出實際檢查方法、結果與未確認事項。請學員開啟 z-lab/CKP02.cbl，確認 PPZ 功能。檔案檢查不代表已登入主機或啟用 PPZ。
+5. 確認 `.bob/skills/` 下 cobol-explain-zh-tw、data-dictionary-zh-tw、program-docs-zh-tw 三項技能各有 SKILL.md。請學員在 Bob Settings → Skills 確認前兩項主流程技能均為 Workspace 且 Active 已開啟，再補記到 output/workspace-check.md；只查到檔案時，啟用狀態須保留待確認。program-docs-zh-tw 是英文正文的翻譯備援，主流程不需呼叫。準備階段不啟動分析或文件工作流程。
 
 ## 二、核對已備妥的個人 JCL
 
