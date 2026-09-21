@@ -1,5 +1,6 @@
 <!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="用 PPZ 解讀程式，再整理成方便查閱的文件。"><title>IBM Bob - 合庫 workshop · 賦能 Z 開發</title><link rel="icon" type="image/svg+xml" href="../../assets/bob-icon.svg"><link rel="alternate icon" href="../../assets/bob-favicon.ico"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/app.js" defer></script></head><body><a class="skip" href="#main">跳至主要內容</a><div class="utility">IBM Bob · 合作金庫 Workshop · 2026.09</div><header><a class="brand" href="../../index.html">IBM <span>Bob</span></a><nav aria-label="主要導覽"><a href="../../workshops/tcb/index.html">課程首頁</a><a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop">GitHub ↗</a></nav></header><div class="layout with-side"><aside><p class="side-label">練習單元</p><nav aria-label="課程導覽"><a  href="00-setup.html">00　課前準備</a><a  href="01-planning.html">01　需求規劃</a><a aria-current=page href="02-documentation.html">02　COBOL 文件化</a><a  href="03-testing.html">03　測試與修正</a><a  href="04-logs.html">04　主機紀錄與 IMS 事件</a><a  href="05-sast.html">05　COBOL 程式碼檢查與改善</a><a  href="06-reference.html">06　成果與解答</a><a  href="07-help.html">07　常見問題</a><a  href="08-source-map.html">08　認識練習程式</a></nav><p class="progress" aria-live="polite"></p></aside><main id="main"><section class="hero"><p class="eyebrow">COBOL 文件化</p><h1>把程式讀懂，也讓下一個人看得懂</h1><p class="lead">用 PPZ 解讀程式，再整理成方便查閱的文件。</p></section><article><h2 id="story">下次接手的人，會想問哪些問題？</h2>
 <p>知道程式「大概在做什麼」之後，還需要留下欄位、流程和注意事項。這個練習會用 PPZ 解讀 CKP02，再把說明整理成方便查閱的文件。</p>
+<p>本單元先在 <strong>Z Code</strong> 完成程式解讀、文件規劃與來源核對，再切換 <strong>Z Architect</strong> 整理需求影響與開發方向。先確認文件計畫，再依提示保存成果。</p>
 <p id="dictionary">沿用第 01 單元產生的 <code>output/CKP02-data-dictionary.md</code>，接著閱讀解說與產生文件。尚未完成時，請先回到<a href="01-planning.html#dictionary">建立 DD.json 與可閱讀的資料字典</a>。</p>
 <h2 id="explain">1. 用 Explain code 閱讀程式</h2>
 <ol><li>開啟 <code>z-lab/CKP02.cbl</code>，選擇 <strong>Z Code</strong>。</li><li>點 <strong>Start Workflow</strong>，在工作區選單選擇本機教材資料夾的 <strong>Run Workflow in〈你開啟的教材資料夾名稱〉</strong>，並核對下方顯示的本機路徑。</li><li>在 <strong>Bob workflows</strong> 找到 <strong>Explain code</strong>，點右側的 <strong>Start</strong>。</li><li>依流程選取這個檔案及 Developer 視角，閱讀程式說明。</li></ol>
@@ -9,26 +10,34 @@
 <p>回覆談到轉換條件後，可以追問實際執行時會遇到的情況，例如同一份資料再跑一次。</p>
 <p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>追問執行時的行為</span><button type="button" data-copy="z-explain">複製 Prompt</button></div><pre id="z-explain">如果資料符合或不符合轉換條件，接下來分別會執行哪些動作？何時會讀下一筆，何時結束？請沿著程式段落說明。
 
-再用 識別欄位 0000123456 的重跑案例（第 14–16 位不是 EOF），逐步推導連續執行兩次的結果。
+再用識別欄位 0000123456 的重跑案例（第 14–16 位不是 EOF），追蹤同一資料集中的同一筆記錄。這裡是兩次獨立的 CKP02 程式執行：第一次寫回的結果，作為第二次的輸入；不是一次處理迴圈讀取兩筆不同資料。請逐步列出每次輸入、是否符合轉換條件及寫回結果，保留尾端空白。
+
+若要說明 JCL 或排程是否會防止重複處理，請先讀取並引用實際 JCL 或設定。只有 COBOL 來源時，將這些外部控制保留待確認，不自行假設有防重機制。
+
+這一步只分析與說明，不建立或修改檔案，也不提交主機作業。
 </pre><div class="expected"><strong>預期回應</strong><p>不符合條件和重跑時的處理過程，附上對應程式位置。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <details id="copybook"><summary>延伸閱讀：用 IDSHIFT 認識 Copybook 與 JCL（選做）</summary>
 <p>IDSHIFT 是獨立的教學範例，用來練習辨識 Copybook、子程式呼叫與 JCL 的關係。它處理記憶體中的單筆資料，並非 CKP02 的新版，也未實作需求單中的試跑與統計功能。你可以略過這段，直接進行下一步 CKP02 文件化。</p>
 <p>想比較兩種寫法時，再把下列檔案一起交給 Bob：IDSHIFT 使用 IDREC.cpy 定義資料，由 TESTSHIFT 呼叫；範例 JCL 執行 TESTSHIFT。請從檔案找出這些關係的依據。</p>
 <p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>z-lab/CKP02.cbl</code>、<code>samples/cobol/IDSHIFT.cbl</code>、<code>samples/cobol/IDREC.cpy</code>、<code>samples/cobol/TESTSHIFT.cbl</code>、<code>samples/jcl/IDSHIFT.jcl</code></p><div class="prompt"><div class="prompt-head"><span>把相關檔案一起看</span><button type="button" data-copy="z-context">複製 Prompt</button></div><pre id="z-context">請根據附上的檔案，比較 CKP02 和 IDSHIFT 的資料定義與讀寫方式。IDREC.cpy 在哪裡被使用？JCL 的 EXEC 實際執行哪支程式？請指出依據，再列出執行前還需要的設定。
+
+這一步只分析與說明，不建立或修改檔案，也不提交主機作業。
 </pre><div class="expected"><strong>預期回應</strong><p>資料定義、呼叫方式及 JCL 執行對象的比較。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>完成後回到 CKP02。這段比較可另外保留筆記，不是後續程式文件的必填內容。</p></details>
 <h2 id="document">2. 整理成接手文件</h2>
 <p>保持 <strong>Z Code</strong>，點 <strong>Start Workflow</strong>，先選擇本機教材工作區，再於 <strong>Bob workflows</strong> 找到 <strong>Generate program documentation</strong>，點右側的 <strong>Start</strong>。依流程選取 CKP02.cbl，完成後從結果連結開啟產生的文件。</p>
-<p>直接閱讀工作流程產生的文件，確認章節、表格與關鍵數值完整。把這份文件加入 Bob 對話，切換到 <strong>Plan</strong>，想想還有哪些內容需要補齊。</p>
+<p>直接開啟工作流程產生的文件，先目視確認段落與圖表沒有截斷、標題或章節沒有重複合併，再核對表格與關鍵數值。工作流程顯示完成，仍須進行內容驗收。原稿保留在 <code>docs/</code>；把這份文件加入同一段 <strong>Z Code</strong> 對話，先列出需要補齊或更正的內容，暫不寫檔。確認後再把修正整理到 <code>output/program.md</code> 與 <code>output/facts.json</code>。</p>
 <p>這裡也加入需求申請單與前面釐清的內容：程式說明回答「現在怎麼運作」，影響分析則回答「為了新需求，接下來要改什麼」。兩份資料一起看，才能區分既有功能與新增工作。</p>
-<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>規劃文件內容</span><button type="button" data-copy="document-plan">複製 Prompt</button></div><pre id="document-plan">我希望下次接手的人能從文件了解 CKP02。請對照原始碼與剛才的解讀，並閱讀 requests/change-application.docx，依 DOC-SPEC.md 規劃程式說明和變更影響分析。
+<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>output/CKP02-data-dictionary.md</code></p><div class="prompt"><div class="prompt-head"><span>先規劃程式文件內容</span><button type="button" data-copy="document-plan">複製 Prompt</button></div><pre id="document-plan">我希望下次接手的人能從文件了解 CKP02。請對照原始碼、剛才工作流程產生的解讀與可閱讀資料字典，依 DOC-SPEC.md 規劃 output/program.md 和 output/facts.json。
 
-先列出要說明的流程、欄位和例子，以及還需要補充的資料。不同程式與執行環境的內容分開整理，這一步先確認文件計畫。
-</pre><div class="expected"><strong>預期回應</strong><p>程式說明與影響分析的章節，以及需要補充的內容。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+先列出要說明的流程、欄位和例子，以及還需要補充的資料。不同程式與執行環境的內容分開整理。新需求的影響分析稍後在 Z Architect 整理；這一步只討論程式文件計畫，不建立或修改檔案。
+</pre><div class="expected"><strong>預期回應</strong><p>program.md 與 facts.json 的內容計畫、來源核對重點及待確認問題；尚不寫檔。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <details id="plan-reply"><summary>回覆參考：Bob 提出確認問題時，可以怎麼回答？</summary>
 <p>以下提供課堂情境的回覆範例。先看清楚 Bob 問的是什麼，再挑選適合的回答；問題編號可能和範例不同。</p>
-<p>如果 Bob 只問「Q1–Q5 哪些可以回答」，卻沒有列出問題，先留在 <strong>Plan</strong> 模式，請它說明：</p>
-<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：沿用目前對話，不需新增檔案。</p><div class="prompt"><div class="prompt-head"><span>請先列出完整問題</span><button type="button" data-copy="document-questions">複製 Prompt</button></div><pre id="document-questions">可以先把希望我確認的問題完整列出來嗎？也請說明各項問題會影響什麼，讓我知道要找誰確認。之前已經回答過的部分請沿用，還不知道的先記下來。
+<p>如果 Bob 只問「Q1–Q5 哪些可以回答」，卻沒有列出問題，先留在 <strong>Z Code</strong>，請它說明，暫不產生文件：</p>
+<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：沿用目前對話，不需新增檔案。</p><div class="prompt"><div class="prompt-head"><span>請先列出完整問題</span><button type="button" data-copy="document-questions">複製 Prompt</button></div><pre id="document-questions">可以先把希望我確認的問題完整列出來嗎？也請說明各項問題會影響什麼，讓我知道要找誰確認。之前已經回答過的部分請沿用，還不知道的先記下來。
+
+這一步只討論問題，不建立或修改檔案。
 </pre><div class="expected"><strong>預期回應</strong><p>完整問題、已有證據、缺少的資訊，以及各項問題影響的範圍。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>本次練習採用下列情境設定。正式部署時，請再向業務與系統同事確認自己單位的做法。</p>
 <table><thead><tr><th>Bob 詢問的內容</th><th>本次文件可以怎麼處理</th></tr></thead><tbody>
@@ -39,38 +48,51 @@
 <tr><td>正式資料中的 EOF 標記是否存在、用途為何</td><td>業務以 EOF 表示最後一筆；程式遇到此標記會略過轉換，接著仍會 REWRITE 並繼續 READ。</td></tr>
 <tr><td>試跑與正式結果不一致</td><td>需要找出哪些筆資料不一致；比對方式、保存內容及保存時間仍待設計。</td></tr>
 </tbody></table>
-<p>確認文件計畫符合你的範圍後，切換到 <strong>Agent</strong>，可使用下方回覆接續產生文件。範例以未選做 IDSHIFT 為前提；若你有選做，請修改該句。已明確回答過的事項請沿用，不必重複確認。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>確認文件範圍並開始撰寫</span><button type="button" data-copy="document-plan-reply">複製 Prompt</button></div><pre id="document-plan-reply">可以，請依剛才的計畫開始寫文件，這次先以 CKP02 為主，不選做 IDSHIFT。
+<p>確認文件計畫符合你的範圍後，保持 <strong>Z Code</strong>，可使用下方回覆接續產生程式說明與 facts.json。範例以未選做 IDSHIFT 為前提；若你有選做，請修改該句。已明確回答過的事項請沿用，不必重複確認；需求決策稍後交給 Z Architect 整理影響分析。</p>
+<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>確認範圍並保存程式文件</span><button type="button" data-copy="document-plan-reply">複製 Prompt</button></div><pre id="document-plan-reply">可以，請依剛才的計畫開始寫文件，這次先以 CKP02 為主，不選做 IDSHIFT。
 
 我能補充的是：計數用 DISPLAY 印在作業紀錄就夠了；正式排程沒有防止重複執行的機制；資料裡的 EOF 表示最後一筆；試跑與正式結果不同時，需要找出哪些筆不一致。
 
 正式 INPUT1 的配置、如何防止重跑，以及前後資料要怎麼保存和比對，還需要討論，請先列為待確認。程式目前的做法和後續修改建議請分開說明。
 
-請依 DOC-SPEC.md，把程式說明、影響分析和 facts.json 存到 output。欄位位置和重跑的例子請再對照 CKP02 檢查一次；這一步先完成文件，不修改程式。
-</pre><div class="expected"><strong>預期回應</strong><p>CKP02 文件與 facts.json、來源核對結果，以及仍待確認的需求或正式環境資訊。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+請依 DOC-SPEC.md，只保存 output/program.md 與 output/facts.json。欄位位置和重跑的例子請再對照 CKP02 檢查一次；保留 DD.json、docs 原稿及所有程式與測試素材，不提交主機作業。上述需求回答留在同一段對話，稍後切換 Z Architect 再整理 impact-analysis.md。
+</pre><div class="expected"><strong>預期回應</strong><p>output/program.md 與 output/facts.json、來源核對結果；需求回答留供稍後的影響分析使用。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>這份回覆可替代下方「完成程式文件」提示，不必兩份都送出。若 Bob 問的是其他問題，先判斷是否影響文件的正確性，不要直接套用上述答案。</p>
 </details>
-<p>確認內容後切換到 <strong>Agent</strong>。文件的章節、檔名與檢查方式都寫在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a>，沿用同一份規格即可。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>完成程式文件</span><button type="button" data-copy="04-document">複製 Prompt</button></div><pre id="04-document">請依剛才的計畫和 DOC-SPEC.md，完成 CKP02 的程式說明與影響分析，存到 output。影響分析以 requests/change-application.docx 的新需求為準，區分既有功能與新增工作。
+<p>確認內容後，保持 <strong>Z Code</strong>，請 Bob 保存程式文件。文件的章節、檔名與檢查方式都寫在 <a href="https://github.com/nicholas-yahung-chien/tcb-bob-workshop/blob/workshop/tcb-2026/DOC-SPEC.md">DOC-SPEC.md</a>，沿用同一份規格；這一步只產生 program.md 與 facts.json。</p>
+<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>DD.json</code>、<code>output/CKP02-data-dictionary.md</code></p><div class="prompt"><div class="prompt-head"><span>完成程式文件</span><button type="button" data-copy="04-document">複製 Prompt</button></div><pre id="04-document">請依剛才確認的計畫和 DOC-SPEC.md，完成 CKP02 的程式說明，只保存 output/program.md 與 output/facts.json。這兩份文件描述現有程式；新需求的影響分析稍後由 Z Architect 整理。
 
 先重新閱讀原始碼，確認各條件成立和不成立時會執行哪些動作，再整理成文件。欄位與例子附上對應段落，位置註明從哪裡起算。先前解讀若與程式不同，以程式為準；需要環境資料才能確定的內容另外列出。完成後執行文件檢查。
-</pre><div class="expected"><strong>預期回應</strong><p>program.md、impact-analysis.md、facts.json，以及文件檢查結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+
+保留 DD.json、docs 原稿及所有程式與測試素材，不提交主機作業。
+</pre><div class="expected"><strong>預期回應</strong><p>output/program.md、output/facts.json，以及來源與例子的檢查結果；其他檔案保持原樣。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <h2 id="verify">3. 回到程式，確認說明</h2>
 <p>寫完文件後，請 Bob 重新看原始碼，沿著條件成立與不成立的路徑各走一次。這樣比較容易發現摘要和詳細說明是否前後不同，也能看到條件之後還會做哪些事。</p>
-<p class="mode-guide"><strong>Agent 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/program.md</code>、<code>output/impact-analysis.md</code>、<code>output/facts.json</code>、<code>z-lab/CKP02.cbl</code>、<code>requests/change-application.docx</code></p><div class="prompt"><div class="prompt-head"><span>檢查文件中的例子</span><button type="button" data-copy="verify-docs">複製 Prompt</button></div><pre id="verify-docs">請重新閱讀原始碼，依 DOC-SPEC.md 核對剛才的程式文件。每個判斷條件成立和不成立時，都各走一次，看看接下來會執行哪些動作、何時讀下一筆、何時結束。
+<p class="mode-guide"><strong>Z Code 模式</strong></p><p class="file-context">加入檔案：<code>DOC-SPEC.md</code>、<code>output/program.md</code>、<code>output/facts.json</code>、<code>z-lab/CKP02.cbl</code></p><div class="prompt"><div class="prompt-head"><span>檢查文件中的例子</span><button type="button" data-copy="verify-docs">複製 Prompt</button></div><pre id="verify-docs">請重新閱讀原始碼，依 DOC-SPEC.md 核對 output/program.md 與 output/facts.json。每個判斷條件成立和不成立時，都各走一次，看看接下來會執行哪些動作、何時讀下一筆、何時結束。
 
 也請重新計算欄位位置，檢查摘要、表格和例子是否一致。若文件與程式不同，修正文件並指出依據，再執行檢查。
 
-影響分析請另外對照 requests/change-application.docx，確認沒有把既有功能寫成這次要新增的工作。
-</pre><div class="expected"><strong>預期回應</strong><p>條件分支與欄位的核對、文件修正說明，以及檢查結果。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+只修正上述兩份文件，保留 DD.json、docs 原稿及所有程式與測試素材，不提交主機作業。
+</pre><div class="expected"><strong>預期回應</strong><p>program.md 與 facts.json 的條件分支、欄位及例子核對，以及這兩份文件的修正說明。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <details><summary>對照文件時，可以先看哪些地方？</summary><ul><li>資料內的 EOF 會略過這一筆的轉換，接著仍會讀下一筆；READ 的 AT END 才會設定迴圈使用的 EOF 旗標。</li><li>記錄第 14–16 位，對應 R-NAME 的第 3–5 位。閱讀欄位位置時，先看看是從哪裡起算。</li><li>程式宣告 VALUE SPACE；實際空白編碼與資料集屬性，需要搭配主機環境確認。</li><li>課程的 z-tests/run.jcl 編譯並執行 CKP02 與測試輔助程式；生產環境 JCL 尚未提供。只有選做 IDSHIFT 時，才另核對 samples/jcl/IDSHIFT.jcl 執行 TESTSHIFT。</li></ul><p>請 Bob 依 DOC-SPEC.md 核對格式與數值，再由你對照原始碼確認，不需要執行驗收腳本。</p></details>
 <details><summary>重跑的例子，應該怎麼看？</summary><p>使用教學重跑案例 0000123456，並讓第 14–16 位不是 EOF。第一次轉換得到 00123456 加兩個空白，第二次得到 123456 加四個空白。第一次後仍以 00 開頭，所以不能只用一個例子就認定重跑結果都相同。</p></details>
-<p>output 裡會有 program.md、impact-analysis.md 和 facts.json。前兩份方便閱讀，facts.json 則用來檢查欄位及例子是否一致。</p>
-<h2 id="development">4. 接下來，要怎麼開發？</h2>
-<p>文件核對完成後，切換到 <strong>Plan</strong>，請 Bob 把分析整理成容易說明的開發方向。沿用剛才的對話，加入需求申請單與已完成的分析文件。</p>
-<p class="mode-guide"><strong>Plan 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code>、<code>z-lab/CKP02.cbl</code>、<code>output/architecture.md</code>、<code>output/checklist.md</code>、<code>output/program.md</code>、<code>output/impact-analysis.md</code></p><div class="prompt"><div class="prompt-head"><span>請 Bob 說明接下來的開發工作</span><button type="button" data-copy="development-summary">複製 Prompt</button></div><pre id="development-summary">看完這些分析，如果接下來要請同事開發這項需求，你會建議怎麼做？請用白話說明要新增或修改哪幾支程式、各自要做什麼，作業流程又會怎麼變，讓我知道可以先從哪裡開始。
+<p>此時 output 裡會有 program.md 與 facts.json，分別保存程式說明及欄位、例子的核對資料。</p>
+<h2 id="impact">4. 整理新需求的影響</h2>
+<p>程式文件核對完成後，在同一段對話切換到 <strong>Z Architect</strong>。加入需求申請單、第 01 單元的架構與實作清單，以及剛完成的程式文件，將新需求的變更範圍整理到 <code>output/impact-analysis.md</code>。保留已回答問題的編號與原意，尚未選定的方案繼續標為提案。</p>
+<p class="mode-guide"><strong>Z Architect 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code>、<code>DOC-SPEC.md</code>、<code>z-lab/CKP02.cbl</code>、<code>output/architecture.md</code>、<code>output/checklist.md</code>、<code>output/program.md</code>、<code>output/facts.json</code></p><div class="prompt"><div class="prompt-head"><span>保存並核對需求影響分析</span><button type="button" data-copy="document-impact">複製 Prompt</button></div><pre id="document-impact">請依 requests/change-application.docx、已確認的課堂回答、output/architecture.md、output/checklist.md，以及剛核對的 program.md 與 facts.json，依 DOC-SPEC.md 保存 output/impact-analysis.md。
 
-還沒決定、需要再找業務或系統同事確認的事情，也請一起提醒我。先把做法說清楚就好，暫時不用改程式。
+分開列出現有功能、新需求要改的地方、設計提案與待確認事項。每項影響附需求或原始碼依據，不能把既有功能當成新增工作；未提供來源的外部相依保留待確認。
+
+保留問題編號、使用者回答的原意及方案的決定狀態。若現有文件互相矛盾，列出位置與需確認的問題，不自行替使用者選方案。完成後核對影響分析與程式文件是否一致，修正本次影響分析並說明依據。
+
+本步只保存或修正 output/impact-analysis.md，保留其他文件、DD.json、程式與測試素材，不實作新功能或提交主機作業。
+</pre><div class="expected"><strong>預期回應</strong><p>output/impact-analysis.md、需求與來源依據，以及跨文件矛盾或尚待確認的決策；其他檔案保持原樣。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
+<p>開啟 impact-analysis.md，檢查每項變更是否能追溯到需求或已確認決策；與 architecture.md、checklist.md 不一致的地方先列出來討論。三份接手成果為 program.md、impact-analysis.md 與 facts.json。</p>
+<h2 id="development">5. 接下來，要怎麼開發？</h2>
+<p>保持 <strong>Z Architect</strong>，請 Bob 把分析整理成容易說明的開發方向。這一步先討論做法與待確認問題，暫不修改檔案或實作新功能。</p>
+<p class="mode-guide"><strong>Z Architect 模式</strong></p><p class="file-context">加入檔案：<code>requests/change-application.docx</code>、<code>z-lab/CKP02.cbl</code>、<code>output/architecture.md</code>、<code>output/checklist.md</code>、<code>output/program.md</code>、<code>output/impact-analysis.md</code></p><div class="prompt"><div class="prompt-head"><span>請 Bob 說明接下來的開發工作</span><button type="button" data-copy="development-summary">複製 Prompt</button></div><pre id="development-summary">看完這些分析，如果接下來要請同事開發這項需求，你會建議怎麼做？請用白話說明要新增或修改哪幾支程式、各自要做什麼，作業流程又會怎麼變，讓我知道可以先從哪裡開始。
+
+還沒決定、需要再找業務或系統同事確認的事情，也請一起提醒我。先把做法說清楚就好，這一步不建立或修改檔案，也不提交主機作業。
 </pre><div class="expected"><strong>預期回應</strong><p>容易理解的開發建議、預計新增或修改的程式與作業流程，以及仍待確認的事項。</p></div><p class="copy-status" role="status" aria-live="polite"></p></div>
 <p>看完後，確認自己能說明要新增或修改哪些程式、各自負責什麼，以及還有哪些事情需要討論。這裡整理的是開發建議；下一單元會先執行原版 CKP02，驗證目前的行為。</p>
 <label class="check"><input type="checkbox" data-check="我試過 Explain code 與文件化"><span>我試過 Explain code 與文件化</span></label><label class="check"><input type="checkbox" data-check="我已對照原始碼檢查文件"><span>我已對照原始碼檢查文件</span></label><label class="check"><input type="checkbox" data-check="我能說明接下來的開發方向與待確認事項"><span>我能說明接下來的開發方向與待確認事項</span></label>
