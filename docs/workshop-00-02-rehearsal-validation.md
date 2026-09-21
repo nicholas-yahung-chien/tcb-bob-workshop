@@ -103,13 +103,13 @@ Plan 與 Agent 已實際完成 program.md、impact-analysis.md、facts.json 的�
 - scripts/check_site.py 通過 11 頁的連結、錨點、標題與複製目標檢查；scripts/check_curriculum.py 通過 56 個課程提示及封裝附件等檢查。
 - git diff --check 通過。本次只修正教材、技能與驗證記錄，不修改課程 COBOL 或測試程式。
 
-## 發布前需同步
+## 發布同步結果
 
-Pages 工作流程只在 main 推送時建置網站；學員 Git 下載來源是 workshop/tcb-2026，ZIP 來自 release。因此 main 合併成功，不代表學員已取得更新的技能與本機指引。由教材維護者完成以下驗收：
+Pages 工作流程只在 main 推送時建置網站；學員 Git 下載來源是 workshop/tcb-2026，ZIP 來自 release。因此 main、教材分支與 release 需分別驗收。2026-09-21 已完成：
 
-- [ ] 合併後確認 Pages 的 00／01／02 網頁已包含本次修正。
-- [ ] 依 scripts/package_learners.py 重新匯出教材，將 .bob/skills、host-lab、specs 等學員檔案同步至 workshop/tcb-2026。
-- [ ] 重新產生並發布對應的 tcb-workshop.zip，確認網頁的下載連結指向新版。
-- [ ] 比較新版 ZIP 與教材分支的檔案內容，確認技能與指引一致，並再次驗證 45 份來源雜湊；保留學員既有配置及成果，不要求直接覆蓋舊工作區。
+- [x] 外部 Pages 建置成功；IBM 內部 gh-pages 分支也已更新，00／01／02 與 FAQ 包含本次修正。
+- [x] 依 scripts/package_learners.py 重新匯出教材，將 .bob/skills、host-lab、specs 等學員檔案同步至 workshop/tcb-2026。
+- [x] 重新產生並發布 workshop-v1.9.32 的 tcb-workshop.zip 與 tcb-reference.zip；外部與 IBM 內部 release 的資產雜湊一致。
+- [x] 新版 ZIP 與教材分支同為 89 個檔案，路徑與 SHA-256 逐一相符；45 份來源雜湊再次驗證通過。學員既有配置及成果仍保留，不要求直接覆蓋舊工作區。
 
-本次文件修正未自行更新教材分支或發布 release。
+外部與 IBM 內部 repository 的 main、workshop/tcb-2026、release tag 及下載資產均已同步；IBM 內部網站仍依 W3 權限登入。
